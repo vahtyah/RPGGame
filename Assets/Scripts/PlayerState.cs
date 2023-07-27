@@ -26,6 +26,7 @@ public class PlayerState
     {
         xInput = Input.GetAxisRaw("Horizontal");
         yInput = Input.GetAxisRaw("Vertical");
+        _player.Animator.SetFloat("yVelocity",_rigidbody2D.velocity.y);
     }
 
     public virtual void Exit()

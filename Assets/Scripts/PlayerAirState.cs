@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class PlayerMoveState : PlayerGroundedState
+public class PlayerAirState : PlayerState
 {
-    public PlayerMoveState(PlayerStateMachine playerStateMachine, Player player, string animBoolName) : base(playerStateMachine, player, animBoolName)
+    public PlayerAirState(PlayerStateMachine playerStateMachine, Player player, string animBoolName) : base(playerStateMachine, player, animBoolName)
     {
     }
 
@@ -14,10 +14,8 @@ public class PlayerMoveState : PlayerGroundedState
     public override void Update()
     {
         base.Update();
-        
-        _player.SetVelocity(xInput * _player.moveSpeed, _rigidbody2D.velocity.y);
-        
-        if (xInput == 0f)
+
+        if (_rigidbody2D.velocity.y == 0)
         {
             _playerStateMachine.CurrentState = _player.PlayerIdleState;
         }
