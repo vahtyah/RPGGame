@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Attack details")] public Vector2[] attackMovement;
+    
+    public bool isBusy { get; private set; }
+    
     [Header("Move Info")] public float moveSpeed = 8f;
     public float jumpForce = 12f;
 
@@ -64,14 +69,22 @@ public class Player : MonoBehaviour
 
         StateMachine.CurrentState = PlayerIdleState;
     }
-
     private void Update()
     {
         StateMachine.CurrentState.Update();
         CheckForDashInput();
     }
 
+    private IEnumerator BusyFor(float second)
+    {
+        isBusy = true;
+        yield return new WaitForSeconds(second);
+        isBusy = false;
+    }
+
+
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+    public void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
 
     public void SetVelocity(float xVelocity, float yVelocity)
     {

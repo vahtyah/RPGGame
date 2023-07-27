@@ -9,7 +9,7 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        _rigidbody2D.velocity = new Vector2(0, 0);
+        _player.ZeroVelocity();
     }
 
     public override void Update()
@@ -17,7 +17,7 @@ public class PlayerIdleState : PlayerGroundedState
         base.Update();
         if (xInput == _player.transform.localScale.x && _player.IsWallDetected())
             return;
-        if (xInput != 0f)
+        if (xInput != 0f && !_player.isBusy)
             _playerStateMachine.CurrentState = _player.PlayerMoveState;
     }
 
