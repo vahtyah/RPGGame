@@ -18,8 +18,11 @@ public class PlayerPrimaryAttackState : PlayerState
             comboCounter = 0;
 
         _player.Animator.SetInteger("ComboCounter", comboCounter);
+
+        var attackDir = _player.transform.localScale.x;
+        if (xInput != 0) attackDir = xInput;
         
-        _player.SetVelocity(_player.attackMovement[comboCounter].x,_player.attackMovement[comboCounter].y);
+        _player.SetVelocity(_player.attackMovement[comboCounter].x * attackDir,_player.attackMovement[comboCounter].y);
         
         timerState = .15f;
     }
