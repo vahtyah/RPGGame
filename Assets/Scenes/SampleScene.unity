@@ -171,6 +171,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   jumpForce: 12
+  dashCooldown: 1
+  dashSpeed: 25
+  dashDuration: 0.2
   _groundCheck: {fileID: 1694869279}
   _groundCheckDistance: 0.15
   _wallCheck: {fileID: 1907250841}
@@ -459,8 +462,8 @@ Transform:
   m_GameObject: {fileID: 1382008808}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2916, y: -2.15, z: 0}
-  m_LocalScale: {x: -16.246248, y: 1, z: 1}
+  m_LocalPosition: {x: 0.615, y: -2.15, z: 0}
+  m_LocalScale: {x: -29.501463, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
