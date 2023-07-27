@@ -21,6 +21,17 @@ public class PlayerMoveState : PlayerGroundedState
         {
             _playerStateMachine.CurrentState = _player.PlayerIdleState;
         }
+
+        Flip();
+    }
+
+    private void Flip()
+    {
+        bool playerHasHorizontalSpeed = Mathf.Abs(_rigidbody2D.velocity.x) > Mathf.Epsilon;
+        if (playerHasHorizontalSpeed)
+        {
+            _player.transform.localScale = new Vector2(Mathf.Sign(_rigidbody2D.velocity.x), 1f);
+        }
     }
 
     public override void Exit()
