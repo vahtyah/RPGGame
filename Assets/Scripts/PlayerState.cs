@@ -12,6 +12,8 @@ public class PlayerState
     protected float yInput;
     protected float timerState;
 
+    protected bool triggerCalled;
+
     public PlayerState(PlayerStateMachine playerStateMachine, Player player, string animBoolName)
     {
         _playerStateMachine = playerStateMachine;
@@ -23,6 +25,7 @@ public class PlayerState
     {
         _player.Animator.SetBool(_animBoolName,true);
         _rigidbody2D = _player.rb;
+        triggerCalled = false;
     }
     public virtual void Update()
     {
@@ -35,5 +38,10 @@ public class PlayerState
     public virtual void Exit()
     {
         _player.Animator.SetBool(_animBoolName,false);        
+    }
+
+    public virtual void AnimationFinishTrigger()
+    {
+        triggerCalled = true;
     }
 }

@@ -14,14 +14,14 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+            _playerStateMachine.CurrentState = _player.PlayerPrimaryAttackState;
 
         if (!_player.IsGroundDetected())
             _playerStateMachine.CurrentState = _player.PlayerAirState;
         
         if (Input.GetKeyDown(KeyCode.Space) && _player.IsGroundDetected())
-        {
             _playerStateMachine.CurrentState = _player.PlayerJumpState;
-        }
     }
 
     public override void Exit()
