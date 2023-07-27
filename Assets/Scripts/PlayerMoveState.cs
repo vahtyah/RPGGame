@@ -16,7 +16,7 @@ public class PlayerMoveState : PlayerGroundedState
         base.Update();
         
         
-        if (xInput == 0f || (xInput == _player.transform.localScale.x && _player.IsWallDetected()))
+        if (xInput == 0f || _player.IsWallDetected())
         {
             _playerStateMachine.CurrentState = _player.PlayerIdleState;
         }

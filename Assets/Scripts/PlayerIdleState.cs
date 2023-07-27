@@ -9,6 +9,7 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        _rigidbody2D.velocity = new Vector2(0, 0);
     }
 
     public override void Update()
