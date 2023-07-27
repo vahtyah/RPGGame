@@ -14,7 +14,10 @@ public class PlayerMoveState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.B))
+        
+        _player.SetVelocity(xInput * _player.moveSpeed, _rigidbody2D.velocity.y);
+        
+        if (xInput == 0f)
         {
             _playerStateMachine.CurrentState = _player.PlayerIdleState;
         }
