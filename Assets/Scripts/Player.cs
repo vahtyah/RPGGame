@@ -7,8 +7,7 @@ public class Player : MonoBehaviour
     [Header("Move Info")] public float moveSpeed = 8f;
     public float jumpForce = 12f;
 
-    [Header("Dash Info")] 
-    public float dashCooldown = 1f;
+    [Header("Dash Info")] public float dashCooldown = 1f;
     private float dashUsageTimer;
     public float dashSpeed = 25;
     public float dashDuration = 0.2f;
@@ -37,6 +36,7 @@ public class Player : MonoBehaviour
     public PlayerMoveState PlayerMoveState { get; private set; }
     public PlayerJumpState PlayerJumpState { get; private set; }
     public PlayerAirState PlayerAirState { get; private set; }
+    public PlayerWallSlideState PlayerWallSlideState { get; private set; }
     public PlayerDashState PlayerDashState { get; private set; }
 
     #endregion
@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
         PlayerMoveState = new PlayerMoveState(StateMachine, this, "Move");
         PlayerJumpState = new PlayerJumpState(StateMachine, this, "Jump");
         PlayerAirState = new PlayerAirState(StateMachine, this, "Jump");
+        PlayerWallSlideState = new PlayerWallSlideState(StateMachine, this, "WallSlide");
         PlayerDashState = new PlayerDashState(StateMachine, this, "Dash");
     }
 
@@ -69,6 +70,16 @@ public class Player : MonoBehaviour
     public void SetVelocity(float xVelocity, float yVelocity)
     {
         rb.velocity = new Vector2(xVelocity, yVelocity);
+        Flip();
+    }
+
+    private void Flip()
+    {
+        bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+        if (playerHasHorizontalSpeed)
+        {
+            transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
+        }
     }
 
     private void CheckForDashInput()
@@ -79,14 +90,17 @@ public class Player : MonoBehaviour
             dashUsageTimer = dashCooldown;
             dashDir = Input.GetAxisRaw("Horizontal");
 
-            if (dashDir == 0) dashDir = transform.localScale.x; 
-            
+            if (dashDir == 0) dashDir = transform.localScale.x;
+
             StateMachine.CurrentState = PlayerDashState;
         }
     }
 
     public bool IsGroundDetected() =>
         Physics2D.Raycast(_groundCheck.position, Vector2.down, _groundCheckDistance, _whatIsGround);
+
+    public bool IsWallDetected() => Physics2D.Raycast(_wallCheck.position, Vector2.right * transform.localScale.x,
+        _wallCheckDistance, _whatIsGround);
 
     private void OnDrawGizmos()
     {

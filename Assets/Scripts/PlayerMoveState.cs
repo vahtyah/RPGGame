@@ -15,24 +15,16 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.Update();
         
-        _player.SetVelocity(xInput * _player.moveSpeed, _rigidbody2D.velocity.y);
         
-        if (xInput == 0f)
+        if (xInput == 0f || (xInput == _player.transform.localScale.x && _player.IsWallDetected()))
         {
             _playerStateMachine.CurrentState = _player.PlayerIdleState;
         }
+        _player.SetVelocity(xInput * _player.moveSpeed, _rigidbody2D.velocity.y);
 
-        Flip();
     }
 
-    private void Flip()
-    {
-        bool playerHasHorizontalSpeed = Mathf.Abs(_rigidbody2D.velocity.x) > Mathf.Epsilon;
-        if (playerHasHorizontalSpeed)
-        {
-            _player.transform.localScale = new Vector2(Mathf.Sign(_rigidbody2D.velocity.x), 1f);
-        }
-    }
+    
 
     public override void Exit()
     {
