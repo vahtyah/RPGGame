@@ -169,6 +169,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273a9da854f14171ae01416bcff91084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundCheck: {fileID: 1694869279}
+  groundCheckDistance: 0.15
+  wallCheck: {fileID: 1907250841}
+  wallCheckDistance: 0.1
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
   attackMovement:
   - {x: 3, y: 1.5}
   - {x: 1, y: 2.5}
@@ -178,13 +185,6 @@ MonoBehaviour:
   dashCooldown: 1
   dashSpeed: 25
   dashDuration: 0.2
-  _groundCheck: {fileID: 1694869279}
-  _groundCheckDistance: 0.15
-  _wallCheck: {fileID: 1907250841}
-  _wallCheckDistance: 0.1
-  _whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!70 &192938343
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dda46c883f44b609c5698cf699f248d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parallaxEffect: 0.5
+  parallaxEffect: 0.7
 --- !u!1 &381700758
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dda46c883f44b609c5698cf699f248d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parallaxEffect: 1
+  parallaxEffect: 0.8
 --- !u!1 &454773739
 GameObject:
   m_ObjectHideFlags: 0
