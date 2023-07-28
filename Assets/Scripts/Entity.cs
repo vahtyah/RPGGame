@@ -34,7 +34,7 @@ public abstract class Entity : MonoBehaviour
     {
     }
     
-    public virtual void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
+    public virtual void SetZeroVelocity() => rb.velocity = new Vector2(0, 0);
 
     public virtual void SetVelocity(float xVelocity, float yVelocity)
     {
@@ -60,7 +60,7 @@ public abstract class Entity : MonoBehaviour
     {
         this.facingRight = !this.facingRight;
         facingDir *= -1;
-        transform.localScale = new Vector2(Mathf.Sign(facingDir), 1f);
+        transform.Rotate(0, 180, 0);
     }
 
     public virtual void FlipController(float xVelocity)

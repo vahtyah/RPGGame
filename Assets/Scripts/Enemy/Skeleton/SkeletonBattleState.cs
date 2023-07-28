@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Enemy.Skeleton
 {
@@ -26,13 +27,19 @@ namespace Enemy.Skeleton
 
             if (enemySkeleton.IsPlayerDetected())
             {
+                stateTimer = enemySkeleton.battleTime;
                 if (enemySkeleton.IsPlayerDetected().distance < enemySkeleton.attackDistance)
                 {
-                    enemySkeleton.ZeroVelocity();
-                    return;
+                    if (CanAttack())
+                        stateMachine.State = enemySkeleton.attackState;
                 }
             }
-            
+            else
+            {
+                if (stateTimer < 0 || Vector2.Distance(player.transform.position,enemySkeleton.transform.position) > 10)
+                    stateMachine.State = enemySkeleton.idleState;
+            }
+
             if (player.position.x > enemySkeleton.transform.position.x)
                 moveDir = 1;
             else if (player.position.x < enemySkeleton.transform.position.x)
@@ -44,6 +51,13 @@ namespace Enemy.Skeleton
         public override void Exit()
         {
             base.Exit();
+        }
+
+        private bool CanAttack()
+        {
+            if (!(Time.time >= enemySkeleton.attackCooldown + enemySkeleton.lastTimeAttacked)) return false;
+            enemySkeleton.lastTimeAttacked = Time.time;
+            return true;
         }
     }
 }

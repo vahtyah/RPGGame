@@ -34,7 +34,7 @@ namespace Player
             base.Update();
 
             if (timerState < 0)
-                player.ZeroVelocity();
+                player.SetZeroVelocity();
 
             if (triggerCalled)
                 playerStateMachine.CurrentState = player.PlayerIdleState;

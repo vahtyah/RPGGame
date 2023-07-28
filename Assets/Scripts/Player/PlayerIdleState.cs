@@ -9,7 +9,7 @@
         public override void Enter()
         {
             base.Enter();
-            player.ZeroVelocity();
+            player.SetZeroVelocity();
         }
 
         public override void Update()
