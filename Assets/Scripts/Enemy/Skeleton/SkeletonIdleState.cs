@@ -2,15 +2,14 @@
 
 namespace Enemy.Skeleton
 {
-    public class SkeletonIdleState : EnemyState
+    public class SkeletonIdleState : SkeletonGroundedState
     {
-        private EnemySkeleton enemySkeleton;
 
-        public SkeletonIdleState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName, EnemySkeleton enemySkeleton) : base(stateMachine, enemyBase, animBoolName)
+        public SkeletonIdleState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName,
+            EnemySkeleton enemySkeleton) : base(stateMachine, enemyBase, animBoolName, enemySkeleton)
         {
-            this.enemySkeleton = enemySkeleton;
         }
-        
+
         public override void Enter()
         {
             base.Enter();

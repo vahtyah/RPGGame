@@ -7,6 +7,7 @@ namespace Enemy
         protected EnemyStateMachine stateMachine;
         protected Enemy enemyBase;
         private string animBoolName;
+        protected Rigidbody2D rb;
         
         protected float stateTimer;
         protected bool triggerCalled;
@@ -22,6 +23,7 @@ namespace Enemy
         {
             triggerCalled = false;
             enemyBase.animator.SetBool(animBoolName,true);
+            rb = enemyBase.rb;
         }
 
         public virtual void Update()

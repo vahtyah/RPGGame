@@ -2,13 +2,11 @@
 
 namespace Enemy.Skeleton
 {
-    public class SkeletonMoveState : EnemyState
+    public class SkeletonMoveState : SkeletonGroundedState
     {
-        private EnemySkeleton enemySkeleton;
-
-        public SkeletonMoveState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName, EnemySkeleton enemySkeleton) : base(stateMachine, enemyBase, animBoolName)
+        public SkeletonMoveState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName,
+            EnemySkeleton enemySkeleton) : base(stateMachine, enemyBase, animBoolName, enemySkeleton)
         {
-            this.enemySkeleton = enemySkeleton;
         }
 
         public override void Enter()
@@ -19,7 +17,7 @@ namespace Enemy.Skeleton
         public override void Update()
         {
             base.Update();
-            enemySkeleton.SetVelocity(enemySkeleton.moveSpeed * enemySkeleton.facingDir,enemySkeleton.rb.velocity.y);
+            enemySkeleton.SetVelocity(enemySkeleton.moveSpeed * enemySkeleton.facingDir, rb.velocity.y);
             if (!enemySkeleton.IsGroundDetected() || enemySkeleton.IsWallDetected())
             {
                 enemySkeleton.Flip();
