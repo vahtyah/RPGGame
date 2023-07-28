@@ -28,7 +28,7 @@ namespace Player
             else
                 player.SetVelocity(0, rigidbody2D.velocity.y * .7f);
         
-            if ((xInput != 0 && player.transform.localScale.x != xInput) || player.IsGroundDetected() )
+            if ((xInput != 0 && player.facingDir != xInput) || player.IsGroundDetected() )
                 playerStateMachine.CurrentState = player.PlayerIdleState;
 
             if (!player.IsWallDetected())

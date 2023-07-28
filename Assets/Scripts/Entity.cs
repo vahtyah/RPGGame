@@ -9,7 +9,9 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] protected Transform wallCheck; 
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected LayerMask whatIsGround;
-    
+
+    public int facingDir { get; private set; } = 1;
+    private bool facingRight = true;
     
     #region Component
 
@@ -37,13 +39,13 @@ public abstract class Entity : MonoBehaviour
     public virtual void SetVelocity(float xVelocity, float yVelocity)
     {
         rb.velocity = new Vector2(xVelocity, yVelocity);
-        Flip();
+        FlipController(xVelocity);
     }
     
     public virtual bool IsGroundDetected() =>
         Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
 
-    public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * transform.localScale.x,
+    public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir,
         wallCheckDistance, whatIsGround);
 
     protected virtual void OnDrawGizmos()
@@ -54,12 +56,21 @@ public abstract class Entity : MonoBehaviour
         Gizmos.DrawLine(position1, new Vector3(position1.x + wallCheckDistance, position1.y));
     }
     
-    protected virtual void Flip()
+    public virtual void Flip()
     {
-        bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
-        if (playerHasHorizontalSpeed)
+        this.facingRight = !this.facingRight;
+        facingDir *= -1;
+        transform.localScale = new Vector2(Mathf.Sign(facingDir), 1f);
+    }
+
+    public virtual void FlipController(float xVelocity)
+    {
+        switch (xVelocity)
         {
-            transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
+            case > 0 when !facingRight:
+            case < 0 when facingRight:
+                Flip();
+                break;
         }
     }
 }

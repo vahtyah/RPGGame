@@ -5,23 +5,23 @@ namespace Enemy
     public abstract class EnemyState
     {
         protected EnemyStateMachine stateMachine;
-        protected Enemy enemy;
+        protected Enemy enemyBase;
         private string animBoolName;
         
-        private float stateTimer;
+        protected float stateTimer;
         protected bool triggerCalled;
 
-        protected EnemyState(EnemyStateMachine stateMachine, Enemy enemy, string animBoolName)
+        protected EnemyState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName)
         {
             this.stateMachine = stateMachine;
             this.animBoolName = animBoolName;
-            this.enemy = enemy;
+            this.enemyBase = enemyBase;
         }
 
         public virtual void Enter()
         {
             triggerCalled = false;
-            enemy.animator.SetBool(animBoolName,true);
+            enemyBase.animator.SetBool(animBoolName,true);
         }
 
         public virtual void Update()
@@ -31,7 +31,7 @@ namespace Enemy
 
         public virtual void Exit()
         {
-            enemy.animator.SetBool(animBoolName,false);
+            enemyBase.animator.SetBool(animBoolName,false);
         }
     }
 }

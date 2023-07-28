@@ -10,7 +10,7 @@
         {
             base.Enter();
             timerState = .4f;
-            player.SetVelocity(5 * -player.transform.localScale.x, player.jumpForce);
+            player.SetVelocity(5 * -player.facingDir, player.jumpForce);
         }
 
         public override void Update()

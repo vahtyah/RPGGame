@@ -79,7 +79,7 @@ namespace Player
                 dashUsageTimer = dashCooldown;
                 dashDir = Input.GetAxisRaw("Horizontal");
 
-                if (dashDir == 0) dashDir = transform.localScale.x;
+                if (dashDir == 0) dashDir = facingDir;
 
                 StateMachine.CurrentState = PlayerDashState;
             }

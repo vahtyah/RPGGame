@@ -21,7 +21,7 @@ namespace Player
 
             player.animator.SetInteger("ComboCounter", comboCounter);
 
-            var attackDir = player.transform.localScale.x;
+            float attackDir = player.facingDir;
             if (xInput != 0) attackDir = xInput;
         
             player.SetVelocity(player.attackMovement[comboCounter].x * attackDir,player.attackMovement[comboCounter].y);

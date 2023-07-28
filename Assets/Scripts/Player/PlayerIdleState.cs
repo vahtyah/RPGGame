@@ -15,7 +15,7 @@
         public override void Update()
         {
             base.Update();
-            if (xInput == player.transform.localScale.x && player.IsWallDetected())
+            if (xInput == player.facingDir && player.IsWallDetected())
                 return;
             if (xInput != 0f && !player.isBusy)
                 playerStateMachine.CurrentState = player.PlayerMoveState;
