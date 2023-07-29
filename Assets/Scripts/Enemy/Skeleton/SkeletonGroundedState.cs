@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Player;
+using UnityEngine;
 
 namespace Enemy.Skeleton
 {
@@ -16,7 +17,7 @@ namespace Enemy.Skeleton
         public override void Enter()
         {
             base.Enter();
-            player = GameObject.Find("Player").transform;
+            player = PlayerManager.Instance.player.transform;
         }
 
         public override void Update()

@@ -1,4 +1,7 @@
-﻿namespace Player
+﻿using Skill;
+using UnityEngine;
+
+namespace Player
 {
     public class PlayerDashState : PlayerState
     {
@@ -10,6 +13,8 @@
         public override void Enter()
         {
             base.Enter();
+
+            player.skill.cloneSkill.CreateClone(player.transform);
             timerState = player.dashDuration;
         }
 

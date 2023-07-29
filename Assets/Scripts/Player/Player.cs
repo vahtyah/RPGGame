@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Skill;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -38,6 +39,7 @@ namespace Player
 
         #endregion
 
+        public SkillManager skill { get; private set; }
         protected override void Awake()
         {
             stateMachine = new PlayerStateMachine();
@@ -56,6 +58,7 @@ namespace Player
         protected override void Start()
         {
             base.Start();
+            skill = SkillManager.Instance;
             stateMachine.State = idleState;
         }
 
@@ -78,10 +81,8 @@ namespace Player
         private void CheckForDashInput()
         {
             if (IsWallDetected()) return;
-            dashUsageTimer -= Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.LeftShift) && dashUsageTimer < 0f)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && skill.dashSkill.CanUseSkill())
             {
-                dashUsageTimer = dashCooldown;
                 dashDir = Input.GetAxisRaw("Horizontal");
 
                 if (dashDir == 0) dashDir = facingDir;
