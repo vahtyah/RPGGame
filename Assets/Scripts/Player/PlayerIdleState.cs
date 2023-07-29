@@ -18,7 +18,7 @@
             if (xInput == player.facingDir && player.IsWallDetected())
                 return;
             if (xInput != 0f && !player.isBusy)
-                playerStateMachine.CurrentState = player.PlayerMoveState;
+                stateMachine.State = player.moveState;
         }
 
         public override void Exit()

@@ -15,5 +15,8 @@ namespace Enemy.Skeleton
                 if(hit.GetComponent<Player.Player>() != null) hit.GetComponent<Player.Player>().Damage();
             }
         }
+
+        private void OpenCounterWindow() => enemySkeleton.OpenCounterAttackWindow();
+        private void CloseCounterWindow() => enemySkeleton.CloseCounterAttackWindow();
     }
 }

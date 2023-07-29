@@ -4,7 +4,7 @@ namespace Player
 {
     public class PlayerGroundedState : PlayerState
     {
-        public PlayerGroundedState(PlayerStateMachine playerStateMachine, Player player, string animBoolName) : base(playerStateMachine, player, animBoolName)
+        public PlayerGroundedState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(stateMachine, player, animBoolName)
         {
         }
 
@@ -16,14 +16,17 @@ namespace Player
         public override void Update()
         {
             base.Update();
+            if (Input.GetKeyDown(KeyCode.Q))
+                stateMachine.State = player.counterAttackState;
+            
             if (Input.GetKeyDown(KeyCode.Mouse0))
-                playerStateMachine.CurrentState = player.PlayerPrimaryAttackState;
+                stateMachine.State = player.primaryAttackState;
 
             if (!player.IsGroundDetected())
-                playerStateMachine.CurrentState = player.PlayerAirState;
+                stateMachine.State = player.airState;
         
             if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
-                playerStateMachine.CurrentState = player.PlayerJumpState;
+                stateMachine.State = player.jumpState;
         }
 
         public override void Exit()

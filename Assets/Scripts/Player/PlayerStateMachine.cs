@@ -2,16 +2,16 @@
 {
     public class PlayerStateMachine
     {
-        private PlayerState currentState;
+        private PlayerState state;
 
-        public PlayerState CurrentState
+        public PlayerState State
         {
-            get => currentState;
+            get => state;
             set
             {
-                currentState?.Exit();
-                currentState = value;
-                currentState?.Enter();
+                state?.Exit();
+                state = value;
+                state?.Enter();
             }
         }
     }

@@ -17,7 +17,7 @@
         {
             base.Update();
             if (timerState < 0)
-                playerStateMachine.CurrentState = player.PlayerAirState;
+                stateMachine.State = player.airState;
         }
 
         public override void Exit()

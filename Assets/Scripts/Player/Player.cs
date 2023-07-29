@@ -8,6 +8,7 @@ namespace Player
     {
         [Header("Attack details")] 
         public Vector2[] attackMovement;
+        public float counterAttackDuration = .2f;
 
         
         public bool isBusy { get; private set; }
@@ -24,42 +25,44 @@ namespace Player
 
         #region State
 
-        public PlayerStateMachine StateMachine { get; private set; }
-        public PlayerIdleState PlayerIdleState { get; private set; }
-        public PlayerMoveState PlayerMoveState { get; private set; }
-        public PlayerJumpState PlayerJumpState { get; private set; }
-        public PlayerAirState PlayerAirState { get; private set; }
-        public PlayerWallSlideState PlayerWallSlideState { get; private set; }
-        public PlayerDashState PlayerDashState { get; private set; }
-        public PlayerWallJumpState PlayerWallJumpState { get; private set; }
-        public PlayerPrimaryAttackState PlayerPrimaryAttackState { get; private set; }
+        public PlayerStateMachine stateMachine { get; private set; }
+        public PlayerIdleState idleState { get; private set; }
+        public PlayerMoveState moveState { get; private set; }
+        public PlayerJumpState jumpState { get; private set; }
+        public PlayerAirState airState { get; private set; }
+        public PlayerWallSlideState wallSlideState { get; private set; }
+        public PlayerDashState dashState { get; private set; }
+        public PlayerWallJumpState wallJumpState { get; private set; }
+        public PlayerPrimaryAttackState primaryAttackState { get; private set; }
+        public PlayerCounterAttackState counterAttackState { get; private set; }
 
         #endregion
 
         protected override void Awake()
         {
-            StateMachine = new PlayerStateMachine();
+            stateMachine = new PlayerStateMachine();
 
-            PlayerIdleState = new PlayerIdleState(StateMachine, this, "Idle");
-            PlayerMoveState = new PlayerMoveState(StateMachine, this, "Move");
-            PlayerJumpState = new PlayerJumpState(StateMachine, this, "Jump");
-            PlayerAirState = new PlayerAirState(StateMachine, this, "Jump");
-            PlayerWallSlideState = new PlayerWallSlideState(StateMachine, this, "WallSlide");
-            PlayerDashState = new PlayerDashState(StateMachine, this, "Dash");
-            PlayerWallJumpState = new PlayerWallJumpState(StateMachine, this, "Jump");
-            PlayerPrimaryAttackState = new PlayerPrimaryAttackState(StateMachine, this, "Attack");
+            idleState = new PlayerIdleState(stateMachine, this, "Idle");
+            moveState = new PlayerMoveState(stateMachine, this, "Move");
+            jumpState = new PlayerJumpState(stateMachine, this, "Jump");
+            airState = new PlayerAirState(stateMachine, this, "Jump");
+            wallSlideState = new PlayerWallSlideState(stateMachine, this, "WallSlide");
+            dashState = new PlayerDashState(stateMachine, this, "Dash");
+            wallJumpState = new PlayerWallJumpState(stateMachine, this, "Jump");
+            primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
+            counterAttackState = new PlayerCounterAttackState(stateMachine, this, "CounterAttack");
         }
 
         protected override void Start()
         {
             base.Start();
-            StateMachine.CurrentState = PlayerIdleState;
+            stateMachine.State = idleState;
         }
 
         protected override void Update()
         {
             base.Update();
-            StateMachine.CurrentState.Update();
+            stateMachine.State.Update();
             CheckForDashInput();
         }
 
@@ -70,7 +73,7 @@ namespace Player
             isBusy = false;
         }
 
-        public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+        public void AnimationTrigger() => stateMachine.State.AnimationFinishTrigger();
 
         private void CheckForDashInput()
         {
@@ -83,7 +86,7 @@ namespace Player
 
                 if (dashDir == 0) dashDir = facingDir;
 
-                StateMachine.CurrentState = PlayerDashState;
+                stateMachine.State = dashState;
             }
         }
     }

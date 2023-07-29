@@ -2,7 +2,7 @@
 {
     public class PlayerMoveState : PlayerGroundedState
     {
-        public PlayerMoveState(PlayerStateMachine playerStateMachine, Player player, string animBoolName) : base(playerStateMachine, player, animBoolName)
+        public PlayerMoveState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(stateMachine, player, animBoolName)
         {
         }
 
@@ -18,7 +18,7 @@
         
             if (xInput == 0f || player.IsWallDetected())
             {
-                playerStateMachine.CurrentState = player.PlayerIdleState;
+                stateMachine.State = player.idleState;
             }
             player.SetVelocity(xInput * player.moveSpeed, rigidbody2D.velocity.y);
 

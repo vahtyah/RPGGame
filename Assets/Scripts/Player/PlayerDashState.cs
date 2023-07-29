@@ -19,7 +19,7 @@
             player.SetVelocity(player.dashSpeed * player.dashDir, 0);
             if (timerState < 0f)
             {
-                playerStateMachine.CurrentState = player.PlayerIdleState;
+                stateMachine.State = player.idleState;
             }
         }
 

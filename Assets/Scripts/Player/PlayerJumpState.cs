@@ -19,7 +19,7 @@ namespace Player
             base.Update();
             if (rigidbody2D.velocity.y < 0)
             {
-                playerStateMachine.CurrentState = player.PlayerAirState;
+                stateMachine.State = player.airState;
             }
         }
 

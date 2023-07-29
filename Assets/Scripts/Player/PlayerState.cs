@@ -4,7 +4,7 @@ namespace Player
 {
     public class PlayerState
     {
-        protected readonly PlayerStateMachine playerStateMachine;
+        protected readonly PlayerStateMachine stateMachine;
         protected readonly Player player;
         private readonly string animBoolName;
 
@@ -16,9 +16,9 @@ namespace Player
 
         protected bool triggerCalled;
 
-        public PlayerState(PlayerStateMachine playerStateMachine, Player player, string animBoolName)
+        public PlayerState(PlayerStateMachine stateMachine, Player player, string animBoolName)
         {
-            this.playerStateMachine = playerStateMachine;
+            this.stateMachine = stateMachine;
             this.player = player;
             this.animBoolName = animBoolName;
         }

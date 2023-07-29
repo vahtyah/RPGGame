@@ -19,7 +19,7 @@ namespace Player
             base.Update();
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                playerStateMachine.CurrentState = player.PlayerWallJumpState;
+                stateMachine.State = player.wallJumpState;
                 return;
             }
 
@@ -29,10 +29,10 @@ namespace Player
                 player.SetVelocity(0, rigidbody2D.velocity.y * .7f);
         
             if ((xInput != 0 && player.facingDir != xInput) || player.IsGroundDetected() )
-                playerStateMachine.CurrentState = player.PlayerIdleState;
+                stateMachine.State = player.idleState;
 
             if (!player.IsWallDetected())
-                playerStateMachine.CurrentState = player.PlayerAirState;
+                stateMachine.State = player.airState;
         }
 
         public override void Exit()

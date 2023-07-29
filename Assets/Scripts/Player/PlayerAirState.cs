@@ -15,9 +15,9 @@
         {
             base.Update();
             if (player.IsGroundDetected())
-                playerStateMachine.CurrentState = player.PlayerIdleState;
+                stateMachine.State = player.idleState;
             if (player.IsWallDetected())
-                playerStateMachine.CurrentState = player.PlayerWallSlideState;
+                stateMachine.State = player.wallSlideState;
         
             if (xInput != 0)
             {

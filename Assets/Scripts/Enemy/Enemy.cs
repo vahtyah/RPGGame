@@ -15,6 +15,12 @@ namespace Enemy
         public float attackDistance;
         public float attackCooldown;
         public float lastTimeAttacked;
+
+        [Header("Stunned Info")]
+        public float stunDuration;
+        public Vector2 stunDirection;
+        protected bool canBeStunned;
+        [SerializeField] private GameObject counterImage;   
         
         
         public EnemyStateMachine stateMachine { get; private set; }
@@ -34,6 +40,25 @@ namespace Enemy
         {
             base.Update();
             stateMachine.State.Update();
+        }
+
+        public virtual void OpenCounterAttackWindow()
+        {
+            canBeStunned = true;
+            counterImage.SetActive(true);
+        }
+        
+        public virtual void CloseCounterAttackWindow()
+        {
+            canBeStunned = false;
+            counterImage.SetActive(false);
+        }
+
+        public virtual bool CanBeStunned()
+        {
+            if (!canBeStunned) return false;
+            CloseCounterAttackWindow();
+            return true;
         }
 
         public virtual void AnimationFinishTrigger() => stateMachine.State.AnimationFinishTrigger();

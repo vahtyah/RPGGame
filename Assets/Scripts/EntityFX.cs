@@ -22,4 +22,12 @@ public class EntityFX : MonoBehaviour
         yield return new WaitForSeconds(flashDuration);
         sr.material = oriMat;
     }
+
+    private void RedColorBlink() { sr.color = sr.color != Color.white ? Color.white : Color.red; }
+
+    private void CancelRedBlink()
+    {
+        CancelInvoke();
+        sr.color = Color.white;
+    }
 }
