@@ -362,6 +362,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  knockbackDirection: {x: 0, y: 0}
+  knockbackDuration: 0
   attackMovement:
   - {x: 3, y: 1.5}
   - {x: 1, y: 2.5}
@@ -690,6 +692,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  knockbackDirection: {x: 10, y: 12}
+  knockbackDuration: 0.1
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
@@ -698,7 +702,7 @@ MonoBehaviour:
   battleTime: 7
   attackDistance: 1.5
   attackCooldown: 0.4
-  lastTimeAttacked: 0
+  lastTimeAttacked: 113.42622
 --- !u!4 &417214281
 Transform:
   m_ObjectHideFlags: 0
@@ -779,7 +783,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 12
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

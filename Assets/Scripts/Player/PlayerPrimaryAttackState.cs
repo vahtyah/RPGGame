@@ -16,6 +16,7 @@ namespace Player
         public override void Enter()
         {
             base.Enter();
+            xInput = 0; //Fix direction attack
             if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
                 comboCounter = 0;
 
