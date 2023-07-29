@@ -16,6 +16,10 @@ namespace Player
         public override void Update()
         {
             base.Update();
+
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+                stateMachine.State = player.aimSwordState;
+            
             if (Input.GetKeyDown(KeyCode.Q))
                 stateMachine.State = player.counterAttackState;
             

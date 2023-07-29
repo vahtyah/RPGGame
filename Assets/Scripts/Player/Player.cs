@@ -36,6 +36,8 @@ namespace Player
         public PlayerWallJumpState wallJumpState { get; private set; }
         public PlayerPrimaryAttackState primaryAttackState { get; private set; }
         public PlayerCounterAttackState counterAttackState { get; private set; }
+        public PlayerAimSwordState aimSwordState { get; private set; }
+        public PlayerCatchSwordState catchSwordState { get; private set; }
 
         #endregion
 
@@ -53,6 +55,8 @@ namespace Player
             wallJumpState = new PlayerWallJumpState(stateMachine, this, "Jump");
             primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
             counterAttackState = new PlayerCounterAttackState(stateMachine, this, "CounterAttack");
+            aimSwordState = new PlayerAimSwordState(stateMachine, this, "AimSword");
+            catchSwordState = new PlayerCatchSwordState(stateMachine, this, "CatchSword");
         }
 
         protected override void Start()
