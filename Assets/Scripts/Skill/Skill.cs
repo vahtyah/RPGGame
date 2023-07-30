@@ -23,7 +23,6 @@ namespace Skill
             UseSkill();
             cooldownTimer = cooldown;
             return true;
-
         }
 
         public virtual void UseSkill()

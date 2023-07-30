@@ -13,7 +13,7 @@ namespace Player
         public override void Enter()
         {
             base.Enter(); 
-            player.skill.swordSkill.DotsActive(true);
+            // player.skill.swordSkill.DotsActive(true);
         }
 
         public override void Update()
