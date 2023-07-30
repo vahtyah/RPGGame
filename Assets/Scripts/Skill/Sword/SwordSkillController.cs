@@ -48,6 +48,11 @@ namespace Skill
             anim = GetComponentInChildren<Animator>();
         }
 
+        private void DestroyMe()
+        {
+            Destroy(gameObject);
+        }
+
         public void Setup(Vector2 dir, float gravityScale, Player.Player player, float freezeTimeDuration, float returnSpeed)
         {
             this.player = player;
@@ -60,6 +65,7 @@ namespace Skill
                 anim.SetBool("Rotation", true);
 
             spinDir = Mathf.Clamp(rb.velocity.x, -1, 1);
+            Invoke("DestroyMe",7);
         }
 
         public void SetupBounce(bool isBouncing, int amountOfBounces, float bounceSpeed)
