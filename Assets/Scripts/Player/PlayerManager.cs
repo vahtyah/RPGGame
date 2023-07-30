@@ -12,7 +12,6 @@ namespace Player
         {
             if(Instance) Destroy(gameObject);
             else Instance = this; 
-            
         }
     }
 }

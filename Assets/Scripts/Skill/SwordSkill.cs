@@ -6,12 +6,9 @@ namespace Skill
     public class SwordSkill : Skill
     {
         [Header("Skill Info")]
-        [SerializeField]
-        private GameObject swordPrefab;
-
+        [SerializeField] private GameObject swordPrefab;
         [SerializeField] private Vector2 launchDir;
         [SerializeField] private float swordGravity;
-
         public Vector2 finalDir;
         
         [Header("Aim dots")]
@@ -50,9 +47,10 @@ namespace Skill
         public void CreateSword()
         {
             var newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
-            newSword.GetComponent<SwordSkillController>().Setup(finalDir, swordGravity);
-            
+            newSword.GetComponent<SwordSkillController>().Setup(finalDir, swordGravity,player);
+            player.AssignNewSword(newSword);
             DotsActive(false);
+            
         }
 
         public Vector2 AimDirection()

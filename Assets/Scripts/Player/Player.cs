@@ -16,6 +16,7 @@ namespace Player
 
         [Header("Move Info")] public float moveSpeed = 8f;
         public float jumpForce = 12f;
+        public float swordReturnImpact;
 
         [Header("Dash Info")] public float dashCooldown = 1f;
         private float dashUsageTimer;
@@ -23,7 +24,7 @@ namespace Player
         public float dashDuration = 0.2f;
         public float dashDir { get; private set; }
 
-
+        public GameObject sword { get; private set; }
         #region State
 
         public PlayerStateMachine stateMachine { get; private set; }
@@ -73,6 +74,17 @@ namespace Player
             CheckForDashInput();
         }
 
+        public void AssignNewSword(GameObject newSword)
+        {
+            sword = newSword;
+        }
+
+        public void CatchTheSword()
+        {
+            stateMachine.State = catchSwordState;
+            Destroy(sword);
+        }
+
         private IEnumerator BusyFor(float second)
         {
             isBusy = true;
@@ -88,9 +100,7 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.LeftShift) && skill.dashSkill.CanUseSkill())
             {
                 dashDir = Input.GetAxisRaw("Horizontal");
-
                 if (dashDir == 0) dashDir = facingDir;
-
                 stateMachine.State = dashState;
             }
         }

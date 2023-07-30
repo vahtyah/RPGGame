@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Skill;
+using UnityEngine;
 
 namespace Player
 {
@@ -17,7 +18,7 @@ namespace Player
         {
             base.Update();
 
-            if (Input.GetKeyDown(KeyCode.Mouse1))
+            if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
                 stateMachine.State = player.aimSwordState;
             
             if (Input.GetKeyDown(KeyCode.Q))
@@ -36,6 +37,13 @@ namespace Player
         public override void Exit()
         {
             base.Exit();
+        }
+
+        private bool HasNoSword()
+        {
+            if (!player.sword) return true;
+            player.sword.GetComponent<SwordSkillController>().ReturnSword();
+            return false;
         }
     }
 }
