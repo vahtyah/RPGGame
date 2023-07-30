@@ -3,8 +3,20 @@ using UnityEngine.PlayerLoop;
 
 namespace Skill
 {
+    public enum SwordType
+    {
+        Regular,
+        Bounce,
+        Pierce,
+        Spin
+    }
     public class SwordSkill : Skill
     {
+        public SwordType swordType = SwordType.Regular;
+        [Header("Bounce Info")]
+        [SerializeField] private int amountOfBounce;
+        [SerializeField] private float bounceGravity;
+        
         [Header("Skill Info")]
         [SerializeField] private GameObject swordPrefab;
         [SerializeField] private Vector2 launchDir;
@@ -47,7 +59,14 @@ namespace Skill
         public void CreateSword()
         {
             var newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
-            newSword.GetComponent<SwordSkillController>().Setup(finalDir, swordGravity,player);
+            var newSwordScript = newSword.GetComponent<SwordSkillController>();
+            if (swordType == SwordType.Bounce)
+            {
+                swordGravity = bounceGravity;   
+                newSwordScript.SetupBounce(true,amountOfBounce);
+            }
+            
+            newSwordScript.Setup(finalDir, swordGravity,player);
             player.AssignNewSword(newSword);
             DotsActive(false);
             

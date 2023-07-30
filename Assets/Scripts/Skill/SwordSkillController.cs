@@ -15,10 +15,11 @@ namespace Skill
 
         private bool canRotate = true;
 
-        public float bounceSpeed = 20f;
-        public bool isBouncing = true;
-        public int amountOfBounce = 4;
-        public List<Transform> enemiesTarget;
+        [Header("Bounce Info")]
+        [SerializeField] private float bounceSpeed = 20f;
+        private bool isBouncing;
+        private int amountOfBounces;
+        private List<Transform> enemiesTarget;
         private int targetIndex;
 
 
@@ -34,8 +35,15 @@ namespace Skill
             this.player = player;
             rb.gravityScale = gravityScale;
             rb.velocity = dir;
-            
+            enemiesTarget = new List<Transform>();
+
             anim.SetBool("Rotation",true);
+        }
+
+        public void SetupBounce(bool isBouncing, int amountOfBounces)
+        {
+            this.isBouncing = isBouncing;
+            this.amountOfBounces = amountOfBounces;
         }
 
         public void ReturnSword()
@@ -59,6 +67,11 @@ namespace Skill
                     player.CatchTheSword();
             }
 
+            BounceLogic();
+        }
+
+        private void BounceLogic()
+        {
             if (isBouncing && enemiesTarget.Count > 0)
             {
                 transform.position = Vector2.MoveTowards(transform.position,
@@ -66,15 +79,15 @@ namespace Skill
                 if (Vector2.Distance(transform.position, enemiesTarget[targetIndex].position) < .1f)
                 {
                     targetIndex++;
-                    amountOfBounce--;
-                    if (amountOfBounce <= 0)
+                    amountOfBounces--;
+                    if (amountOfBounces <= 0)
                     {
                         isBouncing = false;
                         isReturnSword = true;
                     }
 
                     if (targetIndex >= enemiesTarget.Count)
-                        targetIndex = 0;    
+                        targetIndex = 0;
                 }
             }
         }
