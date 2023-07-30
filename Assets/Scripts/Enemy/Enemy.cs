@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Enemy
@@ -10,6 +11,7 @@ namespace Enemy
         public float moveSpeed;
         public float idleTime;
         public float battleTime;
+        private float defaultMoveSpeed;
 
         [Header("Attack Info")] 
         public float attackDistance;
@@ -29,6 +31,7 @@ namespace Enemy
         {
             base.Awake();
             stateMachine = new EnemyStateMachine();
+            defaultMoveSpeed = moveSpeed;
         }
 
         protected override void Start()
@@ -40,6 +43,27 @@ namespace Enemy
         {
             base.Update();
             stateMachine.State.Update();
+        }
+
+        public virtual void FreezeTimer(bool timeFroze)
+        {
+            if (timeFroze)
+            {
+                moveSpeed = 0;
+                animator.speed = 0;
+            }
+            else
+            {
+                moveSpeed = defaultMoveSpeed;
+                animator.speed = 1;
+            }
+        }
+
+        protected virtual IEnumerator FreezeTimerFor(float second)
+        {
+            FreezeTimer(true);
+            yield return new WaitForSeconds(second);
+            FreezeTimer(false);
         }
 
         public virtual void OpenCounterAttackWindow()

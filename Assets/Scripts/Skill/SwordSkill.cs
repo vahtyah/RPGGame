@@ -10,21 +10,37 @@ namespace Skill
         Pierce,
         Spin
     }
+
     public class SwordSkill : Skill
     {
         public SwordType swordType = SwordType.Regular;
+
         [Header("Bounce Info")]
-        [SerializeField] private int amountOfBounce;
+        [SerializeField] private float bounceSpeed = 20f;
+        [SerializeField] private int bounceAmount;
         [SerializeField] private float bounceGravity;
+
+        [Header("Pierce Info")]
+        [SerializeField]
+        private int pierceAmount;
+        [SerializeField] private float pierceGravity;
         
+        [Header("Spin Info")]
+        [SerializeField] private float hitCooldown = .35f;
+        [SerializeField] private float maxTravelDistance = 7;
+        [SerializeField] private float spinDuration = 2;
+        [SerializeField] private float spinGravity = 1; 
+
         [Header("Skill Info")]
         [SerializeField] private GameObject swordPrefab;
         [SerializeField] private Vector2 launchDir;
         [SerializeField] private float swordGravity;
+        [SerializeField] private float freezeTimeDuration;
+        [SerializeField] private float returnSpeed = 12f;
         public Vector2 finalDir;
         
-        [Header("Aim dots")]
-        [SerializeField] private int numberOfDots;
+
+        [Header("Aim dots")] [SerializeField] private int numberOfDots;
         [SerializeField] private float spaceBetweenDots;
         [SerializeField] private GameObject dotPrefab;
         [SerializeField] private Transform dotsParent;
@@ -35,6 +51,15 @@ namespace Skill
         {
             base.Start();
             GenerateDots();
+
+            SetupGravity();
+        }
+
+        private void SetupGravity()
+        {
+            if (swordType == SwordType.Bounce) swordGravity = bounceGravity;
+            else if (swordType == SwordType.Pierce) swordGravity = pierceGravity;
+            else if (swordType == SwordType.Spin) swordGravity = spinGravity;
         }
 
         protected override void Update()
@@ -61,15 +86,14 @@ namespace Skill
             var newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
             var newSwordScript = newSword.GetComponent<SwordSkillController>();
             if (swordType == SwordType.Bounce)
-            {
-                swordGravity = bounceGravity;   
-                newSwordScript.SetupBounce(true,amountOfBounce);
-            }
-            
-            newSwordScript.Setup(finalDir, swordGravity,player);
+                newSwordScript.SetupBounce(true, bounceAmount,bounceSpeed);
+            else if(swordType == SwordType.Pierce)
+                newSwordScript.SetupPierce(pierceAmount);
+            else if(swordType == SwordType.Spin)
+                newSwordScript.SetupSpin(true,maxTravelDistance,spinDuration, hitCooldown);
+            newSwordScript.Setup(finalDir, swordGravity, player, freezeTimeDuration, returnSpeed);
             player.AssignNewSword(newSword);
             DotsActive(false);
-            
         }
 
         public Vector2 AimDirection()
