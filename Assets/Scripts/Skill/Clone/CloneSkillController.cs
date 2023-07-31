@@ -21,10 +21,10 @@ namespace Skill
             sr = GetComponent<SpriteRenderer>();
         }
 
-        public void SetUp(Transform newTransform, float cloneDuration, bool canAttack)
+        public void SetUp(Transform newTransform, float cloneDuration, bool canAttack, Vector3 offset)
         {
             if(canAttack) animator.SetInteger("AttackNumber",Random.Range(1,4));
-            transform.position = newTransform.position;
+            transform.position = newTransform.position + offset;
             cloneTimer = cloneDuration;
 
             FaceClosestTarget();

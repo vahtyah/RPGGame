@@ -20,7 +20,7 @@
             {
                 stateMachine.State = player.idleState;
             }
-            player.SetVelocity(xInput * player.moveSpeed, rigidbody2D.velocity.y);
+            player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
 
         }
 

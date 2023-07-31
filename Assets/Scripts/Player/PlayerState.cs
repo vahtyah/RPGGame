@@ -8,7 +8,7 @@ namespace Player
         protected readonly Player player;
         private readonly string animBoolName;
 
-        protected Rigidbody2D rigidbody2D;
+        protected Rigidbody2D rb;
 
         protected float xInput;
         protected float yInput;
@@ -26,14 +26,14 @@ namespace Player
         public virtual void Enter()
         {
             player.animator.SetBool(animBoolName,true);
-            rigidbody2D = player.rb;
+            rb = player.rb;
             triggerCalled = false;
         }
         public virtual void Update()
         {
             xInput = Input.GetAxisRaw("Horizontal");
             yInput = Input.GetAxisRaw("Vertical");  
-            player.animator.SetFloat("yVelocity",rigidbody2D.velocity.y);
+            player.animator.SetFloat("yVelocity",rb.velocity.y);
             timerState -= Time.deltaTime;
         }
 

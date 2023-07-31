@@ -18,6 +18,7 @@ namespace Skill.Sword
 
         [Header("Skill Info")]
         [SerializeField] private GameObject swordPrefab;
+        [SerializeField] private float swordGravity = 1f;
         [SerializeField] private Vector2 launchDir;
         [SerializeField] private float freezeTimeDuration;
         [SerializeField] private float returnSpeed = 15f;
@@ -78,9 +79,9 @@ namespace Skill.Sword
 
         public void SetupGravity()
         {
-            if (swordType == SwordType.Bounce) regularGravity = bounceGravity;
-            else if (swordType == SwordType.Pierce) regularGravity = pierceGravity;
-            else if (swordType == SwordType.Spin) regularGravity = spinGravity;
+            if (swordType == SwordType.Bounce) swordGravity = bounceGravity;
+            else if (swordType == SwordType.Pierce) swordGravity = pierceGravity;
+            else if (swordType == SwordType.Spin) swordGravity = spinGravity;
         }
 
         public void CreateSword()
@@ -122,7 +123,7 @@ namespace Skill.Sword
             var position = (Vector2)player.transform.position +
                            new Vector2(AimDirection().normalized.x * launchDir.x,
                                AimDirection().normalized.y * launchDir.y) * t +
-                           .5f * (Physics2D.gravity * regularGravity) * (t * t);
+                           .5f * (Physics2D.gravity * swordGravity) * (t * t);
             return position;
         }
 
@@ -155,5 +156,7 @@ namespace Skill.Sword
         public Vector2 FinalDir => finalDir;
 
         public float RegularGravity => regularGravity;
+
+        public float SwordGravity => swordGravity;
     }
 }

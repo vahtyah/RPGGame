@@ -13,7 +13,6 @@ namespace Skill.Sword
         public override void Setup()
         {
             base.Setup();
-            rb.gravityScale = swordSkill.PierceGravity;
         }
 
         public override void StuckInto(Collider2D other)

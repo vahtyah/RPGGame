@@ -1,4 +1,5 @@
 ﻿using System;
+using Skill.Blackhole;
 using Skill.Sword;
 using UnityEngine;
 
@@ -9,8 +10,8 @@ namespace Skill
         public static SkillManager Instance { get; private set; }
         public DashSkill dashSkill { get; private set; }
         public CloneSkill cloneSkill { get; private set; }
-        public SwordSkill swordSkill { get; private set; }
         public Sword.SwordSkill SwordSkill { get; private set; }
+        public BlackholeSkill blackholeSkill { get; private set; }
 
         private void Awake()
         {
@@ -22,8 +23,8 @@ namespace Skill
         {
             dashSkill = GetComponent<DashSkill>();
             cloneSkill = GetComponent<CloneSkill>();
-            swordSkill = GetComponent<SwordSkill>();
             SwordSkill = GetComponent<Sword.SwordSkill>();
+            blackholeSkill = GetComponent<BlackholeSkill>();
         }
     }
 }

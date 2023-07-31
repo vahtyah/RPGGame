@@ -19,6 +19,9 @@ namespace Player
         {
             base.Update();
 
+            if (Input.GetKeyDown(KeyCode.R))
+                stateMachine.State = player.blackholeState;
+            
             if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
                 stateMachine.State = player.aimSwordState;
             

@@ -24,9 +24,9 @@ namespace Player
             }
 
             if (yInput < 0)
-                player.SetVelocity(0, rigidbody2D.velocity.y);
+                player.SetVelocity(0, rb.velocity.y);
             else
-                player.SetVelocity(0, rigidbody2D.velocity.y * .7f);
+                player.SetVelocity(0, rb.velocity.y * .7f);
         
             if ((xInput != 0 && player.facingDir != xInput) || player.IsGroundDetected() )
                 stateMachine.State = player.idleState;

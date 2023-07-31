@@ -10,10 +10,10 @@ namespace Skill
         [Space] 
         [SerializeField] private bool canAttack;
 
-        public void CreateClone(Transform cloneTransform)
+        public void CreateClone(Transform cloneTransform, Vector3 offset)
         {
             var newClone = Instantiate(clonePrefab);
-            newClone.GetComponent<CloneSkillController>().SetUp(cloneTransform, cloneDuration, canAttack);
+            newClone.GetComponent<CloneSkillController>().SetUp(cloneTransform, cloneDuration, canAttack, offset);
         }
     }
 }

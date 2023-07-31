@@ -16,7 +16,7 @@ namespace Player
             sword = player.sword.transform;
             if(player.transform.position.x > sword.position.x && player.facingDir == 1) player.Flip();
             if(player.transform.position.x < sword.position.x && player.facingDir != 1) player.Flip(); 
-            rigidbody2D.velocity = new Vector2(player.swordReturnImpact * -player.facingDir, rigidbody2D.velocity.y);
+            rb.velocity = new Vector2(player.swordReturnImpact * -player.facingDir, rb.velocity.y);
 
         }
 

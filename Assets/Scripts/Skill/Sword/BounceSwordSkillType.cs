@@ -21,7 +21,6 @@ namespace Skill.Sword
         public override void Setup()
         {
             base.Setup(); 
-            rb.gravityScale = swordSkill.BounceGravity;
             anim.SetBool("Rotation", true);
         }
 

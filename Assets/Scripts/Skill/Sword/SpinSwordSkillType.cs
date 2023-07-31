@@ -17,7 +17,6 @@ namespace Skill.Sword
         public override void Setup()
         {
             base.Setup();
-            rb.gravityScale = swordSkill.SpinGravity;
             anim.SetBool("Rotation", true);
             spinDir = Mathf.Clamp(rb.velocity.x, -1, 1);
         }

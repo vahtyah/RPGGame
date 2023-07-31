@@ -30,6 +30,7 @@ namespace Skill.Sword
         public virtual void Setup()
         {
             rb.velocity = swordSkill.FinalDir;
+            rb.gravityScale = swordSkill.SwordGravity;
         }
 
         public virtual void Update()

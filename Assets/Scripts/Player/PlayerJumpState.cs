@@ -11,13 +11,13 @@ namespace Player
         public override void Enter()
         {
             base.Enter();
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, player.jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
         }
 
         public override void Update()
         {
             base.Update();
-            if (rigidbody2D.velocity.y < 0)
+            if (rb.velocity.y < 0)
             {
                 stateMachine.State = player.airState;
             }

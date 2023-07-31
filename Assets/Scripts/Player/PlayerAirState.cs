@@ -21,7 +21,7 @@
         
             if (xInput != 0)
             {
-                player.SetVelocity(player.moveSpeed * .8f * xInput,rigidbody2D.velocity.y);
+                player.SetVelocity(player.moveSpeed * .8f * xInput,rb.velocity.y);
             }
         }
 
