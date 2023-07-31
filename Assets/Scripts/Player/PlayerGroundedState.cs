@@ -1,4 +1,5 @@
 ﻿using Skill;
+using Skill.Sword;
 using UnityEngine;
 
 namespace Player
@@ -42,7 +43,8 @@ namespace Player
         private bool HasNoSword()
         {
             if (!player.sword) return true;
-            player.sword.GetComponent<SwordSkillController>().ReturnSword();
+            // player.sword.GetComponent<SwordSkillController>().ReturnSword();
+            player.sword.GetComponent<Sword>().typeMachine.CurrentType.ReturnSword();
             return false;
         }
     }

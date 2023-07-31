@@ -56,7 +56,6 @@ namespace Enemy.Skeleton
 
         private bool CanAttack()
         {
-            Debug.Log(Time.time >= enemySkeleton.attackCooldown + enemySkeleton.lastTimeAttacked);
             if (Time.time >= enemySkeleton.attackCooldown + enemySkeleton.lastTimeAttacked)
             {
                 enemySkeleton.lastTimeAttacked = Time.time;

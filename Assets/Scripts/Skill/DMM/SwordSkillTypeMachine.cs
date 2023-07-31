@@ -11,7 +11,6 @@ namespace Skill.Sword
             get => currentType;
             set
             {
-                currentType?.Exit();
                 currentType = value;
                 currentType?.Setup();
             }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.PackageManager;
+using UnityEngine;
 
 namespace Skill.Sword
 {
@@ -14,10 +15,7 @@ namespace Skill.Sword
             base.Update();
         }
 
-        public override void Exit()
-        {
-            base.Exit();
-        }
+
 
         public RegularSwordSkillType(SwordSkillTest swordSkillTest, Sword sword) : base(swordSkillTest, sword)
         {

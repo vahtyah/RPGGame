@@ -14,6 +14,7 @@ namespace Player
         {
             base.Enter(); 
             // player.skill.swordSkill.DotsActive(true);
+            player.skill.swordSkillTest.DotsActive(true);
         }
 
         public override void Update()

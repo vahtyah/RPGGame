@@ -838,7 +838,7 @@ Transform:
   m_GameObject: {fileID: 417214279}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.62, y: -0.32, z: 0}
+  m_LocalPosition: {x: 4.14, y: -0.32, z: 0}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1334,13 +1334,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  swordType: 0
+  swordType: 1
   swordPrefab: {fileID: 3190378206210852227, guid: 670ddc017a1e05049861b29040f40e69, type: 3}
-  launchDir: {x: 35, y: 25}
+  launchDir: {x: 14, y: 14}
   swordGravity: 1
   freezeTimeDuration: 0.7
   returnSpeed: 15
   finalDir: {x: 0, y: 0}
+  bounceSpeed: 20
+  bounceAmount: 5
+  bounceGravity: 5
+  bounceRadius: 10
+  numberOfDots: 20
+  spaceBetweenDots: 0.07
+  dotPrefab: {fileID: 2108530136579452790, guid: e07999c80df9cb7498b59bb8ee039965, type: 3}
+  dotsParent: {fileID: 2041865107}
 --- !u!1 &696089590
 GameObject:
   m_ObjectHideFlags: 0
@@ -4341,8 +4349,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -5304150660300095340, guid: 670ddc017a1e05049861b29040f40e69, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
