@@ -10,7 +10,7 @@ namespace Skill
         public DashSkill dashSkill { get; private set; }
         public CloneSkill cloneSkill { get; private set; }
         public SwordSkill swordSkill { get; private set; }
-        public SwordSkillTest swordSkillTest { get; private set; }
+        public Sword.SwordSkill SwordSkill { get; private set; }
 
         private void Awake()
         {
@@ -23,7 +23,7 @@ namespace Skill
             dashSkill = GetComponent<DashSkill>();
             cloneSkill = GetComponent<CloneSkill>();
             swordSkill = GetComponent<SwordSkill>();
-            swordSkillTest = GetComponent<SwordSkillTest>();
+            SwordSkill = GetComponent<Sword.SwordSkill>();
         }
     }
 }

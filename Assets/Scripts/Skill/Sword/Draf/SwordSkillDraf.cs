@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-namespace Skill.Sword
+namespace Skill
 {
     public enum SwordType
     {
@@ -11,41 +10,56 @@ namespace Skill.Sword
         Pierce,
         Spin
     }
-    public class SwordSkillTest : Skill
+
+    public class SwordSkill : Skill
     {
         public SwordType swordType = SwordType.Regular;
-        
-        [Header("Skill Info")]
-        [SerializeField] private GameObject swordPrefab;
 
-        public Vector2 launchDir;
-        public float swordGravity;
-        public float freezeTimeDuration;
-        public float returnSpeed = 15f;
-        public Vector2 finalDir;
-        
         [Header("Bounce Info")]
         [SerializeField] private float bounceSpeed = 20f;
         [SerializeField] private int bounceAmount;
         [SerializeField] private float bounceGravity;
-        [SerializeField] private float bounceRadius = 10f;
+
+        [Header("Pierce Info")]
+        [SerializeField]
+        private int pierceAmount;
+        [SerializeField] private float pierceGravity;
         
+        [Header("Spin Info")]
+        [SerializeField] private float hitCooldown = .35f;
+        [SerializeField] private float maxTravelDistance = 7;
+        [SerializeField] private float spinDuration = 2;
+        [SerializeField] private float spinGravity = 1; 
+
+        [Header("Skill Info")]
+        [SerializeField] private GameObject swordPrefab;
+        [SerializeField] private Vector2 launchDir;
+        [SerializeField] private float swordGravity;
+        [SerializeField] private float freezeTimeDuration;
+        [SerializeField] private float returnSpeed = 12f;
+        public Vector2 finalDir;
+        
+
         [Header("Aim dots")] [SerializeField] private int numberOfDots;
         [SerializeField] private float spaceBetweenDots;
         [SerializeField] private GameObject dotPrefab;
         [SerializeField] private Transform dotsParent;
 
         private GameObject[] dots;
-        
-
-        private void Awake()
-        {
-        }
 
         protected override void Start()
         {
             base.Start();
             GenerateDots();
+
+            SetupGravity();
+        }
+
+        private void SetupGravity()
+        {
+            if (swordType == SwordType.Bounce) swordGravity = bounceGravity;
+            else if (swordType == SwordType.Pierce) swordGravity = pierceGravity;
+            else if (swordType == SwordType.Spin) swordGravity = spinGravity;
         }
 
         protected override void Update()
@@ -56,7 +70,7 @@ namespace Skill.Sword
                 finalDir = new Vector2(aimDirNor.x * launchDir.x,
                     aimDirNor.y * launchDir.y);
             }
-            
+
             if (Input.GetKey(KeyCode.Mouse1))
             {
                 for (var i = 0; i < dots.Length; i++)
@@ -66,15 +80,22 @@ namespace Skill.Sword
                 }
             }
         }
-        
+
         public void CreateSword()
         {
             var newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
-            newSword.GetComponent<Sword>().Setup(swordType, returnSpeed, player);
-            DotsActive(false);
+            var newSwordScript = newSword.GetComponent<SwordSkillController>();
+            if (swordType == SwordType.Bounce)
+                newSwordScript.SetupBounce(true, bounceAmount,bounceSpeed);
+            else if(swordType == SwordType.Pierce)
+                newSwordScript.SetupPierce(pierceAmount);
+            else if(swordType == SwordType.Spin)
+                newSwordScript.SetupSpin(true,maxTravelDistance,spinDuration, hitCooldown);
+            newSwordScript.Setup(finalDir, swordGravity, player, freezeTimeDuration, returnSpeed);
             player.AssignNewSword(newSword);
+            DotsActive(false);
         }
-        
+
         public Vector2 AimDirection()
         {
             var playerPosition = player.transform.position;
@@ -82,7 +103,7 @@ namespace Skill.Sword
             var direction = mousePosition - playerPosition;
             return direction;
         }
-        
+
         public void DotsActive(bool isActive)
         {
             foreach (var dot in dots)
@@ -109,19 +130,5 @@ namespace Skill.Sword
                            .5f * (Physics2D.gravity * swordGravity) * (t * t);
             return position;
         }
-
-        public float BounceSpeed => bounceSpeed;
-
-        public int BounceAmount => bounceAmount;
-
-        public float BounceGravity => bounceGravity;
-
-        public float BounceRadius => bounceRadius;
-
-        public Player.Player Player => player;
-
-        public float ReturnSpeed => returnSpeed;
-
-        public float FreezeTimeDuration => freezeTimeDuration;
     }
 }

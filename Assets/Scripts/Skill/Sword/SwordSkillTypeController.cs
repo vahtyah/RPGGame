@@ -3,36 +3,33 @@ using UnityEngine;
 
 namespace Skill.Sword
 {
-    public abstract class SwordSkillType
+    public abstract class SwordSkillTypeController
     {
-        protected SwordSkillTest swordSkillTest;
+        protected SwordSkill swordSkill;
         protected Sword sword;
         protected Rigidbody2D rb;
-        protected CircleCollider2D cd;
+        private CircleCollider2D cd;
         protected Animator anim;
-        private Player.Player player;
+        protected Player.Player player;
+        
         private bool canRotate = true;
-        public bool isReturning;
-        private float returnSpeed;
+        protected bool isReturning;
 
         private Vector2 finalDir;
 
-        public SwordSkillType(SwordSkillTest swordSkillTest, Sword sword)
+        public SwordSkillTypeController(SwordSkill swordSkill, Sword sword)
         {
-            this.swordSkillTest = swordSkillTest;
+            this.swordSkill = swordSkill;
             this.sword = sword;
             rb = sword.rb;
             cd = sword.cd;
             anim = this.sword.anim;
-            this.player = swordSkillTest.Player;
-            returnSpeed = swordSkillTest.ReturnSpeed;
+            player = swordSkill.Player;
         }
 
         public virtual void Setup()
         {
-            rb.gravityScale = swordSkillTest.swordGravity;
-            rb.velocity = swordSkillTest.finalDir;
-            anim.SetBool("Rotation", true);
+            rb.velocity = swordSkill.FinalDir;
         }
 
         public virtual void Update()
@@ -43,16 +40,16 @@ namespace Skill.Sword
             if (isReturning)
             {
                 sword.transform.position = Vector2.MoveTowards(sword.transform.position, player.transform.position,
-                    returnSpeed * Time.deltaTime);
+                     swordSkill.ReturnSpeed * Time.deltaTime);
                 if (Vector2.Distance(sword.transform.position, player.transform.position) < .5f)
                     player.CatchTheSword();
             }
         }
 
-        public virtual void SkillDamage(Enemy.Enemy enemy, float freezeTimeDuration)
+        public virtual void Damage(Enemy.Enemy enemy)
         {
             enemy.Damage();
-            enemy.StartCoroutine("FreezeTimerFor", freezeTimeDuration);
+            enemy.StartCoroutine("FreezeTimerFor", swordSkill.FreezeTimeDuration);
         }
 
         public virtual void StuckInto(Collider2D other)
@@ -71,6 +68,7 @@ namespace Skill.Sword
             sword.transform.parent = null;
             isReturning = true;
         }
-        
+
+        public bool IsReturning => isReturning;
     }
 }

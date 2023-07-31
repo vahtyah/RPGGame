@@ -3,40 +3,45 @@ using UnityEngine;
 
 namespace Skill.Sword
 {
-    public class BounceSwordSkillType : SwordSkillType
+    public class BounceSwordSkillType : SwordSkillTypeController
     {
         private bool isBouncing;
         private List<Transform> enemiesTarget;
         private int targetIndex;
         private int bounceAmount;
 
-        public BounceSwordSkillType(SwordSkillTest swordSkillTest, Sword sword) : base(swordSkillTest, sword)
+        public BounceSwordSkillType(SwordSkill swordSkill, Sword sword) : base(swordSkill, sword)
         {
-            this.bounceAmount = swordSkillTest.BounceAmount;
+            bounceAmount = swordSkill.BounceAmount;
             enemiesTarget = new List<Transform>();
             isBouncing = true;
             targetIndex = 1;
         }
 
-        public override void Setup() { base.Setup(); }
+        public override void Setup()
+        {
+            base.Setup(); 
+            rb.gravityScale = swordSkill.BounceGravity;
+            anim.SetBool("Rotation", true);
+        }
 
         public override void Update()
         {
             base.Update();
-            SKillLogic();
+            Logic();
         }
 
-        private void SKillLogic()
+        private void Logic()
         {
             if (isBouncing && enemiesTarget.Count > 0)
             {
                 Debug.Log("enemiesTarget.Count = " + enemiesTarget.Count);
                 sword.transform.position = Vector2.MoveTowards(sword.transform.position,
-                    enemiesTarget[targetIndex].position, swordSkillTest.BounceSpeed * Time.deltaTime);
+                    enemiesTarget[targetIndex].position, swordSkill.BounceSpeed * Time.deltaTime);
                 if (Vector2.Distance(sword.transform.position, enemiesTarget[targetIndex].position) < .1f)
                 {
                     var curEnemy = enemiesTarget[targetIndex].GetComponent<Enemy.Enemy>();
-                    SkillDamage(curEnemy, swordSkillTest.freezeTimeDuration);
+                    Damage(curEnemy);
                     targetIndex++;
                     bounceAmount--;
                     if (bounceAmount <= 0)
@@ -51,15 +56,14 @@ namespace Skill.Sword
             }
         }
 
-        public override void SkillDamage(Enemy.Enemy enemy, float freezeTimeDuration)
+        public override void Damage(Enemy.Enemy enemy)
         {
-            base.SkillDamage(enemy, freezeTimeDuration);
+            base.Damage(enemy);
             SetupTarget();
         }
 
         public override void StuckInto(Collider2D other)
         {
-            Debug.Log("stuck bounce");
             base.StuckInto(other);
             if (isBouncing && enemiesTarget.Count > 0)
             {
@@ -72,7 +76,7 @@ namespace Skill.Sword
         {
             if (isBouncing && enemiesTarget.Count <= 0)
             {
-                var colliders = Physics2D.OverlapCircleAll(sword.transform.position, swordSkillTest.BounceRadius);
+                var colliders = Physics2D.OverlapCircleAll(sword.transform.position, swordSkill.BounceRadius);
                 foreach (var hit in colliders)
                 {
                     if (hit.GetComponent<Enemy.Enemy>() != null)

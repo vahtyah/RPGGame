@@ -27,8 +27,7 @@ namespace Skill
         private int targetIndex;
 
         [Header("Pierce Info")]
-        [SerializeField]
-        private int pierceAmount;
+        [SerializeField] private int pierceAmount;
 
         [Header("Spin Info")] private float maxTravelDistance;
         private float spinDuration;

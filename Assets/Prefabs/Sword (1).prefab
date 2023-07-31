@@ -218,11 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270d535f8b6a494b982579790e7bd7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleCheckRadius: 0.25
-  whatIsLayer:
-    serializedVersion: 2
-    m_Bits: 136
-  circleCheck: {fileID: 1486018495020379068}
 --- !u!1 &3538784729798101728
 GameObject:
   m_ObjectHideFlags: 0

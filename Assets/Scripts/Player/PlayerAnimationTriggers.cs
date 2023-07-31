@@ -28,7 +28,7 @@ namespace Player
 
         private void ThrowSword()
         {
-            SkillManager.Instance.swordSkillTest.CreateSword();
+            SkillManager.Instance.SwordSkill.CreateSword();
         }
     }
 }

@@ -4,9 +4,9 @@ namespace Skill.Sword
 {
     public class SwordSkillTypeMachine
     {
-        private SwordSkillType currentType;
+        private SwordSkillTypeController currentType;
 
-        public SwordSkillType CurrentType
+        public SwordSkillTypeController CurrentType
         {
             get => currentType;
             set
