@@ -9,17 +9,20 @@ namespace Skill.Crystal
         [SerializeField] private float crystalDuration;
         [SerializeField] private GameObject crystalPrefab;
         private GameObject currentCrystal;
-
+        
+        [Header("Crystal mirage")]
+        [SerializeField] private bool cloneInsteadOfCrystal;
+        
         [Header("Explosive crystal")]
-        [SerializeField]
-        private bool canExplode;
+        [SerializeField] private bool canExplode;
 
         [Header("Moving crystal")]
-        [SerializeField]
-        private bool canMoveToEnemy;
+        [SerializeField] private bool canMoveToEnemy;
 
         [SerializeField] private float growSpeed;
         [SerializeField] private float moveSpeed;
+        
+        
 
         [Header("Multi stacking crystal")]
         [SerializeField] private bool canUseMultiStacks;
@@ -48,7 +51,13 @@ namespace Skill.Crystal
                 if (canMoveToEnemy) return;
                 (player.transform.position, currentCrystal.transform.position) =
                     (currentCrystal.transform.position, player.transform.position);
-                currentCrystal.GetComponent<CrystalSkillController>().LogicCrystal(); //TODO check or not
+                
+                if(cloneInsteadOfCrystal)
+                {
+                    SkillManager.Instance.cloneSkill.CreateClone(currentCrystal.transform,Vector3.zero);
+                    Destroy(currentCrystal);
+                }
+                else currentCrystal.GetComponent<CrystalSkillController>().LogicCrystal(); //TODO check or not
             }
         }
 

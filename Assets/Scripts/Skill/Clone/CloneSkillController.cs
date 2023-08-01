@@ -14,6 +14,9 @@ namespace Skill
         private Animator animator;
         private float cloneTimer;
         private Transform closestTarget;
+        private bool canDuplicateClone;
+        private float facingDir = 1;
+        private float chanceToDuplicate;
 
         private void Awake()
         {
@@ -21,13 +24,16 @@ namespace Skill
             sr = GetComponent<SpriteRenderer>();
         }
 
-        public void SetUp(Transform newTransform, float cloneDuration, bool canAttack, Vector3 offset, Transform closestEnemy)
+        public void SetUp(Transform newTransform, float cloneDuration, bool canAttack, Vector3 offset, Transform closestEnemy, bool canDuplicateClone, float chanceToDuplicate)
         {
             if(canAttack) animator.SetInteger("AttackNumber",Random.Range(1,4));
             transform.position = newTransform.position + offset;
             cloneTimer = cloneDuration;
             closestTarget = closestEnemy;
+            this.canDuplicateClone = canDuplicateClone;
+            this.chanceToDuplicate = chanceToDuplicate;
             FaceClosestTarget();
+            
         }
 
         private void Update()
@@ -49,14 +55,28 @@ namespace Skill
             var colliders = Physics2D.OverlapCircleAll(attackCheck.position, attackCheckRadius);
             foreach (var hit in colliders)
             {
-                if (hit.GetComponent<Enemy.Enemy>() != null) hit.GetComponent<Enemy.Enemy>().Damage();
+                if (hit.GetComponent<Enemy.Enemy>() != null)
+                {
+                    hit.GetComponent<Enemy.Enemy>().Damage();
+                    if (canDuplicateClone)
+                    {
+                        if (Random.Range(0, 100) < chanceToDuplicate)
+                        {
+                            SkillManager.Instance.cloneSkill.CreateClone(hit.transform, new Vector3(.5f * facingDir,0));
+                        }
+                    }
+                }
             }
         }
 
         private void FaceClosestTarget()
         {
             if (closestTarget == null) return;
-            if (transform.position.x > closestTarget.position.x) transform.Rotate(0,180,0);
+            if (transform.position.x > closestTarget.position.x)
+            {
+                facingDir *= -1;
+                transform.Rotate(0,180,0);
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ namespace Player
 {
     public class PlayerCounterAttackState : PlayerState
     {
+        private bool canCreateClone;
         public PlayerCounterAttackState(PlayerStateMachine playerStateMachine, Player player, string animBoolName) : base(playerStateMachine, player, animBoolName)
         {
         }
@@ -11,6 +12,7 @@ namespace Player
         public override void Enter()
         {
             base.Enter();
+            canCreateClone = true;
             timerState = player.counterAttackDuration;
             player.animator.SetBool("SuccessfulAttack",false);
         }
@@ -28,6 +30,11 @@ namespace Player
                     {
                         timerState = 10;
                         player.animator.SetBool("SuccessfulAttack",true);
+                        if (canCreateClone)
+                        {
+                            canCreateClone = false;
+                            player.skill.cloneSkill.CreateCloneOnCounterAttack(hit.transform);
+                        }
                     }
             }
 
