@@ -1,5 +1,6 @@
 ﻿using System;
 using Skill.Blackhole;
+using Skill.Crystal;
 using Skill.Sword;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Skill
         public CloneSkill cloneSkill { get; private set; }
         public Sword.SwordSkill SwordSkill { get; private set; }
         public BlackholeSkill blackholeSkill { get; private set; }
+        public CrystalSkill crystalSkill { get; private set; }
 
         private void Awake()
         {
@@ -25,6 +27,7 @@ namespace Skill
             cloneSkill = GetComponent<CloneSkill>();
             SwordSkill = GetComponent<Sword.SwordSkill>();
             blackholeSkill = GetComponent<BlackholeSkill>();
+            crystalSkill = GetComponent<CrystalSkill>();
         }
     }
 }

@@ -21,12 +21,12 @@ namespace Skill
             sr = GetComponent<SpriteRenderer>();
         }
 
-        public void SetUp(Transform newTransform, float cloneDuration, bool canAttack, Vector3 offset)
+        public void SetUp(Transform newTransform, float cloneDuration, bool canAttack, Vector3 offset, Transform closestEnemy)
         {
             if(canAttack) animator.SetInteger("AttackNumber",Random.Range(1,4));
             transform.position = newTransform.position + offset;
             cloneTimer = cloneDuration;
-
+            closestTarget = closestEnemy;
             FaceClosestTarget();
         }
 
@@ -55,17 +55,6 @@ namespace Skill
 
         private void FaceClosestTarget()
         {
-            var colliders = Physics2D.OverlapCircleAll(transform.position, 25);
-            var closestDistance = Mathf.Infinity;
-            foreach (var hit in colliders)
-            {
-                if (hit.GetComponent<Enemy.Enemy>() == null) continue;
-                var distanceToTarget = Vector2.Distance(transform.position, hit.transform.position);
-                if (!(distanceToTarget < closestDistance)) continue;
-                closestDistance = distanceToTarget;
-                closestTarget = hit.transform;
-            }
-
             if (closestTarget == null) return;
             if (transform.position.x > closestTarget.position.x) transform.Rotate(0,180,0);
         }

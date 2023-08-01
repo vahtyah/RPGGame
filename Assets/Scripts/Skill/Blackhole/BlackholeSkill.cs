@@ -14,12 +14,6 @@ namespace Skill.Blackhole
         [SerializeField] private float shrinkSpeed;
 
         private BlackholeSkillController currentBlackhole;
-        
-        protected override void Start() { base.Start(); }
-
-        protected override void Update() { base.Update(); }
-
-        public override bool CanUseSkill() { return base.CanUseSkill(); }
 
         public override void UseSkill()
         {

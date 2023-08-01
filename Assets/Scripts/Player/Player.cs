@@ -74,10 +74,14 @@ namespace Player
             base.Update();
             stateMachine.State.Update();
             CheckForDashInput();
+
+            if (Input.GetKeyDown(KeyCode.F))
+                skill.crystalSkill.CanUseSkill();
         }
 
         public void AssignNewSword(GameObject newSword)
         {
+            if(sword != null) return;
             sword = newSword;
         }
 

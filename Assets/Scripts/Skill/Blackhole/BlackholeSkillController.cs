@@ -62,6 +62,7 @@ namespace Skill.Blackhole
             }
 
             CloneAttackLogic();
+            //TODO Clone will attack enemy closest, not target
 
             if (canGrow && !canShrink)
             {
@@ -102,7 +103,7 @@ namespace Skill.Blackhole
                 cloneAttackTimer = cloneAttackCooldown;
                 SkillManager.Instance.cloneSkill.CreateClone(targets[randomIndex], new Vector3(xOffset, 0));
                 amountOfAttack--;
-                if (amountOfAttack < 0)
+                if (amountOfAttack <= 0)
                 {
                     Invoke("FinishBlackholeAbility", 1f);
                 }
@@ -115,6 +116,7 @@ namespace Skill.Blackhole
             playerCanExitState = true;
             cloneAttackReleased = false;
             canShrink = true;
+            Debug.Log("VAR");
         }
 
         private void OnTriggerEnter2D(Collider2D other)
