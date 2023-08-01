@@ -34,5 +34,7 @@ namespace Skill.Blackhole
 
             return false;
         }
+
+        public float GetBlackholeRadius() => maxSize / 2;   
     }
 }

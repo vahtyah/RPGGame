@@ -21,8 +21,15 @@ namespace Skill
         [SerializeField] private bool canDuplicateClone;
         [SerializeField] private float chanceToDuplicate;
 
+        [Header("CrystalInsteadOfClone")]
+        [SerializeField] private bool crystalInsteadOfClone;
         public void CreateClone(Transform cloneTransform, Vector3 offset)
         {
+            if (crystalInsteadOfClone) //TODO chuyển sang chiêu Crystal
+            {
+                SkillManager.Instance.crystalSkill.CreateCrystal();
+                return;
+            }
             var newClone = Instantiate(clonePrefab);
             newClone.GetComponent<CloneSkillController>().SetUp(cloneTransform, cloneDuration, canAttack, offset,
                 FindClosestEnemy(newClone.transform), canDuplicateClone,chanceToDuplicate);
@@ -51,5 +58,7 @@ namespace Skill
             yield return new WaitForSeconds(.4f);
             CreateClone(transform, offset);
         }
+
+        public bool CrystalInsteadOfClone => crystalInsteadOfClone; 
     }
 }

@@ -42,6 +42,9 @@ namespace Skill.Blackhole
             this.amountOfAttack = amountOfAttack;
             this.cloneAttackCooldown = cloneAttackCooldown;
             this.blackholeTimer = blackholeDuration;
+
+            if (SkillManager.Instance.cloneSkill.CrystalInsteadOfClone)
+                playerCanDisapear = false;
         }
 
         private void Update()
@@ -98,10 +101,17 @@ namespace Skill.Blackhole
         {
             if (cloneAttackTimer < 0 && cloneAttackReleased && targets.Count > 0 && amountOfAttack > 0)
             {
+                
                 int randomIndex = Random.Range(0, targets.Count);
                 var xOffset = Random.Range(0, 2) == 0 ? -1.5f : 1.5f;
                 cloneAttackTimer = cloneAttackCooldown;
-                SkillManager.Instance.cloneSkill.CreateClone(targets[randomIndex], new Vector3(xOffset, 0));
+
+                if (SkillManager.Instance.cloneSkill.CrystalInsteadOfClone)
+                {
+                    SkillManager.Instance.crystalSkill.CreateCrystal();
+                    SkillManager.Instance.crystalSkill.CurrentCrystalChooseRandomEnemy();
+                }
+                else SkillManager.Instance.cloneSkill.CreateClone(targets[randomIndex], new Vector3(xOffset, 0));
                 amountOfAttack--;
                 if (amountOfAttack <= 0)
                 {
