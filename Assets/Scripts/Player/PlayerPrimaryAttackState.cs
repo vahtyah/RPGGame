@@ -20,7 +20,7 @@ namespace Player
             if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
                 comboCounter = 0;
 
-            player.animator.SetInteger("ComboCounter", comboCounter);
+            player.anim.SetInteger("ComboCounter", comboCounter);
 
             float attackDir = player.facingDir;
             if (xInput != 0) attackDir = xInput;

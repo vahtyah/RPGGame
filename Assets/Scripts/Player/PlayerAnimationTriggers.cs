@@ -22,7 +22,12 @@ namespace Player
             var colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
             foreach (var hit in colliders)
             {
-                if (hit.GetComponent<Enemy.Enemy>() != null) hit.GetComponent<Enemy.Enemy>().Damage();
+                if (hit.GetComponent<Enemy.Enemy>() != null)
+                {
+                    var target = hit.GetComponent<EnemyStats>();
+                    player.stars.DoDamage(target);
+                    // hit.GetComponent<Enemy.Enemy>().Damage();
+                }
             }
         }
 

@@ -25,7 +25,7 @@ namespace Player
     
         public virtual void Enter()
         {
-            player.animator.SetBool(animBoolName,true);
+            player.anim.SetBool(animBoolName,true);
             rb = player.rb;
             triggerCalled = false;
         }
@@ -33,13 +33,13 @@ namespace Player
         {
             xInput = Input.GetAxisRaw("Horizontal");
             yInput = Input.GetAxisRaw("Vertical");  
-            player.animator.SetFloat("yVelocity",rb.velocity.y);
+            player.anim.SetFloat("yVelocity",rb.velocity.y);
             timerState -= Time.deltaTime;
         }
 
         public virtual void Exit()
         {
-            player.animator.SetBool(animBoolName,false);        
+            player.anim.SetBool(animBoolName,false);        
         }
 
         public virtual void AnimationFinishTrigger()

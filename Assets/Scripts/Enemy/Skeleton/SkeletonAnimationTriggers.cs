@@ -12,7 +12,12 @@ namespace Enemy.Skeleton
                 Physics2D.OverlapCircleAll(enemySkeleton.attackCheck.position, enemySkeleton.attackCheckRadius);
             foreach (var hit in colliders)
             {
-                if(hit.GetComponent<Player.Player>() != null) hit.GetComponent<Player.Player>().Damage();
+                if(hit.GetComponent<Player.Player>() != null)
+                {
+                    PlayerStats target = hit.GetComponent<PlayerStats>();
+                    enemySkeleton.stars.DoDamage(target);
+                    // hit.GetComponent<Player.Player>().Damage();
+                }
             }
         }
 

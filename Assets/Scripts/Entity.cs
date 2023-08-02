@@ -22,10 +22,12 @@ public abstract class Entity : MonoBehaviour
 
     #region Component
 
-    public Animator animator { get; private set; }
+    public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
     public SpriteRenderer sr { get; private set; }
     public EntityFX fx { get; private set; }
+    public CharacterStats stars { get; private set; }
+    public CapsuleCollider2D cd { get; private set; }
 
     #endregion
 
@@ -35,17 +37,19 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         fx = GetComponent<EntityFX>();
         sr = GetComponentInChildren<SpriteRenderer>();
+        cd = GetComponent<CapsuleCollider2D>();
+        stars = GetComponent<CharacterStats>(); 
     }
 
     protected virtual void Update()
     {
     }
 
-    public virtual void Damage()
+    public virtual void DamageEffect()
     {
         fx.StartCoroutine("FlashFX");
         StartCoroutine(HitKnockback());
@@ -124,4 +128,6 @@ public abstract class Entity : MonoBehaviour
             sr.color = Color.clear;
         else sr.color = Color.white;
     }
+
+    public virtual void Die(){}
 }

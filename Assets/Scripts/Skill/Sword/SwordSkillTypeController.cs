@@ -49,7 +49,7 @@ namespace Skill.Sword
 
         public virtual void Damage(Enemy.Enemy enemy)
         {
-            enemy.Damage();
+            enemy.DamageEffect();
             enemy.StartCoroutine("FreezeTimerFor", swordSkill.FreezeTimeDuration);
         }
 

@@ -276,9 +276,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5094048748435395160}
   - component: {fileID: 6415885523681598839}
-  - component: {fileID: 6734164083968054890}
   - component: {fileID: 3705787259034439071}
   - component: {fileID: 4220835552715904492}
+  - component: {fileID: 5614435200178313247}
+  - component: {fileID: 2613858719309692583}
   m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -333,52 +334,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &6734164083968054890
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7046989837853874547}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.0058294833, y: -0.25388175}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.63494307, y: 1.5077635}
-  m_EdgeRadius: 0
 --- !u!114 &3705787259034439071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,6 +383,80 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitMat: {fileID: 2100000, guid: ac20c561f1e207742bd39efa28a98b13, type: 2}
   flashDuration: 0.2
+--- !u!114 &5614435200178313247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7046989837853874547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337255ee18ee405ea2028cbd4e584adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength:
+    _baseValue: 0
+    _modifiers: 
+  agility:
+    _baseValue: 0
+    _modifiers: 
+  intelligence:
+    _baseValue: 0
+    _modifiers: 
+  vitality:
+    _baseValue: 0
+    _modifiers: 
+  maxHealth:
+    _baseValue: 2
+    _modifiers: 
+  armor:
+    _baseValue: 0
+    _modifiers: 
+  evasion:
+    _baseValue: 0
+    _modifiers: 
+  damage:
+    _baseValue: 10
+    _modifiers: 
+  currentHealth: 0
+--- !u!70 &2613858719309692583
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7046989837853874547}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.010515963, y: -0.24537258}
+  m_Size: {x: 0.67526615, y: 1.4907455}
+  m_Direction: 0
 --- !u!1 &7624353989164930940
 GameObject:
   m_ObjectHideFlags: 0

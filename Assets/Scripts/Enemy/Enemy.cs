@@ -22,10 +22,10 @@ namespace Enemy
         public float stunDuration;
         public Vector2 stunDirection;
         protected bool canBeStunned;
-        [SerializeField] private GameObject counterImage;   
-        
-        
+        [SerializeField] private GameObject counterImage;
+
         public EnemyStateMachine stateMachine { get; private set; }
+        public string lastAnimBoolName { get; private set; }
 
         protected override void Awake()
         {
@@ -45,17 +45,19 @@ namespace Enemy
             stateMachine.State.Update();
         }
 
+        public virtual void AssignLastAnimBoolName(string lastAnimBoolName) => this.lastAnimBoolName = lastAnimBoolName;
+
         public virtual void FreezeTimer(bool timeFroze)
         {
             if (timeFroze)
             {
                 moveSpeed = 0;
-                animator.speed = 0;
+                anim.speed = 0;
             }
             else
             {
                 moveSpeed = defaultMoveSpeed;
-                animator.speed = 1;
+                anim.speed = 1;
             }
         }
 

@@ -57,7 +57,7 @@ namespace Skill
             {
                 if (hit.GetComponent<Enemy.Enemy>() != null)
                 {
-                    hit.GetComponent<Enemy.Enemy>().Damage();
+                    hit.GetComponent<Enemy.Enemy>().DamageEffect();
                     if (canDuplicateClone)
                     {
                         if (Random.Range(0, 100) < chanceToDuplicate)

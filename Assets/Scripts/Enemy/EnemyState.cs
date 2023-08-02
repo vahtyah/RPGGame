@@ -22,7 +22,7 @@ namespace Enemy
         public virtual void Enter()
         {
             triggerCalled = false;
-            enemyBase.animator.SetBool(animBoolName,true);
+            enemyBase.anim.SetBool(animBoolName,true);
             rb = enemyBase.rb;
         }
 
@@ -33,7 +33,8 @@ namespace Enemy
 
         public virtual void Exit()
         {
-            enemyBase.animator.SetBool(animBoolName,false);
+            enemyBase.anim.SetBool(animBoolName,false);
+            enemyBase.AssignLastAnimBoolName(animBoolName);
         }
 
         public virtual void AnimationFinishTrigger() => triggerCalled = true;

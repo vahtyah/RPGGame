@@ -40,6 +40,7 @@ namespace Player
         public PlayerAimSwordState aimSwordState { get; private set; }
         public PlayerCatchSwordState catchSwordState { get; private set; }
         public PlayerBlackholeState blackholeState { get; private set; }
+        public PlayerDeadState deadState { get; private set; }
 
         #endregion
 
@@ -60,6 +61,7 @@ namespace Player
             aimSwordState = new PlayerAimSwordState(stateMachine, this, "AimSword");
             catchSwordState = new PlayerCatchSwordState(stateMachine, this, "CatchSword");
             blackholeState = new PlayerBlackholeState(stateMachine, this, "Jump");
+            deadState = new PlayerDeadState(stateMachine, this, "Die");
         }
 
         protected override void Start()
@@ -109,6 +111,12 @@ namespace Player
                 if (dashDir == 0) dashDir = facingDir;
                 stateMachine.State = dashState;
             }
+        }
+
+        public override void Die()
+        {
+            base.Die();
+            stateMachine.State = deadState;
         }
     }
 }

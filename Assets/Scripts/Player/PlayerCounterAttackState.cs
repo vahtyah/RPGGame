@@ -14,7 +14,7 @@ namespace Player
             base.Enter();
             canCreateClone = true;
             timerState = player.counterAttackDuration;
-            player.animator.SetBool("SuccessfulAttack",false);
+            player.anim.SetBool("SuccessfulAttack",false);
         }
 
         public override void Update()
@@ -29,7 +29,7 @@ namespace Player
                     if (hit.GetComponent<Enemy.Enemy>().CanBeStunned())
                     {
                         timerState = 10;
-                        player.animator.SetBool("SuccessfulAttack",true);
+                        player.anim.SetBool("SuccessfulAttack",true);
                         if (canCreateClone)
                         {
                             canCreateClone = false;
