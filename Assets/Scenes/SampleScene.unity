@@ -959,7 +959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  swordType: 3
+  swordType: 0
   swordPrefab: {fileID: 3190378206210852227, guid: 670ddc017a1e05049861b29040f40e69, type: 3}
   swordGravity: 1
   launchDir: {x: 35, y: 25}
@@ -3940,10 +3940,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 157609777911099705, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
-      propertyPath: m_Name
-      value: HealthUI
-      objectReference: {fileID: 0}
     - target: {fileID: 1733045873438192366, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
