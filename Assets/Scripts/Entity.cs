@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Entity : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public abstract class Entity : MonoBehaviour
     public CapsuleCollider2D cd { get; private set; }
 
     #endregion
+
+    public event EventHandler onFlipped;
 
     protected virtual void Awake()
     {
@@ -107,6 +110,7 @@ public abstract class Entity : MonoBehaviour
         this.facingRight = !this.facingRight;
         facingDir *= -1;
         transform.Rotate(0, 180, 0);
+        OnFlipped();
     }
 
     public virtual void FlipController(float xVelocity)
@@ -130,4 +134,5 @@ public abstract class Entity : MonoBehaviour
     }
 
     public virtual void Die(){}
+    protected virtual void OnFlipped() { onFlipped?.Invoke(this, EventArgs.Empty); }
 }
