@@ -85,7 +85,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.716
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -233,7 +233,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -1960750239
+  m_SortingLayerID: -221340735
   m_SortingOrder: 19
   m_TargetDisplay: 0
 --- !u!114 &4056220334305157612
@@ -774,6 +774,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitMat: {fileID: 2100000, guid: ac20c561f1e207742bd39efa28a98b13, type: 2}
   flashDuration: 0.2
+  chillColor:
+  - {r: 0.627451, g: 0.18431373, b: 1, a: 1}
+  - {r: 0.7353177, g: 0.42048514, b: 1, a: 1}
+  igniteColor:
+  - {r: 1, g: 0.25882354, b: 0.25882354, a: 1}
+  - {r: 1, g: 0.654902, b: 0.654902, a: 1}
+  shockColor:
+  - {r: 0.9528302, g: 0.79284805, b: 0.1849158, a: 1}
+  - {r: 0.9716981, g: 0.8823437, b: 0.54608905, a: 1}
 --- !u!114 &5614435200178313247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -799,7 +808,7 @@ MonoBehaviour:
     _baseValue: 0
     _modifiers: 
   damage:
-    _baseValue: 10
+    _baseValue: 0
     _modifiers: 
   critChance:
     _baseValue: 0
@@ -808,7 +817,7 @@ MonoBehaviour:
     _baseValue: 0
     _modifiers: 
   maxHealth:
-    _baseValue: 40
+    _baseValue: 100
     _modifiers: 
   armor:
     _baseValue: 0
@@ -820,10 +829,10 @@ MonoBehaviour:
     _baseValue: 0
     _modifiers: 
   fireDamage:
-    _baseValue: 5
+    _baseValue: 0
     _modifiers: 
   iceDamage:
-    _baseValue: 0
+    _baseValue: 5
     _modifiers: 
   lightingDamage:
     _baseValue: 0
@@ -831,6 +840,8 @@ MonoBehaviour:
   isIgnited: 0
   isChilled: 0
   isShocked: 0
+  ailmentDuration: 4
+  shockStrikePrefabs: {fileID: 5754521203067570224, guid: b4f3bd99bf7d3c54fbed2d5c500a610e, type: 3}
   currentHealth: 0
 --- !u!70 &2613858719309692583
 CapsuleCollider2D:

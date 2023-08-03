@@ -194,7 +194,7 @@ namespace Skill
 
         private void SwordSkillDamage(Enemy.Enemy enemy)
         {
-            enemy.DamageEffect();
+            enemy.DamageImpact();
             enemy.StartCoroutine("FreezeTimerFor", freezeTimeDuration);
         }
 

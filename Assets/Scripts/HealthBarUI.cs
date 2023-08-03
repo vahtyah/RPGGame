@@ -31,7 +31,6 @@ public class HealthBarUI : MonoBehaviour
     private void UpdateHealthUI()
     {
         slider.value = characterStats.GetHealthAmountNormalized;
-        Debug.Log("slider.value = " + slider.value);
     }
 
     private void FlipUI()

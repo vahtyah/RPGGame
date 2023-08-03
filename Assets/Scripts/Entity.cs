@@ -52,11 +52,16 @@ public abstract class Entity : MonoBehaviour
     {
     }
 
-    public virtual void DamageEffect()
+    public virtual void SlowEntityBy(float slowPercentage, float slowDuration)
     {
-        fx.StartCoroutine("FlashFX");
+        
+    }
+
+    public virtual void ReturnDefaultSpeed() => anim.speed = 1;
+
+    public virtual void DamageImpact()
+    {
         StartCoroutine(HitKnockback());
-        Debug.Log(gameObject.name + "was damaged!");
     }
     
     protected virtual IEnumerator HitKnockback()
@@ -125,13 +130,6 @@ public abstract class Entity : MonoBehaviour
     }
 
     #endregion
-
-    public void MakeTransparent(bool transparent)
-    {
-        if(transparent)
-            sr.color = Color.clear;
-        else sr.color = Color.white;
-    }
 
     public virtual void Die(){}
     protected virtual void OnFlipped() { onFlipped?.Invoke(this, EventArgs.Empty); }

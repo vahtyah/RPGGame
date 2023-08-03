@@ -349,6 +349,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitMat: {fileID: 2100000, guid: ac20c561f1e207742bd39efa28a98b13, type: 2}
   flashDuration: 0.15
+  chillColor:
+  - {r: 0.627451, g: 0.18431373, b: 1, a: 1}
+  - {r: 0.7353177, g: 0.42048514, b: 1, a: 1}
+  igniteColor:
+  - {r: 1, g: 0.25882354, b: 0.25882354, a: 1}
+  - {r: 1, g: 0.654902, b: 0.654902, a: 1}
+  shockColor:
+  - {r: 0.9528302, g: 0.79284805, b: 0.1849158, a: 1}
+  - {r: 0.9716981, g: 0.8823437, b: 0.54608905, a: 1}
 --- !u!114 &192938346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,11 +410,13 @@ MonoBehaviour:
     _baseValue: 0
     _modifiers: 
   lightingDamage:
-    _baseValue: 0
+    _baseValue: 5
     _modifiers: 
   isIgnited: 0
   isChilled: 0
   isShocked: 0
+  ailmentDuration: 4
+  shockStrikePrefabs: {fileID: 5754521203067570224, guid: b4f3bd99bf7d3c54fbed2d5c500a610e, type: 3}
   currentHealth: 0
 --- !u!1 &234513037
 GameObject:
@@ -3478,7 +3489,7 @@ GameObject:
   - component: {fileID: 1871076777}
   - component: {fileID: 1871076778}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: HealthUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3929,6 +3940,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 157609777911099705, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
+      propertyPath: m_Name
+      value: HealthUI
+      objectReference: {fileID: 0}
     - target: {fileID: 1733045873438192366, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3937,13 +3952,9 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4390918298079629168, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
-      propertyPath: m_Value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5094048748435395160, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.14
+      value: -0.56
       objectReference: {fileID: 0}
     - target: {fileID: 5094048748435395160, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3981,25 +3992,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5614435200178313247, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
-      propertyPath: damage._baseValue
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5614435200178313247, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
-      propertyPath: maxHealth._baseValue
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5614435200178313247, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
-      propertyPath: fireDamage._baseValue
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7046989837853874547, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
       propertyPath: m_Name
       value: Enemy_Skeleton
-      objectReference: {fileID: 0}
-    - target: {fileID: 8763956628532399538, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -221340735
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

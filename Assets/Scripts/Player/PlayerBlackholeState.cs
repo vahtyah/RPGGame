@@ -46,7 +46,7 @@ namespace Player
         {
             base.Exit();
             rb.gravityScale = defaultsGravity;
-            player.MakeTransparent(false);
+            player.fx.MakeTransparent(false);
         }
     }
 }

@@ -17,11 +17,14 @@ namespace Player
         [Header("Move Info")] public float moveSpeed = 8f;
         public float jumpForce = 12f;
         public float swordReturnImpact;
+        private float defaultMoveSpeed;
+        private float defaultJumpForce;
 
         [Header("Dash Info")] public float dashCooldown = 1f;
         private float dashUsageTimer;
         public float dashSpeed = 25;
         public float dashDuration = 0.2f;
+        private float defaultDashSpeed;
         public float dashDir { get; private set; }
 
         public GameObject sword { get; private set; }
@@ -79,6 +82,29 @@ namespace Player
 
             if (Input.GetKeyDown(KeyCode.F))
                 skill.crystalSkill.CanUseSkill();
+        }
+
+        public override void SlowEntityBy(float slowPercentage, float slowDuration)
+        {
+            defaultJumpForce = jumpForce;
+            defaultMoveSpeed = moveSpeed;
+            defaultDashSpeed = dashSpeed;
+            base.SlowEntityBy(slowPercentage, slowDuration);
+
+            moveSpeed *= (1 - slowPercentage);
+            jumpForce *= (1 - slowPercentage);
+            dashSpeed *= (1 - slowPercentage);
+            anim.speed *= (1 - slowPercentage);
+            
+            Invoke("ReturnDefaultSpeed",slowDuration);
+        }
+
+        public override void ReturnDefaultSpeed()
+        {
+            base.ReturnDefaultSpeed();
+            moveSpeed = defaultMoveSpeed;
+            jumpForce = defaultJumpForce;
+            dashSpeed = defaultDashSpeed;
         }
 
         public void AssignNewSword(GameObject newSword)

@@ -9,6 +9,7 @@ namespace Skill.Crystal
         private Animator anim => GetComponent<Animator>();
         private CircleCollider2D cd => GetComponent<CircleCollider2D>();
         private Transform closestEnemy;
+        private Player.Player player;
         private float crystalExitTimer;
 
         private bool canExplode;
@@ -19,9 +20,10 @@ namespace Skill.Crystal
         private float growSpeed;
         [SerializeField] private LayerMask whatIsEnemy;
 
-        public void Setup(float crystalDuration, bool canExplode, bool canMove, float moveSpeed, float growSpeed,
+        public void Setup(Player.Player player,float crystalDuration, bool canExplode, bool canMove, float moveSpeed, float growSpeed,
             Transform closestEnemy)
         {
+            this.player = player;
             crystalExitTimer = crystalDuration;
             this.canExplode = canExplode;
             this.canMove = canMove;
@@ -72,7 +74,7 @@ namespace Skill.Crystal
             foreach (var hit in colliders)
             {
                 if (hit.GetComponent<Enemy.Enemy>() != null)
-                    hit.GetComponent<Enemy.Enemy>().DamageEffect();
+                    player.stars.DoDamage(hit.GetComponent<CharacterStats>());
             }
         }
 

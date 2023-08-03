@@ -93,7 +93,7 @@ namespace Skill.Blackhole
             if (playerCanDisapear)
             {
                 playerCanDisapear = false;
-                PlayerManager.Instance.player.MakeTransparent(true);
+                PlayerManager.Instance.player.fx.MakeTransparent(true);
             }
         }
 

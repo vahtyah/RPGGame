@@ -10,6 +10,7 @@ namespace Skill
         [SerializeField] private float colorLosingSpeed;
         [SerializeField] private Transform attackCheck;
         [SerializeField] private float attackCheckRadius = .8f;
+        private Player.Player player;
         private SpriteRenderer sr;
         private Animator animator;
         private float cloneTimer;
@@ -24,9 +25,10 @@ namespace Skill
             sr = GetComponent<SpriteRenderer>();
         }
 
-        public void SetUp(Transform newTransform, float cloneDuration, bool canAttack, Vector3 offset, Transform closestEnemy, bool canDuplicateClone, float chanceToDuplicate)
+        public void SetUp(Player.Player player,Transform newTransform, float cloneDuration, bool canAttack, Vector3 offset, Transform closestEnemy, bool canDuplicateClone, float chanceToDuplicate)
         {
             if(canAttack) animator.SetInteger("AttackNumber",Random.Range(1,4));
+            this.player = player;
             transform.position = newTransform.position + offset;
             cloneTimer = cloneDuration;
             closestTarget = closestEnemy;
@@ -57,7 +59,7 @@ namespace Skill
             {
                 if (hit.GetComponent<Enemy.Enemy>() != null)
                 {
-                    hit.GetComponent<Enemy.Enemy>().DamageEffect();
+                    player.stars.DoDamage(hit.GetComponent<CharacterStats>());
                     if (canDuplicateClone)
                     {
                         if (Random.Range(0, 100) < chanceToDuplicate)

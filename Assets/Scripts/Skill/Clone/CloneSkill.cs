@@ -31,7 +31,7 @@ namespace Skill
                 return;
             }
             var newClone = Instantiate(clonePrefab);
-            newClone.GetComponent<CloneSkillController>().SetUp(cloneTransform, cloneDuration, canAttack, offset,
+            newClone.GetComponent<CloneSkillController>().SetUp(player,cloneTransform, cloneDuration, canAttack, offset,
                 FindClosestEnemy(newClone.transform), canDuplicateClone,chanceToDuplicate);
         }
 
