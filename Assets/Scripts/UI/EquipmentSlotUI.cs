@@ -18,5 +18,7 @@ namespace UI
             base.Setup(item);
             itemImage.color= Color.white; //TODO: stupid?
         }
+        
+        
     }
 }
