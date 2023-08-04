@@ -108,7 +108,7 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            var newItemSlotUI = Instantiate(itemSlotUIPrefab, inventorySlotParent);
+            var newItemSlotUI = Instantiate(itemSlotUIPrefab, stashSlotParent);
             var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
             
             var newItem = new InventoryItem(itemData, newItemSlotUIScript);
@@ -130,7 +130,7 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            var newItemSlotUI = Instantiate(itemSlotUIPrefab, stashSlotParent);
+            var newItemSlotUI = Instantiate(itemSlotUIPrefab, inventorySlotParent);
             
             var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
             var newItem = new InventoryItem(itemData, newItemSlotUIScript);
@@ -172,5 +172,39 @@ public class Inventory : MonoBehaviour
                 stashValue.RemoveStack();
             }
         }
+    }
+
+    public bool CanCraft(ItemDataEquipment itemToCraft, List<InventoryItem> requiredMaterials)
+    {
+        List<InventoryItem> materialsToRemove = new List<InventoryItem>();
+        for (int i = 0; i < requiredMaterials.Count; i++)
+        {
+            if (stashDictionary.TryGetValue(requiredMaterials[i].itemData, out var value))
+            {
+                if (value.stackSize < requiredMaterials[i].stackSize)
+                {
+                    Debug.Log("Not enough materials!");
+                    return false;
+                }
+                else
+                {
+                    materialsToRemove.Add(value);
+                }
+            }
+            else
+            {
+                Debug.Log("Not enough materials!");
+                return false;
+            }
+        }
+
+        for (int i = 0; i < materialsToRemove.Count; i++)
+        {
+            RemoveItem(materialsToRemove[i].itemData);
+        }
+        
+        AddItem(itemToCraft);
+        Debug.Log("Here is your item " + itemToCraft.itemName);
+        return true;
     }
 }

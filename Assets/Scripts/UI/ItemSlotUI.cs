@@ -9,7 +9,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler
     [SerializeField] protected Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
 
-    protected InventoryItem item;
+    public InventoryItem item;  
 
     public virtual void Setup(InventoryItem item)
     {

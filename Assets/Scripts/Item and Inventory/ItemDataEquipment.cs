@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using System.Collections.Generic;
+using Player;
 using UnityEngine;
 
 namespace Item_and_Inventory
@@ -37,6 +38,9 @@ namespace Item_and_Inventory
         public int fireDamage;
         public int iceDamage;
         public int lightingDamage;
+
+        [Header("Craft requirement")]
+        public List<InventoryItem> craftingMaterials;
         public void AddModifiers()
         {
             var playerStats = PlayerManager.Instance.player.GetComponent<PlayerStats>();
