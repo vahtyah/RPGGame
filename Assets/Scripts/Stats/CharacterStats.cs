@@ -131,7 +131,7 @@ public class CharacterStats : MonoBehaviour
     {
         var canApplyIgnite = fireDamage > iceDamage && fireDamage > lightingDamage;
         var canApplyChill = iceDamage > fireDamage && iceDamage > lightingDamage;
-        var canApplyShock = lightingDamage < fireDamage && lightingDamage > iceDamage;
+        var canApplyShock = lightingDamage > fireDamage && lightingDamage > iceDamage;
 
         while (!canApplyChill && !canApplyIgnite && !canApplyShock)
         {
@@ -153,6 +153,7 @@ public class CharacterStats : MonoBehaviour
             {
                 canApplyShock = true;
                 target.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                return;
             }
         }
 
@@ -216,21 +217,22 @@ public class CharacterStats : MonoBehaviour
         Transform closestTarget = null;
         foreach (var hit in colliders)
         {
-            Debug.Log("sub: " + transform.name + " hit: " + hit.name);
-            Debug.Log("Vector2.Distance(transform.position, hit.transform.position) = " +
-                      Vector2.Distance(transform.position, hit.transform.position));
-            if (hit.GetComponent<Enemy.Enemy>() == null &&
-                Vector2.Distance(transform.position, hit.transform.position) <= 1f) continue;
-            var distanceToTarget = Vector2.Distance(transform.position, hit.transform.position);
-            if (!(distanceToTarget < closestDistance)) continue;
-            closestDistance = distanceToTarget;
-            closestTarget = hit.transform;
+            if (hit.GetComponent<Enemy.Enemy>() != null &&
+                Vector2.Distance(transform.position, hit.transform.position) > 1)
+            {
+                float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
+
+                if (distanceToEnemy < closestDistance)
+                {
+                    closestDistance = distanceToEnemy;
+                    closestTarget = hit.transform;
+                }
+
+                if (closestTarget == null) // delete if you don't want shocked target to be hit by shock strike
+                    closestTarget = transform;
+            }
         }
-
-        if (closestTarget == null) closestTarget = transform;
-
-        Debug.Log("closestTarget.name = " + closestTarget.name);
-
+        if (closestTarget == null) return;
         var newThunder = Instantiate(shockStrikePrefabs, transform.position, Quaternion.identity);
         newThunder.GetComponent<ThunderStrikeController>()
             .Setup(shockDamage, closestTarget.GetComponent<CharacterStats>());
@@ -241,7 +243,7 @@ public class CharacterStats : MonoBehaviour
         DecreaseHealthBy(damage);
         entity.DamageImpact();
         fx.StartCoroutine("FlashFX");
-            if (currentHealth < 0)
+        if (currentHealth < 0)
         {
             Die();
         }
