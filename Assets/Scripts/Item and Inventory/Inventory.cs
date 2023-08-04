@@ -7,6 +7,11 @@ public class Inventory : MonoBehaviour
     public static Inventory Instance { get; private set; }
     public List<InventoryItem> inventoryItems;
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
+    
+    [Header("Inventory UI")]
+    [SerializeField] private Transform inventorySlotParent;
+    [SerializeField] private GameObject itemSlotUIPrefab;
+    private List<ItemSlotUI> itemSlotUIs;
 
     private void Awake()
     {
@@ -18,6 +23,16 @@ public class Inventory : MonoBehaviour
     {
         inventoryItems = new List<InventoryItem>();
         inventoryDictionary = new Dictionary<ItemData, InventoryItem>();
+
+        itemSlotUIs = new List<ItemSlotUI>();
+    }
+
+    private void UpdateSlotUI() //TODO: fix performance
+    {
+        for (var i = 0; i < inventoryItems.Count; i++)
+        {
+            itemSlotUIs[i].UpdateSlot(inventoryItems[i]);
+        }
     }
 
     public void AddItem(ItemData itemData)
@@ -28,10 +43,14 @@ public class Inventory : MonoBehaviour
         }
         else
         {
+            var newItemSlotUI = Instantiate(itemSlotUIPrefab, inventorySlotParent);
+            itemSlotUIs.Add(newItemSlotUI.GetComponent<ItemSlotUI>());
             var newItem = new InventoryItem(itemData);
             inventoryItems.Add(newItem);
             inventoryDictionary.Add(itemData, newItem);
         }
+        
+        UpdateSlotUI();
     }
 
     public void RemoveItem(ItemData itemData)
@@ -47,6 +66,7 @@ public class Inventory : MonoBehaviour
             {
                 value.RemoveStack();
             }
+            UpdateSlotUI();
         }
     }
 }
