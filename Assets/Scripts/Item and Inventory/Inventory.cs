@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Item_and_Inventory;
+using UI;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
     public static Inventory Instance { get; private set; }
 
+    public List<InventoryItem> equipment;
+    public Dictionary<ItemDataEquipment, InventoryItem> equipmentDictionary;
+    
     public List<InventoryItem> inventory;
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
 
@@ -15,10 +20,12 @@ public class Inventory : MonoBehaviour
     [Header("Inventory UI")]
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform stashSlotParent;
+    [SerializeField] private Transform equipmentSlotParent;
 
     [SerializeField] private GameObject itemSlotUIPrefab;
     private List<ItemSlotUI> inventorySlotUIs;
-    private List<ItemSlotUI> stashSlotUI;
+    private List<ItemSlotUI> stashSlotUIs;
+    private EquipmentSlotUI[] equipmentSlotUIs; 
 
     private void Awake()
     {
@@ -34,8 +41,54 @@ public class Inventory : MonoBehaviour
         stash = new List<InventoryItem>();
         stashDictionary = new Dictionary<ItemData, InventoryItem>();
 
+        equipment = new List<InventoryItem>();
+        equipmentDictionary = new Dictionary<ItemDataEquipment, InventoryItem>();
+
         inventorySlotUIs = new List<ItemSlotUI>();
-        stashSlotUI = new List<ItemSlotUI>();
+        stashSlotUIs = new List<ItemSlotUI>();
+        equipmentSlotUIs = equipmentSlotParent.GetComponentsInChildren<EquipmentSlotUI>();
+    }
+
+    public void EquipItem(ItemData itemData)
+    {
+        var newEquipment = itemData as ItemDataEquipment;
+        var newItem = new InventoryItem(newEquipment);
+
+        ItemDataEquipment oldEquipment = null;
+        
+        foreach (var item in equipmentDictionary)
+        {
+            if (item.Key.equipmentType == newEquipment!.equipmentType)
+                oldEquipment = item.Key;
+        }
+
+        if(oldEquipment != null)
+        {
+            UnequipItem(oldEquipment);
+            AddItem(oldEquipment);
+        }
+
+        equipment.Add(newItem);
+        equipmentDictionary.Add(newEquipment!, newItem);
+        
+        
+        //Update slot equipment
+        foreach (var equipmentSlotUI in equipmentSlotUIs)
+        {
+            if(newEquipment.equipmentType == equipmentSlotUI.equipmentType)
+                equipmentSlotUI.Setup(newItem);
+        }
+        
+        RemoveItem(itemData);
+    }
+
+    private void UnequipItem(ItemDataEquipment itemToRemove)
+    {
+        if (equipmentDictionary.TryGetValue(itemToRemove!, out var value))
+        {
+            equipment.Remove(value);
+            equipmentDictionary.Remove(itemToRemove);
+        }
     }
 
     private void UpdateSlotUI() //TODO: fix performance
@@ -47,7 +100,7 @@ public class Inventory : MonoBehaviour
         
         for (var i = 0; i < stash.Count; i++)
         {
-            stashSlotUI[i].UpdateSlot(stash[i]);
+            stashSlotUIs[i].UpdateSlot(stash[i]);
         }
     }
 
@@ -56,7 +109,7 @@ public class Inventory : MonoBehaviour
         if (itemData.itemType == ItemType.Equipment) AddToInventory(itemData);
         else if (itemData.itemType == ItemType.Material) AddToStash(itemData);
 
-        UpdateSlotUI();
+        // UpdateSlotUI();
     }
 
     private void AddToStash(ItemData itemData)
@@ -68,8 +121,14 @@ public class Inventory : MonoBehaviour
         else
         {
             var newItemSlotUI = Instantiate(itemSlotUIPrefab, inventorySlotParent);
-            stashSlotUI.Add(newItemSlotUI.GetComponent<ItemSlotUI>());
+            var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
+            
             var newItem = new InventoryItem(itemData);
+            
+            newItemSlotUIScript.Setup(newItem);
+            
+            stashSlotUIs.Add(newItemSlotUIScript);
+            
             stash.Add(newItem);
             stashDictionary.Add(itemData, newItem);
         }
@@ -84,8 +143,13 @@ public class Inventory : MonoBehaviour
         else
         {
             var newItemSlotUI = Instantiate(itemSlotUIPrefab, stashSlotParent);
-            inventorySlotUIs.Add(newItemSlotUI.GetComponent<ItemSlotUI>());
+            
+            var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
             var newItem = new InventoryItem(itemData);
+            newItemSlotUIScript.Setup(newItem);
+
+
+            inventorySlotUIs.Add(newItemSlotUIScript);
             inventory.Add(newItem);
             inventoryDictionary.Add(itemData, newItem);
         }
@@ -118,7 +182,8 @@ public class Inventory : MonoBehaviour
                 stashValue.RemoveStack();
             }
         }
+        
 
-        UpdateSlotUI();
+        // UpdateSlotUI();
     }
 }
