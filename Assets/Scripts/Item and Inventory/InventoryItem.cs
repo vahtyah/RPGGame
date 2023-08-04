@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 [Serializable]
 public class InventoryItem
@@ -6,11 +7,26 @@ public class InventoryItem
     public ItemData itemData;
     public int stackSize;
 
-    public InventoryItem(ItemData itemData)
+    private ItemSlotUI slotUI;
+
+    public InventoryItem(ItemData itemData, ItemSlotUI slotUI)
     {
-        this.itemData = itemData; 
-        AddStack();
+        this.itemData = itemData;
+        this.slotUI = slotUI;
+        this.stackSize = 1;
     }
-    public void AddStack() => stackSize++;
-    public void RemoveStack() => stackSize--;
+
+    public void AddStack()
+    {
+        stackSize++;
+        slotUI.UpdateSlot(this);
+    }
+
+    public void RemoveStack()
+    {
+        stackSize--; 
+        slotUI.UpdateSlot(this);
+    }
+
+    public ItemSlotUI SlotUI => slotUI;
 }

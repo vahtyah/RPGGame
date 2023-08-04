@@ -1,6 +1,7 @@
 ﻿using System;
 using Item_and_Inventory;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace UI
 {
@@ -18,7 +19,12 @@ namespace UI
             base.Setup(item);
             itemImage.color= Color.white; //TODO: stupid?
         }
-        
-        
+
+        public override void OnPointerDown(PointerEventData eventData)
+        {
+            Inventory.Instance.UnequipItem(item.itemData as ItemDataEquipment);
+            Inventory.Instance.AddItem(item.itemData as ItemDataEquipment);
+            itemImage.color= Color.clear; //TODO: stupid?
+        }
     }
 }

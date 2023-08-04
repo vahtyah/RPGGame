@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
     public void EquipItem(ItemData itemData)
     {
         var newEquipment = itemData as ItemDataEquipment;
-        var newItem = new InventoryItem(newEquipment);
+        var newItem = new InventoryItem(newEquipment, null);
 
         ItemDataEquipment oldEquipment = null;
         
@@ -84,7 +84,7 @@ public class Inventory : MonoBehaviour
         RemoveItem(itemData);
     }
 
-    private void UnequipItem(ItemDataEquipment itemToRemove)
+    public void UnequipItem(ItemDataEquipment itemToRemove)
     {
         if (equipmentDictionary.TryGetValue(itemToRemove!, out var value))
         {
@@ -94,25 +94,10 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void UpdateSlotUI() //TODO: fix performance
-    {
-        for (var i = 0; i < inventory.Count; i++)
-        {
-            inventorySlotUIs[i].UpdateSlot(inventory[i]);
-        }
-        
-        for (var i = 0; i < stash.Count; i++)
-        {
-            stashSlotUIs[i].UpdateSlot(stash[i]);
-        }
-    }
-
     public void AddItem(ItemData itemData)
     {
         if (itemData.itemType == ItemType.Equipment) AddToInventory(itemData);
         else if (itemData.itemType == ItemType.Material) AddToStash(itemData);
-
-        // UpdateSlotUI();
     }
 
     private void AddToStash(ItemData itemData)
@@ -126,7 +111,7 @@ public class Inventory : MonoBehaviour
             var newItemSlotUI = Instantiate(itemSlotUIPrefab, inventorySlotParent);
             var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
             
-            var newItem = new InventoryItem(itemData);
+            var newItem = new InventoryItem(itemData, newItemSlotUIScript);
             
             newItemSlotUIScript.Setup(newItem);
             
@@ -148,7 +133,7 @@ public class Inventory : MonoBehaviour
             var newItemSlotUI = Instantiate(itemSlotUIPrefab, stashSlotParent);
             
             var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
-            var newItem = new InventoryItem(itemData);
+            var newItem = new InventoryItem(itemData, newItemSlotUIScript);
             newItemSlotUIScript.Setup(newItem);
 
 
@@ -166,6 +151,7 @@ public class Inventory : MonoBehaviour
             {
                 inventory.Remove(value);
                 inventoryDictionary.Remove(itemData);
+                Destroy(value.SlotUI.gameObject);
             }
             else
             {
@@ -179,14 +165,12 @@ public class Inventory : MonoBehaviour
             {
                 stash.Remove(stashValue);
                 stashDictionary.Remove(itemData);
+                Destroy(stashValue.SlotUI.gameObject);
             }
             else
             {
                 stashValue.RemoveStack();
             }
         }
-        
-
-        // UpdateSlotUI();
     }
 }
