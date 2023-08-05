@@ -1,4 +1,5 @@
-﻿using Skill;
+﻿using Item_and_Inventory;
+using Skill;
 using UnityEngine;
 
 namespace Player
@@ -26,7 +27,7 @@ namespace Player
                 {
                     var target = hit.GetComponent<EnemyStats>();
                     player.stars.DoDamage(target);
-                    // hit.GetComponent<Enemy.Enemy>().Damage();
+                    Inventory.Instance.GetEquipmentByType(EquipmentType.Weapon).ExecuteItemEffect();
                 }
             }
         }

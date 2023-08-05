@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Item_and_Inventory;
 using UI;
 using UnityEngine;
@@ -218,4 +219,15 @@ public class Inventory : MonoBehaviour
     public List<InventoryItem> Equipment => equipment;
 
     public List<InventoryItem> Stash => stash;
+
+    public ItemDataEquipment GetEquipmentByType(EquipmentType type)
+    {
+        ItemDataEquipment equipmentItem = null;
+        foreach (var item in equipmentDictionary.Where(item => item.Key.equipmentType == type))
+        {
+            equipmentItem = item.Key;
+        }
+
+        return equipmentItem;
+    }
 }

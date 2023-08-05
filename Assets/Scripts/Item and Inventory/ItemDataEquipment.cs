@@ -16,6 +16,8 @@ namespace Item_and_Inventory
     public class ItemDataEquipment : ItemData
     {
         public EquipmentType equipmentType;
+
+        public ItemEffect[] itemEffects;
         
         [Header("Major stats")]
         public int strength; // 1 point increase damage by 1 and crit.power by 1%
@@ -41,6 +43,14 @@ namespace Item_and_Inventory
 
         [Header("Craft requirement")]
         public List<InventoryItem> craftingMaterials;
+
+        public void ExecuteItemEffect()
+        {
+            foreach (var item in itemEffects)
+            {
+                item.ExecuteEffect();
+            }
+        }
         public void AddModifiers()
         {
             var playerStats = PlayerManager.Instance.player.GetComponent<PlayerStats>();
