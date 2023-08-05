@@ -1,4 +1,5 @@
 ﻿using System;
+using Item_and_Inventory;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,6 +7,7 @@ public class CharacterStats : MonoBehaviour
 {
     private Entity entity;
     private EntityFX fx;
+    private ItemDrop itemDrop;
 
     [Header("Major stats")] public Stats strength; // 1 point increase damage by 1 and crit.power by 1%
     public Stats agility; // 1 point increase evasion by 1% and crit.chance by 1%
@@ -46,6 +48,8 @@ public class CharacterStats : MonoBehaviour
     [SerializeField] private int currentHealth;
     public event EventHandler onHealthChanged;
 
+    public bool isDead { get; private set; }
+
     public int IgniteDamage
     {
         set => igniteDamage = value;
@@ -62,6 +66,7 @@ public class CharacterStats : MonoBehaviour
         currentHealth = MaxHealthValue;
         entity = GetComponent<Entity>();
         fx = GetComponent<EntityFX>();
+        itemDrop = GetComponent<ItemDrop>();
     }
 
     protected virtual void Update()
@@ -110,10 +115,9 @@ public class CharacterStats : MonoBehaviour
         totalDamage = CheckTargetArmor(target, totalDamage);
         target.TakeDamage(totalDamage);
         // DoMagicDamage(target);
-        
+
         //if invnteroy current weapon has fire effect
         // then DoMagicalDamage(_targetStats);
-
     }
 
     public virtual void DoMagicDamage(CharacterStats target)
@@ -236,6 +240,7 @@ public class CharacterStats : MonoBehaviour
                     closestTarget = transform;
             }
         }
+
         if (closestTarget == null) return;
         var newThunder = Instantiate(shockStrikePrefabs, transform.position, Quaternion.identity);
         newThunder.GetComponent<ThunderStrikeController>()
@@ -291,8 +296,11 @@ public class CharacterStats : MonoBehaviour
 
     protected virtual void Die()
     {
+        if (isDead) return;
         Debug.Log(this.gameObject.name + " was died!");
+        isDead = true;
         entity.Die();
+        itemDrop.GenerateDrop();
     }
 
     private int MaxHealthValue => maxHealth.Value + vitality.Value * 5;

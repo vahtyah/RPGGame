@@ -11,7 +11,7 @@ namespace Item_and_Inventory
         
         [SerializeField] private GameObject dropPrefab;
 
-        public void GenerateDrop()
+        public virtual void GenerateDrop()
         {
             foreach (var item in possibleDrop)
             {
@@ -36,7 +36,7 @@ namespace Item_and_Inventory
             }
         }
         
-        public void DropItem(ItemData itemDrop)
+        protected void DropItem(ItemData itemDrop)
         {
             var newDrop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
             var randomVelocity = new Vector2(Random.Range(-5, 5), Random.Range(12, 15));
