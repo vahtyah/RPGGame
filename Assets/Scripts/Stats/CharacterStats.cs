@@ -243,7 +243,7 @@ public class CharacterStats : MonoBehaviour
 
         if (closestTarget == null) return;
         var newThunder = Instantiate(shockStrikePrefabs, transform.position, Quaternion.identity);
-        newThunder.GetComponent<ThunderStrikeController>()
+        newThunder.GetComponent<ShockStrikeController>()
             .Setup(shockDamage, closestTarget.GetComponent<CharacterStats>());
     }
 

@@ -44,11 +44,11 @@ namespace Item_and_Inventory
         [Header("Craft requirement")]
         public List<InventoryItem> craftingMaterials;
 
-        public void ExecuteItemEffect()
+        public void ExecuteItemEffect(Transform targetTransform)
         {
             foreach (var item in itemEffects)
             {
-                item.ExecuteEffect();
+                item.ExecuteEffect(targetTransform);
             }
         }
         public void AddModifiers()
