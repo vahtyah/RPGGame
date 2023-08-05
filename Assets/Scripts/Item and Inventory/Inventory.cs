@@ -28,7 +28,10 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject itemSlotUIPrefab;
     private List<ItemSlotUI> inventorySlotUIs;
     private List<ItemSlotUI> stashSlotUIs;
-    private EquipmentSlotUI[] equipmentSlotUIs; 
+    private EquipmentSlotUI[] equipmentSlotUIs;
+
+    [Header("Items cooldown")]
+    private float lastTimeUsedFlask;
 
     private void Awake()
     {
@@ -229,5 +232,22 @@ public class Inventory : MonoBehaviour
         }
 
         return equipmentItem;
+    }
+
+    public void UseFlask()
+    {
+        var currentFlask = GetEquipmentByType(EquipmentType.Flask);
+        if(!currentFlask) return;
+        bool canUseFlask = Time.time > lastTimeUsedFlask + currentFlask.itemCooldown;
+
+        if (canUseFlask)
+        {
+            currentFlask.ExecuteItemEffect(null);
+            lastTimeUsedFlask = Time.time;
+        }
+        else
+        {
+            Debug.Log("Flash on cooldown!");
+        }
     }
 }

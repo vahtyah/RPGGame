@@ -24,10 +24,6 @@ namespace Item_and_Inventory
             for (int i = 0; i < amountOfDrop; i++)
             {
                 if (dropList.Count < 1) break;
-                foreach (var itemData in dropList)
-                {
-                    Debug.Log(itemData.itemName);
-                }
                 var randomIndex = Random.Range(0, dropList.Count);
                 Debug.Log("randomIndex = " + randomIndex);
                 var randomItem = dropList[randomIndex];

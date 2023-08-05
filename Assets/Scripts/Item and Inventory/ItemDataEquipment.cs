@@ -16,8 +16,8 @@ namespace Item_and_Inventory
     public class ItemDataEquipment : ItemData
     {
         public EquipmentType equipmentType;
-
         public ItemEffect[] itemEffects;
+        public float itemCooldown;
         
         [Header("Major stats")]
         public int strength; // 1 point increase damage by 1 and crit.power by 1%

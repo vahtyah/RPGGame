@@ -1,4 +1,5 @@
 ﻿using System;
+using Item_and_Inventory;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -74,7 +75,11 @@ namespace Skill.Crystal
             foreach (var hit in colliders)
             {
                 if (hit.GetComponent<Enemy.Enemy>() != null)
-                    player.stars.DoDamage(hit.GetComponent<CharacterStats>());
+                {
+                    player.stars.DoMagicDamage(hit.GetComponent<CharacterStats>());
+                    
+                    Inventory.Instance.GetEquipmentByType(EquipmentType.Amulet)?.ExecuteItemEffect(hit.transform);//Effect
+                }
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using UnityEditor.Profiling.Memory.Experimental;
+﻿using Item_and_Inventory;
+using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 
 namespace Skill.Sword
@@ -51,6 +52,9 @@ namespace Skill.Sword
         {
             player.stars.DoDamage(enemy.GetComponent<CharacterStats>());
             enemy.StartCoroutine("FreezeTimerFor", swordSkill.FreezeTimeDuration);
+            
+            Inventory.Instance.GetEquipmentByType(EquipmentType.Amulet)?.ExecuteItemEffect(enemy.transform);//Effect
+
         }
 
         public virtual void StuckInto(Collider2D other)

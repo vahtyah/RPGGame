@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using Player;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Item_and_Inventory
@@ -10,7 +11,7 @@ namespace Item_and_Inventory
 
         public override void ExecuteEffect(Transform targetTransform)
         {
-            var newThunderStrike = Instantiate(thunderStrikePrefab, targetTransform.position, quaternion.identity);
+            var newThunderStrike = Instantiate(thunderStrikePrefab, targetTransform.position, Quaternion.identity);
             Destroy(newThunderStrike, .9f);
         }
     }

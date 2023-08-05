@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Item_and_Inventory;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -85,6 +86,20 @@ public class CharacterStats : MonoBehaviour
         {
             ApplyIgniteDamage();
         }
+    }
+
+    public void IncreaseStatBy(int modifier, float duration, Stats statToModifier)
+    {
+        StartCoroutine(StatModCoroutine(modifier, duration, statToModifier));
+    }
+
+    private IEnumerator StatModCoroutine(int modifier, float duration, Stats statToModifier)
+    {
+        statToModifier.AddModifier(modifier);
+
+        yield return new WaitForSeconds(duration);
+        
+        statToModifier.RemoveModifier(modifier);
     }
 
     private void ApplyIgniteDamage()
@@ -258,10 +273,17 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
+    public virtual void IncreaseHealthBy(int amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealthValue);
+        OnHealthChanged();
+    }
+
     protected virtual void DecreaseHealthBy(int damage)
     {
         currentHealth -= damage;
-        onHealthChanged?.Invoke(this, EventArgs.Empty);
+        OnHealthChanged();
     }
 
     private bool CanCrit()
@@ -303,7 +325,8 @@ public class CharacterStats : MonoBehaviour
         itemDrop.GenerateDrop();
     }
 
-    private int MaxHealthValue => maxHealth.Value + vitality.Value * 5;
+    public int MaxHealthValue => maxHealth.Value + vitality.Value * 5;
 
     public float GetHealthAmountNormalized => (float)currentHealth / MaxHealthValue;
+    protected virtual void OnHealthChanged() { onHealthChanged?.Invoke(this, EventArgs.Empty); }
 }
