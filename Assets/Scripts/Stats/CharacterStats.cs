@@ -90,6 +90,7 @@ public class CharacterStats : MonoBehaviour
             if (currentHealth <= 0)
             {
                 isIgnited = false;
+                Debug.Log("ignite damage");
                 Die();
             }
 
@@ -107,9 +108,12 @@ public class CharacterStats : MonoBehaviour
             totalDamage = CalculateCriticalDamage(totalDamage);
 
         totalDamage = CheckTargetArmor(target, totalDamage);
-
         target.TakeDamage(totalDamage);
-        DoMagicDamage(target);
+        // DoMagicDamage(target);
+        
+        //if invnteroy current weapon has fire effect
+        // then DoMagicalDamage(_targetStats);
+
     }
 
     public virtual void DoMagicDamage(CharacterStats target)
@@ -119,7 +123,7 @@ public class CharacterStats : MonoBehaviour
         var lightingDamage = this.lightingDamage.Value;
         var totalMagicDamage = fireDamage + iceDamage + lightingDamage + intelligence.Value;
         totalMagicDamage = CheckTargetResistance(target, totalMagicDamage);
-
+        Debug.Log("do magic damage" + totalMagicDamage);
         target.TakeDamage(totalMagicDamage);
 
         if (Mathf.Max(fireDamage, iceDamage, lightingDamage) <= 0) return;

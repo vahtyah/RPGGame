@@ -39,6 +39,7 @@ public class ThunderStrikeController : MonoBehaviour
     private void DamageAndSeflDestroy()
     {
         // targetStats.ApplyShock(true);
+        Debug.Log("damage and sefl destroy");
         targetStats.TakeDamage(damage);
         Destroy(gameObject, .4f);
     }
