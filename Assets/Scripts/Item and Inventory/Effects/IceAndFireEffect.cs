@@ -9,7 +9,7 @@ namespace Item_and_Inventory
         [SerializeField] private GameObject iceAndFireEffectPrefab;
         [SerializeField] private Vector2 newVelocity;
 
-        public override void ExecuteEffect(Transform targetTransform)
+        public override void ExecuteEffect(Transform transform)
         {
             var player = PlayerManager.Instance.player;
 
@@ -17,7 +17,7 @@ namespace Item_and_Inventory
             
             if(!thirdAttack) return;
             
-            var newIceAndFireEffect = Instantiate(iceAndFireEffectPrefab, targetTransform.position, player.transform.rotation);
+            var newIceAndFireEffect = Instantiate(iceAndFireEffectPrefab, transform.position, player.transform.rotation);
             newIceAndFireEffect.GetComponent<Rigidbody2D>().velocity = newVelocity * player.GetComponent<Player.Player>().facingDir;
             Destroy(newIceAndFireEffect, 2f);
         }

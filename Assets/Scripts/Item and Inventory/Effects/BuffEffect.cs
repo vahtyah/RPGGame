@@ -29,7 +29,7 @@ namespace Item_and_Inventory
         [SerializeField] private int buffAmount;
         [SerializeField] private float buffDuration;
 
-        public override void ExecuteEffect(Transform targetTransform)
+        public override void ExecuteEffect(Transform transform)
         {
             stats = PlayerManager.Instance.player.GetComponent<PlayerStats>();
             stats.IncreaseStatBy(buffAmount,buffDuration, StatToModify());

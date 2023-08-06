@@ -8,7 +8,7 @@ namespace Item_and_Inventory
     {
         [Range(0f,1f)]
         [SerializeField] private float healPercent;
-        public override void ExecuteEffect(Transform targetTransform)
+        public override void ExecuteEffect(Transform transform)
         {
             var playerStats = PlayerManager.Instance.player.GetComponent<PlayerStats>();
 

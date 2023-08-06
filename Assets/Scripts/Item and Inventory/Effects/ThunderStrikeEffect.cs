@@ -9,9 +9,9 @@ namespace Item_and_Inventory
     {
         [SerializeField] private GameObject thunderStrikePrefab;
 
-        public override void ExecuteEffect(Transform targetTransform)
+        public override void ExecuteEffect(Transform transform)
         {
-            var newThunderStrike = Instantiate(thunderStrikePrefab, targetTransform.position, Quaternion.identity);
+            var newThunderStrike = Instantiate(thunderStrikePrefab, transform.position, Quaternion.identity);
             Destroy(newThunderStrike, .9f);
         }
     }

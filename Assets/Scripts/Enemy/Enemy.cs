@@ -76,7 +76,12 @@ namespace Enemy
             }
         }
 
-        protected virtual IEnumerator FreezeTimerFor(float second)
+        public void FreezeTimerFor(float second)
+        {
+            StartCoroutine(FreezeTimerCoroutine(second));
+        }
+
+        protected virtual IEnumerator FreezeTimerCoroutine(float second)
         {
             FreezeTimer(true);
             yield return new WaitForSeconds(second);

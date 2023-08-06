@@ -48,6 +48,7 @@ namespace Item_and_Inventory
         {
             foreach (var item in itemEffects)
             {
+                Debug.Log("VAR");
                 item.ExecuteEffect(targetTransform);
             }
         }

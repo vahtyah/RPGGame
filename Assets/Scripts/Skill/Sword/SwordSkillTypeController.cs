@@ -51,7 +51,7 @@ namespace Skill.Sword
         public virtual void Damage(Enemy.Enemy enemy)
         {
             player.stars.DoDamage(enemy.GetComponent<CharacterStats>());
-            enemy.StartCoroutine("FreezeTimerFor", swordSkill.FreezeTimeDuration);
+            enemy.FreezeTimerFor(swordSkill.FreezeTimeDuration);
             
             Inventory.Instance.GetEquipmentByType(EquipmentType.Amulet)?.ExecuteItemEffect(enemy.transform);//Effect
 

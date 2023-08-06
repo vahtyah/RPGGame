@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Item_and_Inventory;
+using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
@@ -10,13 +11,11 @@ public class PlayerStats : CharacterStats
         player = GetComponent<Player.Player>();
     }
 
-    public override void TakeDamage(int damage)
+    protected override void DecreaseHealthBy(int damage)
     {
-        base.TakeDamage(damage);
-    }
-
-    protected override void Die()
-    {
-        base.Die();
+        base.DecreaseHealthBy(damage);
+        var currentArmor = Inventory.Instance.GetEquipmentByType(EquipmentType.Armor);
+        
+        if(currentArmor) currentArmor.ExecuteItemEffect(player.transform);
     }
 }

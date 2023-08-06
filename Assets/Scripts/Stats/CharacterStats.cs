@@ -329,4 +329,6 @@ public class CharacterStats : MonoBehaviour
 
     public float GetHealthAmountNormalized => (float)currentHealth / MaxHealthValue;
     protected virtual void OnHealthChanged() { onHealthChanged?.Invoke(this, EventArgs.Empty); }
+
+    public int CurrentHealth => currentHealth;
 }
