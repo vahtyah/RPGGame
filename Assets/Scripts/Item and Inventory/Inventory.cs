@@ -111,6 +111,8 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(ItemData itemData)
     {
+        //TODO: make inventory limit slot or not, then no destroy item drop when not enough space
+        
         if (itemData.itemType == ItemType.Equipment) AddToInventory(itemData);
         else if (itemData.itemType == ItemType.Material) AddToStash(itemData);
     }

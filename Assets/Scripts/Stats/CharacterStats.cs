@@ -324,6 +324,28 @@ public class CharacterStats : MonoBehaviour
         entity.Die();
         itemDrop.GenerateDrop();
     }
+    
+    public virtual Stats StatOfType(StatType stats)
+    {
+        return stats switch
+        {
+            StatType.strength => strength,
+            StatType.agility => agility,
+            StatType.intelligence => intelligence,
+            StatType.vitality => vitality,
+            StatType.damage => damage,
+            StatType.critChance => critChance,
+            StatType.critPower => critPower,
+            StatType.maxHealth => maxHealth,
+            StatType.armor => armor,
+            StatType.evasion => evasion,
+            StatType.magicResistance => magicResistance,
+            StatType.fireDamage => fireDamage,
+            StatType.iceDamage => iceDamage,
+            StatType.lightingDamage => lightingDamage,
+            _ => null
+        };
+    }
 
     public int MaxHealthValue => maxHealth.Value + vitality.Value * 5;
 

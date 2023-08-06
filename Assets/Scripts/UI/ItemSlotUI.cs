@@ -1,10 +1,12 @@
 ﻿using System;
+using Item_and_Inventory;
 using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSlotUI : MonoBehaviour, IPointerDownHandler
+public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] protected Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
@@ -34,5 +36,17 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler
         {
             Inventory.Instance.EquipItem(item.itemData);
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!item.itemData) return;
+        ToolTipUI.Instance.ShowToolTip(item.itemData as ItemDataEquipment);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!item.itemData) return;
+        ToolTipUI.Instance.HideToolTip();
     }
 }

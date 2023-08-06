@@ -160,7 +160,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -221340735
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -436,7 +436,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -221340735
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -85727878, guid: 687df074731fbf744b668d2275dbb675, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -670,6 +670,7 @@ GameObject:
   - component: {fileID: 4220835552715904492}
   - component: {fileID: 5614435200178313247}
   - component: {fileID: 2613858719309692583}
+  - component: {fileID: 6130086353048559456}
   m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -808,7 +809,7 @@ MonoBehaviour:
     _baseValue: 0
     _modifiers: 
   damage:
-    _baseValue: 0
+    _baseValue: 10
     _modifiers: 
   critChance:
     _baseValue: 0
@@ -843,6 +844,8 @@ MonoBehaviour:
   ailmentDuration: 4
   shockStrikePrefabs: {fileID: 5754521203067570224, guid: b4f3bd99bf7d3c54fbed2d5c500a610e, type: 3}
   currentHealth: 0
+  level: 1
+  percentageModifier: 0.4
 --- !u!70 &2613858719309692583
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -880,6 +883,27 @@ CapsuleCollider2D:
   m_Offset: {x: -0.010515963, y: -0.24537258}
   m_Size: {x: 0.67526615, y: 1.4907455}
   m_Direction: 0
+--- !u!114 &6130086353048559456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7046989837853874547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d1aeba527317341922aee4164c4277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfDrop: 2
+  possibleDrop:
+  - {fileID: 11400000, guid: f5fa154c9249b114dbca0ab16300aa93, type: 2}
+  - {fileID: 11400000, guid: abcb0f557d5ff854687f237eb73a5857, type: 2}
+  - {fileID: 11400000, guid: fa0fc6c1750ec344f889553a5c1bd946, type: 2}
+  - {fileID: 11400000, guid: 5ec4b5f3ffa637e4f8ed0956e2e98b9a, type: 2}
+  - {fileID: 11400000, guid: 8a2d23455a7d63e47be284620e5f5de6, type: 2}
+  dropList: []
+  dropPrefab: {fileID: 8616273930555591629, guid: af97d0422422b9a40b13b6d248f4c660, type: 3}
 --- !u!1 &7624353989164930940
 GameObject:
   m_ObjectHideFlags: 0

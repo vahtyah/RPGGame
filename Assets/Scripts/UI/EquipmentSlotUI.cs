@@ -22,6 +22,8 @@ namespace UI
 
         public override void OnPointerDown(PointerEventData eventData)
         {
+            if (item.itemData == null) return;
+            //TODO: Still not removed from the slot
             Inventory.Instance.UnequipItem(item.itemData as ItemDataEquipment);
             Inventory.Instance.AddItem(item.itemData as ItemDataEquipment);
             itemImage.color= Color.clear; //TODO: stupid?

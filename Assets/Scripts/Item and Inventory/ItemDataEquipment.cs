@@ -48,12 +48,12 @@ namespace Item_and_Inventory
         {
             foreach (var item in itemEffects)
             {
-                Debug.Log("VAR");
                 item.ExecuteEffect(targetTransform);
             }
         }
         public void AddModifiers()
         {
+            //TODO: Create List of Stats need to modify;
             var playerStats = PlayerManager.Instance.player.GetComponent<PlayerStats>();
             
             playerStats.strength.AddModifier(strength);
