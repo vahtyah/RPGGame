@@ -12,7 +12,7 @@ namespace Skill.Sword
         private CircleCollider2D cd;
         protected Animator anim;
         protected Player.Player player;
-        
+
         private bool canRotate = true;
         protected bool isReturning;
 
@@ -38,11 +38,11 @@ namespace Skill.Sword
         {
             if (canRotate)
                 sword.transform.right = rb.velocity;
-            
+
             if (isReturning)
             {
                 sword.transform.position = Vector2.MoveTowards(sword.transform.position, player.transform.position,
-                     swordSkill.ReturnSpeed * Time.deltaTime);
+                    swordSkill.ReturnSpeed * Time.deltaTime);
                 if (Vector2.Distance(sword.transform.position, player.transform.position) < .5f)
                     player.CatchTheSword();
             }
@@ -52,9 +52,8 @@ namespace Skill.Sword
         {
             player.stars.DoDamage(enemy.GetComponent<CharacterStats>());
             enemy.FreezeTimerFor(swordSkill.FreezeTimeDuration);
-            
-            Inventory.Instance.GetEquipmentByType(EquipmentType.Amulet)?.ExecuteItemEffect(enemy.transform);//Effect
 
+            Inventory.Instance.GetEquipmentByType(EquipmentType.Amulet)?.ExecuteItemEffect(enemy.transform); //Effect
         }
 
         public virtual void StuckInto(Collider2D other)
@@ -66,6 +65,7 @@ namespace Skill.Sword
             anim.SetBool("Rotation", false);
             sword.transform.parent = other.transform;
         }
+
         public virtual void ReturnSword()
         {
             rb.constraints = RigidbodyConstraints2D.FreezeAll;

@@ -9,6 +9,7 @@ namespace Skill
         [SerializeField] protected float cooldown;
         protected float cooldownTimer;
         protected Player.Player player;
+        public event EventHandler onSkillUsed;
 
         protected virtual void Start() { player = PlayerManager.Instance.player; }
 
@@ -32,7 +33,7 @@ namespace Skill
 
         public virtual void UseSkill()
         {
-            //skill use
+            OnSkillUsed();
         }
 
         public virtual Transform FindClosestEnemy(Transform checkTransform)
@@ -51,5 +52,13 @@ namespace Skill
 
             return closestTarget;
         }
+
+        public float Cooldown => cooldown;
+
+        public float CooldownTimer => cooldownTimer;
+
+        protected virtual void OnSkillUsed() { onSkillUsed?.Invoke(this, EventArgs.Empty); }
+
+        public virtual float CooldownNormalized => cooldownTimer / cooldown;
     }
 }

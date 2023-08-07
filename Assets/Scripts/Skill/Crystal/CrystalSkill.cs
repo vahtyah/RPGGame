@@ -77,26 +77,23 @@ namespace Skill.Crystal
         private bool CanUseMultiStacks()
         {
             if (!canUseMultiStacks) return false;
-            if (crystalLeft.Count > 0)
+            if (crystalLeft.Count <= 0) return true;
+            
+            if (crystalLeft.Count == amountOfStacks)
             {
-                if (crystalLeft.Count == amountOfStacks)
-                {
-                    Invoke("ResetAbility", useTimeWindow);
-                }
-
-                cooldown = 0;
-                GameObject crystalToSpawn = crystalLeft[crystalLeft.Count - 1];
-                crystalLeft.Remove(crystalToSpawn);
-                GameObject newCrystal = Instantiate(crystalToSpawn, player.transform.position, quaternion.identity);
-                newCrystal.GetComponent<CrystalSkillController>().Setup(player,crystalDuration, canExplode, canMoveToEnemy,
-                    moveSpeed, growSpeed, FindClosestEnemy(newCrystal.transform));
-
-                if (crystalLeft.Count <= 0)
-                {
-                    cooldown = multiStackCooldown;
-                    RefillCrystal();
-                }
+                Invoke("ResetAbility", useTimeWindow);
             }
+
+            cooldown = 0;
+            var crystalToSpawn = crystalLeft[^1];
+            crystalLeft.Remove(crystalToSpawn);
+            var newCrystal = Instantiate(crystalToSpawn, player.transform.position, quaternion.identity);
+            newCrystal.GetComponent<CrystalSkillController>().Setup(player,crystalDuration, canExplode, canMoveToEnemy,
+                moveSpeed, growSpeed, FindClosestEnemy(newCrystal.transform));
+
+            if (crystalLeft.Count > 0) return true;
+            cooldown = multiStackCooldown;
+            RefillCrystal();
 
             return true;
         }

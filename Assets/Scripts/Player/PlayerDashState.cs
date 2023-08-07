@@ -14,7 +14,7 @@ namespace Player
         {
             base.Enter();
 
-            player.skill.cloneSkill.CreateCloneOnDashStart();
+            player.skill.dashSkill.CloneOnDash();
             timerState = player.dashDuration;
         }
 
@@ -31,7 +31,7 @@ namespace Player
         public override void Exit()
         {
             base.Exit();
-            player.skill.cloneSkill.CreateCloneOnDashOver();
+            player.skill.dashSkill.CloneOnDashArrival();
             player.SetVelocity(0, rb.velocity.y);
         }
     }

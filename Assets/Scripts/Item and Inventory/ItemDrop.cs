@@ -25,7 +25,6 @@ namespace Item_and_Inventory
             {
                 if (dropList.Count < 1) break;
                 var randomIndex = Random.Range(0, dropList.Count);
-                Debug.Log("randomIndex = " + randomIndex);
                 var randomItem = dropList[randomIndex];
                 dropList.Remove(randomItem);
                 DropItem(randomItem);
