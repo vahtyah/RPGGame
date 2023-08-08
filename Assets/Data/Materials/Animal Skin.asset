@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   itemName: Animal skin
-  icon: {fileID: -973012730, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemIcon: {fileID: -973012730, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemID: f5fa154c9249b114dbca0ab16300aa93
   dropChance: 65.1

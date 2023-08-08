@@ -1,21 +1,28 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace UI
 {
     public class UI : MonoBehaviour
     {
-        [SerializeField] private GameObject characterUI;
+        [SerializeField] private GameObject menuUI;
         public ToolTipUI toolTipUI;
         private void Start() { toolTipUI = GetComponentInChildren<ToolTipUI>(); }
 
-        public void SwitchTo(GameObject menu)
+        private void Update()
         {
-            for (var i = 0; i < transform.childCount; i++)
+            if(Input.GetKeyDown(KeyCode.Tab))
+                menuUI.gameObject.SetActive(!menuUI.gameObject.activeSelf);
+        }
+
+        public void SwitchTo(GameObject elementMenu)
+        {
+            for (var i = 0; i < menuUI.transform.childCount - 1; i++)
             {
-                transform.GetChild(i).gameObject.SetActive(false);
+                menuUI.transform.GetChild(i).gameObject.SetActive(false);
             }
             
-            if(menu) menu.gameObject.SetActive(true);
+            elementMenu.gameObject.SetActive(true);
         }
     }
 }

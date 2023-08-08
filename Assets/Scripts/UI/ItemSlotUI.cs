@@ -16,7 +16,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
     public virtual void Setup(InventoryItem item)
     {
         this.item = item;
-        itemImage.sprite = item.itemData.icon;
+        itemImage.sprite = item.itemData.itemIcon;
         UpdateSlot(item);
     }
     

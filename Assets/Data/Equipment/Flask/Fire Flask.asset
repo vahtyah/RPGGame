@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   itemName: Fire Flask
-  icon: {fileID: 1073501139, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemIcon: {fileID: -1740531083, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemID: 2f834832ea98ae34d91d1f10fd7a8295
   dropChance: 0
   equipmentType: 3
   itemEffects:

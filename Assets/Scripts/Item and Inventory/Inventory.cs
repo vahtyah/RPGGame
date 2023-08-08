@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Item_and_Inventory;
+using Save_and_Load;
 using UI;
+using UnityEditor;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, ISaveManager
 {
     public static Inventory Instance { get; private set; }
 
@@ -37,6 +39,9 @@ public class Inventory : MonoBehaviour
     private float flaskCooldown;
     private float armorCooldown;
 
+    [Header("Data base")]
+    public List<InventoryItem> loadedItems;
+
     private void Awake()
     {
         if (Instance) Destroy(gameObject);
@@ -57,6 +62,23 @@ public class Inventory : MonoBehaviour
         inventorySlotUIs = new List<ItemSlotUI>();
         stashSlotUIs = new List<ItemSlotUI>();
         equipmentSlotUIs = equipmentSlotParent.GetComponentsInChildren<EquipmentSlotUI>();
+        
+        LoadItemStart();
+    }
+
+    private void LoadItemStart()
+    {
+        if (loadedItems.Count > 0)
+        {
+            foreach (var inventoryItem in loadedItems)
+            {
+                for (var i = 0; i < inventoryItem.stackSize; i++)
+                {
+                    AddItem(inventoryItem.itemData);
+                }
+            }
+            return;
+        }
         
         foreach (var itemData in startingItem)
         {
@@ -109,7 +131,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(ItemData itemData)
+    public void AddItem(ItemData itemData)  
     {
         //TODO: make inventory limit slot or not, then no destroy item drop when not enough space
         
@@ -271,4 +293,48 @@ public class Inventory : MonoBehaviour
         Debug.Log("Armor on cooldown!");
         return false;
     }
+
+    public void LoadData(GameData data)
+    {
+        var itemDatabases = GetItemDatabase();
+        
+        foreach (var pair in data.inventory)
+        {
+            if (!itemDatabases.TryGetValue(pair.Key, out var itemData)) continue;
+            var itemToLoad = new InventoryItem(itemData, null)
+            {
+                stackSize = pair.Value
+            };
+                
+            loadedItems.Add(itemToLoad);
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.inventory.Clear();
+
+        foreach (var value in inventoryDictionary)
+        {
+            data.inventory.Add(value.Key.itemID, value.Value.stackSize);
+        }
+    }
+
+    private Dictionary<string,ItemData> GetItemDatabase()
+    {
+        var itemDatabase = new Dictionary<string, ItemData>();
+        var assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Equipment" });
+         
+        foreach (var assetName in assetNames)
+        {
+            var SOpath = AssetDatabase.GUIDToAssetPath(assetName);
+            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOpath);
+            if(itemData)
+                itemDatabase.Add(itemData.itemID, itemData);
+        }
+
+        return itemDatabase;
+    }
+    
+    
 }

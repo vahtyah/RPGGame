@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   itemName: Nice armor
-  icon: {fileID: -1581127718, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemIcon: {fileID: -1581127718, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemID: fa0fc6c1750ec344f889553a5c1bd946
   dropChance: 30.8
   equipmentType: 1
+  itemEffects: []
+  itemCooldown: 0
   strength: 0
   agility: 0
   intelligence: 0
