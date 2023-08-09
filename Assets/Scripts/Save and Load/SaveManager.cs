@@ -11,9 +11,18 @@ namespace Save_and_Load
         public static SaveManager Instance { get; private set; }
 
         [SerializeField] private string fileName;
+        [SerializeField] private bool encryptData;
         private List<ISaveManager> saveManagers;
         private GameData gameData;
         private FileDataHandler dataHandler;
+
+        [ContextMenu("Delete save file")]
+        private void DeleteSavedData()
+        {
+            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
+            dataHandler.Delete();
+        }
+
         private void Awake()
         {
             if (Instance) Destroy(gameObject);
@@ -22,15 +31,12 @@ namespace Save_and_Load
 
         private void Start()
         {
-            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
             saveManagers = FindAllSaveManagers();
             LoadGame();
         }
 
-        public void NewGame()
-        {
-            gameData = new GameData();
-        }
+        public void NewGame() { gameData = new GameData(); }
 
         private void LoadGame()
         {
@@ -52,21 +58,19 @@ namespace Save_and_Load
             {
                 saveManager.SaveData(ref gameData);
             }
-            
+
             dataHandler.Save(gameData);
         }
 
-        private void OnApplicationQuit()
-        {
-            SaveGame();
-        }
+        private void OnApplicationQuit() { SaveGame(); }
+
         private List<ISaveManager> FindAllSaveManagers()
         {
             // var saveManagers = FindObjectsOfType<MonoBehaviour>().OfType<ISaveManager>();
             // var saveManagers = FindObjectsOfType<MonoBehaviour>().Where(mb => mb is ISaveManager).Cast<ISaveManager>();
-            var saveManagers = Resources.FindObjectsOfTypeAll<MonoBehaviour>().Where(mb => mb is ISaveManager).Cast<ISaveManager>();
+            var saveManagers = Resources.FindObjectsOfTypeAll<MonoBehaviour>().Where(mb => mb is ISaveManager)
+                .Cast<ISaveManager>();
             return new List<ISaveManager>(saveManagers);
         }
-
     }
 }

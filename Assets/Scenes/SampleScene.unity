@@ -1525,6 +1525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: data.vahtyah
+  encryptData: 1
 --- !u!4 &148861812
 Transform:
   m_ObjectHideFlags: 0
