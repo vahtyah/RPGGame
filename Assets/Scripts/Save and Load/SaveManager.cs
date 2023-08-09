@@ -17,7 +17,7 @@ namespace Save_and_Load
         private FileDataHandler dataHandler;
 
         [ContextMenu("Delete save file")]
-        private void DeleteSavedData()
+        public void DeleteSavedData()
         {
             dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
             dataHandler.Delete();
@@ -27,11 +27,11 @@ namespace Save_and_Load
         {
             if (Instance) Destroy(gameObject);
             else Instance = this;
+            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
         }
 
         private void Start()
         {
-            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
             saveManagers = FindAllSaveManagers();
             LoadGame();
         }
@@ -44,6 +44,7 @@ namespace Save_and_Load
             if (gameData == null)
             {
                 NewGame();
+                Debug.Log("new Game");
             }
 
             foreach (var saveManager in saveManagers)
@@ -71,6 +72,12 @@ namespace Save_and_Load
             var saveManagers = Resources.FindObjectsOfTypeAll<MonoBehaviour>().Where(mb => mb is ISaveManager)
                 .Cast<ISaveManager>();
             return new List<ISaveManager>(saveManagers);
+        }
+
+        public bool HasSavedData()
+        {
+            Debug.Log(dataHandler.Load());
+            return dataHandler.Load() != null;
         }
     }
 }

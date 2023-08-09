@@ -87,7 +87,7 @@ namespace Skill.Sword
         public void CreateSword()
         {
             var newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
-            newSword.GetComponent<Sword>().Setup(swordType);
+            newSword.GetComponent<SwordController>().Setup(swordType);
             DotsActive(false);
             player.AssignNewSword(newSword);
         }

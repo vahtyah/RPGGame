@@ -14,8 +14,8 @@ namespace Player
         {
             base.Enter(); 
             // player.skill.swordSkill.DotsActive(true);
-            player.skill.SwordSkill.DotsActive(true);
-            player.skill.SwordSkill.SetupGravity();//Todo ?
+            player.skill.swordSkill.DotsActive(true);
+            player.skill.swordSkill.SetupGravity();//Todo ?
         }
 
         public override void Update()

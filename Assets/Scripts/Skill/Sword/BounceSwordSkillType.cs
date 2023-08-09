@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Skill.Sword
 {
-    public class BounceSwordSkillType : SwordSkillTypeController
+    public class BounceSwordSkillType : SwordSkillType
     {
         private bool isBouncing;
         private List<Transform> enemiesTarget;
         private int targetIndex;
         private int bounceAmount;
 
-        public BounceSwordSkillType(SwordSkill swordSkill, Sword sword) : base(swordSkill, sword)
+        public BounceSwordSkillType(SwordSkill swordSkill, SwordController swordController) : base(swordSkill, swordController)
         {
             bounceAmount = swordSkill.BounceAmount;
             enemiesTarget = new List<Transform>();
@@ -35,9 +35,9 @@ namespace Skill.Sword
             if (isBouncing && enemiesTarget.Count > 0)
             {
                 Debug.Log("enemiesTarget.Count = " + enemiesTarget.Count);
-                sword.transform.position = Vector2.MoveTowards(sword.transform.position,
+                swordController.transform.position = Vector2.MoveTowards(swordController.transform.position,
                     enemiesTarget[targetIndex].position, swordSkill.BounceSpeed * Time.deltaTime);
-                if (Vector2.Distance(sword.transform.position, enemiesTarget[targetIndex].position) < .1f)
+                if (Vector2.Distance(swordController.transform.position, enemiesTarget[targetIndex].position) < .1f)
                 {
                     var curEnemy = enemiesTarget[targetIndex].GetComponent<Enemy.Enemy>();
                     Damage(curEnemy);
@@ -67,7 +67,7 @@ namespace Skill.Sword
             if (isBouncing && enemiesTarget.Count > 0)
             {
                 anim.SetBool("Rotation", true);
-                sword.transform.parent = null;
+                swordController.transform.parent = null;
             }
         }
 
@@ -75,7 +75,7 @@ namespace Skill.Sword
         {
             if (isBouncing && enemiesTarget.Count <= 0)
             {
-                var colliders = Physics2D.OverlapCircleAll(sword.transform.position, swordSkill.BounceRadius);
+                var colliders = Physics2D.OverlapCircleAll(swordController.transform.position, swordSkill.BounceRadius);
                 foreach (var hit in colliders)
                 {
                     if (hit.GetComponent<Enemy.Enemy>() != null)

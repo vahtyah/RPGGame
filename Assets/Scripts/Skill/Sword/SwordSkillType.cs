@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Skill.Sword
 {
-    public abstract class SwordSkillTypeController
+    public abstract class SwordSkillType
     {
         protected SwordSkill swordSkill;
-        protected Sword sword;
+        protected SwordController swordController;
         protected Rigidbody2D rb;
         private CircleCollider2D cd;
         protected Animator anim;
@@ -18,13 +18,13 @@ namespace Skill.Sword
 
         private Vector2 finalDir;
 
-        public SwordSkillTypeController(SwordSkill swordSkill, Sword sword)
+        public SwordSkillType(SwordSkill swordSkill, SwordController swordController)
         {
             this.swordSkill = swordSkill;
-            this.sword = sword;
-            rb = sword.rb;
-            cd = sword.cd;
-            anim = this.sword.anim;
+            this.swordController = swordController;
+            rb = swordController.rb;
+            cd = swordController.cd;
+            anim = this.swordController.anim;
             player = swordSkill.Player;
         }
 
@@ -37,13 +37,13 @@ namespace Skill.Sword
         public virtual void Update()
         {
             if (canRotate)
-                sword.transform.right = rb.velocity;
+                swordController.transform.right = rb.velocity;
 
             if (isReturning)
             {
-                sword.transform.position = Vector2.MoveTowards(sword.transform.position, player.transform.position,
+                swordController.transform.position = Vector2.MoveTowards(swordController.transform.position, player.transform.position,
                     swordSkill.ReturnSpeed * Time.deltaTime);
-                if (Vector2.Distance(sword.transform.position, player.transform.position) < .5f)
+                if (Vector2.Distance(swordController.transform.position, player.transform.position) < .5f)
                     player.CatchTheSword();
             }
         }
@@ -63,14 +63,14 @@ namespace Skill.Sword
             rb.isKinematic = true;
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             anim.SetBool("Rotation", false);
-            sword.transform.parent = other.transform;
+            swordController.transform.parent = other.transform;
         }
 
         public virtual void ReturnSword()
         {
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             // rb.isKinematic = false;
-            sword.transform.parent = null;
+            swordController.transform.parent = null;
             isReturning = true;
         }
 

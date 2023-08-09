@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-namespace Skill.Sword
+namespace Skill.Crystal
 {
-    public class SwordSkillTypeMachine
+    public class CrystalSkillTypeMachine
     {
-        private SwordSkillType currentType;
+        private CrystalSkillType currentType;
 
-        public SwordSkillType CurrentType
+        public CrystalSkillType CurrentType
         {
             get => currentType;
             set

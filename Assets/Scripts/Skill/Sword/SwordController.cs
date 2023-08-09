@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Skill.Sword
 {
-    public class Sword : MonoBehaviour
+    public class SwordController : MonoBehaviour
     {
         
         #region Component
@@ -32,7 +32,7 @@ namespace Skill.Sword
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponentInChildren<Animator>();
 
-            swordSkill = SkillManager.Instance.SwordSkill;
+            swordSkill = SkillManager.Instance.swordSkill;
             typeMachine = new SwordSkillTypeMachine();
 
             regularSword = new RegularSwordSkillType(swordSkill, this);
@@ -50,14 +50,14 @@ namespace Skill.Sword
 
         private void SetupTypeSword(SwordType swordType)
         {
-            if (swordType == SwordType.Regular)
-                typeMachine.CurrentType = regularSword;
-            else if (swordType == SwordType.Bounce)
-                typeMachine.CurrentType = bounceSword;
-            else if (swordType == SwordType.Pierce)
-                typeMachine.CurrentType = pierceSword;
-            else if (swordType == SwordType.Spin)
-                typeMachine.CurrentType = spinSword;
+            typeMachine.CurrentType = swordType switch
+            {
+                SwordType.Regular => regularSword,
+                SwordType.Bounce => bounceSword,
+                SwordType.Pierce => pierceSword,
+                SwordType.Spin => spinSword,
+                _ => typeMachine.CurrentType
+            };
         }
 
         private void Update()

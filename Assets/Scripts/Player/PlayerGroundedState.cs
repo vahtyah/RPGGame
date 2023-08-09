@@ -47,7 +47,7 @@ namespace Player
         {
             if (!player.sword) return true;
             // player.sword.GetComponent<SwordSkillController>().ReturnSword();
-            player.sword.GetComponent<Sword>().typeMachine.CurrentType.ReturnSword();
+            player.sword.GetComponent<SwordController>().typeMachine.CurrentType.ReturnSword();
             return false;
         }
     }

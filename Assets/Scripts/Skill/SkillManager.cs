@@ -11,7 +11,7 @@ namespace Skill
         public static SkillManager Instance { get; private set; }
         public DashSkill dashSkill { get; private set; }
         public CloneSkill cloneSkill { get; private set; }
-        public Sword.SwordSkill SwordSkill { get; private set; }
+        public Sword.SwordSkill swordSkill { get; private set; }
         public BlackholeSkill blackholeSkill { get; private set; }
         public CrystalSkill crystalSkill { get; private set; }
 
@@ -25,7 +25,7 @@ namespace Skill
         {
             dashSkill = GetComponent<DashSkill>();
             cloneSkill = GetComponent<CloneSkill>();
-            SwordSkill = GetComponent<Sword.SwordSkill>();
+            swordSkill = GetComponent<Sword.SwordSkill>();
             blackholeSkill = GetComponent<BlackholeSkill>();
             crystalSkill = GetComponent<CrystalSkill>();
         }
