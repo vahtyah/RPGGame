@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Linq;
 using Player;
+using Save_and_Load;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public class SkillTreeSlotUI : MonoBehaviour
+    public class SkillTreeSlotUI : MonoBehaviour, ISaveManager
     {
         [Header("Skill info")]
         [SerializeField] private string skillName;
         [SerializeField] private int skillPrice;
         [TextArea]
         [SerializeField] private string skillDescription;
-        [SerializeField] private Color lockSkillColor;
+        [SerializeField] private Color skillColor;
 
         public bool unlocker;
         [Header("Unlock conditions")]
@@ -32,15 +33,14 @@ namespace UI
         private void Start()
         {
             img = GetComponent<Image>();
-            img.color = lockSkillColor;
-            GetComponent<Button>().onClick.AddListener( (() =>
-            {
-                UnlockSkillSlot();
-            }));
+            img.color = skillColor;
+            GetComponent<Button>().onClick.AddListener( (UnlockSkillSlot));
         }
 
         private void UnlockSkillSlot()
         {
+            if (unlocker) return;
+            
             if (shouldBeUnlocker.Any(skill => !skill.unlocker)) return;
 
             if (shouldBeLocker.Any(skill => skill.unlocker)) return;
@@ -52,6 +52,21 @@ namespace UI
             OnUnlocked();
         }
 
-        protected virtual void OnUnlocked() { onUnlocked?.Invoke(this, EventArgs.Empty); }
+        private void OnUnlocked() { onUnlocked?.Invoke(this, EventArgs.Empty); }
+
+        public void LoadData(GameData data)
+        {
+            if (data.skillTree.Contains(skillName))
+            {
+                unlocker = true;
+                skillColor = Color.white;
+                OnUnlocked();
+            }
+        }
+
+        public void SaveData(ref GameData data)
+        {
+            if(unlocker && !data.skillTree.Contains(skillName)) data.skillTree.Add(skillName);
+        }
     }
 }

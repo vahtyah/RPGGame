@@ -63,7 +63,8 @@ namespace Save_and_Load
         private List<ISaveManager> FindAllSaveManagers()
         {
             // var saveManagers = FindObjectsOfType<MonoBehaviour>().OfType<ISaveManager>();
-            var saveManagers = FindObjectsOfType<MonoBehaviour>().Where(mb => mb is ISaveManager).Cast<ISaveManager>();
+            // var saveManagers = FindObjectsOfType<MonoBehaviour>().Where(mb => mb is ISaveManager).Cast<ISaveManager>();
+            var saveManagers = Resources.FindObjectsOfTypeAll<MonoBehaviour>().Where(mb => mb is ISaveManager).Cast<ISaveManager>();
             return new List<ISaveManager>(saveManagers);
         }
 
