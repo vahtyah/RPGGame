@@ -9,11 +9,13 @@ namespace Save_and_Load
     {
         public int currency;
         public SerializableDictionary<string, int> inventory;
+        public List<string> equipmentID;
 
         public GameData()
         {
             currency = 0;
             inventory = new SerializableDictionary<string, int>();
+            equipmentID = new List<string>();
         }
     }
 }

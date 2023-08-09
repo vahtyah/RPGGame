@@ -42,6 +42,8 @@ public class Inventory : MonoBehaviour, ISaveManager
     [Header("Data base")]
     public List<InventoryItem> loadedItems;
 
+    public List<ItemDataEquipment> loadedEquipment;
+
     private void Awake()
     {
         if (Instance) Destroy(gameObject);
@@ -68,8 +70,13 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     private void LoadItemStart()
     {
-        if (loadedItems.Count > 0)
+        foreach (var itemDataEquipment in loadedEquipment)
         {
+            EquipItem(itemDataEquipment);
+        }
+        
+        if (loadedItems.Count > 0)
+        {   
             foreach (var inventoryItem in loadedItems)
             {
                 for (var i = 0; i < inventoryItem.stackSize; i++)
@@ -301,29 +308,45 @@ public class Inventory : MonoBehaviour, ISaveManager
         foreach (var pair in data.inventory)
         {
             if (!itemDatabases.TryGetValue(pair.Key, out var itemData)) continue;
-            var itemToLoad = new InventoryItem(itemData, null)
+            var itemToLoad = new InventoryItem(itemData, null) //TODO: Save slot 
             {
                 stackSize = pair.Value
             };
                 
             loadedItems.Add(itemToLoad);
         }
+        
+        foreach (var id in data.equipmentID)
+            if (itemDatabases.TryGetValue(id, out var itemEquipmentData))
+                loadedEquipment.Add(itemEquipmentData as ItemDataEquipment);
+        
     }
 
     public void SaveData(ref GameData data)
     {
         data.inventory.Clear();
+        data.equipmentID.Clear();
 
         foreach (var value in inventoryDictionary)
         {
             data.inventory.Add(value.Key.itemID, value.Value.stackSize);
+        }
+        
+        foreach (var value in stashDictionary)
+        {
+            data.inventory.Add(value.Key.itemID, value.Value.stackSize);
+        }
+        
+        foreach (var value in equipmentDictionary)
+        {
+            data.equipmentID.Add(value.Key.itemID);
         }
     }
 
     private Dictionary<string,ItemData> GetItemDatabase()
     {
         var itemDatabase = new Dictionary<string, ItemData>();
-        var assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Equipment" });
+        var assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Items" });
          
         foreach (var assetName in assetNames)
         {

@@ -3619,7 +3619,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &488250040
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7514,6 +7514,8 @@ MonoBehaviour:
   stashSlotParent: {fileID: 488250040}
   equipmentSlotParent: {fileID: 1150514822}
   itemSlotUIPrefab: {fileID: 432744197043469332, guid: 97dbede449bca2e4dab02d42f7b95484, type: 3}
+  loadedItems: []
+  loadedEquipment: []
 --- !u!4 &1045385389
 Transform:
   m_ObjectHideFlags: 0
