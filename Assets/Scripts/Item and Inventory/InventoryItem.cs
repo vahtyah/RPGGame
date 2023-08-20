@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 
 [Serializable]
@@ -7,26 +8,26 @@ public class InventoryItem
     public ItemData itemData;
     public int stackSize;
 
-    private ItemSlotUI slotUI;
+    private TextMeshProUGUI _amountText;
 
-    public InventoryItem(ItemData itemData, ItemSlotUI slotUI)
+    public InventoryItem(ItemData itemData, TextMeshProUGUI amountText)
     {
         this.itemData = itemData;
-        this.slotUI = slotUI;
+        this._amountText = amountText;
         this.stackSize = 1;
     }
 
     public void AddStack()
     {
         stackSize++;
-        slotUI.UpdateSlot(this);
+        _amountText.text = stackSize.ToString();
     }
 
     public void RemoveStack()
     {
-        stackSize--; 
-        slotUI.UpdateSlot(this);
+        stackSize--;
+        _amountText.text = stackSize <= 1 ? "" : stackSize.ToString();
     }
 
-    public ItemSlotUI SlotUI => slotUI;
+    public TextMeshProUGUI AmountText => AmountText;
 }

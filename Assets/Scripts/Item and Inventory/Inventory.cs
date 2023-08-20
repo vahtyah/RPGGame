@@ -70,17 +70,17 @@ public class Inventory : MonoBehaviour, ISaveManager
         inventorySlotUIs = new List<ItemSlotUI>();
         stashSlotUIs = new List<ItemSlotUI>();
         equipmentSlotUIs = equipmentSlotParent.GetComponentsInChildren<EquipmentSlotUI>();
-        
+
         equipmentCooldownUIs = equipmentSlotUI.GetComponentsInChildren<EquipmentCooldownUI>();
         LoadItemStart();
     }
 
     private void LoadItemStart()
     {
-        foreach (var itemDataEquipment in loadedEquipment)
-        {
-            EquipItem(itemDataEquipment);
-        }
+        // foreach (var itemDataEquipment in loadedEquipment)
+        // {
+        //     EquipItem(itemDataEquipment);
+        // }
 
         if (loadedItems.Count > 0)
         {
@@ -101,39 +101,39 @@ public class Inventory : MonoBehaviour, ISaveManager
         }
     }
 
-    public void EquipItem(ItemData itemData)
-    {
-        var newEquipment = itemData as ItemDataEquipment;
-        var newItem = new InventoryItem(newEquipment, null);
-
-        ItemDataEquipment oldEquipment = null;
-
-        foreach (var item in equipmentDictionary)
-        {
-            if (item.Key.equipmentType == newEquipment!.equipmentType)
-                oldEquipment = item.Key;
-        }
-
-        if (oldEquipment != null)
-        {
-            UnequipItem(oldEquipment);
-            AddItem(oldEquipment);
-        }
-
-        equipment.Add(newItem);
-        equipmentDictionary.Add(newEquipment!, newItem);
-
-        //Update slot equipment
-        foreach (var equipmentSlotUI in equipmentSlotUIs)
-        {
-            if (newEquipment.equipmentType == equipmentSlotUI.equipmentType)
-                equipmentSlotUI.Setup(newItem);
-        }
-
-        newEquipment.AddModifiers();
-
-        RemoveItem(itemData);
-    }
+    // public void EquipItem(ItemData itemData)
+    // {
+    //     var newEquipment = itemData as ItemDataEquipment;
+    //     var newItem = new InventoryItem(newEquipment, null);
+    //
+    //     ItemDataEquipment oldEquipment = null;
+    //
+    //     foreach (var item in equipmentDictionary)
+    //     {
+    //         if (item.Key.equipmentType == newEquipment!.equipmentType)
+    //             oldEquipment = item.Key;
+    //     }
+    //
+    //     if (oldEquipment != null)
+    //     {
+    //         UnequipItem(oldEquipment);
+    //         AddItem(oldEquipment);
+    //     }
+    //
+    //     equipment.Add(newItem);
+    //     equipmentDictionary.Add(newEquipment!, newItem);
+    //
+    //     //Update slot equipment
+    //     foreach (var equipmentSlotUI in equipmentSlotUIs)
+    //     {
+    //         if (newEquipment.equipmentType == equipmentSlotUI.equipmentType)
+    //             equipmentSlotUI.Setup(newItem);
+    //     }
+    //
+    //     newEquipment.AddModifiers();
+    //
+    //     RemoveItem(itemData);
+    // }
 
     public void UnequipItem(ItemDataEquipment itemToRemove)
     {
@@ -150,9 +150,10 @@ public class Inventory : MonoBehaviour, ISaveManager
         //TODO: make inventory limit slot or not, then no destroy item drop when not enough space
         if (itemData.itemType == ItemType.Equipment)
         {
-            var equipment = itemData as ItemDataEquipment;
-            if (equipment.equipmentType == EquipmentType.Flask)
+            var dataEquipment = itemData as ItemDataEquipment;
+            if (dataEquipment.equipmentType == EquipmentType.Flask)
             {
+                AddToEquipmentSlot(dataEquipment);
             }
             else
                 AddToInventory(itemData);
@@ -171,7 +172,7 @@ public class Inventory : MonoBehaviour, ISaveManager
             var newItemSlotUI = Instantiate(itemSlotUIPrefab, stashSlotParent);
             var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
 
-            var newItem = new InventoryItem(itemData, newItemSlotUIScript);
+            var newItem = new InventoryItem(itemData, newItemSlotUIScript.AmountText);
 
             newItemSlotUIScript.Setup(newItem);
 
@@ -193,7 +194,7 @@ public class Inventory : MonoBehaviour, ISaveManager
             var newItemSlotUI = Instantiate(itemSlotUIPrefab, inventorySlotParent);
 
             var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
-            var newItem = new InventoryItem(itemData, newItemSlotUIScript);
+            var newItem = new InventoryItem(itemData, newItemSlotUIScript.AmountText);
             newItemSlotUIScript.Setup(newItem);
 
             inventorySlotUIs.Add(newItemSlotUIScript);
@@ -202,9 +203,28 @@ public class Inventory : MonoBehaviour, ISaveManager
         }
     }
 
-    private void AddToEquipmentSlot(ItemDataEquipment item)
+    private void AddToEquipmentSlot(ItemDataEquipment itemData)
     {
-        
+        if (equipmentDictionary.TryGetValue(itemData, out InventoryItem value))
+        {
+            value.AddStack();
+        }
+        else
+        {
+            foreach (var equipmentCooldownUI in equipmentCooldownUIs)
+            {
+                if (equipmentCooldownUI.dataEquipment == null)
+                {
+                    var newItem = new InventoryItem(itemData, equipmentCooldownUI.AmountText);
+                    equipmentCooldownUI.Setup(newItem);
+                    equipment.Add(newItem);
+                    equipmentDictionary.Add(itemData, newItem);
+                    break;
+                }
+
+                Debug.Log("Slot equipment full!");
+            }
+        }
     }
 
     public void RemoveItem(ItemData itemData)
@@ -215,7 +235,7 @@ public class Inventory : MonoBehaviour, ISaveManager
             {
                 inventory.Remove(value);
                 inventoryDictionary.Remove(itemData);
-                Destroy(value.SlotUI.gameObject);
+                Destroy(value.AmountText.gameObject);
             }
             else
             {
@@ -229,11 +249,25 @@ public class Inventory : MonoBehaviour, ISaveManager
             {
                 stash.Remove(stashValue);
                 stashDictionary.Remove(itemData);
-                Destroy(stashValue.SlotUI.gameObject);
+                Destroy(stashValue.AmountText.gameObject);
             }
             else
             {
                 stashValue.RemoveStack();
+            }
+        }
+
+        var equipmentData = itemData as ItemDataEquipment;
+        if (equipmentDictionary.TryGetValue(equipmentData!, out var equipmentValue))
+        {
+            if (equipmentValue.stackSize <= 1)
+            {
+                equipment.Remove(equipmentValue);
+                equipmentDictionary.Remove(equipmentData);
+            }
+            else
+            {
+                equipmentValue.RemoveStack();
             }
         }
     }

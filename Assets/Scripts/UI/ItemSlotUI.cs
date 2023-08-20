@@ -34,7 +34,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         }
         if (item.itemData.itemType == ItemType.Equipment)
         {
-            Inventory.Instance.EquipItem(item.itemData);
+            // Inventory.Instance.EquipItem(item.itemData);
         }
     }
 
@@ -49,4 +49,6 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         if (!item.itemData) return;
         ToolTipUI.Instance.HideToolTip();
     }
+
+    public TextMeshProUGUI AmountText => itemText;
 }

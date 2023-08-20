@@ -83,11 +83,11 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.F))
                 skill.crystalSkill.CanUseSkill();
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                Inventory.Instance.UseFlask();
-                //TODO: Vật phẩm nhặt thì hơn. (Mất sau khi dùng) hoặc nằm ở trong crash
-            }
+            // if (Input.GetKeyDown(KeyCode.Alpha1))
+            // {
+            //     Inventory.Instance.UseFlask();
+            //     //TODO: Vật phẩm nhặt thì hơn. (Mất sau khi dùng) hoặc nằm ở trong crash
+            // }
         }
 
         public override void SlowEntityBy(float slowPercentage, float slowDuration)
