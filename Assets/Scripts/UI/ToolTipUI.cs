@@ -28,7 +28,6 @@ namespace UI
         {
             itemNameText.text = item.itemName;
             itemTypeText.text = item.equipmentType.ToString();
-            
             gameObject.SetActive(true);
         }
 

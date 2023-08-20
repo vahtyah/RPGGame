@@ -1,6 +1,7 @@
 ﻿using System;
 using Skill.Blackhole;
 using Skill.Crystal;
+using Skill.Parry;
 using Skill.Sword;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace Skill
         public Sword.SwordSkill swordSkill { get; private set; }
         public BlackholeSkill blackholeSkill { get; private set; }
         public CrystalSkill crystalSkill { get; private set; }
+        public ParrySkill parrySkill { get; private set; }
 
         private void Awake()
         {
@@ -28,6 +30,7 @@ namespace Skill
             swordSkill = GetComponent<Sword.SwordSkill>();
             blackholeSkill = GetComponent<BlackholeSkill>();
             crystalSkill = GetComponent<CrystalSkill>();
+            parrySkill = GetComponent<ParrySkill>();
         }
     }
 }

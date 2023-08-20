@@ -76,7 +76,6 @@ namespace Save_and_Load
 
         public bool HasSavedData()
         {
-            Debug.Log(dataHandler.Load());
             return dataHandler.Load() != null;
         }
     }

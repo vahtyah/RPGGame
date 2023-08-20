@@ -97,5 +97,10 @@ namespace Item_and_Inventory
             playerStats.fireDamage.RemoveModifier(fireDamage);
             playerStats.lightingDamage.RemoveModifier(lightingDamage);
         }
+
+        public void UseEquipment()
+        {
+            
+        }
     }
 }

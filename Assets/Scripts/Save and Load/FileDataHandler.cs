@@ -42,7 +42,6 @@ namespace Save_and_Load
         public GameData Load()
         {
             var fullPath = Path.Combine(dataDirPath, dataFileName);
-            Debug.Log(fullPath);
             GameData gameData = null;
 
             if (File.Exists(fullPath))

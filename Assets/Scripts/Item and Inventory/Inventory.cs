@@ -12,10 +12,10 @@ public class Inventory : MonoBehaviour, ISaveManager
     public static Inventory Instance { get; private set; }
 
     public List<ItemData> startingItem;
-    
+
     public List<InventoryItem> equipment;
     public Dictionary<ItemDataEquipment, InventoryItem> equipmentDictionary;
-    
+
     public List<InventoryItem> inventory;
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
 
@@ -24,8 +24,13 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     [Header("Inventory UI")]
     [SerializeField] private Transform inventorySlotParent;
+
     [SerializeField] private Transform stashSlotParent;
     [SerializeField] private Transform equipmentSlotParent;
+
+    /**/
+    [SerializeField] private Transform equipmentSlotUI;
+    private EquipmentCooldownUI[] equipmentCooldownUIs;
 
     [SerializeField] private GameObject itemSlotUIPrefab;
     private List<ItemSlotUI> inventorySlotUIs;
@@ -34,6 +39,7 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     [Header("Items cooldown")]
     private float lastTimeUsedFlask;
+
     private float lastTimeUsedArmor;
 
     private float flaskCooldown;
@@ -65,6 +71,7 @@ public class Inventory : MonoBehaviour, ISaveManager
         stashSlotUIs = new List<ItemSlotUI>();
         equipmentSlotUIs = equipmentSlotParent.GetComponentsInChildren<EquipmentSlotUI>();
         
+        equipmentCooldownUIs = equipmentSlotUI.GetComponentsInChildren<EquipmentCooldownUI>();
         LoadItemStart();
     }
 
@@ -74,9 +81,9 @@ public class Inventory : MonoBehaviour, ISaveManager
         {
             EquipItem(itemDataEquipment);
         }
-        
+
         if (loadedItems.Count > 0)
-        {   
+        {
             foreach (var inventoryItem in loadedItems)
             {
                 for (var i = 0; i < inventoryItem.stackSize; i++)
@@ -84,9 +91,10 @@ public class Inventory : MonoBehaviour, ISaveManager
                     AddItem(inventoryItem.itemData);
                 }
             }
+
             return;
         }
-        
+
         foreach (var itemData in startingItem)
         {
             AddItem(itemData);
@@ -99,14 +107,14 @@ public class Inventory : MonoBehaviour, ISaveManager
         var newItem = new InventoryItem(newEquipment, null);
 
         ItemDataEquipment oldEquipment = null;
-        
+
         foreach (var item in equipmentDictionary)
         {
             if (item.Key.equipmentType == newEquipment!.equipmentType)
                 oldEquipment = item.Key;
         }
 
-        if(oldEquipment != null)
+        if (oldEquipment != null)
         {
             UnequipItem(oldEquipment);
             AddItem(oldEquipment);
@@ -114,17 +122,16 @@ public class Inventory : MonoBehaviour, ISaveManager
 
         equipment.Add(newItem);
         equipmentDictionary.Add(newEquipment!, newItem);
-        
-        
+
         //Update slot equipment
         foreach (var equipmentSlotUI in equipmentSlotUIs)
         {
-            if(newEquipment.equipmentType == equipmentSlotUI.equipmentType)
+            if (newEquipment.equipmentType == equipmentSlotUI.equipmentType)
                 equipmentSlotUI.Setup(newItem);
         }
-        
+
         newEquipment.AddModifiers();
-        
+
         RemoveItem(itemData);
     }
 
@@ -138,11 +145,18 @@ public class Inventory : MonoBehaviour, ISaveManager
         }
     }
 
-    public void AddItem(ItemData itemData)  
+    public void AddItem(ItemData itemData)
     {
         //TODO: make inventory limit slot or not, then no destroy item drop when not enough space
-        
-        if (itemData.itemType == ItemType.Equipment) AddToInventory(itemData);
+        if (itemData.itemType == ItemType.Equipment)
+        {
+            var equipment = itemData as ItemDataEquipment;
+            if (equipment.equipmentType == EquipmentType.Flask)
+            {
+            }
+            else
+                AddToInventory(itemData);
+        }
         else if (itemData.itemType == ItemType.Material) AddToStash(itemData);
     }
 
@@ -156,13 +170,13 @@ public class Inventory : MonoBehaviour, ISaveManager
         {
             var newItemSlotUI = Instantiate(itemSlotUIPrefab, stashSlotParent);
             var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
-            
+
             var newItem = new InventoryItem(itemData, newItemSlotUIScript);
-            
+
             newItemSlotUIScript.Setup(newItem);
-            
+
             stashSlotUIs.Add(newItemSlotUIScript);
-            
+
             stash.Add(newItem);
             stashDictionary.Add(itemData, newItem);
         }
@@ -177,16 +191,20 @@ public class Inventory : MonoBehaviour, ISaveManager
         else
         {
             var newItemSlotUI = Instantiate(itemSlotUIPrefab, inventorySlotParent);
-            
+
             var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
             var newItem = new InventoryItem(itemData, newItemSlotUIScript);
             newItemSlotUIScript.Setup(newItem);
-
 
             inventorySlotUIs.Add(newItemSlotUIScript);
             inventory.Add(newItem);
             inventoryDictionary.Add(itemData, newItem);
         }
+    }
+
+    private void AddToEquipmentSlot(ItemDataEquipment item)
+    {
+        
     }
 
     public void RemoveItem(ItemData itemData)
@@ -204,7 +222,7 @@ public class Inventory : MonoBehaviour, ISaveManager
                 value.RemoveStack();
             }
         }
-        
+
         if (stashDictionary.TryGetValue(itemData, out var stashValue))
         {
             if (stashValue.stackSize <= 1)
@@ -248,7 +266,7 @@ public class Inventory : MonoBehaviour, ISaveManager
         {
             RemoveItem(materialsToRemove[i].itemData);
         }
-        
+
         AddItem(itemToCraft);
         Debug.Log("Here is your item " + itemToCraft.itemName);
         return true;
@@ -272,8 +290,8 @@ public class Inventory : MonoBehaviour, ISaveManager
     public void UseFlask()
     {
         var currentFlask = GetEquipmentByType(EquipmentType.Flask);
-        if(!currentFlask) return;
-        bool canUseFlask = Time.time > lastTimeUsedFlask + flaskCooldown;
+        if (!currentFlask) return;
+        var canUseFlask = Time.time > lastTimeUsedFlask + flaskCooldown;
 
         if (canUseFlask)
         {
@@ -304,7 +322,7 @@ public class Inventory : MonoBehaviour, ISaveManager
     public void LoadData(GameData data)
     {
         var itemDatabases = GetItemDatabase();
-        
+
         foreach (var pair in data.inventory)
         {
             if (!itemDatabases.TryGetValue(pair.Key, out var itemData)) continue;
@@ -312,14 +330,13 @@ public class Inventory : MonoBehaviour, ISaveManager
             {
                 stackSize = pair.Value
             };
-                
+
             loadedItems.Add(itemToLoad);
         }
-        
+
         foreach (var id in data.equipmentID)
             if (itemDatabases.TryGetValue(id, out var itemEquipmentData))
                 loadedEquipment.Add(itemEquipmentData as ItemDataEquipment);
-        
     }
 
     public void SaveData(ref GameData data)
@@ -331,33 +348,31 @@ public class Inventory : MonoBehaviour, ISaveManager
         {
             data.inventory.Add(value.Key.itemID, value.Value.stackSize);
         }
-        
+
         foreach (var value in stashDictionary)
         {
             data.inventory.Add(value.Key.itemID, value.Value.stackSize);
         }
-        
+
         foreach (var value in equipmentDictionary)
         {
             data.equipmentID.Add(value.Key.itemID);
         }
     }
 
-    private Dictionary<string,ItemData> GetItemDatabase()
+    private Dictionary<string, ItemData> GetItemDatabase()
     {
         var itemDatabase = new Dictionary<string, ItemData>();
         var assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Items" });
-         
+
         foreach (var assetName in assetNames)
         {
             var SOpath = AssetDatabase.GUIDToAssetPath(assetName);
             var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOpath);
-            if(itemData)
+            if (itemData)
                 itemDatabase.Add(itemData.itemID, itemData);
         }
 
         return itemDatabase;
     }
-    
-    
 }

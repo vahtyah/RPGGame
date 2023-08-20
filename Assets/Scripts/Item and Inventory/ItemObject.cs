@@ -5,7 +5,15 @@ public class ItemObject : MonoBehaviour
 {
     [SerializeField] private ItemData itemData;
      private Rigidbody2D rb => GetComponent<Rigidbody2D>();
-    private void UpdateVisualItem()
+
+     private void OnValidate()
+     {
+         if (!itemData) return;
+         GetComponent<SpriteRenderer>().sprite = itemData.itemIcon;
+         gameObject.name = "Item object - " + itemData.itemName;
+     }
+
+     private void UpdateVisualItem()
     {
         if (!itemData) return;
         GetComponent<SpriteRenderer>().sprite = itemData.itemIcon;
