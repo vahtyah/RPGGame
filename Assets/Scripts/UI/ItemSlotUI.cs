@@ -34,7 +34,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         }
         if (item.itemData.itemType == ItemType.Equipment)
         {
-            // Inventory.Instance.EquipItem(item.itemData);
+            Inventory.Instance.EquipItem(item.itemData);
         }
     }
 

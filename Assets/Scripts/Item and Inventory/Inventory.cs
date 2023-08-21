@@ -13,18 +13,20 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     public List<ItemData> startingItem;
 
+    //Equipment
     public List<InventoryItem> equipment;
     public Dictionary<ItemDataEquipment, InventoryItem> equipmentDictionary;
 
+    //Inventory
     public List<InventoryItem> inventory;
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
 
+    //Stash
     public List<InventoryItem> stash;
     public Dictionary<ItemData, InventoryItem> stashDictionary;
 
     [Header("Inventory UI")]
     [SerializeField] private Transform inventorySlotParent;
-
     [SerializeField] private Transform stashSlotParent;
     [SerializeField] private Transform equipmentSlotParent;
 
@@ -104,39 +106,39 @@ public class Inventory : MonoBehaviour, ISaveManager
         }
     }
 
-    // public void EquipItem(ItemData itemData)
-    // {
-    //     var newEquipment = itemData as ItemDataEquipment;
-    //     var newItem = new InventoryItem(newEquipment, null);
-    //
-    //     ItemDataEquipment oldEquipment = null;
-    //
-    //     foreach (var item in equipmentDictionary)
-    //     {
-    //         if (item.Key.equipmentType == newEquipment!.equipmentType)
-    //             oldEquipment = item.Key;
-    //     }
-    //
-    //     if (oldEquipment != null)
-    //     {
-    //         UnequipItem(oldEquipment);
-    //         AddItem(oldEquipment);
-    //     }
-    //
-    //     equipment.Add(newItem);
-    //     equipmentDictionary.Add(newEquipment!, newItem);
-    //
-    //     //Update slot equipment
-    //     foreach (var equipmentSlotUI in equipmentSlotUIs)
-    //     {
-    //         if (newEquipment.equipmentType == equipmentSlotUI.equipmentType)
-    //             equipmentSlotUI.Setup(newItem);
-    //     }
-    //
-    //     newEquipment.AddModifiers();
-    //
-    //     RemoveItem(itemData);
-    // }
+    public void EquipItem(ItemData itemData)
+    {
+        var newEquipment = itemData as ItemDataEquipment;
+        var newItem = new InventoryItem(newEquipment, null);
+    
+        ItemDataEquipment oldEquipment = null;
+    
+        foreach (var item in equipmentDictionary)
+        {
+            if (item.Key.equipmentType == newEquipment!.equipmentType)
+                oldEquipment = item.Key;
+        }
+    
+        if (oldEquipment != null)
+        {
+            UnequipItem(oldEquipment);
+            AddItem(oldEquipment);
+        }
+    
+        equipment.Add(newItem);
+        equipmentDictionary.Add(newEquipment!, newItem);
+    
+        //Update slot equipment
+        foreach (var equipmentSlotUI in equipmentSlotUIs)
+        {
+            if (newEquipment.equipmentType == equipmentSlotUI.equipmentType)
+                equipmentSlotUI.Setup(newItem);
+        }
+    
+        newEquipment.AddModifiers();
+    
+        RemoveItem(itemData);
+    }
 
     public void UnequipItem(ItemDataEquipment itemToRemove)
     {
