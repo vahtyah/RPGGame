@@ -9,10 +9,12 @@ public class InventoryItem
     public int stackSize;
 
     private TextMeshProUGUI _amountText;
+    public ItemSlotUI itemSlotUI { get; private set; }
 
-    public InventoryItem(ItemData itemData, TextMeshProUGUI amountText)
+    public InventoryItem(ItemData itemData, TextMeshProUGUI amountText, ItemSlotUI itemSlotUI)
     {
         this.itemData = itemData;
+        this.itemSlotUI = itemSlotUI;
         this._amountText = amountText;
         this.stackSize = 1;
     }

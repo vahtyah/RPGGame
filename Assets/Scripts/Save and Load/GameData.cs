@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,15 +9,17 @@ namespace Save_and_Load
     public class GameData
     {
         public int currency;
-        public SerializableDictionary<string, int> inventory;
+        public List<InventoryItem> generalInventory;
+        public List<InventoryItem> stashInventory;
         public List<string> skillTree;
-        public SerializableDictionary<string, int> equipment;
+        public List<InventoryItem> equipmentInventory;
 
         public GameData()
         {
             currency = 0;
-            inventory = new SerializableDictionary<string, int>();
-            equipment = new SerializableDictionary<string, int>();
+            generalInventory = new List<InventoryItem>();
+            stashInventory = new List<InventoryItem>();
+            equipmentInventory = new List<InventoryItem>();
             skillTree = new List<string>();
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Item_and_Inventory;
+using Item_and_Inventory.Test;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -10,13 +11,19 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
 {
     [SerializeField] protected Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
+    protected Inventory1 inventory;
+    protected GeneralInventory generalInventory;
+    protected EquipmentInventory equipmentInventory;
 
     public InventoryItem item;  
 
-    public virtual void Setup(InventoryItem item)
+    public virtual void Setup(InventoryItem item, Inventory1 inventory)
     {
         this.item = item;
         itemImage.sprite = item.itemData.itemIcon;
+        this.inventory = inventory;
+        generalInventory = inventory.GetComponent<GeneralInventory>();
+        equipmentInventory = inventory.GetComponent<EquipmentInventory>();
         UpdateSlot(item);
     }
     
@@ -28,25 +35,25 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
     public virtual void OnPointerDown(PointerEventData eventData)
     {
         if (Input.GetKey(KeyCode.LeftControl))
-        {
-            Inventory.Instance.RemoveItem(item.itemData);
+        {   
+            inventory.RemoveItem(item.itemData);
             return;
         }
         if (item.itemData.itemType == ItemType.Equipment)
         {
-            Inventory.Instance.EquipItem(item.itemData);
+            equipmentInventory.EquipItem(item.itemData);
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!item.itemData) return;
+        if (item == null) return;
         ToolTipUI.Instance.ShowToolTip(item.itemData as ItemDataEquipment);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!item.itemData) return;
+        if (item == null) return;
         ToolTipUI.Instance.HideToolTip();
     }
 

@@ -26,9 +26,9 @@ namespace UI
 
         public void ShowToolTip(ItemDataEquipment item)
         {
-            itemNameText.text = item.itemName;
-            itemTypeText.text = item.equipmentType.ToString();
-            gameObject.SetActive(true);
+            // itemNameText.text = item.itemName;
+            // itemTypeText.text = item.equipmentType.ToString();
+            // gameObject.SetActive(true);
         }
 
         public void HideToolTip() => gameObject.SetActive(false);

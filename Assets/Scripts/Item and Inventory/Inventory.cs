@@ -108,36 +108,36 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     public void EquipItem(ItemData itemData)
     {
-        var newEquipment = itemData as ItemDataEquipment;
-        var newItem = new InventoryItem(newEquipment, null);
-    
-        ItemDataEquipment oldEquipment = null;
-    
-        foreach (var item in equipmentDictionary)
-        {
-            if (item.Key.equipmentType == newEquipment!.equipmentType)
-                oldEquipment = item.Key;
-        }
-    
-        if (oldEquipment != null)
-        {
-            UnequipItem(oldEquipment);
-            AddItem(oldEquipment);
-        }
-    
-        equipment.Add(newItem);
-        equipmentDictionary.Add(newEquipment!, newItem);
-    
-        //Update slot equipment
-        foreach (var equipmentSlotUI in equipmentSlotUIs)
-        {
-            if (newEquipment.equipmentType == equipmentSlotUI.equipmentType)
-                equipmentSlotUI.Setup(newItem);
-        }
-    
-        newEquipment.AddModifiers();
-    
-        RemoveItem(itemData);
+        // var newEquipment = itemData as ItemDataEquipment;
+        // var newItem = new InventoryItem(newEquipment, null);
+        //
+        // ItemDataEquipment oldEquipment = null;
+        //
+        // foreach (var item in equipmentDictionary)
+        // {
+        //     if (item.Key.equipmentType == newEquipment!.equipmentType)
+        //         oldEquipment = item.Key;
+        // }
+        //
+        // if (oldEquipment != null)
+        // {
+        //     UnequipItem(oldEquipment);
+        //     AddItem(oldEquipment);
+        // }
+        //
+        // equipment.Add(newItem);
+        // equipmentDictionary.Add(newEquipment!, newItem);
+        //
+        // //Update slot equipment
+        // foreach (var equipmentSlotUI in equipmentSlotUIs)
+        // {
+        //     // if (newEquipment.equipmentType == equipmentSlotUI.equipmentType)
+        //         // equipmentSlotUI.Setup(newItem);
+        // }
+        //
+        // newEquipment.AddModifiers();
+        //
+        // RemoveItem(itemData);
     }
 
     public void UnequipItem(ItemDataEquipment itemToRemove)
@@ -168,44 +168,44 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     private void AddToStash(ItemData itemData)
     {
-        if (stashDictionary.TryGetValue(itemData, out InventoryItem value))
-        {
-            value.AddStack();
-        }
-        else
-        {
-            var newItemSlotUI = Instantiate(itemSlotUIPrefab, stashSlotParent);
-            var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
-
-            var newItem = new InventoryItem(itemData, newItemSlotUIScript.AmountText);
-
-            newItemSlotUIScript.Setup(newItem);
-
-            stashSlotUIs.Add(newItemSlotUIScript);
-
-            stash.Add(newItem);
-            stashDictionary.Add(itemData, newItem);
-        }
+        // if (stashDictionary.TryGetValue(itemData, out InventoryItem value))
+        // {
+        //     value.AddStack();
+        // }
+        // else
+        // {
+        //     var newItemSlotUI = Instantiate(itemSlotUIPrefab, stashSlotParent);
+        //     var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
+        //
+        //     var newItem = new InventoryItem(itemData, newItemSlotUIScript.AmountText);
+        //
+        //     // newItemSlotUIScript.Setup(newItem);
+        //
+        //     stashSlotUIs.Add(newItemSlotUIScript);
+        //
+        //     stash.Add(newItem);
+        //     stashDictionary.Add(itemData, newItem);
+        // }
     }
 
     private void AddToInventory(ItemData itemData)
     {
-        if (inventoryDictionary.TryGetValue(itemData, out InventoryItem value))
-        {
-            value.AddStack();
-        }
-        else
-        {
-            var newItemSlotUI = Instantiate(itemSlotUIPrefab, inventorySlotParent);
-
-            var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
-            var newItem = new InventoryItem(itemData, newItemSlotUIScript.AmountText);
-            newItemSlotUIScript.Setup(newItem);
-
-            inventorySlotUIs.Add(newItemSlotUIScript);
-            inventory.Add(newItem);
-            inventoryDictionary.Add(itemData, newItem);
-        }
+        // if (inventoryDictionary.TryGetValue(itemData, out InventoryItem value))
+        // {
+        //     value.AddStack();
+        // }
+        // else
+        // {
+        //     var newItemSlotUI = Instantiate(itemSlotUIPrefab, inventorySlotParent);
+        //
+        //     var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
+        //     var newItem = new InventoryItem(itemData, newItemSlotUIScript.AmountText);
+        //     // newItemSlotUIScript.Setup(newItem);
+        //
+        //     inventorySlotUIs.Add(newItemSlotUIScript);
+        //     inventory.Add(newItem);
+        //     inventoryDictionary.Add(itemData, newItem);
+        // }
     }
 
     private void AddToEquipmentSlot(ItemDataEquipment itemData)
@@ -220,11 +220,11 @@ public class Inventory : MonoBehaviour, ISaveManager
             {
                 if (equipmentCooldownUI.dataEquipment == null)
                 {
-                    var newItem = new InventoryItem(itemData, equipmentCooldownUI.AmountText);
-                    equipmentCooldownUI.Setup(newItem);
-                    equipment.Add(newItem);
-                    equipmentDictionary.Add(itemData, newItem);
-                    break;
+                    // var newItem = new InventoryItem(itemData, equipmentCooldownUI.AmountText, );
+                    // equipmentCooldownUI.Setup(newItem);
+                    // equipment.Add(newItem);
+                    // equipmentDictionary.Add(itemData, newItem);
+                    // break;
                 }
 
                 Debug.Log("Slot equipment full!");
@@ -362,47 +362,47 @@ public class Inventory : MonoBehaviour, ISaveManager
     {
         var itemDatabases = GetItemDatabase();
 
-        foreach (var pair in data.inventory)
-        {
-            if (!itemDatabases.TryGetValue(pair.Key, out var itemData)) continue;
-            var itemToLoad = new InventoryItem(itemData, null) //TODO: Save slot 
-            {
-                stackSize = pair.Value
-            };
-
-            loadedItems.Add(itemToLoad);
-        }
-
-        foreach (var pair in data.equipment)
-            if (itemDatabases.TryGetValue(pair.Key, out var itemEquipmentData))
-            {
-                var itemToLoad = new InventoryItem(itemEquipmentData, null) //TODO: Save slot 
-                {
-                    stackSize = pair.Value
-                };
-                loadedEquipment.Add(itemToLoad);
-            }
+        // foreach (var pair in data.inventory)
+        // {
+        //     if (!itemDatabases.TryGetValue(pair.Key, out var itemData)) continue;
+        //     var itemToLoad = new InventoryItem(itemData, null) //TODO: Save slot 
+        //     {
+        //         stackSize = pair.Value
+        //     };
+        //
+        //     loadedItems.Add(itemToLoad);
+        // }
+        //
+        // foreach (var pair in data.equipment)
+        //     if (itemDatabases.TryGetValue(pair.Key, out var itemEquipmentData))
+        //     {
+        //         var itemToLoad = new InventoryItem(itemEquipmentData, null) //TODO: Save slot 
+        //         {
+        //             stackSize = pair.Value
+        //         };
+        //         loadedEquipment.Add(itemToLoad);
+        //     }
     }
 
     public void SaveData(ref GameData data)
     {
-        data.inventory.Clear();
-        data.equipment.Clear();
-
-        foreach (var value in inventoryDictionary)
-        {
-            data.inventory.Add(value.Key.itemID, value.Value.stackSize);
-        }
-
-        foreach (var value in stashDictionary)
-        {
-            data.inventory.Add(value.Key.itemID, value.Value.stackSize);
-        }
-
-        foreach (var value in equipmentDictionary)
-        {
-            data.equipment.Add(value.Key.itemID, value.Value.stackSize);
-        }
+        // data.inventory.Clear();
+        // data.equipment.Clear();
+        //
+        // foreach (var value in inventoryDictionary)
+        // {
+        //     data.inventory.Add(value.Key.itemID, value.Value.stackSize);
+        // }
+        //
+        // foreach (var value in stashDictionary)
+        // {
+        //     data.inventory.Add(value.Key.itemID, value.Value.stackSize);
+        // }
+        //
+        // foreach (var value in equipmentDictionary)
+        // {
+        //     data.equipment.Add(value.Key.itemID, value.Value.stackSize);
+        // }
     }
 
     private Dictionary<string, ItemData> GetItemDatabase()

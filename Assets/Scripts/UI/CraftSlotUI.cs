@@ -9,7 +9,7 @@ namespace UI
     {
         private void OnEnable()
         {
-            Setup(item);
+            // Setup(item);
         }
 
         public override void OnPointerDown(PointerEventData eventData)
