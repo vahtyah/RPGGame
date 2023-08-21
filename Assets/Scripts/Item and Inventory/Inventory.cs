@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour, ISaveManager
     [Header("Data base")]
     public List<InventoryItem> loadedItems;
 
-    public List<ItemDataEquipment> loadedEquipment;
+    public List<InventoryItem> loadedEquipment;
 
     private void Awake()
     {
@@ -77,10 +77,13 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     private void LoadItemStart()
     {
-        // foreach (var itemDataEquipment in loadedEquipment)
-        // {
-        //     EquipItem(itemDataEquipment);
-        // }
+        foreach (var itemDataEquipment in loadedEquipment)
+        {
+            for (var i = 0; i < itemDataEquipment.stackSize; i++)
+            {
+                AddItem(itemDataEquipment.itemData);
+            }
+        }
 
         if (loadedItems.Count > 0)
         {
@@ -368,15 +371,21 @@ public class Inventory : MonoBehaviour, ISaveManager
             loadedItems.Add(itemToLoad);
         }
 
-        foreach (var id in data.equipmentID)
-            if (itemDatabases.TryGetValue(id, out var itemEquipmentData))
-                loadedEquipment.Add(itemEquipmentData as ItemDataEquipment);
+        foreach (var pair in data.equipment)
+            if (itemDatabases.TryGetValue(pair.Key, out var itemEquipmentData))
+            {
+                var itemToLoad = new InventoryItem(itemEquipmentData, null) //TODO: Save slot 
+                {
+                    stackSize = pair.Value
+                };
+                loadedEquipment.Add(itemToLoad);
+            }
     }
 
     public void SaveData(ref GameData data)
     {
         data.inventory.Clear();
-        data.equipmentID.Clear();
+        data.equipment.Clear();
 
         foreach (var value in inventoryDictionary)
         {
@@ -390,7 +399,7 @@ public class Inventory : MonoBehaviour, ISaveManager
 
         foreach (var value in equipmentDictionary)
         {
-            data.equipmentID.Add(value.Key.itemID);
+            data.equipment.Add(value.Key.itemID, value.Value.stackSize);
         }
     }
 
