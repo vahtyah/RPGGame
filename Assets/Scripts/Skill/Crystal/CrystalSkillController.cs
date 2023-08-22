@@ -79,7 +79,7 @@ namespace Skill.Crystal
                 {
                     player.stars.DoMagicDamage(hit.GetComponent<CharacterStats>());
                     
-                    Inventory.Instance.GetEquipmentByType(EquipmentType.Amulet)?.ExecuteItemEffect(hit.transform);//Effect
+                    // Inventory.Instance.GetEquipmentByType(EquipmentType.Amulet)?.ExecuteItemEffect(hit.transform);//Effect
                 }
             }
         }

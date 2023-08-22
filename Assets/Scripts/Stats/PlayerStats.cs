@@ -14,8 +14,8 @@ public class PlayerStats : CharacterStats
     protected override void DecreaseHealthBy(int damage)
     {
         base.DecreaseHealthBy(damage);
-        var currentArmor = Inventory.Instance.GetEquipmentByType(EquipmentType.Armor);
-        
-        if(currentArmor) currentArmor.ExecuteItemEffect(player.transform);
+        // var currentArmor = Inventory.Instance.GetEquipmentByType(EquipmentType.Armor);
+        //
+        // if(currentArmor) currentArmor.ExecuteItemEffect(player.transform);
     }
 }

@@ -27,7 +27,7 @@ namespace Player
                 {
                     var target = hit.GetComponent<EnemyStats>();
                     player.stars.DoDamage(target);
-                    Inventory.Instance.GetEquipmentByType(EquipmentType.Weapon)?.ExecuteItemEffect(target.transform);
+                    // Inventory.Instance.GetEquipmentByType(EquipmentType.Weapon)?.ExecuteItemEffect(target.transform);
                 }
             }
         }
