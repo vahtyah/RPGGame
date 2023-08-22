@@ -28,6 +28,7 @@ namespace Item_and_Inventory.Test
                     equipmentSlotUI.Setup(inventoryItem, this);
                     inventoryItems.Add(inventoryItem);
                     itemDictionary.Add(itemData, inventoryItem);
+                    equipmentItem.AddModifiers();
                 }
         }
 
@@ -44,7 +45,9 @@ namespace Item_and_Inventory.Test
                     if (slotUI.item.itemData != null)
                     {
                         oldItem = slotUI.item;
-                        UnequipItem(oldItem.itemData as ItemDataEquipment, slotUI);
+                        var oldEquipment = oldItem.itemData as ItemDataEquipment;
+                        UnequipItem(oldEquipment, slotUI);
+                        oldEquipment!.RemoveModifiers();
                     }
                     AddItem(equipmentData);
                     generalInventory.RemoveItem(itemData);

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Item_and_Inventory
@@ -10,6 +12,12 @@ namespace Item_and_Inventory
         Armor,
         Amulet,
         Flask
+    }
+    [System.Serializable]
+    public class DictionaryContainer
+    {
+        public StatType statType;
+        public int value;
     }
     
     [CreateAssetMenu(fileName = "New Item Data Equipment", menuName = "Data/Item Equipment")]
@@ -40,6 +48,8 @@ namespace Item_and_Inventory
         public int fireDamage;
         public int iceDamage;
         public int lightingDamage;
+
+        [SerializeField] private DictionaryContainer[] statsModifier;
 
         [Header("Craft requirement")]
         public List<InventoryItem> craftingMaterials;
