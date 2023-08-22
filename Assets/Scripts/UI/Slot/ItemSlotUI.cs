@@ -46,13 +46,13 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (item == null) return;
-        ToolTipUI.Instance.ShowToolTip(item.itemData as EquipmentItemData);
+        // ToolTipUI.Instance.ShowToolTip(item.itemData as EquipmentItemData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (item == null) return;
-        ToolTipUI.Instance.HideToolTip();
+        // ToolTipUI.Instance.HideToolTip();
     }
 
     public TextMeshProUGUI AmountText => amountText;

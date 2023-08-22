@@ -20714,6 +20714,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1126633406951687825, guid: dbb7d6ea619d7774894de67d7562546a, type: 3}
+      propertyPath: encryptData
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4105917364225058293, guid: dbb7d6ea619d7774894de67d7562546a, type: 3}
       propertyPath: m_Name
       value: SaveManager

@@ -34,7 +34,6 @@ namespace Skill.Sword
         {
             if (isBouncing && enemiesTarget.Count > 0)
             {
-                Debug.Log("enemiesTarget.Count = " + enemiesTarget.Count);
                 swordController.transform.position = Vector2.MoveTowards(swordController.transform.position,
                     enemiesTarget[targetIndex].position, swordSkill.BounceSpeed * Time.deltaTime);
                 if (Vector2.Distance(swordController.transform.position, enemiesTarget[targetIndex].position) < .1f)

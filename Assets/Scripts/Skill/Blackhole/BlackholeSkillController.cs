@@ -126,7 +126,6 @@ namespace Skill.Blackhole
             playerCanExitState = true;
             cloneAttackReleased = false;
             canShrink = true;
-            Debug.Log("VAR");
         }
 
         private void OnTriggerEnter2D(Collider2D other)

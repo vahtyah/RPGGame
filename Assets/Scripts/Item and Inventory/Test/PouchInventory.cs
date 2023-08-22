@@ -1,4 +1,5 @@
-﻿using UI;
+﻿using Save_and_Load;
+using UI;
 using UnityEngine;
 
 namespace Item_and_Inventory.Test
@@ -12,14 +13,11 @@ namespace Item_and_Inventory.Test
         {
             pouchSlots = slotParent.GetComponentsInChildren<PouchSlotUI>();
             base.Start();
-            Debug.Log("Start" + itemDictionary);
         }
 
         public override void AddItem(ItemData itemData)
         {
             var pouchItemData = itemData as PouchItemData;
-            Debug.Log("Add Item" + itemDictionary);
-
             if (itemDictionary.TryGetValue(pouchItemData , out var value))
             {
                 value.AddStack();
@@ -52,6 +50,21 @@ namespace Item_and_Inventory.Test
             {
                 inventoryItem.RemoveStack();
             }
+        }
+
+        public override void LoadData(GameData data)
+        {
+            base.LoadData(data);
+            foreach (var item in data.pouchInventory)
+                loadedItems.Add(item);
+        }
+
+        public override void SaveData(ref GameData data)
+        {
+            base.SaveData(ref data);
+            data.pouchInventory.Clear();
+            foreach (var pair in itemDictionary)
+                data.pouchInventory.Add(pair.Value);
         }
     }
 }

@@ -37,7 +37,6 @@ namespace Skill.Crystal
         public override void UseSkill()
         {
             base.UseSkill();
-            Debug.Log("Use Skill");
 
             if (CanUseMultiStacks())
                 return;

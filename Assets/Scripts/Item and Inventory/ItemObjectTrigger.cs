@@ -11,7 +11,6 @@ namespace Item_and_Inventory
             if (other.GetComponent<Player.Player>() != null)
             {
                 if (other.GetComponent<PlayerStats>()?.isDead == true) return;
-                Debug.Log("take drop item!");
                 itemObject.PickUpItem();
             }
         }

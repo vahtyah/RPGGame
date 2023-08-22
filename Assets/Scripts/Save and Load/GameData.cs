@@ -11,8 +11,9 @@ namespace Save_and_Load
         public int currency;
         public List<InventoryItem> generalInventory;
         public List<InventoryItem> stashInventory;
-        public List<string> skillTree;
         public List<InventoryItem> equipmentInventory;
+        public List<InventoryItem> pouchInventory;
+        public List<string> skillTree;
 
         public GameData()
         {
@@ -20,6 +21,7 @@ namespace Save_and_Load
             generalInventory = new List<InventoryItem>();
             stashInventory = new List<InventoryItem>();
             equipmentInventory = new List<InventoryItem>();
+            pouchInventory = new List<InventoryItem>();
             skillTree = new List<string>();
         }
     }

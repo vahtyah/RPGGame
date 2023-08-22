@@ -37,11 +37,9 @@ namespace Item_and_Inventory
         {
             if (loadedItems.Count > 0)
             {
-                foreach (var inventoryItem in loadedItems)
-                {
-                    AddItem(inventoryItem.itemData);
-                }
-                
+                foreach (var item in loadedItems)
+                    for (var i = 0; i < item.stackSize; i++)
+                        AddItem(item.itemData);
                 return;
             }
 
@@ -54,7 +52,6 @@ namespace Item_and_Inventory
 
         public virtual void AddItem(ItemData itemData)
         {
-            Debug.Log("Add");
             if (itemDictionary.TryGetValue(itemData, out var value))
             {
                 value.AddStack();

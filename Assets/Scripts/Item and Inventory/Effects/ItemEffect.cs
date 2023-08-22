@@ -6,7 +6,6 @@ namespace Item_and_Inventory
     {
         public virtual void ExecuteEffect(Transform transform)
         {
-            Debug.Log("Effect execute!");
         }
     }
 }

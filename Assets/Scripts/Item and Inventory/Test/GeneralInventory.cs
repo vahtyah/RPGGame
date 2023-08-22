@@ -19,19 +19,10 @@ namespace Item_and_Inventory.Test
 
         public override void SaveData(ref GameData data)
         {
-            Debug.Log("Save Data");
             data.generalInventory.Clear();
             base.SaveData(ref data); 
             foreach (var value in itemDictionary)
-            {
                 data.generalInventory.Add(value.Value);
-                Debug.Log(value.Key.itemName);
-            }
-
-            foreach (var item in data.generalInventory)
-            {
-                Debug.Log("item = " + item.itemData.itemName);
-            }
         }
     }
 }
