@@ -21,7 +21,7 @@ namespace UI
             UpdateCooldownOf();
         }
 
-        protected void SetCooldownOf()
+        public virtual void SetCooldownOf()
         {
             if (cooldownImage.fillAmount != 0) return;
             cooldownImage.fillAmount = 1;

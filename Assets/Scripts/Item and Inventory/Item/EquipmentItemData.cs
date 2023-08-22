@@ -21,7 +21,7 @@ namespace Item_and_Inventory
     }
     
     [CreateAssetMenu(fileName = "New Item Data Equipment", menuName = "Data/Item Equipment")]
-    public class ItemDataEquipment : ItemData
+    public class EquipmentItemData : ItemData
     {
         public EquipmentType equipmentType;
         public ItemEffect[] itemEffects;

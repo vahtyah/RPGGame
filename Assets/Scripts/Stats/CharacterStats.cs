@@ -102,6 +102,23 @@ public class CharacterStats : MonoBehaviour
         statToModifier.RemoveModifier(modifier);
     }
 
+    public void IncreaseHealthFor1S(int amountHealth, int timeToIncrease)
+    {
+        StartCoroutine(HealthIncreaseCoroutine(amountHealth, timeToIncrease));
+    }
+    
+    private IEnumerator HealthIncreaseCoroutine(int amountHealth, int timeToIncrease)
+    {
+        var increaseFor1s = amountHealth / timeToIncrease;
+        var sumIncrease = 0;
+        while (sumIncrease < amountHealth)
+        {
+            IncreaseHealthBy(increaseFor1s);
+            sumIncrease += increaseFor1s;
+            yield return new WaitForSeconds(1);
+        }
+    }
+
     private void ApplyIgniteDamage()
     {
         if (igniteDamageTimer < 0 && isIgnited)

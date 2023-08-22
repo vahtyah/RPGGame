@@ -41,18 +41,20 @@ namespace Item_and_Inventory
                 {
                     AddItem(inventoryItem.itemData);
                 }
-
+                
                 return;
             }
 
             foreach (var itemData in startingItem)
             {
+                Debug.Log(itemData.itemName);
                 AddItem(itemData);
             }
         }
 
         public virtual void AddItem(ItemData itemData)
         {
+            Debug.Log("Add");
             if (itemDictionary.TryGetValue(itemData, out var value))
             {
                 value.AddStack();

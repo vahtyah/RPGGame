@@ -18,7 +18,7 @@ namespace Item_and_Inventory
                 if (Random.Range(0, 100) <= chanceToLoseEquipmentItems)
                 {
                     DropItem(item.itemData);
-                    inventory.UnequipItem(item.itemData as ItemDataEquipment);
+                    inventory.UnequipItem(item.itemData as EquipmentItemData);
                     //TODO: change image alpha
                     currentEquipment = inventory.Equipment;
                     continue;

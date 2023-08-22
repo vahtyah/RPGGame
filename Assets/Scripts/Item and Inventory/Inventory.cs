@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     //Equipment
     public List<InventoryItem> equipment;
-    public Dictionary<ItemDataEquipment, InventoryItem> equipmentDictionary;
+    public Dictionary<EquipmentItemData, InventoryItem> equipmentDictionary;
 
     //Inventory
     public List<InventoryItem> inventory;
@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     /**/
     [SerializeField] private Transform equipmentSlotUI;
-    private EquipmentCooldownUI[] equipmentCooldownUIs;
+    private PouchCooldownUI[] equipmentCooldownUIs;
 
     [SerializeField] private GameObject itemSlotUIPrefab;
     private List<ItemSlotUI> inventorySlotUIs;
@@ -67,13 +67,13 @@ public class Inventory : MonoBehaviour, ISaveManager
         stashDictionary = new Dictionary<ItemData, InventoryItem>();
 
         equipment = new List<InventoryItem>();
-        equipmentDictionary = new Dictionary<ItemDataEquipment, InventoryItem>();
+        equipmentDictionary = new Dictionary<EquipmentItemData, InventoryItem>();
 
         inventorySlotUIs = new List<ItemSlotUI>();
         stashSlotUIs = new List<ItemSlotUI>();
         equipmentSlotUIs = equipmentSlotParent.GetComponentsInChildren<EquipmentSlotUI>();
 
-        equipmentCooldownUIs = equipmentSlotUI.GetComponentsInChildren<EquipmentCooldownUI>();
+        equipmentCooldownUIs = equipmentSlotUI.GetComponentsInChildren<PouchCooldownUI>();
         LoadItemStart();
     }
 
@@ -140,13 +140,13 @@ public class Inventory : MonoBehaviour, ISaveManager
         // RemoveItem(itemData);
     }
 
-    public void UnequipItem(ItemDataEquipment itemToRemove)
+    public void UnequipItem(EquipmentItemData equipmentItemToRemove)
     {
-        if (equipmentDictionary.TryGetValue(itemToRemove!, out var value))
+        if (equipmentDictionary.TryGetValue(equipmentItemToRemove!, out var value))
         {
             equipment.Remove(value);
-            equipmentDictionary.Remove(itemToRemove);
-            itemToRemove.RemoveModifiers();
+            equipmentDictionary.Remove(equipmentItemToRemove);
+            equipmentItemToRemove.RemoveModifiers();
         }
     }
 
@@ -155,7 +155,7 @@ public class Inventory : MonoBehaviour, ISaveManager
         //TODO: make inventory limit slot or not, then no destroy item drop when not enough space
         if (itemData.itemType == ItemType.Equipment)
         {
-            var dataEquipment = itemData as ItemDataEquipment;
+            var dataEquipment = itemData as EquipmentItemData;
             if (dataEquipment.equipmentType == EquipmentType.Flask)
             {
                 AddToEquipmentSlot(dataEquipment);
@@ -208,9 +208,9 @@ public class Inventory : MonoBehaviour, ISaveManager
         // }
     }
 
-    private void AddToEquipmentSlot(ItemDataEquipment itemData)
+    private void AddToEquipmentSlot(EquipmentItemData equipmentItemData)
     {
-        if (equipmentDictionary.TryGetValue(itemData, out InventoryItem value))
+        if (equipmentDictionary.TryGetValue(equipmentItemData, out InventoryItem value))
         {
             value.AddStack();
         }
@@ -218,7 +218,7 @@ public class Inventory : MonoBehaviour, ISaveManager
         {
             foreach (var equipmentCooldownUI in equipmentCooldownUIs)
             {
-                if (equipmentCooldownUI.dataEquipment == null)
+                if (equipmentCooldownUI.data == null)
                 {
                     // var newItem = new InventoryItem(itemData, equipmentCooldownUI.AmountText, );
                     // equipmentCooldownUI.Setup(newItem);
@@ -262,7 +262,7 @@ public class Inventory : MonoBehaviour, ISaveManager
             }
         }
 
-        var equipmentData = itemData as ItemDataEquipment;
+        var equipmentData = itemData as EquipmentItemData;
         if (equipmentDictionary.TryGetValue(equipmentData!, out var equipmentValue))
         {
             if (equipmentValue.stackSize <= 1)
@@ -277,7 +277,7 @@ public class Inventory : MonoBehaviour, ISaveManager
         }
     }
 
-    public bool CanCraft(ItemDataEquipment itemToCraft, List<InventoryItem> requiredMaterials)
+    public bool CanCraft(EquipmentItemData equipmentItemToCraft, List<InventoryItem> requiredMaterials)
     {
         List<InventoryItem> materialsToRemove = new List<InventoryItem>();
         for (int i = 0; i < requiredMaterials.Count; i++)
@@ -306,8 +306,8 @@ public class Inventory : MonoBehaviour, ISaveManager
             RemoveItem(materialsToRemove[i].itemData);
         }
 
-        AddItem(itemToCraft);
-        Debug.Log("Here is your item " + itemToCraft.itemName);
+        AddItem(equipmentItemToCraft);
+        Debug.Log("Here is your item " + equipmentItemToCraft.itemName);
         return true;
     }
 
@@ -315,9 +315,9 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     public List<InventoryItem> Stash => stash;
 
-    public ItemDataEquipment GetEquipmentByType(EquipmentType type)
+    public EquipmentItemData GetEquipmentByType(EquipmentType type)
     {
-        ItemDataEquipment equipmentItem = null;
+        EquipmentItemData equipmentItem = null;
         foreach (var item in equipmentDictionary.Where(item => item.Key.equipmentType == type))
         {
             equipmentItem = item.Key;

@@ -10,8 +10,6 @@ namespace Player
         [Header("Attack details")] 
         public Vector2[] attackMovement;
         public float counterAttackDuration = .2f;
-
-        
         public bool isBusy { get; private set; }
 
         [Header("Move Info")] public float moveSpeed = 8f;

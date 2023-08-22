@@ -35,4 +35,11 @@ MonoBehaviour:
   fireDamage: 0
   iceDamage: 0
   lightingDamage: 10
+  statsModifier:
+  - statType: 1
+    value: 0
+  - statType: 8
+    value: 0
+  - statType: 11
+    value: 0
   craftingMaterials: []

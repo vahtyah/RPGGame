@@ -28,10 +28,8 @@ namespace UI
         public override void OnPointerDown(PointerEventData eventData)
         {
             if (item.itemData == null) return;
-            //TODO: Still not removed from the slot
-            generalInventory.AddItem(item.itemData);
-            equipmentInventory.UnequipItem(item.itemData as ItemDataEquipment, this);
-
+            inventoryManager.generalInventory.AddItem(item.itemData);
+            inventoryManager.equipmentInventory.UnequipItem(item.itemData as EquipmentItemData, this);
             Dismantle();
         }
     }

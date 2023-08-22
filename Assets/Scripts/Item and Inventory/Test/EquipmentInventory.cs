@@ -20,10 +20,11 @@ namespace Item_and_Inventory.Test
 
         public override void AddItem(ItemData itemData)
         {
-            var equipmentItem = itemData as ItemDataEquipment;
+            var equipmentItem = itemData as EquipmentItemData;
             foreach (var equipmentSlotUI in equipmentSlots)
                 if (equipmentSlotUI.equipmentType == equipmentItem!.equipmentType)
                 {
+                    
                     var inventoryItem = new InventoryItem(equipmentItem, null, equipmentSlotUI);
                     equipmentSlotUI.Setup(inventoryItem, this);
                     inventoryItems.Add(inventoryItem);
@@ -34,7 +35,7 @@ namespace Item_and_Inventory.Test
 
         public void EquipItem(ItemData itemData)
         {
-            var equipmentData = itemData as ItemDataEquipment;
+            var equipmentData = itemData as EquipmentItemData;
 
             InventoryItem oldItem = null;
             
@@ -45,7 +46,7 @@ namespace Item_and_Inventory.Test
                     if (slotUI.item.itemData != null)
                     {
                         oldItem = slotUI.item;
-                        var oldEquipment = oldItem.itemData as ItemDataEquipment;
+                        var oldEquipment = oldItem.itemData as EquipmentItemData;
                         UnequipItem(oldEquipment, slotUI);
                         oldEquipment!.RemoveModifiers();
                     }
@@ -59,13 +60,13 @@ namespace Item_and_Inventory.Test
         }
         
 
-        public void UnequipItem(ItemDataEquipment equipmentData, EquipmentSlotUI slotUI)
+        public void UnequipItem(EquipmentItemData data, EquipmentSlotUI slotUI)
         {
-            if (itemDictionary.TryGetValue(equipmentData, out var inventoryItem))
+            if (itemDictionary.TryGetValue(data, out var inventoryItem))
             {
-                itemDictionary.Remove(equipmentData);
+                itemDictionary.Remove(data);
                 inventoryItems.Remove(inventoryItem);
-                equipmentData.RemoveModifiers();
+                data.RemoveModifiers();
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Item_and_Inventory.Test;
 using UnityEngine;
 
 public class ItemObject : MonoBehaviour
@@ -29,7 +30,7 @@ public class ItemObject : MonoBehaviour
 
     public void PickUpItem()
     {
-        Inventory.Instance.AddItem(itemData);
+        InventoryManager.Instance.AddItem(itemData);
         Destroy(gameObject);
     }
 }

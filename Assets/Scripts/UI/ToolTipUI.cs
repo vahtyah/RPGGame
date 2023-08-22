@@ -24,7 +24,7 @@ namespace UI
             HideToolTip();
         }
 
-        public void ShowToolTip(ItemDataEquipment item)
+        public void ShowToolTip(EquipmentItemData equipmentItem)
         {
             // itemNameText.text = item.itemName;
             // itemTypeText.text = item.equipmentType.ToString();

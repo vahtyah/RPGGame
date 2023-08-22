@@ -19,7 +19,7 @@ namespace UI
             //Event
             PlayerManager.Instance.onCurrencyChanged += (sender, currency) =>
             {
-                currencyText.text = currency.ToString("C0");
+                currencyText.text = currency.ToString();
             };
             playerStats.onHealthChanged +=
                 delegate(object sender, EventArgs args) { UpdateHeathBar(); };

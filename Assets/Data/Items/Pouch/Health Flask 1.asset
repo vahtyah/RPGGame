@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddfe6c1d37660d64c97b7abfbbc68efd, type: 3}
+  m_Name: Health Flask 1
+  m_EditorClassIdentifier: 
+  itemType: 2
+  itemName: Health Flask2
+  itemIcon: {fileID: -410334530, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemID: 20c363e5f9ccd824c99a66fa8016cd45
+  dropChance: 14.4
+  itemEffects:
+  - {fileID: 11400000, guid: 76d07fdae88b6154eacf0d7c6344ce1b, type: 2}
+  itemCooldown: 6

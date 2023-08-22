@@ -14,7 +14,7 @@ namespace UI
 
         public override void OnPointerDown(PointerEventData eventData)
         {
-            var craftData = item.itemData as ItemDataEquipment;
+            var craftData = item.itemData as EquipmentItemData;
             Inventory.Instance.CanCraft(craftData, craftData!.craftingMaterials);
         }
     }

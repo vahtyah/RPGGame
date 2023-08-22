@@ -10,26 +10,24 @@ using UnityEngine.UI;
 public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] protected Image itemImage;
-    [SerializeField] private TextMeshProUGUI itemText;
+    [SerializeField] private TextMeshProUGUI amountText;
+    protected InventoryManager inventoryManager;
     protected Inventory1 inventory;
-    protected GeneralInventory generalInventory;
-    protected EquipmentInventory equipmentInventory;
+    public InventoryItem item;
 
-    public InventoryItem item;  
+    private void Start() { inventoryManager = InventoryManager.Instance; }
 
     public virtual void Setup(InventoryItem item, Inventory1 inventory)
     {
         this.item = item;
         itemImage.sprite = item.itemData.itemIcon;
         this.inventory = inventory;
-        generalInventory = inventory.GetComponent<GeneralInventory>();
-        equipmentInventory = inventory.GetComponent<EquipmentInventory>();
         UpdateSlot(item);
     }
     
     public void UpdateSlot(InventoryItem item)
     {
-        itemText.text = item.stackSize > 1 ? item.stackSize.ToString() : "";
+        amountText.text = item.stackSize > 1 ? item.stackSize.ToString() : "";
     }
 
     public virtual void OnPointerDown(PointerEventData eventData)
@@ -41,14 +39,14 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         }
         if (item.itemData.itemType == ItemType.Equipment)
         {
-            equipmentInventory.EquipItem(item.itemData);
+            inventoryManager.equipmentInventory.EquipItem(item.itemData);
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (item == null) return;
-        ToolTipUI.Instance.ShowToolTip(item.itemData as ItemDataEquipment);
+        ToolTipUI.Instance.ShowToolTip(item.itemData as EquipmentItemData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -57,5 +55,5 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         ToolTipUI.Instance.HideToolTip();
     }
 
-    public TextMeshProUGUI AmountText => itemText;
+    public TextMeshProUGUI AmountText => amountText;
 }
