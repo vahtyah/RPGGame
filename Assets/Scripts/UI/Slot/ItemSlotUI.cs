@@ -14,8 +14,13 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
     protected InventoryManager inventoryManager;
     protected Inventory inventory;
     public Item item;
+    protected RectTransform rectTransform;
 
-    private void Start() { inventoryManager = InventoryManager.Instance; }
+    protected virtual void Start()
+    {
+        inventoryManager = InventoryManager.Instance;
+        rectTransform = GetComponent<RectTransform>();
+    }
 
     public virtual void Setup(Item item, Inventory inventory)
     {
@@ -44,16 +49,16 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        if (item == null) return;
-        // ToolTipUI.Instance.ShowToolTip(item.itemData as EquipmentItemData);
+        if (item.itemData == null) return;
+        ToolTipUI.Instance.ShowToolTip(item.itemData, rectTransform);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
-        if (item == null) return;
-        // ToolTipUI.Instance.HideToolTip();
+        if (item.itemData == null) return;
+        ToolTipUI.Instance.HideToolTip();
     }
 
     public TextMeshProUGUI AmountText => amountText;

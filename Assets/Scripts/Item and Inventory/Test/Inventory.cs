@@ -45,7 +45,6 @@ namespace Item_and_Inventory
 
             foreach (var itemData in startingItem)
             {
-                Debug.Log(itemData.itemName);
                 AddItem(itemData);
             }
         }

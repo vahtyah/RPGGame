@@ -22,7 +22,6 @@ namespace Item_and_Inventory.Test
             foreach (var equipmentSlotUI in equipmentSlots)
                 if (equipmentSlotUI.equipmentType == equipmentItem!.equipmentType)
                 {
-                    
                     var inventoryItem = new Item(equipmentItem, null, equipmentSlotUI);
                     equipmentSlotUI.Setup(inventoryItem, this);
                     inventoryItems.Add(inventoryItem);

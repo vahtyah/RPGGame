@@ -16,7 +16,11 @@ namespace UI
         private PouchCooldownUI pouchCooldownUI;
         private PouchItemData pouchItemData;
 
-        private void Start() { pouchCooldownUI = GetComponent<PouchCooldownUI>(); }
+        protected override void Start()
+        {
+            pouchCooldownUI = GetComponent<PouchCooldownUI>();
+            base.Start();
+        }
 
         public override void Setup(Item item, Inventory inventory)
         {
