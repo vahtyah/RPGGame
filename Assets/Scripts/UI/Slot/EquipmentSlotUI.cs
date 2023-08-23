@@ -12,7 +12,7 @@ namespace UI
 
         private void OnValidate() { gameObject.name = "Equipment slot - " + equipmentType.ToString(); }
 
-        public override void Setup(InventoryItem item, Inventory1 inventory)
+        public override void Setup(Item item, Inventory inventory)
         {
             base.Setup(item, inventory);
             itemImage.color = Color.white; //TODO: stupid?

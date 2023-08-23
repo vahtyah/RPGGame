@@ -2,7 +2,7 @@
 
 namespace Item_and_Inventory.Test
 {
-    public class StashInventory : Inventory1
+    public class StashInventory : Inventory
     {
         public override void LoadData(GameData data)
         {

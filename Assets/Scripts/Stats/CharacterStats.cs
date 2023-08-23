@@ -113,9 +113,9 @@ public class CharacterStats : MonoBehaviour
         var sumIncrease = 0;
         while (sumIncrease < amountHealth)
         {
+            yield return new WaitForSeconds(1);
             IncreaseHealthBy(increaseFor1s);
             sumIncrease += increaseFor1s;
-            yield return new WaitForSeconds(1);
         }
     }
 

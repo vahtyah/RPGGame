@@ -52,7 +52,7 @@ namespace Item_and_Inventory
         [SerializeField] private DictionaryContainer[] statsModifier;
 
         [Header("Craft requirement")]
-        public List<InventoryItem> craftingMaterials;
+        public List<Item> craftingMaterials;
 
         public void ExecuteItemEffect(Transform targetTransform)
         {

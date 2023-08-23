@@ -10,7 +10,7 @@ public class ItemObject : MonoBehaviour
      private void OnValidate()
      {
          if (!itemData) return;
-         GetComponent<SpriteRenderer>().sprite = itemData.itemIcon;
+         GetComponent<SpriteRenderer>().sprite = itemData.itemIconInGame;
          gameObject.name = "Item object - " + itemData.itemName;
      }
 
@@ -30,7 +30,7 @@ public class ItemObject : MonoBehaviour
 
     public void PickUpItem()
     {
-        InventoryManager.Instance.AddItem(itemData);
-        Destroy(gameObject);
+        if (InventoryManager.Instance.AddItem(itemData))
+            Destroy(gameObject);
     }
 }

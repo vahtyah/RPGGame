@@ -12,12 +12,12 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
     [SerializeField] protected Image itemImage;
     [SerializeField] private TextMeshProUGUI amountText;
     protected InventoryManager inventoryManager;
-    protected Inventory1 inventory;
-    public InventoryItem item;
+    protected Inventory inventory;
+    public Item item;
 
     private void Start() { inventoryManager = InventoryManager.Instance; }
 
-    public virtual void Setup(InventoryItem item, Inventory1 inventory)
+    public virtual void Setup(Item item, Inventory inventory)
     {
         this.item = item;
         itemImage.sprite = item.itemData.itemIcon;
@@ -25,7 +25,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         UpdateSlot(item);
     }
     
-    public void UpdateSlot(InventoryItem item)
+    public void UpdateSlot(Item item)
     {
         amountText.text = item.stackSize > 1 ? item.stackSize.ToString() : "";
     }

@@ -8,12 +8,12 @@ using UnityEngine;
 
 namespace Item_and_Inventory
 {
-    public class Inventory1 : MonoBehaviour, ISaveManager
+    public class Inventory : MonoBehaviour, ISaveManager
     {
         
         public List<ItemData> startingItem;
-        public List<InventoryItem> inventoryItems;
-        public Dictionary<ItemData, InventoryItem> itemDictionary;
+        public List<Item> inventoryItems;
+        public Dictionary<ItemData, Item> itemDictionary;
         private List<ItemSlotUI> slotUIs;
 
         [Header("Inventory UI")]
@@ -22,12 +22,12 @@ namespace Item_and_Inventory
         
         
         [Header("Data base")]
-        public List<InventoryItem> loadedItems;
+        public List<Item> loadedItems;
 
         protected virtual void Start()
         {
-            inventoryItems = new List<InventoryItem>();
-            itemDictionary = new Dictionary<ItemData, InventoryItem>();
+            inventoryItems = new List<Item>();
+            itemDictionary = new Dictionary<ItemData, Item>();
             slotUIs = new List<ItemSlotUI>();
             
             LoadItemStart();
@@ -50,7 +50,7 @@ namespace Item_and_Inventory
             }
         }
 
-        public virtual void AddItem(ItemData itemData)
+        public virtual bool AddItem(ItemData itemData)
         {
             if (itemDictionary.TryGetValue(itemData, out var value))
             {
@@ -61,13 +61,15 @@ namespace Item_and_Inventory
                 var newItemSlotUI = Instantiate(itemSlotUIPrefab, slotParent);
                 
                 var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
-                var newItem = new InventoryItem(itemData, newItemSlotUIScript.AmountText, newItemSlotUIScript);
+                var newItem = new Item(itemData, newItemSlotUIScript.AmountText, newItemSlotUIScript);
                 newItemSlotUIScript.Setup(newItem, this);
 
                 slotUIs.Add(newItemSlotUIScript);
                 inventoryItems.Add(newItem);
                 itemDictionary.Add(itemData, newItem);
             }
+
+            return true;
         }
 
         public virtual void RemoveItem(ItemData itemData)

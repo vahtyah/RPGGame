@@ -15,7 +15,7 @@ MonoBehaviour:
   itemType: 2
   itemName: Health Flask
   itemIcon: {fileID: -410334530, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
-  itemID: 24b5a15f4bc231c438555777fb7144c3
+  itemIconInGame: {fileID: 1206954855, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   dropChance: 14.4
   itemEffects:
   - {fileID: 11400000, guid: 76d07fdae88b6154eacf0d7c6344ce1b, type: 2}

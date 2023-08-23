@@ -844,7 +844,7 @@ MonoBehaviour:
   ailmentDuration: 4
   shockStrikePrefabs: {fileID: 5754521203067570224, guid: b4f3bd99bf7d3c54fbed2d5c500a610e, type: 3}
   currentHealth: 0
-  level: 1
+  level: 6
   percentageModifier: 0.4
 --- !u!70 &2613858719309692583
 CapsuleCollider2D:
@@ -903,7 +903,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5ec4b5f3ffa637e4f8ed0956e2e98b9a, type: 2}
   - {fileID: 11400000, guid: 8a2d23455a7d63e47be284620e5f5de6, type: 2}
   dropList: []
-  dropPrefab: {fileID: 8616273930555591629, guid: af97d0422422b9a40b13b6d248f4c660, type: 3}
+  dropPrefab: {fileID: 8616273930555591629, guid: 7564fdfcba007cd4dbabf7f5f1aba4c2, type: 3}
 --- !u!1 &7624353989164930940
 GameObject:
   m_ObjectHideFlags: 0

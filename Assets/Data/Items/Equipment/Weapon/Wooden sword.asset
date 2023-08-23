@@ -15,7 +15,7 @@ MonoBehaviour:
   itemType: 1
   itemName: Wooden sword
   itemIcon: {fileID: 1025091068, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
-  itemID: 8a2d23455a7d63e47be284620e5f5de6
+  itemIconInGame: {fileID: -1055781779, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   dropChance: 51.6
   equipmentType: 0
   itemEffects: []
@@ -34,4 +34,5 @@ MonoBehaviour:
   fireDamage: 0
   iceDamage: 0
   lightingDamage: 0
+  statsModifier: []
   craftingMaterials: []

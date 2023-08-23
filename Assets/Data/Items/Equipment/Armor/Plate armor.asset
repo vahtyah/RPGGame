@@ -15,7 +15,7 @@ MonoBehaviour:
   itemType: 1
   itemName: Nice armor
   itemIcon: {fileID: -1581127718, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
-  itemID: fa0fc6c1750ec344f889553a5c1bd946
+  itemIconInGame: {fileID: -460786257, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   dropChance: 30.8
   equipmentType: 1
   itemEffects: []
@@ -34,4 +34,5 @@ MonoBehaviour:
   fireDamage: 0
   iceDamage: 0
   lightingDamage: 0
+  statsModifier: []
   craftingMaterials: []

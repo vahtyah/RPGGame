@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Item_and_Inventory.Test
 {
-    public class PouchInventory : Inventory1
+    public class PouchInventory : Inventory
     {
         [Header("Equipment UI")]
         [SerializeField] private PouchSlotUI[] pouchSlots;
@@ -15,27 +15,28 @@ namespace Item_and_Inventory.Test
             base.Start();
         }
 
-        public override void AddItem(ItemData itemData)
+        public override bool AddItem(ItemData itemData)
         {
             var pouchItemData = itemData as PouchItemData;
-            if (itemDictionary.TryGetValue(pouchItemData , out var value))
+            if (itemDictionary.TryGetValue(pouchItemData, out var value))
             {
                 value.AddStack();
+                return true;
             }
-            else
+
+            foreach (var slotUI in pouchSlots)
             {
-                foreach (var slotUI in pouchSlots)
+                if (slotUI.item.itemData == null)
                 {
-                    if (slotUI.item.itemData == null)
-                    {
-                        var inventoryItem = new InventoryItem(pouchItemData, slotUI.AmountText, slotUI);
-                        slotUI.Setup(inventoryItem, this);
-                        inventoryItems.Add(inventoryItem);
-                        itemDictionary.Add(itemData, inventoryItem);
-                        return;
-                    }
+                    var inventoryItem = new Item(pouchItemData, slotUI.AmountText, slotUI);
+                    slotUI.Setup(inventoryItem, this);
+                    inventoryItems.Add(inventoryItem);
+                    itemDictionary.Add(itemData, inventoryItem);
+                    return true;
                 }
             }
+
+            return false;
         }
 
         public override void RemoveItem(ItemData itemData)

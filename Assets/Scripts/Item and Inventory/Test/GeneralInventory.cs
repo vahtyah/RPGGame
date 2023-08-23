@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Item_and_Inventory.Test
 {
-    public class GeneralInventory : Inventory1
+    public class GeneralInventory : Inventory
     {
         public override void LoadData(GameData data)
         {
@@ -12,9 +12,9 @@ namespace Item_and_Inventory.Test
                 loadedItems.Add(item);
         }
 
-        public override void AddItem(ItemData itemData)
+        public override bool AddItem(ItemData itemData)
         {
-            base.AddItem(itemData);
+            return base.AddItem(itemData);
         }
 
         public override void SaveData(ref GameData data)

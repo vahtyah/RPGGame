@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddfe6c1d37660d64c97b7abfbbc68efd, type: 3}
-  m_Name: Health Flask 1
+  m_Name: Health Flask 2
   m_EditorClassIdentifier: 
   itemType: 2
-  itemName: Health Flask2
+  itemName: Health Flask 3
   itemIcon: {fileID: -410334530, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   itemIconInGame: {fileID: 1206954855, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   dropChance: 14.4

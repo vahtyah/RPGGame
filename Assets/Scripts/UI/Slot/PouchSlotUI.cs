@@ -9,17 +9,16 @@ namespace UI
     public class PouchSlotUI : ItemSlotUI
     {
         [SerializeField] private KeyCode keyCode;
+        [SerializeField] private GameObject consumableSlotPrefab;
+        [SerializeField] private Transform consumableSlotParent;
 
         private float itemTimer;
         private PouchCooldownUI pouchCooldownUI;
         private PouchItemData pouchItemData;
 
-        private void Start()
-        {
-            pouchCooldownUI = GetComponent<PouchCooldownUI>();
-        }
+        private void Start() { pouchCooldownUI = GetComponent<PouchCooldownUI>(); }
 
-        public override void Setup(InventoryItem item, Inventory1 inventory)
+        public override void Setup(Item item, Inventory inventory)
         {
             base.Setup(item, inventory);
             pouchItemData = item.itemData as PouchItemData;
@@ -39,12 +38,13 @@ namespace UI
                 {
                     pouchCooldownUI.Dismantle();
                 }
+
+                var newConsumableSlotUI = Instantiate(consumableSlotPrefab, consumableSlotParent)
+                    .GetComponent<ConsumableSlotUI>();
+                newConsumableSlotUI.Setup(new Item(pouchItemData,null,null),null);
             } //TODO: clean
         }
 
-        public override void OnPointerDown(PointerEventData eventData)
-        {
-            
-        }
+        public override void OnPointerDown(PointerEventData eventData) { }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Item_and_Inventory.Test
 {
-    public class EquipmentInventory : Inventory1
+    public class EquipmentInventory : Inventory
     {
         private GeneralInventory generalInventory;
         
@@ -18,26 +18,28 @@ namespace Item_and_Inventory.Test
             base.Start();
         }
 
-        public override void AddItem(ItemData itemData)
+        public override bool AddItem(ItemData itemData)
         {
             var equipmentItem = itemData as EquipmentItemData;
             foreach (var equipmentSlotUI in equipmentSlots)
                 if (equipmentSlotUI.equipmentType == equipmentItem!.equipmentType)
                 {
                     
-                    var inventoryItem = new InventoryItem(equipmentItem, null, equipmentSlotUI);
+                    var inventoryItem = new Item(equipmentItem, null, equipmentSlotUI);
                     equipmentSlotUI.Setup(inventoryItem, this);
                     inventoryItems.Add(inventoryItem);
                     itemDictionary.Add(itemData, inventoryItem);
                     equipmentItem.AddModifiers();
                 }
+
+            return true;
         }
 
         public void EquipItem(ItemData itemData)
         {
             var equipmentData = itemData as EquipmentItemData;
 
-            InventoryItem oldItem = null;
+            Item oldItem = null;
             
             foreach (var slotUI in equipmentSlots)
             {

@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Item_and_Inventory;
 
 namespace Save_and_Load
 {
@@ -9,19 +10,19 @@ namespace Save_and_Load
     public class GameData
     {
         public int currency;
-        public List<InventoryItem> generalInventory;
-        public List<InventoryItem> stashInventory;
-        public List<InventoryItem> equipmentInventory;
-        public List<InventoryItem> pouchInventory;
+        public List<Item> generalInventory;
+        public List<Item> stashInventory;
+        public List<Item> equipmentInventory;
+        public List<Item> pouchInventory;
         public List<string> skillTree;
 
         public GameData()
         {
             currency = 0;
-            generalInventory = new List<InventoryItem>();
-            stashInventory = new List<InventoryItem>();
-            equipmentInventory = new List<InventoryItem>();
-            pouchInventory = new List<InventoryItem>();
+            generalInventory = new List<Item>();
+            stashInventory = new List<Item>();
+            equipmentInventory = new List<Item>();
+            pouchInventory = new List<Item>();
             skillTree = new List<string>();
         }
     }

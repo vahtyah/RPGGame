@@ -15,7 +15,7 @@ MonoBehaviour:
   itemType: 1
   itemName: Ice And Fire
   itemIcon: {fileID: 1398721256, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
-  itemID: bcda2679d0800e4458c5f2cc02a059b4
+  itemIconInGame: {fileID: -1943397117, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   dropChance: 0
   equipmentType: 0
   itemEffects:
@@ -35,4 +35,5 @@ MonoBehaviour:
   fireDamage: 5
   iceDamage: 5
   lightingDamage: 0
+  statsModifier: []
   craftingMaterials: []

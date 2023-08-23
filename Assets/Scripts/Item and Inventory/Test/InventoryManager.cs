@@ -14,10 +14,8 @@ namespace Item_and_Inventory.Test
 
         private void Awake()
         {
-            // if (Instance) Destroy(gameObject);
-            // else Instance = this;
-
-            Instance = this;
+            if (Instance) Destroy(gameObject);
+            else Instance = this;
         }
 
         private void Start()
@@ -28,12 +26,9 @@ namespace Item_and_Inventory.Test
             stashInventory = GetComponent<StashInventory>();
         }
 
-        public void AddItem(ItemData itemData)
+        public bool AddItem(ItemData itemData)
         {
-            if(itemData.itemType == ItemType.Pouch)
-                pouchInventory.AddItem(itemData);
-            else
-                generalInventory.AddItem(itemData);
+            return itemData.itemType == ItemType.Pouch ? pouchInventory.AddItem(itemData) : generalInventory.AddItem(itemData);
         }
     }
 }
