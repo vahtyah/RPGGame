@@ -42,4 +42,6 @@ MonoBehaviour:
     value: 0
   - statType: 11
     value: 0
-  craftingMaterials: []
+  craftingMaterials:
+  - itemData: {fileID: 11400000, guid: f5fa154c9249b114dbca0ab16300aa93, type: 2}
+    stackSize: 0

@@ -18,7 +18,7 @@ namespace Item_and_Inventory
 
         [Header("Inventory UI")]
         [SerializeField] protected Transform slotParent;
-        [SerializeField] private GameObject itemSlotUIPrefab;
+        [SerializeField] protected GameObject itemSlotUIPrefab;
         
         
         [Header("Data base")]

@@ -7,9 +7,7 @@ namespace Item_and_Inventory.Test
     public class EquipmentInventory : Inventory
     {
         private GeneralInventory generalInventory;
-        
-        [Header("Equipment UI")]
-        [SerializeField] private EquipmentSlotUI[] equipmentSlots;
+        private EquipmentSlotUI[] equipmentSlots;
 
         protected override void Start()
         {

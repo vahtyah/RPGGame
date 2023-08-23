@@ -32,6 +32,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        if(inventory == null) return; //Disable items that are not in the inventory 
         if (Input.GetKey(KeyCode.LeftControl))
         {   
             inventory.RemoveItem(item.itemData);

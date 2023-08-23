@@ -1,5 +1,6 @@
 ﻿using System;
 using Item_and_Inventory;
+using Item_and_Inventory.Test;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,15 +8,11 @@ namespace UI
 {
     public class CraftSlotUI : ItemSlotUI
     {
-        private void OnEnable()
-        {
-            // Setup(item);
-        }
-
-        public override void OnPointerDown(PointerEventData eventData)
+       public override void OnPointerDown(PointerEventData eventData)
         {
             var craftData = item.itemData as EquipmentItemData;
-            // Inventory.Instance.CanCraft(craftData, craftData!.craftingMaterials);
+            // InventoryManager.Instance.craftInventory.CanCraft(craftData, craftData!.craftingMaterials);
+            InventoryManager.Instance.craftInventory.ShowCraftInfo(craftData,craftData!.craftingMaterials);
         }
     }
 }

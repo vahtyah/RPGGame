@@ -11,6 +11,7 @@ namespace Item_and_Inventory.Test
         public GeneralInventory generalInventory { get; private set; }
         public PouchInventory pouchInventory { get; private set; }
         public StashInventory stashInventory { get; private set; }
+        public CraftInventory craftInventory { get; private set; }
 
         private void Awake()
         {
@@ -24,6 +25,7 @@ namespace Item_and_Inventory.Test
             generalInventory = GetComponent<GeneralInventory>();
             pouchInventory = GetComponent<PouchInventory>();
             stashInventory = GetComponent<StashInventory>();
+            craftInventory = GetComponent<CraftInventory>();
         }
 
         public bool AddItem(ItemData itemData)
