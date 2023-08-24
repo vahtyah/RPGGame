@@ -8,6 +8,7 @@ namespace Item_and_Inventory.Test
         public Transform itemSelectedUI;
         public static InventoryManager Instance { get; private set; }
 
+        public Inventory inventory { get; set; }
         public EquipmentInventory equipmentInventory { get; private set; }
         public BackpackInventory backpackInventory { get; private set; }
         public PouchInventory pouchInventory { get; private set; }
@@ -27,6 +28,7 @@ namespace Item_and_Inventory.Test
             pouchInventory = GetComponent<PouchInventory>();
             stashInventory = GetComponent<StashInventory>();
             craftInventory = GetComponent<CraftInventory>();
+            inventory = GetComponent<Inventory>();
         }
 
         public bool AddItem(ItemData itemData)

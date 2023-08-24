@@ -18,19 +18,18 @@ namespace UI
             itemImage.color = Color.white; //TODO: stupid?
         }
 
-        public void Dismantle()
+        public override void Dismantle()
         {
-            item.itemData = null;
+            base.Dismantle();
             inventory = null;
             itemImage.color = Color.clear;
         }
 
         public override void OnPointerDown(PointerEventData eventData)
         {
-            if (item.itemData == null) return;
+            if (item == null) return;
             inventoryManager.backpackInventory.AddItem(item.itemData);
             inventoryManager.equipmentInventory.UnequipItem(item.itemData as EquipmentItemData, this);
-            Dismantle();
         }
     }
 }

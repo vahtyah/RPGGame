@@ -43,9 +43,9 @@ namespace Item_and_Inventory.Test
             {
                 if (slotUI.equipmentType == equipmentData!.equipmentType)
                 {
-                    if (slotUI.item.itemData != null)
+                    if (slotUI.Item != null)
                     {
-                        oldItem = slotUI.item;
+                        oldItem = slotUI.Item;
                         var oldEquipment = oldItem.itemData as EquipmentItemData;
                         UnequipItem(oldEquipment, slotUI);
                         oldEquipment!.RemoveModifiers();
@@ -67,6 +67,7 @@ namespace Item_and_Inventory.Test
                 itemDictionary.Remove(data);
                 inventoryItems.Remove(inventoryItem);
                 data.RemoveModifiers();
+                slotUI.Dismantle();
             }
         }
 

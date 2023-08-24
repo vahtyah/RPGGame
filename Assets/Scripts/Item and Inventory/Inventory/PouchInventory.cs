@@ -26,7 +26,7 @@ namespace Item_and_Inventory.Test
 
             foreach (var slotUI in pouchSlots)
             {
-                if (slotUI.item.itemData == null)
+                if (slotUI.Item == null)
                 {
                     var inventoryItem = new Item(pouchItemData, slotUI.AmountText, slotUI);
                     slotUI.Setup(inventoryItem, this);

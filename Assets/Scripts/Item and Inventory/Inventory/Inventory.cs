@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Item_and_Inventory.Test;
 using Save_and_Load;
 using UI;
 using Unity.VisualScripting;
@@ -10,11 +11,13 @@ namespace Item_and_Inventory
 {
     public class Inventory : MonoBehaviour, ISaveManager
     {
-        
         public List<ItemData> startingItem;
         public List<Item> inventoryItems;
         public Dictionary<ItemData, Item> itemDictionary;
         private List<ItemSlotUI> slotUIs;
+        
+        protected Item itemSelected;
+        protected InventoryManager inventory;
 
         [Header("Inventory UI")]
         [SerializeField] protected Transform slotParent;
@@ -29,7 +32,7 @@ namespace Item_and_Inventory
             inventoryItems = new List<Item>();
             itemDictionary = new Dictionary<ItemData, Item>();
             slotUIs = new List<ItemSlotUI>();
-            
+            inventory = InventoryManager.Instance;
             LoadItemStart();
         }
 
@@ -116,6 +119,25 @@ namespace Item_and_Inventory
                 inventoryItems.Add(newItem);
                 itemDictionary.Add(newItem.itemData, newItem);
             }
+        }
+        
+        public virtual void MoveItemButtonOnClick()
+        {
+            DiscardItemButtonOnClick();
+        }
+
+        public void DiscardItemButtonOnClick()
+        {
+            if(itemSelected == null) return;
+            RemoveItems(itemSelected);
+            SelectItem(null);
+        }
+
+        public virtual void SelectItem(Item itemToSelect)
+        {
+            itemSelected = itemToSelect;
+            if(itemSelected == null) inventory.HideItemSelectedUI();
+            else inventory.ShowItemSelectedUI(itemToSelect.itemSlotUI.transform.position);
         }
 
         public virtual void LoadData(GameData data)

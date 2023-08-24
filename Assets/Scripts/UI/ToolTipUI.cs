@@ -66,7 +66,6 @@ namespace UI
                 itemTypeText.text = (itemData as EquipmentItemData)!.equipmentType.ToString();
             gameObject.SetActive(true);
             this.transformTarget = transformTarget;
-            Debug.Log(this.transformTarget.name);
         }
 
         public void HideToolTip() => gameObject.SetActive(false);

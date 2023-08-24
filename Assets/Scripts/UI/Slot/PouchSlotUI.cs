@@ -40,6 +40,7 @@ namespace UI
                 inventory.RemoveItem(pouchItemData);
                 if (!inventory.itemDictionary.ContainsKey(pouchItemData))
                 {
+                    Dismantle();
                     pouchCooldownUI.Dismantle();
                 }
 

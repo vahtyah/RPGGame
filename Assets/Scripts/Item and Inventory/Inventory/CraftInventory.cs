@@ -8,8 +8,6 @@ namespace Item_and_Inventory.Test
 {
     public class CraftInventory : Inventory
     {
-        private InventoryManager inventory;
-
         [Header("Craft UI")]
         [SerializeField] private GameObject CraftInfoItem;
         [SerializeField] private GameObject itemMaterialPrefab;
@@ -21,7 +19,6 @@ namespace Item_and_Inventory.Test
 
         protected override void Start()
         {
-            inventory = InventoryManager.Instance;
             loadedItems = GetItemDatabase();
             craftButton.onClick.AddListener(() =>
             {
