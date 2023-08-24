@@ -2107,11 +2107,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 156835823}
   amountText: {fileID: 1715547879}
-  itemSelectedUI: {fileID: 0}
-  item:
-    itemData: {fileID: 0}
-    stackSize: 0
-    itemSlotUI: {fileID: 0}
   equipmentType: 1
 --- !u!114 &156835823
 MonoBehaviour:
@@ -2525,11 +2520,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 196048177}
   amountText: {fileID: 791699641}
-  itemSelectedUI: {fileID: 0}
-  item:
-    itemData: {fileID: 0}
-    stackSize: 0
-    itemSlotUI: {fileID: 0}
   keyCode: 52
   consumableSlotPrefab: {fileID: 4772366215329070535, guid: b74fff56df78f6d4d91b4e98108aed18, type: 3}
   consumableSlotParent: {fileID: 1815986744}
@@ -2640,11 +2630,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 229728385}
   amountText: {fileID: 431654831}
-  itemSelectedUI: {fileID: 0}
-  item:
-    itemData: {fileID: 0}
-    stackSize: 0
-    itemSlotUI: {fileID: 0}
   equipmentType: 2
 --- !u!114 &229728385
 MonoBehaviour:
@@ -3351,11 +3336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 317700659}
   amountText: {fileID: 137953130}
-  itemSelectedUI: {fileID: 0}
-  item:
-    itemData: {fileID: 0}
-    stackSize: 0
-    itemSlotUI: {fileID: 0}
   keyCode: 49
   consumableSlotPrefab: {fileID: 4772366215329070535, guid: b74fff56df78f6d4d91b4e98108aed18, type: 3}
   consumableSlotParent: {fileID: 1815986744}
@@ -3416,11 +3396,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 352279246}
   amountText: {fileID: 1467741231}
-  itemSelectedUI: {fileID: 0}
-  item:
-    itemData: {fileID: 0}
-    stackSize: 0
-    itemSlotUI: {fileID: 0}
   keyCode: 51
   consumableSlotPrefab: {fileID: 4772366215329070535, guid: b74fff56df78f6d4d91b4e98108aed18, type: 3}
   consumableSlotParent: {fileID: 1815986744}
@@ -8082,11 +8057,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 845363760}
   amountText: {fileID: 1021146970}
-  itemSelectedUI: {fileID: 0}
-  item:
-    itemData: {fileID: 0}
-    stackSize: 0
-    itemSlotUI: {fileID: 0}
   keyCode: 50
   consumableSlotPrefab: {fileID: 4772366215329070535, guid: b74fff56df78f6d4d91b4e98108aed18, type: 3}
   consumableSlotParent: {fileID: 1815986744}
@@ -8822,7 +8792,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 15af64baa9ecdc440b142d6c8a168cf1, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -11121,7 +11091,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d7e53d894dd8e7a499039a1525f1756b, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -12661,8 +12631,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1045385391}
-        m_TargetAssemblyTypeName: Item_and_Inventory.Test.StashInventory, Assembly-CSharp
-        m_MethodName: MoveItemToBackpackButtonOnClick
+        m_TargetAssemblyTypeName: Item_and_Inventory.Inventory, Assembly-CSharp
+        m_MethodName: DiscardItemButtonOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12792,7 +12762,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1351862848}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1045385391}
+        m_TargetAssemblyTypeName: Item_and_Inventory.Test.StashInventory, Assembly-CSharp
+        m_MethodName: MoveItemButtonOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1351862848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14883,8 +14865,8 @@ RectTransform:
   m_Children:
   - {fileID: 930129660}
   - {fileID: 2007862500}
-  - {fileID: 735833343}
   - {fileID: 931374051}
+  - {fileID: 735833343}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -20597,11 +20579,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 2011370126}
   amountText: {fileID: 729287787}
-  itemSelectedUI: {fileID: 0}
-  item:
-    itemData: {fileID: 0}
-    stackSize: 0
-    itemSlotUI: {fileID: 0}
   equipmentType: 3
 --- !u!114 &2011370126
 MonoBehaviour:
@@ -22273,11 +22250,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 447391075027478210}
   amountText: {fileID: 2123106901620982792}
-  itemSelectedUI: {fileID: 0}
-  item:
-    itemData: {fileID: 11400000, guid: 5ec4b5f3ffa637e4f8ed0956e2e98b9a, type: 2}
-    stackSize: 0
-    itemSlotUI: {fileID: 0}
 --- !u!1 &5656547671345889068
 GameObject:
   m_ObjectHideFlags: 0
@@ -22341,11 +22313,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 5671159348366128187}
   amountText: {fileID: 6194623036667352817}
-  itemSelectedUI: {fileID: 0}
-  item:
-    itemData: {fileID: 0}
-    stackSize: 0
-    itemSlotUI: {fileID: 0}
   equipmentType: 0
 --- !u!114 &6194623036667352817
 MonoBehaviour:
