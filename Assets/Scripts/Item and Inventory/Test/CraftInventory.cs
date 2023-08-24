@@ -64,7 +64,7 @@ namespace Item_and_Inventory.Test
         {
             foreach (var material in requiredMaterials)
             {
-                if (inventory.generalInventory.itemDictionary.TryGetValue(material.itemData, out var item))
+                if (inventory.backpackInventory.itemDictionary.TryGetValue(material.itemData, out var item))
                 {
                     if (material.stackSize <= item.stackSize) continue;
                     Debug.Log("not enough material!");
@@ -75,8 +75,8 @@ namespace Item_and_Inventory.Test
             }
 
             foreach (var material in requiredMaterials)
-                inventory.generalInventory.RemoveItem(material.itemData);
-            inventory.generalInventory.AddItem(itemData);
+                inventory.backpackInventory.RemoveItem(material.itemData);
+            inventory.backpackInventory.AddItem(itemData);
             Debug.Log($"Crafted {itemData.itemName}");
             return true;
         }

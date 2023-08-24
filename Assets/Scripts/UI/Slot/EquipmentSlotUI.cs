@@ -28,7 +28,7 @@ namespace UI
         public override void OnPointerDown(PointerEventData eventData)
         {
             if (item.itemData == null) return;
-            inventoryManager.generalInventory.AddItem(item.itemData);
+            inventoryManager.backpackInventory.AddItem(item.itemData);
             inventoryManager.equipmentInventory.UnequipItem(item.itemData as EquipmentItemData, this);
             Dismantle();
         }

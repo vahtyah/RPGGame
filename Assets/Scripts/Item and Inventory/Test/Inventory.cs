@@ -86,6 +86,38 @@ namespace Item_and_Inventory
             }
         }
 
+        public virtual void RemoveItems(Item item)
+        {
+            if (itemDictionary.ContainsValue(item))
+            {
+                inventoryItems.Remove(item);
+                itemDictionary.Remove(item.itemData);
+                Destroy(item.itemSlotUI.gameObject);
+            }
+        }
+
+        public virtual void AddItems(Item item)
+        {
+            if (itemDictionary.ContainsKey(item.itemData))
+            {
+                itemDictionary[item.itemData].AddStack(item.stackSize);
+            }
+            else
+            {
+                var newItemSlotUI = Instantiate(itemSlotUIPrefab, slotParent);
+                
+                var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
+                var newItem = new Item(item.itemData, newItemSlotUIScript.AmountText, newItemSlotUIScript);
+                newItemSlotUIScript.Setup(newItem, this);
+                Debug.Log(item.stackSize);
+                newItem.AddStack(item.stackSize - 1);
+
+                slotUIs.Add(newItemSlotUIScript);
+                inventoryItems.Add(newItem);
+                itemDictionary.Add(newItem.itemData, newItem);
+            }
+        }
+
         public virtual void LoadData(GameData data)
         {
             

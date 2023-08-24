@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Item_and_Inventory.Test
 {
-    public class GeneralInventory : Inventory
+    public class BackpackInventory : Inventory
     {
         public override void LoadData(GameData data)
         {

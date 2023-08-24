@@ -11,6 +11,9 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
 {
     [SerializeField] protected Image itemImage;
     [SerializeField] private TextMeshProUGUI amountText;
+    [SerializeField] private Transform itemSelectedUI;
+    
+    
     protected InventoryManager inventoryManager;
     protected Inventory inventory;
     public Item item;
@@ -37,12 +40,18 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if(inventory == null) return; //Disable items that are not in the inventory 
-        if (Input.GetKey(KeyCode.LeftControl))
-        {   
-            inventory.RemoveItem(item.itemData);
+        if(inventory == null) return; //Disable items that are not in the inventory
+        if (inventory == inventoryManager.stashInventory)
+        {
+            inventoryManager.stashInventory.ItemSelected = item;
+            inventoryManager.ShowItemSelectedUI(transform.position);
             return;
         }
+        // if (Input.GetKey(KeyCode.LeftControl))
+        // {   
+        //     inventory.RemoveItem(item.itemData);
+        //     return;
+        // }
         if (item.itemData.itemType == ItemType.Equipment)
         {
             inventoryManager.equipmentInventory.EquipItem(item.itemData);

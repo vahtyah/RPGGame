@@ -6,12 +6,12 @@ namespace Item_and_Inventory.Test
 {
     public class EquipmentInventory : Inventory
     {
-        private GeneralInventory generalInventory;
+        private BackpackInventory backpackInventory;
         private EquipmentSlotUI[] equipmentSlots;
 
         protected override void Start()
         {
-            generalInventory = GetComponent<GeneralInventory>();
+            backpackInventory = GetComponent<BackpackInventory>();
             equipmentSlots = slotParent.GetComponentsInChildren<EquipmentSlotUI>();
             base.Start();
         }
@@ -34,6 +34,7 @@ namespace Item_and_Inventory.Test
 
         public void EquipItem(ItemData itemData)
         {
+            Debug.Log("Equip item");
             var equipmentData = itemData as EquipmentItemData;
 
             Item oldItem = null;
@@ -50,12 +51,12 @@ namespace Item_and_Inventory.Test
                         oldEquipment!.RemoveModifiers();
                     }
                     AddItem(equipmentData);
-                    generalInventory.RemoveItem(itemData);
+                    backpackInventory.RemoveItem(itemData);
                 }
             }
 
             if (oldItem != null)
-                generalInventory.AddItem(oldItem.itemData);
+                backpackInventory.AddItem(oldItem.itemData);
         }
         
 
