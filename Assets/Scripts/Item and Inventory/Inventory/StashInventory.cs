@@ -5,6 +5,8 @@ namespace Item_and_Inventory.Test
 {
     public class StashInventory : Inventory
     {
+        [Header("Stash UI")]
+        [SerializeField] private GameObject button;
         public override void MoveItemButtonOnClick()
         {
             if (itemSelected == null) return;
@@ -12,11 +14,12 @@ namespace Item_and_Inventory.Test
             base.MoveItemButtonOnClick();
         }
 
-        public Item ItemSelected
+        public override void SelectItem(Item itemToSelect)
         {
-            set => itemSelected = value;
+            base.SelectItem(itemToSelect);
+            button.SetActive(itemSelected != null);
         }
-        
+
         public override void LoadData(GameData data)
         {
             base.LoadData(data);

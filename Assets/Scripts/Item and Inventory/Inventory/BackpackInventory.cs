@@ -5,11 +5,31 @@ namespace Item_and_Inventory.Test
 {
     public class BackpackInventory : Inventory
     {
+        [Header("Backpack UI")]
+        [SerializeField] private GameObject button;
+        [SerializeField] private GameObject equipButton;
         public override void MoveItemButtonOnClick()
         {
             if (itemSelected == null) return;
             inventory.stashInventory.AddItems(itemSelected);
             base.MoveItemButtonOnClick();
+        }
+
+        public void EquipItemButtonOnClick()
+        {
+            inventory.equipmentInventory.EquipItem(itemSelected.itemData);
+            SelectItem(null);
+        }
+
+        public override void SelectItem(Item itemToSelect)
+        {
+            base.SelectItem(itemToSelect);
+            if(itemSelected == null) button.SetActive(false);
+            else
+            {
+                button.SetActive(true);
+                equipButton.SetActive(itemToSelect.itemData.itemType == ItemType.Equipment);
+            }
         }
 
         public override void LoadData(GameData data)

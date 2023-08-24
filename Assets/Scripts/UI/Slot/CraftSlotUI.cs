@@ -11,8 +11,6 @@ namespace UI
        public override void OnPointerDown(PointerEventData eventData)
         {
             base.OnPointerDown(eventData);
-            var craftData = item.itemData as EquipmentItemData;
-            InventoryManager.Instance.craftInventory.ShowCraftInfo(craftData,craftData!.craftingMaterials);
         }
     }
 }

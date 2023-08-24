@@ -57,6 +57,11 @@ namespace Item_and_Inventory.Test
             }
         }
 
+        private void HideCraftInfo()
+        {
+            CraftInfoItem.SetActive(false);
+        }
+
         public bool CanCraft(EquipmentItemData itemData, List<Item> requiredMaterials)
         {
             foreach (var material in requiredMaterials)
@@ -76,6 +81,21 @@ namespace Item_and_Inventory.Test
             inventory.backpackInventory.AddItem(itemData);
             Debug.Log($"Crafted {itemData.itemName}");
             return true;
+        }
+
+        public override void SelectItem(Item itemToSelect)
+        {
+            
+            //TODO: just inventory run, not craft
+            base.SelectItem(itemToSelect);
+            Debug.Log(itemToSelect + "in craft inventory");
+            if (itemToSelect == null)
+            {
+                HideCraftInfo();
+                return;
+            }
+            itemData = itemToSelect.itemData as EquipmentItemData;
+            ShowCraftInfo(itemData, itemData!.craftingMaterials);
         }
 
         private List<Item> GetItemDatabase()

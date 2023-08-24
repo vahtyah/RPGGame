@@ -137,7 +137,7 @@ namespace Item_and_Inventory
         {
             itemSelected = itemToSelect;
             if(itemSelected == null) inventory.HideItemSelectedUI();
-            else inventory.ShowItemSelectedUI(itemToSelect.itemSlotUI.transform.position);
+            else inventory.ShowItemSelectedUI(itemToSelect);
         }
 
         public virtual void LoadData(GameData data)

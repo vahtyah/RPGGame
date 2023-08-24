@@ -39,10 +39,6 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
     {
         if (inventory == null) return; //Disable items that are not in the inventory
         inventory.SelectItem(item);
-        if (item.itemData.itemType == ItemType.Equipment && inventory == inventoryManager.backpackInventory)
-        {
-            inventoryManager.equipmentInventory.EquipItem(item.itemData);
-        }
     }
 
     public virtual void OnPointerEnter(PointerEventData eventData)
@@ -59,4 +55,6 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
 
     public TextMeshProUGUI AmountText => amountText;
     public Item Item => item;
+
+    public Inventory Inventory => inventory;
 }

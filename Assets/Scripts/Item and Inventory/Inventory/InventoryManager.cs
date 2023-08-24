@@ -36,10 +36,11 @@ namespace Item_and_Inventory.Test
             return itemData.itemType == ItemType.Pouch ? pouchInventory.AddItem(itemData) : backpackInventory.AddItem(itemData);
         }
 
-        public void ShowItemSelectedUI(Vector3 position)
+        public void ShowItemSelectedUI(Item item)
         {
             itemSelectedUI.gameObject.SetActive(true);
-            itemSelectedUI.position = position;
+            itemSelectedUI.position = item.itemSlotUI.transform.position;
+            inventory = item.itemSlotUI.Inventory;
         }
 
 

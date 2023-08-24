@@ -181,6 +181,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UI_White_Blue_1
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 679
+        width: 245
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 23, y: 24, z: 23, w: 23}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8529f471e6c42924c99cfd94757cd248
+      internalID: -1372220979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -193,6 +214,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       UI_White_Blue_0: 1563013725
+      UI_White_Blue_1: -1372220979
       artdecoUI_PIPO_wb_0: -1762947064
       artdecoUI_PIPO_wb_1: -1146079874
   mipmapLimitGroupName: 
