@@ -49,16 +49,16 @@ namespace Skill
         private void UnlockCloneOnDashArrival() =>
             cloneOnDashArrivalUnlocker = cloneOnDashArrival.unlocker;
         
-        public void CloneOnDash()
+        public void DashStartEffect()
         {
             if(cloneOnDashUnlocker)
-               player.skill.cloneSkill.CreateClone(player.transform,Vector3.zero);
+               player.skill.cloneSkill1.CreateCloneAttack(player.transform,Vector3.zero);
         }
 
-        public void CloneOnDashArrival()
+        public void DashFinishEffect()
         {
             if(cloneOnDashArrivalUnlocker)
-                player.skill.cloneSkill.CreateClone(player.transform,Vector3.zero);
+                player.skill.cloneSkill1.CreateCloneAttack(player.transform,Vector3.zero);
         }
     }
 }
