@@ -1,4 +1,5 @@
 ﻿using System;
+using Skill.Test;
 using UI;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Skill
     {
         [Header("Dash")]
         public bool dashUnlocker;
+
         [SerializeField] private SkillTreeSlotUI dash;
 
         [Header("Clone on Dash")]
@@ -23,10 +25,7 @@ namespace Skill
         [SerializeField]
         private SkillTreeSlotUI cloneOnDashArrival;
 
-        private void Awake()
-        {
-            dash.onUnlocked += delegate(object sender, EventArgs args) { UnlockDash(); };
-        }
+        private void Awake() { dash.onUnlocked += delegate(object sender, EventArgs args) { UnlockDash(); }; }
 
         protected override void Start()
         {
@@ -36,10 +35,7 @@ namespace Skill
             // cloneOnDashArrival.onUnlocked += delegate(object sender, EventArgs args) { UnlockCloneOnDashArrival(); };
         }
 
-        public override bool CanUseSkill()
-        {
-            return dashUnlocker && base.CanUseSkill();
-        }
+        public override bool CanUseSkill() { return dashUnlocker && base.CanUseSkill(); }
 
         private void UnlockDash() => dashUnlocker = dash.unlocker;
 
@@ -48,17 +44,17 @@ namespace Skill
 
         private void UnlockCloneOnDashArrival() =>
             cloneOnDashArrivalUnlocker = cloneOnDashArrival.unlocker;
-        
+
         public void DashStartEffect()
         {
-            if(cloneOnDashUnlocker)
-               player.skill.cloneSkill1.CreateCloneAttack(player.transform,Vector3.zero);
+            if (cloneOnDashUnlocker)
+                player.skill.cloneSkill1.CreateClone(player.transform, CloneType.Attack, Vector3.zero);
         }
 
         public void DashFinishEffect()
         {
-            if(cloneOnDashArrivalUnlocker)
-                player.skill.cloneSkill1.CreateCloneAttack(player.transform,Vector3.zero);
+            if (cloneOnDashArrivalUnlocker)
+                player.skill.cloneSkill1.CreateClone(player.transform, CloneType.Attack, Vector3.zero);
         }
     }
 }

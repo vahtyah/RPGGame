@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1091160711817937917}
   - component: {fileID: 1670881245925993782}
   - component: {fileID: 2644689919389876980}
+  - component: {fileID: 3442695471697916345}
   m_Layer: 0
   m_Name: Clone 1
   m_TagString: Untagged
@@ -124,6 +125,33 @@ MonoBehaviour:
   colorLosingSpeed: 1
   attackCheck: {fileID: 6135381547993394515}
   attackCheckRadius: 0.8
+--- !u!50 &3442695471697916345
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3874019286013316239}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4479067295826359127
 GameObject:
   m_ObjectHideFlags: 0

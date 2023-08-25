@@ -6450,6 +6450,10 @@ MonoBehaviour:
   cooldown: 0
   clonePrefab: {fileID: 3874019286013316239, guid: baa53334b433a514c99528db8d746df2, type: 3}
   cloneDuration: 1.5
+  colorLosingSpeedAttack: 1
+  dashDuration: 0.1
+  dashSpeed: 17
+  colorLosingSpeedDash: 4
 --- !u!1 &696089590
 GameObject:
   m_ObjectHideFlags: 0

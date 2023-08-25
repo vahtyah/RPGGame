@@ -5,11 +5,11 @@ namespace Skill.Test
 {
     public class CloneController : MonoBehaviour
     {
-        [SerializeField] private float colorLosingSpeed = 1;
         [SerializeField] private Transform attackCheck;
         [SerializeField] private float attackCheckRadius = .8f;
         public Animator anim { get; private set; }
         public SpriteRenderer sr { get; private set; }
+        public Rigidbody2D rb { get; private set; }
         public CloneSkillMachine skillMachine { get; private set; }
 
         private void Awake()
@@ -17,6 +17,7 @@ namespace Skill.Test
             skillMachine = new CloneSkillMachine();
             anim = GetComponent<Animator>();
             sr = GetComponent<SpriteRenderer>();
+            rb = GetComponent<Rigidbody2D>();
             Debug.Log("Awake");
         }
 

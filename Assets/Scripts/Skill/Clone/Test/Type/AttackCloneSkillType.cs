@@ -12,8 +12,25 @@ namespace Skill.Test
         public override void Setup()
         {
             base.Setup();
+            timerClone = cloneSkill.CloneDuration;
+            colorLosingSpeed = cloneSkill.ColorLosingSpeedAttack;
             clone.anim.SetInteger("AttackNumber",Random.Range(1,4));
-            FaceClosestTarget();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            
+        }
+
+        protected override void FaceDirection()
+        {
+            var closestTarget = cloneSkill.FindClosestEnemy(player.transform);
+            if (closestTarget == null) return;
+            if (clone.transform.position.x > closestTarget.position.x)
+            {
+                clone.transform.Rotate(0,180,0);
+            }
         }
 
         public override void AttackTrigger()
@@ -33,14 +50,5 @@ namespace Skill.Test
             timerClone = -.1f;
         }
         
-        private void FaceClosestTarget()
-        {
-            var closestTarget = cloneSkill.FindClosestEnemy(player.transform);
-            if (closestTarget == null) return;
-            if (clone.transform.position.x > closestTarget.position.x)
-            {
-                clone.transform.Rotate(0,180,0);
-            }
-        }
     }
 }
