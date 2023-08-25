@@ -6454,6 +6454,7 @@ MonoBehaviour:
   dashDuration: 0.1
   dashSpeed: 17
   colorLosingSpeedDash: 4
+  target: {fileID: 1006962307}
 --- !u!1 &696089590
 GameObject:
   m_ObjectHideFlags: 0
@@ -9566,6 +9567,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975701645}
   m_CullTransparentMesh: 1
+--- !u!4 &1006962307 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5094048748435395160, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
+  m_PrefabInstance: {fileID: 2037603646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1018871509
 GameObject:
   m_ObjectHideFlags: 0
@@ -22336,6 +22342,10 @@ PrefabInstance:
     - target: {fileID: 5094048748435395160, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614435200178313247, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
+      propertyPath: maxHealth._baseValue
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 6130086353048559456, guid: c5925bc8e5128724b90fe3a50886de42, type: 3}
       propertyPath: possibleDrop.Array.size

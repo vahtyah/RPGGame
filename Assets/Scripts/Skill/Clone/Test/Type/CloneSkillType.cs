@@ -40,5 +40,10 @@ namespace Skill.Test
 
         public abstract void AttackTrigger();
         public abstract void AnimationTrigger();
+
+        public virtual void OnTriggerEnter(Collider2D other)
+        {
+            
+        }
     }
 }

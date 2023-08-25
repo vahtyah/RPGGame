@@ -7,6 +7,7 @@ namespace Skill.Test
     {
         [SerializeField] private Transform attackCheck;
         [SerializeField] private float attackCheckRadius = .8f;
+        public Transform target { get; private set; }
         public Animator anim { get; private set; }
         public SpriteRenderer sr { get; private set; }
         public Rigidbody2D rb { get; private set; }
@@ -26,10 +27,11 @@ namespace Skill.Test
             Debug.Log("start");
         }
 
-        public void Setup(Transform newTransform, CloneSkillType skillType)
+        public void Setup(Transform newTransform, CloneSkillType skillType, Vector3 offset)
         {
             Debug.Log("setup");
-            transform.position = newTransform.position;
+            transform.position = newTransform.position + offset;
+            target = newTransform;
             skillMachine.SkillType = skillType;
         }
 
@@ -51,6 +53,11 @@ namespace Skill.Test
         public void SelfDestroy()
         {
             Destroy(gameObject);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            skillMachine.SkillType?.OnTriggerEnter(other);
         }
 
         public Transform AttackCheck => attackCheck;
