@@ -35,7 +35,6 @@ namespace Skill
             this.canDuplicateClone = canDuplicateClone;
             this.chanceToDuplicate = chanceToDuplicate;
             FaceClosestTarget();
-            
         }
 
         private void Update()
