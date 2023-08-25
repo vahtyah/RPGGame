@@ -88,7 +88,6 @@ namespace Item_and_Inventory.Test
             
             //TODO: just inventory run, not craft
             base.SelectItem(itemToSelect);
-            Debug.Log(itemToSelect + "in craft inventory");
             if (itemToSelect == null)
             {
                 HideCraftInfo();
