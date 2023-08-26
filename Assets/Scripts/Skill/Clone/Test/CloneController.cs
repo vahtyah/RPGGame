@@ -60,6 +60,8 @@ namespace Skill.Test
             skillMachine.SkillType?.OnTriggerEnter(other);
         }
 
+        
+
         public Transform AttackCheck => attackCheck;
         public float AttackCheckRadius => attackCheckRadius;
     }

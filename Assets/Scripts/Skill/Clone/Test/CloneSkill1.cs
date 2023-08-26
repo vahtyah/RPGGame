@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using DefaultNamespace;
+
 
 namespace Skill.Test
 {
@@ -28,7 +31,9 @@ namespace Skill.Test
         [SerializeField] private float colorLosingSpeedDash = 1;
 
         [Header("Clone Dash Attack")]
-        [SerializeField] private Transform target;
+        public Transform target;
+
+        [SerializeField] private GameObject slashPrefab;
 
         public void CreateClone(Transform cloneTransform, CloneType cloneType, Vector3 offset = default)
         {
@@ -48,21 +53,6 @@ namespace Skill.Test
             };
         }
 
-        protected override void Update()
-        {
-            base.Update();
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                Vector3[] randomVector3 =
-                {
-                    new(1.5f, 0), new(-1.5f, 0), new(1.5f, -1.5f), new(-1.5f, -1.5f),
-                };
-                int randomIndex = Random.Range(0, randomVector3.Length);
-                Vector3 randomVector = randomVector3[randomIndex];
-                CreateClone(target, CloneType.Dash, randomVector);
-            }
-        }
-
         public float CloneDuration => cloneDuration;
         public float DashDuration => dashDuration;
         public float DashSpeed => dashSpeed;
@@ -71,5 +61,6 @@ namespace Skill.Test
 
         public float ColorLosingSpeedDash => colorLosingSpeedDash;
         public Transform Target => target;
+        public GameObject SlashPrefab => slashPrefab;
     }
 }

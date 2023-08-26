@@ -6455,6 +6455,7 @@ MonoBehaviour:
   dashSpeed: 17
   colorLosingSpeedDash: 4
   target: {fileID: 1006962307}
+  slashPrefab: {fileID: 2124874283947880600, guid: c8b410529e81205408650c073a5822a8, type: 3}
 --- !u!1 &696089590
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ namespace Skill.Test
     public class DashCloneSkillType : CloneSkillType
     {
         private Vector3 facingDir;
+
         public DashCloneSkillType(CloneSkill1 cloneSkill, CloneController clone, string animBoolName) : base(cloneSkill,
             clone, animBoolName)
         {
@@ -27,12 +28,13 @@ namespace Skill.Test
         {
             if (clone.target.GetComponent<Player.Player>())
             {
-                facingDir.x = player.facingDir;
+                facingDir.x = (cloneSkill.target.position - player.transform.position).normalized.x;
             }
             else
             {
                 facingDir = (clone.target.position - clone.transform.position).normalized;
             }
+
             clone.transform.localScale = new Vector3(Mathf.Sign(facingDir.x), 1);
         }
 
@@ -42,7 +44,8 @@ namespace Skill.Test
             if (clone.target.GetComponent<Enemy.Enemy>())
             {
                 player.stars.DoDamage(clone.target.GetComponent<CharacterStats>());
-            }
+                Slash.Create(cloneSkill.SlashPrefab, clone.target.transform.position, facingDir);
+            }   
         }
 
         public override void AttackTrigger() { }

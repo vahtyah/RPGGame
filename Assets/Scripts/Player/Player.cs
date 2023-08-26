@@ -42,6 +42,7 @@ namespace Player
         public PlayerCatchSwordState catchSwordState { get; private set; }
         public PlayerBlackholeState blackholeState { get; private set; }
         public PlayerDeadState deadState { get; private set; }
+        public PlayerLastBreathSkillState lastBreathSkillState { get; private set; }
 
         #endregion
 
@@ -49,6 +50,7 @@ namespace Player
         protected override void Awake()
         {
             stateMachine = new PlayerStateMachine();
+            
 
             idleState = new PlayerIdleState(stateMachine, this, "Idle");
             moveState = new PlayerMoveState(stateMachine, this, "Move");
@@ -63,6 +65,7 @@ namespace Player
             catchSwordState = new PlayerCatchSwordState(stateMachine, this, "CatchSword");
             blackholeState = new PlayerBlackholeState(stateMachine, this, "Jump");
             deadState = new PlayerDeadState(stateMachine, this, "Die");
+            lastBreathSkillState = new PlayerLastBreathSkillState(stateMachine, this, "Idle");
         }
 
         protected override void Start()
@@ -81,11 +84,12 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.F))
                 skill.crystalSkill.CanUseSkill();
 
-            // if (Input.GetKeyDown(KeyCode.Alpha1))
-            // {
-            //     Inventory.Instance.UseFlask();
-            //     //TODO: Vật phẩm nhặt thì hơn. (Mất sau khi dùng) hoặc nằm ở trong crash
-            // }
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                stateMachine.State = lastBreathSkillState;
+                var skillEffect = (PlayerLastBreathSkillState)stateMachine.State;
+                StartCoroutine(skillEffect.EffectSkill());
+            }
         }
 
         public override void SlowEntityBy(float slowPercentage, float slowDuration)

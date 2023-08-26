@@ -12,6 +12,7 @@ namespace Enemy.Skeleton
         public SkeletonAttackState attackState { get; private set; }
         public SkeletonStunnedState stunnedState { get; private set; }
         public SkeletonDeadState deadState { get; private set; }
+        public SkeletonAirState airState { get; private set; }
 
         #endregion
 
@@ -24,6 +25,7 @@ namespace Enemy.Skeleton
             attackState = new SkeletonAttackState(stateMachine, this, "Attack", this);
             stunnedState = new SkeletonStunnedState(stateMachine, this, "Stunned", this);
             deadState = new SkeletonDeadState(stateMachine, this, "Idle",this);
+            airState = new SkeletonAirState(stateMachine, this, "Idle", this);
         }
 
         protected override void Start()
