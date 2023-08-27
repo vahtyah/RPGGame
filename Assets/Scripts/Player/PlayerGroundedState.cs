@@ -23,7 +23,7 @@ namespace Player
                 stateMachine.State = player.blackholeState;
             
             if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
-                stateMachine.State = player.aimSwordState;
+                stateMachine.State = player.holdSwordState;
             
             if (Input.GetKeyDown(KeyCode.Q) && player.skill.parrySkill.CanUseSkill())
                 stateMachine.State = player.counterAttackState;
@@ -36,6 +36,8 @@ namespace Player
         
             if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
                 stateMachine.State = player.jumpState;
+            
+            
         }
 
         public override void Exit()

@@ -2,9 +2,9 @@
 
 namespace Player
 {
-    public class PlayerAimTornadoState : PlayerAimState
+    public class PlayerHoldTornadoState : PlayerHoldState
     {
-        public PlayerAimTornadoState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(
+        public PlayerHoldTornadoState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(
             stateMachine, player, animBoolName)
         {
         }
@@ -14,6 +14,12 @@ namespace Player
             base.Update();
             if (Input.GetKeyUp(KeyCode.K))
                 stateMachine.State = player.idleState;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            player.anim.SetTrigger("ThrowTornado");
         }
     }
 }

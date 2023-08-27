@@ -1,8 +1,8 @@
 ﻿namespace Player
 {
-    public class PlayerAimState : PlayerState
+    public class PlayerHoldState : PlayerState
     {
-        public PlayerAimState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(stateMachine, player, animBoolName)
+        public PlayerHoldState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(stateMachine, player, animBoolName)
         {
         }
 

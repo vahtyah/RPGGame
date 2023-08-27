@@ -40,7 +40,8 @@ namespace Player
         public PlayerWallJumpState wallJumpState { get; private set; }
         public PlayerPrimaryAttackState primaryAttackState { get; private set; }
         public PlayerCounterAttackState counterAttackState { get; private set; }
-        public PlayerAimSwordState aimSwordState { get; private set; }
+        public PlayerHoldSwordState holdSwordState { get; private set; }
+        public PlayerHoldTornadoState holdTornadoState { get; private set; }
         public PlayerCatchSwordState catchSwordState { get; private set; }
         public PlayerBlackholeState blackholeState { get; private set; }
         public PlayerDeadState deadState { get; private set; }
@@ -62,7 +63,8 @@ namespace Player
             wallJumpState = new PlayerWallJumpState(stateMachine, this, "Jump");
             primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
             counterAttackState = new PlayerCounterAttackState(stateMachine, this, "CounterAttack");
-            aimSwordState = new PlayerAimSwordState(stateMachine, this, "AimSword");
+            holdSwordState = new PlayerHoldSwordState(stateMachine, this, "Hold");
+            holdTornadoState = new PlayerHoldTornadoState(stateMachine, this, "Hold");
             catchSwordState = new PlayerCatchSwordState(stateMachine, this, "CatchSword");
             blackholeState = new PlayerBlackholeState(stateMachine, this, "Jump");
             deadState = new PlayerDeadState(stateMachine, this, "Die");
@@ -94,7 +96,7 @@ namespace Player
 
             if (Input.GetKeyDown(KeyCode.K))
             {
-                Tornado.Create(tornadoPrefab, groundCheck.position, facingDir);
+                stateMachine.State = holdTornadoState;
             }
         }
 
@@ -158,5 +160,7 @@ namespace Player
             base.Die();
             stateMachine.State = deadState;
         }
+
+        public GameObject TornadoPrefab => tornadoPrefab;
     }
 }

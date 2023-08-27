@@ -3,9 +3,9 @@ using UnityEngine.UIElements;
 
 namespace Player
 {
-    public class PlayerAimSwordState : PlayerAimState
+    public class PlayerHoldSwordState : PlayerHoldState
     {
-        public PlayerAimSwordState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(
+        public PlayerHoldSwordState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(
             stateMachine, player, animBoolName)
         {
         }
@@ -32,6 +32,7 @@ namespace Player
         public override void Exit()
         {
             base.Exit();
+            player.anim.SetTrigger("ThrowSword");
         }
     }
 }
