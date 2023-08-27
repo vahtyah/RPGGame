@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Player
 {
-    public class PlayerAimSwordState : PlayerState
+    public class PlayerAimSwordState : PlayerAimState
     {
         public PlayerAimSwordState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(
             stateMachine, player, animBoolName)
@@ -21,7 +21,6 @@ namespace Player
         public override void Update()
         {
             base.Update();
-            player.SetZeroVelocity();
             if (Input.GetKeyUp(KeyCode.Mouse1))
                 stateMachine.State = player.idleState;
 
@@ -33,7 +32,6 @@ namespace Player
         public override void Exit()
         {
             base.Exit();
-            player.StartCoroutine("BusyFor", .2f);
         }
     }
 }

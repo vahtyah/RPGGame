@@ -34,12 +34,15 @@ namespace Skill.Test
         public Transform target;
 
         [SerializeField] private GameObject slashPrefab;
+        [SerializeField] private GameObject lastSlashPrefab;
+        [SerializeField] private GameObject hitPrefab;
 
-        public void CreateClone(Transform cloneTransform, CloneType cloneType, Vector3 offset = default)
+        public CloneController CreateClone(Transform cloneTransform, CloneType cloneType, Vector3 offset = default)
         {
             var newClone = Instantiate(clonePrefab);
             var newCloneCtr = newClone.GetComponent<CloneController>();
             newCloneCtr.Setup(cloneTransform, GetCloneSkillTypeBy(cloneType, newCloneCtr), offset);
+            return newCloneCtr;
         }
 
         public CloneSkillType GetCloneSkillTypeBy(CloneType cloneType, CloneController cloneCtr)
@@ -62,5 +65,7 @@ namespace Skill.Test
         public float ColorLosingSpeedDash => colorLosingSpeedDash;
         public Transform Target => target;
         public GameObject SlashPrefab => slashPrefab;
+        public GameObject LastSlashPrefab => lastSlashPrefab;
+        public GameObject HitPrefab => hitPrefab;
     }
 }

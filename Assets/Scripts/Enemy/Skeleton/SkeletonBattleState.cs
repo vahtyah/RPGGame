@@ -56,7 +56,7 @@ namespace Enemy.Skeleton
 
         private bool CanAttack()
         {
-            if (Time.time >= enemySkeleton.attackCooldown + enemySkeleton.lastTimeAttacked)
+            if (Time.time >= enemySkeleton.attackCooldown + enemySkeleton.lastTimeAttacked && enemySkeleton.IsGroundDetected())
             {
                 enemySkeleton.lastTimeAttacked = Time.time;
                 return true;

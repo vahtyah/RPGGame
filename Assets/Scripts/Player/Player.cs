@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Skill;
+using Skill.Test;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -7,6 +8,7 @@ namespace Player
 {
     public class Player : Entity
     {
+        [SerializeField] private GameObject tornadoPrefab;
         [Header("Attack details")] 
         public Vector2[] attackMovement;
         public float counterAttackDuration = .2f;
@@ -51,7 +53,6 @@ namespace Player
         {
             stateMachine = new PlayerStateMachine();
             
-
             idleState = new PlayerIdleState(stateMachine, this, "Idle");
             moveState = new PlayerMoveState(stateMachine, this, "Move");
             jumpState = new PlayerJumpState(stateMachine, this, "Jump");
@@ -89,6 +90,11 @@ namespace Player
                 stateMachine.State = lastBreathSkillState;
                 var skillEffect = (PlayerLastBreathSkillState)stateMachine.State;
                 StartCoroutine(skillEffect.EffectSkill());
+            }
+
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                Tornado.Create(tornadoPrefab, groundCheck.position, facingDir);
             }
         }
 

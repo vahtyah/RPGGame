@@ -32,7 +32,9 @@ namespace Skill.Test
             }
             else
             {
-                facingDir = (clone.target.position - clone.transform.position).normalized;
+                var positionTarget = clone.target.position;
+                var positionClone = clone.transform.position;
+                facingDir = (positionTarget - positionClone).normalized;
             }
 
             clone.transform.localScale = new Vector3(Mathf.Sign(facingDir.x), 1);
@@ -45,6 +47,7 @@ namespace Skill.Test
             {
                 player.stars.DoDamage(clone.target.GetComponent<CharacterStats>());
                 Slash.Create(cloneSkill.SlashPrefab, clone.target.transform.position, facingDir);
+                Hit.Create(cloneSkill.HitPrefab, clone.target.transform.position, facingDir);
             }   
         }
 
