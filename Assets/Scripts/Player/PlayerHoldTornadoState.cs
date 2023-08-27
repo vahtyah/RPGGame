@@ -12,7 +12,7 @@ namespace Player
         public override void Update()
         {
             base.Update();
-            if (Input.GetKeyUp(KeyCode.K))
+            if (Input.GetKeyUp(KeyCode.L))
                 stateMachine.State = player.idleState;
         }
 

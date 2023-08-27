@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Enemy.Skeleton;
 using UnityEngine;
 
 namespace Enemy
@@ -7,19 +8,23 @@ namespace Enemy
     public class Enemy : Entity
     {
         [SerializeField] protected LayerMask whatIsPlayer;
-        [Header("Move Info")] 
+
+        [Header("Move Info")]
         public float moveSpeed;
+
         public float idleTime;
         public float battleTime;
         private float defaultMoveSpeed;
 
-        [Header("Attack Info")] 
+        [Header("Attack Info")]
         public float attackDistance;
+
         public float attackCooldown;
         public float lastTimeAttacked;
 
         [Header("Stunned Info")]
         public float stunDuration;
+
         public Vector2 stunDirection;
         protected bool canBeStunned;
         [SerializeField] private GameObject counterImage;
@@ -27,17 +32,22 @@ namespace Enemy
         public EnemyStateMachine stateMachine { get; private set; }
         public string lastAnimBoolName { get; private set; }
 
+        public EnemyAirState airState { get; private set; }
+        public EnemyIdleState idleState { get; private set; }
+        public EnemyMoveState moveState { get; private set; }
+
         protected override void Awake()
         {
             base.Awake();
             stateMachine = new EnemyStateMachine();
             defaultMoveSpeed = moveSpeed;
+
+            airState = new EnemyAirState(stateMachine, this, "Idle");
+            idleState = new EnemyIdleState(stateMachine, this, "Idle");
+            moveState = new EnemyMoveState(stateMachine, this, "Move");
         }
 
-        protected override void Start()
-        {
-            base.Start();
-        }
+        protected override void Start() { base.Start(); }
 
         protected override void Update()
         {
@@ -50,8 +60,8 @@ namespace Enemy
             base.SlowEntityBy(slowPercentage, slowDuration);
             moveSpeed *= (1 - slowPercentage);
             anim.speed *= (1 - slowPercentage);
-            
-            Invoke("ReturnDefaultSpeed",slowDuration);
+
+            Invoke("ReturnDefaultSpeed", slowDuration);
         }
 
         public override void ReturnDefaultSpeed()
@@ -76,10 +86,7 @@ namespace Enemy
             }
         }
 
-        public void FreezeTimerFor(float second)
-        {
-            StartCoroutine(FreezeTimerCoroutine(second));
-        }
+        public void FreezeTimerFor(float second) { StartCoroutine(FreezeTimerCoroutine(second)); }
 
         protected virtual IEnumerator FreezeTimerCoroutine(float second)
         {
@@ -93,7 +100,7 @@ namespace Enemy
             canBeStunned = true;
             counterImage.SetActive(true);
         }
-        
+
         public virtual void CloseCounterAttackWindow()
         {
             canBeStunned = false;
@@ -116,7 +123,8 @@ namespace Enemy
         {
             base.OnDrawGizmos();
             Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + attackDistance * facingDir, transform.position.y));
+            Gizmos.DrawLine(transform.position,
+                new Vector3(transform.position.x + attackDistance * facingDir, transform.position.y));
         }
     }
 }

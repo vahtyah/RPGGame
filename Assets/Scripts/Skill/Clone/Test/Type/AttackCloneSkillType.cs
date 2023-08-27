@@ -4,7 +4,7 @@ namespace Skill.Test
 {
     public class AttackCloneSkillType : CloneSkillType
     {
-        public AttackCloneSkillType(CloneSkill1 cloneSkill, CloneController clone, string animBoolName) : base(
+        public AttackCloneSkillType(CloneSkill1 cloneSkill, Clone clone, string animBoolName) : base(
             cloneSkill, clone, animBoolName)
         {
         }

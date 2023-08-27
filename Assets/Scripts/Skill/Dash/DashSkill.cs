@@ -48,13 +48,13 @@ namespace Skill
         public void DashStartEffect()
         {
             if (cloneOnDashUnlocker)
-                player.skill.cloneSkill1.CreateClone(player.transform, CloneType.Attack, Vector3.zero);
+                Clone.Create(player.transform, CloneType.Attack);
         }
 
         public void DashFinishEffect()
         {
             if (cloneOnDashArrivalUnlocker)
-                player.skill.cloneSkill1.CreateClone(player.transform, CloneType.Attack, Vector3.zero);
+                Clone.Create(player.transform, CloneType.Attack);
         }
     }
 }

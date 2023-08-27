@@ -87,16 +87,8 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.F))
                 skill.crystalSkill.CanUseSkill();
 
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(KeyCode.L) && skill.lastBreathSkill.CanUseSkill())
             {
-                stateMachine.State = lastBreathSkillState;
-                var skillEffect = (PlayerLastBreathSkillState)stateMachine.State;
-                StartCoroutine(skillEffect.EffectSkill());
-            }
-
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                stateMachine.State = holdTornadoState;
             }
         }
 

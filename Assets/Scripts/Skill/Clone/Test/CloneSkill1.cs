@@ -37,24 +37,24 @@ namespace Skill.Test
         [SerializeField] private GameObject lastSlashPrefab;
         [SerializeField] private GameObject hitPrefab;
 
-        public CloneController CreateClone(Transform cloneTransform, CloneType cloneType, Vector3 offset = default)
-        {
-            var newClone = Instantiate(clonePrefab);
-            var newCloneCtr = newClone.GetComponent<CloneController>();
-            newCloneCtr.Setup(cloneTransform, GetCloneSkillTypeBy(cloneType, newCloneCtr), offset);
-            return newCloneCtr;
-        }
-
-        public CloneSkillType GetCloneSkillTypeBy(CloneType cloneType, CloneController cloneCtr)
-        {
-            return cloneType switch
-            {
-                CloneType.Attack => new AttackCloneSkillType(this, cloneCtr, "Attack"),
-                CloneType.Dash => new DashCloneSkillType(this, cloneCtr, "Dash"),
-                CloneType.DashAttack => new DashCloneSkillType(this, cloneCtr, "DashAttack"),
-                _ => new AttackCloneSkillType(this, cloneCtr, "Attack")
-            };
-        }
+        // public Clone CreateClone(Transform cloneTransform, CloneType cloneType, Vector3 offset = default)
+        // {
+        //     var newClone = Instantiate(clonePrefab);
+        //     var newCloneCtr = newClone.GetComponent<Clone>();
+        //     newCloneCtr.Setup(cloneTransform, GetCloneSkillTypeBy1(cloneType, newCloneCtr), offset);
+        //     return newCloneCtr;
+        // }
+        //
+        // public CloneSkillType GetCloneSkillTypeBy1(CloneType cloneType, Clone cloneCtr)
+        // {
+        //     return cloneType switch
+        //     {
+        //         CloneType.Attack => new AttackCloneSkillType(this, cloneCtr, "Attack"),
+        //         CloneType.Dash => new DashCloneSkillType(this, cloneCtr, "Dash"),
+        //         CloneType.DashAttack => new DashCloneSkillType(this, cloneCtr, "DashAttack"),
+        //         _ => new AttackCloneSkillType(this, cloneCtr, "Attack")
+        //     };
+        // }
 
         public float CloneDuration => cloneDuration;
         public float DashDuration => dashDuration;
@@ -67,5 +67,6 @@ namespace Skill.Test
         public GameObject SlashPrefab => slashPrefab;
         public GameObject LastSlashPrefab => lastSlashPrefab;
         public GameObject HitPrefab => hitPrefab;
+        public GameObject ClonePrefab => clonePrefab;
     }
 }

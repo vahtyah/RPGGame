@@ -34,5 +34,14 @@ namespace Skill.Test
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1),
                 5 * Time.deltaTime);
         }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.GetComponent<Enemy.Enemy>())
+            {
+                SkillManager.Instance.lastBreathSkill.Target = other.transform;
+                SkillManager.Instance.lastBreathSkill.use(); //TODO: fix
+            }
+        }
     }
 }

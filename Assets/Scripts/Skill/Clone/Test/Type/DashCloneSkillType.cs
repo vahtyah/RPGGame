@@ -6,7 +6,7 @@ namespace Skill.Test
     {
         private Vector3 facingDir;
 
-        public DashCloneSkillType(CloneSkill1 cloneSkill, CloneController clone, string animBoolName) : base(cloneSkill,
+        public DashCloneSkillType(CloneSkill1 cloneSkill, Clone clone, string animBoolName) : base(cloneSkill,
             clone, animBoolName)
         {
         }
@@ -28,7 +28,7 @@ namespace Skill.Test
         {
             if (clone.target.GetComponent<Player.Player>())
             {
-                facingDir.x = (cloneSkill.target.position - player.transform.position).normalized.x;
+                facingDir.x = (clone.target.position - player.transform.position).normalized.x;
             }
             else
             {

@@ -3,8 +3,28 @@ using UnityEngine;
 
 namespace Skill.Test
 {
-    public class CloneController : MonoBehaviour
+    public class Clone : MonoBehaviour
     {
+        public static Clone Create(Transform cloneTransform, CloneType cloneType, Vector3 offset = default)
+        {
+            var newClone = Instantiate(SkillManager.Instance.cloneSkill1.ClonePrefab);
+            var newCloneCtr = newClone.GetComponent<Clone>();
+            newCloneCtr.Setup(cloneTransform, cloneType, offset);
+            return newCloneCtr;
+        }
+        
+        private CloneSkillType GetCloneSkillTypeBy(CloneType cloneType)
+        {
+            var cloneSkill = SkillManager.Instance.cloneSkill1;
+            return cloneType switch
+            {
+                CloneType.Attack => new AttackCloneSkillType(cloneSkill,this, "Attack"),
+                CloneType.Dash => new DashCloneSkillType(cloneSkill,this, "Dash"),
+                CloneType.DashAttack => new DashCloneSkillType(cloneSkill,this, "DashAttack"),
+                _ => new AttackCloneSkillType(cloneSkill,this, "Attack")
+            };
+        }
+        
         [SerializeField] private Transform attackCheck;
         [SerializeField] private float attackCheckRadius = .8f;
         public Transform target { get; private set; }
@@ -19,20 +39,13 @@ namespace Skill.Test
             anim = GetComponent<Animator>();
             sr = GetComponent<SpriteRenderer>();
             rb = GetComponent<Rigidbody2D>();
-            Debug.Log("Awake");
         }
 
-        private void Start()
+        public void Setup(Transform newTransform, CloneType cloneType, Vector3 offset)
         {
-            Debug.Log("start");
-        }
-
-        public void Setup(Transform newTransform, CloneSkillType skillType, Vector3 offset)
-        {
-            Debug.Log("setup");
             transform.position = newTransform.position + offset;
             target = newTransform;
-            skillMachine.SkillType = skillType;
+            skillMachine.SkillType = GetCloneSkillTypeBy(cloneType);
         }
 
         private void Update()

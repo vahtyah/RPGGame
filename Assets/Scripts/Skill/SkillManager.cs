@@ -2,6 +2,7 @@
 using Skill.Blackhole;
 using Skill.Consumable;
 using Skill.Crystal;
+using Skill.LastBreath;
 using Skill.Parry;
 using Skill.Sword;
 using Skill.Test;
@@ -20,6 +21,7 @@ namespace Skill
         public CrystalSkill crystalSkill { get; private set; }
         public ParrySkill parrySkill { get; private set; }
         public ConsumableSkill consumableSkill { get; private set; }
+        public LastBreathSkill lastBreathSkill { get; private set; }
 
         private void Awake()
         {
@@ -37,6 +39,7 @@ namespace Skill
             crystalSkill = GetComponent<CrystalSkill>();
             parrySkill = GetComponent<ParrySkill>();
             consumableSkill = GetComponent<ConsumableSkill>();
+            lastBreathSkill = GetComponent<LastBreathSkill>();
         }
 
         private void Update()

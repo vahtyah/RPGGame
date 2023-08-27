@@ -6,14 +6,14 @@ namespace Skill.Test
     public abstract class CloneSkillType
     {
         protected CloneSkill1 cloneSkill;
-        protected CloneController clone;
+        protected Clone clone;
         protected Player.Player player;
 
         private string animBoolName;
         protected float timerClone; 
         protected float colorLosingSpeed;
 
-        protected CloneSkillType(CloneSkill1 cloneSkill, CloneController clone, string animBoolName)
+        protected CloneSkillType(CloneSkill1 cloneSkill, Clone clone, string animBoolName)
         {
             this.cloneSkill = cloneSkill;
             this.clone = clone;
