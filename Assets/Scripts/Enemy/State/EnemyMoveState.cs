@@ -1,6 +1,8 @@
-﻿namespace Enemy
+﻿using Enemy.State;
+
+namespace Enemy
 {
-    public class EnemyMoveState : EnemyState
+    public class EnemyMoveState : EnemyGroundedState
     {
         public EnemyMoveState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName) : base(stateMachine, enemyBase, animBoolName)
         {

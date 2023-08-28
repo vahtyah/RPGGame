@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Enemy.Skeleton;
+using Enemy.State;
 using UnityEngine;
 
 namespace Enemy
@@ -32,9 +33,11 @@ namespace Enemy
         public EnemyStateMachine stateMachine { get; private set; }
         public string lastAnimBoolName { get; private set; }
 
-        public EnemyAirState airState { get; private set; }
-        public EnemyIdleState idleState { get; private set; }
-        public EnemyMoveState moveState { get; private set; }
+        public EnemyAirState airState { get; protected set; }
+        public EnemyIdleState idleState { get; protected set; }
+        public EnemyMoveState moveState { get; protected set; }
+        public EnemyBattleState battleState { get; protected set; }
+        public EnemyAttackState attackState { get; private set; }
 
         protected override void Awake()
         {
@@ -45,9 +48,15 @@ namespace Enemy
             airState = new EnemyAirState(stateMachine, this, "Idle");
             idleState = new EnemyIdleState(stateMachine, this, "Idle");
             moveState = new EnemyMoveState(stateMachine, this, "Move");
+            battleState = new EnemyBattleState(stateMachine, this, "Move");
+            attackState = new EnemyAttackState(stateMachine, this, "Attack");
         }
 
-        protected override void Start() { base.Start(); }
+        protected override void Start()
+        {
+            base.Start();
+            stateMachine.State = idleState;
+        }
 
         protected override void Update()
         {
