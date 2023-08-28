@@ -7,10 +7,12 @@ namespace Enemy.State
     {
         private Transform player;
         private float moveDir;
-        public EnemyBattleState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName) : base(stateMachine, enemyBase, animBoolName)
+
+        public EnemyBattleState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName) : base(
+            stateMachine, enemyBase, animBoolName)
         {
         }
-        
+
         public override void Enter()
         {
             base.Enter();
@@ -32,7 +34,7 @@ namespace Enemy.State
             }
             else
             {
-                if (stateTimer < 0 || Vector2.Distance(player.transform.position,enemyBase.transform.position) > 10)
+                if (stateTimer < 0 || Vector2.Distance(player.transform.position, enemyBase.transform.position) > 10)
                     stateMachine.State = enemyBase.idleState;
             }
 
@@ -44,10 +46,6 @@ namespace Enemy.State
             enemyBase.SetVelocity(moveDir * enemyBase.moveSpeed, rb.velocity.y);
         }
 
-        public override void Exit()
-        {
-            base.Exit();
-        }
 
         private bool CanAttack()
         {

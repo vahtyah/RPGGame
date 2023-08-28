@@ -30,14 +30,19 @@ namespace Enemy
         protected bool canBeStunned;
         [SerializeField] private GameObject counterImage;
 
-        public EnemyStateMachine stateMachine { get; private set; }
         public string lastAnimBoolName { get; private set; }
+
+        #region State
+
+        public EnemyStateMachine stateMachine { get; private set; }
 
         public EnemyAirState airState { get; protected set; }
         public EnemyIdleState idleState { get; protected set; }
         public EnemyMoveState moveState { get; protected set; }
         public EnemyBattleState battleState { get; protected set; }
-        public EnemyAttackState attackState { get; private set; }
+        public EnemyAttackState attackState { get; protected set; }
+
+        #endregion
 
         protected override void Awake()
         {

@@ -6551,7 +6551,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 1
   numberOfSlashed: 5
-  target: {fileID: 0}
 --- !u!1 &696089590
 GameObject:
   m_ObjectHideFlags: 0
