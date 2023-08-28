@@ -29,6 +29,7 @@ namespace Skill.Test
             if (clone.target.GetComponent<Player.Player>())
             {
                 facingDir.x = (clone.target.position - player.transform.position).normalized.x;
+                Debug.Log(clone.target);
             }
             else
             {
@@ -43,7 +44,7 @@ namespace Skill.Test
         public override void OnTriggerEnter(Collider2D other)
         {
             base.OnTriggerEnter(other);
-            if (clone.target.GetComponent<Enemy.Enemy>())
+            if (clone.target.GetComponent<Enemy.Enemy>() && clone.cloneType == CloneType.DashAttack)
             {
                 player.stars.DoDamage(clone.target.GetComponent<CharacterStats>());
                 Slash.Create(cloneSkill.SlashPrefab, clone.target.transform.position, facingDir);

@@ -90,6 +90,9 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.L) && skill.lastBreathSkill.CanUseSkill())
             {
             }
+
+            if (Input.GetKeyDown(KeyCode.K))
+                Clone.Create(transform, CloneType.Dash);
         }
 
         public override void SlowEntityBy(float slowPercentage, float slowDuration)

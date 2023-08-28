@@ -37,7 +37,7 @@ namespace Skill.Test
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.GetComponent<Enemy.Enemy>())
+            if (other.GetComponent<Enemy.Enemy>() && SkillManager.Instance.lastBreathSkill.Target == null)
             {
                 SkillManager.Instance.lastBreathSkill.Target = other.transform;
                 SkillManager.Instance.lastBreathSkill.use(); //TODO: fix
