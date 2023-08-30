@@ -52,7 +52,10 @@ namespace UI
             OnUnlocked();
         }
 
-        private void OnUnlocked() { onUnlocked?.Invoke(this, EventArgs.Empty); }
+        private void OnUnlocked()
+        {
+            onUnlocked?.Invoke(this, EventArgs.Empty);
+        }
 
         public void LoadData(GameData data)
         {

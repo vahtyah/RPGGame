@@ -25,7 +25,11 @@ namespace Skill
         [SerializeField]
         private SkillTreeSlotUI cloneOnDashArrival;
 
-        private void Awake() { dash.onUnlocked += delegate(object sender, EventArgs args) { UnlockDash(); }; }
+        private void Awake()
+        {
+            Debug.Log("unlock skill");
+            dash.onUnlocked += delegate(object sender, EventArgs args) { UnlockDash(); };
+        }
 
         protected override void Start()
         {

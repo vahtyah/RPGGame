@@ -10,6 +10,7 @@ namespace Item_and_Inventory.Test
     {
         [Header("Craft UI")]
         [SerializeField] private GameObject CraftInfoItem;
+
         [SerializeField] private GameObject itemMaterialPrefab;
         [SerializeField] private Transform requiredMaterialsParent;
         [SerializeField] private ItemSlotUI itemToCraft;
@@ -33,10 +34,10 @@ namespace Item_and_Inventory.Test
             CraftInfoItem.SetActive(true);
             this.itemData = itemData;
             var item = new Item(itemData, null, null);
-            itemToCraft.Setup(item,null);
+            itemToCraft.Setup(item, null);
             var requiredMaterialsTmp = new List<Item>(requiredMaterials);
             var matslots = requiredMaterialsParent.GetComponentsInChildren<ItemSlotUI>();
-            
+
             foreach (var slotUI in matslots)
             {
                 if (requiredMaterialsTmp.Count <= 0)
@@ -57,10 +58,7 @@ namespace Item_and_Inventory.Test
             }
         }
 
-        private void HideCraftInfo()
-        {
-            CraftInfoItem.SetActive(false);
-        }
+        private void HideCraftInfo() { CraftInfoItem.SetActive(false); }
 
         public bool CanCraft(EquipmentItemData itemData, List<Item> requiredMaterials)
         {
@@ -72,7 +70,7 @@ namespace Item_and_Inventory.Test
                     Debug.Log("not enough material!");
                     return false;
                 }
-                
+
                 return false;
             }
 
@@ -85,7 +83,6 @@ namespace Item_and_Inventory.Test
 
         public override void SelectItem(Item itemToSelect)
         {
-            
             //TODO: just inventory run, not craft
             base.SelectItem(itemToSelect);
             if (itemToSelect == null)
@@ -93,6 +90,7 @@ namespace Item_and_Inventory.Test
                 HideCraftInfo();
                 return;
             }
+
             itemData = itemToSelect.itemData as EquipmentItemData;
             ShowCraftInfo(itemData, itemData!.craftingMaterials);
         }
@@ -100,17 +98,12 @@ namespace Item_and_Inventory.Test
         private List<Item> GetItemDatabase()
         {
             var itemDatabase = new List<Item>();
-            var assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Items/Equipment" });
+            var itemDataArray = Resources.LoadAll<ItemData>("Items");
 
-            foreach (var assetName in assetNames)
+            foreach (var itemData in itemDataArray)
             {
-                var SOpath = AssetDatabase.GUIDToAssetPath(assetName);
-                var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOpath);
-                if (itemData)
-                {
-                    var item = new Item(itemData, null, null);
-                    itemDatabase.Add(item);
-                }
+                var item = new Item(itemData, null, null);
+                itemDatabase.Add(item);
             }
 
             return itemDatabase;

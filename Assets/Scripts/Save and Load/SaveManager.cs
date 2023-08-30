@@ -28,6 +28,12 @@ namespace Save_and_Load
             if (Instance) Destroy(gameObject);
             else Instance = this;
             dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
+            
+        }
+
+        private void Start()
+        {
+            Debug.Log("Start save");
             saveManagers = FindAllSaveManagers();
             LoadGame();
         }
