@@ -27,16 +27,9 @@ namespace Skill
 
         private void Awake()
         {
-            Debug.Log("unlock skill");
             dash.onUnlocked += delegate(object sender, EventArgs args) { UnlockDash(); };
-        }
-
-        protected override void Start()
-        {
-            base.Start();
-
-            // cloneOnDash.onUnlocked += delegate(object sender, EventArgs args) { UnlockCloneOnDash(); };
-            // cloneOnDashArrival.onUnlocked += delegate(object sender, EventArgs args) { UnlockCloneOnDashArrival(); };
+            cloneOnDash.onUnlocked += delegate(object sender, EventArgs args) { UnlockCloneOnDash(); };
+            cloneOnDashArrival.onUnlocked += delegate(object sender, EventArgs args) { UnlockCloneOnDashArrival(); };
         }
 
         public override bool CanUseSkill() { return dashUnlocker && base.CanUseSkill(); }

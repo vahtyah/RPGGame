@@ -30,7 +30,7 @@ namespace UI
             gameObject.name = "Skill - " + skillName;
         }
 
-        private void Start()
+        private void Awake()
         {
             img = GetComponent<Image>();
             img.color = skillColor;
@@ -47,13 +47,13 @@ namespace UI
 
             if (!PlayerManager.Instance.HasEnoughMoney(skillPrice)) return;
             
-            unlocker = true;
-            img.color = Color.white;
             OnUnlocked();
         }
 
         private void OnUnlocked()
         {
+            unlocker = true;
+            img.color = Color.white;
             onUnlocked?.Invoke(this, EventArgs.Empty);
         }
 
@@ -61,15 +61,17 @@ namespace UI
         {
             if (data.skillTree.Contains(skillName))
             {
-                unlocker = true;
-                skillColor = Color.white;
                 OnUnlocked();
             }
         }
 
         public void SaveData(ref GameData data)
         {
-            if(unlocker && !data.skillTree.Contains(skillName)) data.skillTree.Add(skillName);
+            if(unlocker && !data.skillTree.Contains(skillName))
+            {
+                Debug.Log(skillName);
+                data.skillTree.Add(skillName);
+            }
         }
     }
 }
