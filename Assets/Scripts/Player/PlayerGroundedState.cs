@@ -24,9 +24,12 @@ namespace Player
             
             if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
                 stateMachine.State = player.holdSwordState;
-            
-            if (Input.GetKeyDown(KeyCode.Q) && player.skill.parrySkill.CanUseSkill())
-                stateMachine.State = player.counterAttackState;
+
+            if (Input.GetKeyDown(KeyCode.Q) && player.skill.parrySkill.UseSkill())
+            {
+                
+            }
+                // stateMachine.State = player.counterAttackState;
             
             if (Input.GetKeyDown(KeyCode.Mouse0))
                 stateMachine.State = player.primaryAttackState;
@@ -36,8 +39,6 @@ namespace Player
         
             if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
                 stateMachine.State = player.jumpState;
-            
-            
         }
 
         public override void Exit()

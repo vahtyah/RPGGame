@@ -34,9 +34,9 @@ namespace Skill.Crystal
         [SerializeField] private float multiStackCooldown;
         [SerializeField] private List<GameObject> crystalLeft = new List<GameObject>();
 
-        public override void UseSkill()
+        protected override void StartSkill()
         {
-            base.UseSkill();
+            base.StartSkill();
 
             if (CanUseMultiStacks())
                 return;

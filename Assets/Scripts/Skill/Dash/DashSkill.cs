@@ -32,7 +32,7 @@ namespace Skill
             cloneOnDashArrival.onUnlocked += delegate(object sender, EventArgs args) { UnlockCloneOnDashArrival(); };
         }
 
-        public override bool CanUseSkill() { return dashUnlocker && base.CanUseSkill(); }
+        public override bool UseSkill() { return dashUnlocker && base.UseSkill(); }
 
         private void UnlockDash() => dashUnlocker = dash.unlocker;
 

@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 25aac90531ef220408c1d4287e439058, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -2474,7 +2474,6 @@ MonoBehaviour:
   - {x: 3, y: 1.5}
   - {x: 1, y: 2.5}
   - {x: 4, y: 4}
-  counterAttackDuration: 0.2
   moveSpeed: 8
   jumpForce: 12
   swordReturnImpact: 6
@@ -6852,6 +6851,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  parryDuration: 0.2
+  parry: {fileID: 0}
+  cloneOnParry: {fileID: 0}
 --- !u!114 &680447360
 MonoBehaviour:
   m_ObjectHideFlags: 0

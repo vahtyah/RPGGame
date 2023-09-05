@@ -25,9 +25,9 @@ namespace Skill.LastBreath
 
         protected override void Start() { base.Start(); }
 
-        public override void UseSkill()
+        protected override void StartSkill()
         {
-            base.UseSkill();
+            base.StartSkill();
             player.stateMachine.State = player.holdTornadoState;
         }
 

@@ -37,25 +37,6 @@ namespace Skill.Test
         [SerializeField] private GameObject lastSlashPrefab;
         [SerializeField] private GameObject hitPrefab;
 
-        // public Clone CreateClone(Transform cloneTransform, CloneType cloneType, Vector3 offset = default)
-        // {
-        //     var newClone = Instantiate(clonePrefab);
-        //     var newCloneCtr = newClone.GetComponent<Clone>();
-        //     newCloneCtr.Setup(cloneTransform, GetCloneSkillTypeBy1(cloneType, newCloneCtr), offset);
-        //     return newCloneCtr;
-        // }
-        //
-        // public CloneSkillType GetCloneSkillTypeBy1(CloneType cloneType, Clone cloneCtr)
-        // {
-        //     return cloneType switch
-        //     {
-        //         CloneType.Attack => new AttackCloneSkillType(this, cloneCtr, "Attack"),
-        //         CloneType.Dash => new DashCloneSkillType(this, cloneCtr, "Dash"),
-        //         CloneType.DashAttack => new DashCloneSkillType(this, cloneCtr, "DashAttack"),
-        //         _ => new AttackCloneSkillType(this, cloneCtr, "Attack")
-        //     };
-        // }
-
         public float CloneDuration => cloneDuration;
         public float DashDuration => dashDuration;
         public float DashSpeed => dashSpeed;

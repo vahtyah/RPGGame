@@ -11,7 +11,6 @@ namespace Player
         [SerializeField] private GameObject tornadoPrefab;
         [Header("Attack details")] 
         public Vector2[] attackMovement;
-        public float counterAttackDuration = .2f;
         public bool isBusy { get; private set; }
 
         [Header("Move Info")] public float moveSpeed = 8f;
@@ -85,9 +84,9 @@ namespace Player
             CheckForDashInput();
 
             if (Input.GetKeyDown(KeyCode.F))
-                skill.crystalSkill.CanUseSkill();
+                skill.crystalSkill.UseSkill();
 
-            if (Input.GetKeyDown(KeyCode.L) && skill.lastBreathSkill.CanUseSkill())
+            if (Input.GetKeyDown(KeyCode.L) && skill.lastBreathSkill.UseSkill())
             {
             }
 
@@ -142,7 +141,7 @@ namespace Player
         private void CheckForDashInput()
         {
             if (IsWallDetected()) return;
-            if (Input.GetKeyDown(KeyCode.LeftShift) && skill.dashSkill.CanUseSkill())
+            if (Input.GetKeyDown(KeyCode.LeftShift) && skill.dashSkill.UseSkill())
             {
                 dashDir = Input.GetAxisRaw("Horizontal");
                 if (dashDir == 0) dashDir = facingDir;

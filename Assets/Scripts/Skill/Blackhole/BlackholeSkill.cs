@@ -15,9 +15,9 @@ namespace Skill.Blackhole
 
         private BlackholeSkillController currentBlackhole;
 
-        public override void UseSkill()
+        protected override void StartSkill()
         {
-            base.UseSkill();
+            base.StartSkill();
             var newBlackhole = Instantiate(blackholePrefab, player.transform.position,Quaternion.identity);
             currentBlackhole = newBlackhole.GetComponent<BlackholeSkillController>();
             currentBlackhole.SetupBlackhole(maxSize,growSpeed,shrinkSpeed,amountOfAttack,cloneCooldown, blackholeDuration);
