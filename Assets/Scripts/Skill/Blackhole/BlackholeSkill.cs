@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UI;
+using UnityEngine;
 
 namespace Skill.Blackhole
 {
@@ -12,10 +14,29 @@ namespace Skill.Blackhole
         [SerializeField] private float maxSize;
         [SerializeField] private float growSpeed;
         [SerializeField] private float shrinkSpeed;
+        
+        [Header("Skill Tree")] [SerializeField]
+        private SkillTreeSlotUI blackHole;
+
+        private bool blackHoleUnlocker;
+
+        
 
         private BlackholeSkillController currentBlackhole;
 
-        protected override void StartSkill()
+        private void Awake()
+        {
+            blackHole.onUnlocked += delegate(object sender, EventArgs args) { UnlockBlackHole(); };
+        }
+
+        private void UnlockBlackHole() => blackHoleUnlocker = blackHole.unlocker;
+
+        public override bool UseSkill()
+        {
+            return blackHoleUnlocker;
+        }
+
+        public override void StartSkill()
         {
             base.StartSkill();
             var newBlackhole = Instantiate(blackholePrefab, player.transform.position,Quaternion.identity);

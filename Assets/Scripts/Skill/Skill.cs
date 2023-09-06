@@ -33,7 +33,7 @@ namespace Skill
             return true;
         }
 
-        protected virtual void StartSkill()
+        public virtual void StartSkill()
         {
             OnSkillUsed();
             isUseSkill = true;

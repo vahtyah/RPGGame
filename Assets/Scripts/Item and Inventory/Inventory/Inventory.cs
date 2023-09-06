@@ -33,7 +33,6 @@ namespace Item_and_Inventory
             itemDictionary = new Dictionary<ItemData, Item>();
             slotUIs = new List<ItemSlotUI>();
             inventory = InventoryManager.Instance;
-            Debug.Log("start inventory");
             LoadItemStart();
         }
 

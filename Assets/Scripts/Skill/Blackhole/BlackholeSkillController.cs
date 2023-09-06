@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Player;
+using Skill.Test;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector2 = System.Numerics.Vector2;
@@ -111,7 +112,11 @@ namespace Skill.Blackhole
                     SkillManager.Instance.crystalSkill.CreateCrystal();
                     SkillManager.Instance.crystalSkill.CurrentCrystalChooseRandomEnemy();
                 }
-                else SkillManager.Instance.cloneSkill.CreateClone(targets[randomIndex], new Vector3(xOffset, 0));
+                else
+                {
+                    Clone.Create(targets[randomIndex], CloneType.Attack, new Vector3(xOffset, 0));
+                }
+
                 amountOfAttack--;
                 if (amountOfAttack <= 0)
                 {

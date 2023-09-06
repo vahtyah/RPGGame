@@ -25,7 +25,7 @@ namespace Skill.Parry
         public override bool UseSkill() { return parryUnlocker && base.UseSkill(); }
 
 
-        protected override void StartSkill()
+        public override void StartSkill()
         {
             base.StartSkill();
             parryTimer = parryDuration;
