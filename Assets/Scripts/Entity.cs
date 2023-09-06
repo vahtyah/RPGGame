@@ -133,4 +133,6 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void Die(){}
     protected virtual void OnFlipped() { onFlipped?.Invoke(this, EventArgs.Empty); }
+
+    public Transform GroundCheck => groundCheck;
 }

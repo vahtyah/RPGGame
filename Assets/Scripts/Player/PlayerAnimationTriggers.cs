@@ -1,5 +1,6 @@
 ﻿using Item_and_Inventory;
 using Skill;
+using Skill.Test;
 using UnityEngine;
 
 namespace Player
@@ -35,6 +36,11 @@ namespace Player
         private void ThrowSword()
         {
             SkillManager.Instance.swordSkill.CreateSword();
+        }
+
+        private void ThrowTornado()
+        {
+            Tornado.Create(player.TornadoPrefab,player.GroundCheck.position, player.facingDir);
         }
     }
 }

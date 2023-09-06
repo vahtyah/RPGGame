@@ -50,8 +50,6 @@ namespace Skill.Sword
         
         private GameObject[] dots;
 
-        private void Awake() { }
-
         protected override void Start()
         {
             base.Start();

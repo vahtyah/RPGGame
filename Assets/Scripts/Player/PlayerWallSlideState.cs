@@ -8,11 +8,7 @@ namespace Player
             playerStateMachine, player, animBoolName)
         {
         }
-
-        public override void Enter()
-        {
-            base.Enter();
-        }
+        
 
         public override void Update()
         {
@@ -33,11 +29,6 @@ namespace Player
 
             if (!player.IsWallDetected())
                 stateMachine.State = player.airState;
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
         }
     }
 }

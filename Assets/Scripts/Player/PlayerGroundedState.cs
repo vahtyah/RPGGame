@@ -23,10 +23,13 @@ namespace Player
                 stateMachine.State = player.blackholeState;
             
             if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
-                stateMachine.State = player.aimSwordState;
-            
-            if (Input.GetKeyDown(KeyCode.Q) && player.skill.parrySkill.CanUseSkill())
-                stateMachine.State = player.counterAttackState;
+                stateMachine.State = player.holdSwordState;
+
+            if (Input.GetKeyDown(KeyCode.Q) && player.skill.parrySkill.UseSkill())
+            {
+                
+            }
+                // stateMachine.State = player.counterAttackState;
             
             if (Input.GetKeyDown(KeyCode.Mouse0))
                 stateMachine.State = player.primaryAttackState;

@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -35,7 +34,6 @@ namespace Skill
             this.canDuplicateClone = canDuplicateClone;
             this.chanceToDuplicate = chanceToDuplicate;
             FaceClosestTarget();
-            
         }
 
         private void Update()

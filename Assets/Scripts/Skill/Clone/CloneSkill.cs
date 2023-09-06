@@ -6,8 +6,7 @@ namespace Skill
     public class CloneSkill : Skill
     {
         [Header("Clone Info")]
-        [SerializeField]
-        private GameObject clonePrefab;
+        [SerializeField] private GameObject clonePrefab;
 
         [SerializeField] private float cloneDuration;
         [Space] 

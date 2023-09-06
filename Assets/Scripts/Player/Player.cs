@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Skill;
+using Skill.Test;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -7,9 +8,9 @@ namespace Player
 {
     public class Player : Entity
     {
+        [SerializeField] private GameObject tornadoPrefab;
         [Header("Attack details")] 
         public Vector2[] attackMovement;
-        public float counterAttackDuration = .2f;
         public bool isBusy { get; private set; }
 
         [Header("Move Info")] public float moveSpeed = 8f;
@@ -38,10 +39,12 @@ namespace Player
         public PlayerWallJumpState wallJumpState { get; private set; }
         public PlayerPrimaryAttackState primaryAttackState { get; private set; }
         public PlayerCounterAttackState counterAttackState { get; private set; }
-        public PlayerAimSwordState aimSwordState { get; private set; }
+        public PlayerHoldSwordState holdSwordState { get; private set; }
+        public PlayerHoldTornadoState holdTornadoState { get; private set; }
         public PlayerCatchSwordState catchSwordState { get; private set; }
         public PlayerBlackholeState blackholeState { get; private set; }
         public PlayerDeadState deadState { get; private set; }
+        public PlayerLastBreathSkillState lastBreathSkillState { get; private set; }
 
         #endregion
 
@@ -49,7 +52,7 @@ namespace Player
         protected override void Awake()
         {
             stateMachine = new PlayerStateMachine();
-
+            
             idleState = new PlayerIdleState(stateMachine, this, "Idle");
             moveState = new PlayerMoveState(stateMachine, this, "Move");
             jumpState = new PlayerJumpState(stateMachine, this, "Jump");
@@ -59,10 +62,12 @@ namespace Player
             wallJumpState = new PlayerWallJumpState(stateMachine, this, "Jump");
             primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
             counterAttackState = new PlayerCounterAttackState(stateMachine, this, "CounterAttack");
-            aimSwordState = new PlayerAimSwordState(stateMachine, this, "AimSword");
+            holdSwordState = new PlayerHoldSwordState(stateMachine, this, "Hold");
+            holdTornadoState = new PlayerHoldTornadoState(stateMachine, this, "Hold");
             catchSwordState = new PlayerCatchSwordState(stateMachine, this, "CatchSword");
             blackholeState = new PlayerBlackholeState(stateMachine, this, "Jump");
             deadState = new PlayerDeadState(stateMachine, this, "Die");
+            lastBreathSkillState = new PlayerLastBreathSkillState(stateMachine, this, "Idle");
         }
 
         protected override void Start()
@@ -79,13 +84,14 @@ namespace Player
             CheckForDashInput();
 
             if (Input.GetKeyDown(KeyCode.F))
-                skill.crystalSkill.CanUseSkill();
+                skill.crystalSkill.UseSkill();
 
-            // if (Input.GetKeyDown(KeyCode.Alpha1))
-            // {
-            //     Inventory.Instance.UseFlask();
-            //     //TODO: Vật phẩm nhặt thì hơn. (Mất sau khi dùng) hoặc nằm ở trong crash
-            // }
+            if (Input.GetKeyDown(KeyCode.L) && skill.lastBreathSkill.UseSkill())
+            {
+            }
+
+            if (Input.GetKeyDown(KeyCode.K))
+                Clone.Create(transform, CloneType.Dash);
         }
 
         public override void SlowEntityBy(float slowPercentage, float slowDuration)
@@ -135,7 +141,7 @@ namespace Player
         private void CheckForDashInput()
         {
             if (IsWallDetected()) return;
-            if (Input.GetKeyDown(KeyCode.LeftShift) && skill.dashSkill.CanUseSkill())
+            if (Input.GetKeyDown(KeyCode.LeftShift) && skill.dashSkill.UseSkill())
             {
                 dashDir = Input.GetAxisRaw("Horizontal");
                 if (dashDir == 0) dashDir = facingDir;
@@ -148,5 +154,7 @@ namespace Player
             base.Die();
             stateMachine.State = deadState;
         }
+
+        public GameObject TornadoPrefab => tornadoPrefab;
     }
 }

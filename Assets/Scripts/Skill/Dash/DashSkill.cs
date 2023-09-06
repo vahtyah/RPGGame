@@ -1,4 +1,5 @@
 ﻿using System;
+using Skill.Test;
 using UI;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Skill
     {
         [Header("Dash")]
         public bool dashUnlocker;
+
         [SerializeField] private SkillTreeSlotUI dash;
 
         [Header("Clone on Dash")]
@@ -26,20 +28,11 @@ namespace Skill
         private void Awake()
         {
             dash.onUnlocked += delegate(object sender, EventArgs args) { UnlockDash(); };
+            cloneOnDash.onUnlocked += delegate(object sender, EventArgs args) { UnlockCloneOnDash(); };
+            cloneOnDashArrival.onUnlocked += delegate(object sender, EventArgs args) { UnlockCloneOnDashArrival(); };
         }
 
-        protected override void Start()
-        {
-            base.Start();
-
-            // cloneOnDash.onUnlocked += delegate(object sender, EventArgs args) { UnlockCloneOnDash(); };
-            // cloneOnDashArrival.onUnlocked += delegate(object sender, EventArgs args) { UnlockCloneOnDashArrival(); };
-        }
-
-        public override bool CanUseSkill()
-        {
-            return dashUnlocker && base.CanUseSkill();
-        }
+        public override bool UseSkill() { return dashUnlocker && base.UseSkill(); }
 
         private void UnlockDash() => dashUnlocker = dash.unlocker;
 
@@ -48,17 +41,17 @@ namespace Skill
 
         private void UnlockCloneOnDashArrival() =>
             cloneOnDashArrivalUnlocker = cloneOnDashArrival.unlocker;
-        
-        public void CloneOnDash()
+
+        public void DashStartEffect()
         {
-            if(cloneOnDashUnlocker)
-               player.skill.cloneSkill.CreateClone(player.transform,Vector3.zero);
+            if (cloneOnDashUnlocker)
+                Clone.Create(player.transform, CloneType.Attack);
         }
 
-        public void CloneOnDashArrival()
+        public void DashFinishEffect()
         {
-            if(cloneOnDashArrivalUnlocker)
-                player.skill.cloneSkill.CreateClone(player.transform,Vector3.zero);
+            if (cloneOnDashArrivalUnlocker)
+                Clone.Create(player.transform, CloneType.Attack);
         }
     }
 }

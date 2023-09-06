@@ -20,11 +20,5 @@
             if (xInput != 0f && !player.isBusy)
                 stateMachine.State = player.moveState;
         }
-
-        public override void Exit()
-        {
-            base.Exit();
-        }
-
     }
 }

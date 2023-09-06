@@ -7,8 +7,11 @@ namespace Skill
     public abstract class Skill : MonoBehaviour
     {
         [SerializeField] protected float cooldown;
-        protected float cooldownTimer;
+        
         protected Player.Player player;
+        
+        protected float cooldownTimer;
+        private bool isUseSkill;
         public event EventHandler onSkillUsed;
 
         protected virtual void Start() { player = PlayerManager.Instance.player; }
@@ -16,24 +19,34 @@ namespace Skill
         protected virtual void Update()
         {
             cooldownTimer -= Time.deltaTime;
+            if (isUseSkill)
+               Logic();
         }
 
-        public virtual bool CanUseSkill()
+        public virtual bool UseSkill()
         {
             if (!(cooldownTimer < 0))
-            {
-                Debug.Log("Skill is on cooldown!");
                 return false;
-            }
 
-            UseSkill(); 
+            StartSkill(); 
             cooldownTimer = cooldown;
             return true;
         }
 
-        public virtual void UseSkill()
+        protected virtual void StartSkill()
         {
             OnSkillUsed();
+            isUseSkill = true;
+        }
+        
+        public virtual void CompleteSkill()
+        {
+            isUseSkill = false;
+        }
+
+        protected virtual void Logic()
+        {
+            
         }
 
         public virtual Transform FindClosestEnemy(Transform checkTransform)
