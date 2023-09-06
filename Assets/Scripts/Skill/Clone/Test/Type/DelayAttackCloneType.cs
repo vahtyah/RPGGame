@@ -5,10 +5,11 @@ namespace Skill.Test
 {
     public class DelayAttackCloneType : AttackCloneSkillType
     {
-        public DelayAttackCloneType(CloneSkill1 cloneSkill, Clone clone, string animBoolName) : base(cloneSkill, clone, animBoolName)
+        public DelayAttackCloneType(CloneSkill1 cloneSkill, Clone clone, string animBoolName) : base(cloneSkill, clone,
+            animBoolName)
         {
         }
-        
+
         private IEnumerator CreateCloneWithDelay(Transform transform, Vector3 offset)
         {
             yield return new WaitForSeconds(.4f);

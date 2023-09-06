@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Skill.Test
@@ -10,8 +11,16 @@ namespace Skill.Test
         {
             var newClone = Instantiate(SkillManager.Instance.cloneSkill1.ClonePrefab);
             var newCloneCtr = newClone.GetComponent<Clone>();
-            newCloneCtr.Setup(cloneTransform, cloneType,target, offset);
+            newCloneCtr.Setup(cloneTransform, cloneType, target, offset);
             return newCloneCtr;
+        }
+
+        public static IEnumerator Create(Transform cloneTransform, Vector3 offset, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            var newClone = Instantiate(SkillManager.Instance.cloneSkill1.ClonePrefab);
+            var newCloneCtr = newClone.GetComponent<Clone>();
+            newCloneCtr.Setup(cloneTransform, CloneType.Attack, default, offset);
         }
 
         private CloneSkillType GetCloneSkillTypeBy(CloneType cloneType)
@@ -43,7 +52,7 @@ namespace Skill.Test
             rb = GetComponent<Rigidbody2D>();
         }
 
-        public void Setup(Transform newTransform, CloneType cloneType, Transform target, Vector3 offset)
+        private void Setup(Transform newTransform, CloneType cloneType, Transform target, Vector3 offset)
         {
             transform.position = newTransform.position + offset;
             this.target = target == default ? newTransform : target;
@@ -51,15 +60,30 @@ namespace Skill.Test
             this.cloneType = cloneType;
         }
 
-        private void Update() { skillMachine.SkillType?.Update(); }
+        private void Update()
+        {
+            skillMachine.SkillType?.Update();
+        }
 
-        private void AnimationTrigger() { skillMachine.SkillType?.AnimationTrigger(); }
+        private void AnimationTrigger()
+        {
+            skillMachine.SkillType?.AnimationTrigger();
+        }
 
-        private void AttackTrigger() { skillMachine.SkillType?.AttackTrigger(); }
+        private void AttackTrigger()
+        {
+            skillMachine.SkillType?.AttackTrigger();
+        }
 
-        public void SelfDestroy() { Destroy(gameObject); }
+        public void SelfDestroy()
+        {
+            Destroy(gameObject);
+        }
 
-        private void OnTriggerEnter2D(Collider2D other) { skillMachine.SkillType?.OnTriggerEnter(other); }
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            skillMachine.SkillType?.OnTriggerEnter(other);
+        }
 
         public Transform AttackCheck => attackCheck;
         public float AttackCheckRadius => attackCheckRadius;
