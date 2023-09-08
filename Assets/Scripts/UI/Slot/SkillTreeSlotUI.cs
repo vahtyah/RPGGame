@@ -15,6 +15,8 @@ namespace UI
         [TextArea]
         [SerializeField] private string skillDescription;
         [SerializeField] private Color skillColor;
+        [SerializeField] private SkillCooldownUI cooldownUI;
+        
 
         public bool unlocker;
         [Header("Unlock conditions")]
@@ -46,7 +48,8 @@ namespace UI
             if (shouldBeLocker.Any(skill => skill.unlocker)) return;
 
             if (!PlayerManager.Instance.HasEnoughMoney(skillPrice)) return;
-            
+            cooldownUI?.SetImageSkill(img.sprite);
+            cooldownUI?.gameObject.SetActive(true);
             OnUnlocked();
         }
 

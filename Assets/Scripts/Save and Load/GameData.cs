@@ -15,6 +15,7 @@ namespace Save_and_Load
         public List<Item> equipmentInventory;
         public List<Item> pouchInventory;
         public List<string> skillTree;
+        public SerializableDictionary<string, Sprite> skillCooldownImg;
 
         public GameData()
         {
@@ -24,6 +25,7 @@ namespace Save_and_Load
             equipmentInventory = new List<Item>();
             pouchInventory = new List<Item>();
             skillTree = new List<string>();
+            skillCooldownImg = new SerializableDictionary<string, Sprite>();
         }
     }
 }
