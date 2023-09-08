@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using DefaultNamespace;
 using Item_and_Inventory.Test;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +10,7 @@ namespace UI
     public class UI : MonoBehaviour, IPointerDownHandler
     {
         [SerializeField] private GameObject menuUI;
+        [SerializeField] private GameObject dieScreen;
         public ToolTipUI toolTipUI;
 
         private InventoryManager inventory;
@@ -39,9 +42,39 @@ namespace UI
             elementMenu.gameObject.SetActive(true);
         }
 
+        public void SwitchOnEndScreen()
+        {
+            LoadScreen.Instance.FadeOut();
+            StartCoroutine(EndScreenWithDelay());
+        }
+
+        private IEnumerator EndScreenWithDelay()
+        {
+            yield return new WaitForSeconds(1);
+            dieScreen.SetActive(true);
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
             inventory.inventory.SelectItem(null);
+        }
+
+        public void ResetGameButtonOnClick() => GameSceneManager.Load(GameSceneManager.Scene.GameScene);
+
+        public void QuitGameButtonOnClick()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+            Application.Quit();
+        }
+
+        private IEnumerator LoadScreenWithFade()
+        {
+            LoadScreen.Instance.FadeIn();
+            dieScreen.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            GameSceneManager.Load(GameSceneManager.Scene.GameScene);
         }
     }
 }

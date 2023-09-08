@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UI;
+using UnityEngine;
 
 namespace Player
 {
@@ -12,6 +13,8 @@ namespace Player
         {
             base.Enter();
             player.SetZeroVelocity();
+            
+            GameObject.Find("Canvas").GetComponent<UI.UI>().SwitchOnEndScreen();
         }
 
         public override void Update() { base.Update(); }
