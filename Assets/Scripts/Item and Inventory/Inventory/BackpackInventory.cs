@@ -36,7 +36,7 @@ namespace Item_and_Inventory.Test
         {
             base.LoadData(data);
             foreach (var item in data.generalInventory)
-                loadedItems.Add(item);
+                loadedItems.Add(item.Key);
         }
 
         public override void SaveData(ref GameData data)
@@ -44,7 +44,7 @@ namespace Item_and_Inventory.Test
             data.generalInventory.Clear();
             base.SaveData(ref data); 
             foreach (var value in itemDictionary)
-                data.generalInventory.Add(value.Value);
+                data.generalInventory.Add(value.Value, 1);
         }
     }
 }
