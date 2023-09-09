@@ -15,6 +15,8 @@ namespace UI
         [TextArea]
         [SerializeField] private string skillDescription;
         [SerializeField] private Color skillColor;
+        [SerializeField] private SkillCooldownUI cooldownUI;
+        
 
         public bool unlocker;
         [Header("Unlock conditions")]
@@ -33,7 +35,7 @@ namespace UI
         private void Awake()
         {
             img = GetComponent<Image>();
-            img.color = skillColor;
+            img.color = unlocker ? Color.white:skillColor;
             GetComponent<Button>().onClick.AddListener( (UnlockSkillSlot));
         }
 
@@ -46,14 +48,15 @@ namespace UI
             if (shouldBeLocker.Any(skill => skill.unlocker)) return;
 
             if (!PlayerManager.Instance.HasEnoughMoney(skillPrice)) return;
-            
+            cooldownUI?.SetImageSkill(img.sprite);
+            cooldownUI?.gameObject.SetActive(true);
+            img.color = Color.white;
             OnUnlocked();
         }
 
         private void OnUnlocked()
         {
             unlocker = true;
-            img.color = Color.white;
             onUnlocked?.Invoke(this, EventArgs.Empty);
         }
 
@@ -69,7 +72,6 @@ namespace UI
         {
             if(unlocker && !data.skillTree.Contains(skillName))
             {
-                Debug.Log(skillName);
                 data.skillTree.Add(skillName);
             }
         }

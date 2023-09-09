@@ -19,7 +19,7 @@ namespace Player
         {
             base.Update();
 
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R) && player.skill.blackholeSkill.UseSkill())
                 stateMachine.State = player.blackholeState;
             
             if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())

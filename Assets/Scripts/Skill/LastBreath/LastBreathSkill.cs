@@ -1,13 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Player;
 using Skill.Test;
+using UI;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Skill.LastBreath
 {
     public class LastBreathSkill : Skill
     {
         [SerializeField] private int numberOfSlashed = 5;
+        [SerializeField] private SkillTreeSlotUI lastBreathSkillTreeSlot;
+        private bool lastBreathUnlocker;
+        
         private bool isUsedSkill;
 
         private Vector3[] randomVector3 =
@@ -23,9 +29,25 @@ namespace Skill.LastBreath
             set => target = value;
         }
 
-        protected override void Start() { base.Start(); }
+        private void Awake()
+        {
+            lastBreathSkillTreeSlot.onUnlocked += delegate(object sender, EventArgs args)
+            {
+                UnlockerLastBreath();
+            };
+        }
 
-        protected override void StartSkill()
+        private void UnlockerLastBreath()
+        {
+            lastBreathUnlocker = lastBreathSkillTreeSlot.unlocker;
+        }
+
+        public override bool UseSkill()
+        {
+            return lastBreathUnlocker && base.UseSkill();
+        }
+
+        public override void StartSkill()
         {
             base.StartSkill();
             player.stateMachine.State = player.holdTornadoState;

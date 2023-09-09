@@ -33,8 +33,8 @@ namespace Player
                 rb.velocity = new Vector2(0, -.1f);
                 if (!skillUsed)
                 {
-                    if (player.skill.blackholeSkill.UseSkill())
-                        skillUsed = true;
+                    player.skill.blackholeSkill.StartSkill();
+                    skillUsed = true;
                 }
             }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using Player;
+using Save_and_Load;
 using Skill;
 using TMPro;
 using UnityEngine;
@@ -7,14 +8,14 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class SkillCooldownUI : CooldownUI
+    public class SkillCooldownUI : CooldownUI, ISaveManager
     {
         [SerializeField] private Skill.Skill skill;
 
         protected override void Start()
         {
             base.Start();
-            if(skill)
+            if (skill)
                 skill.onSkillUsed += delegate(object sender, EventArgs args) { SetCooldownOf(); };
         }
 
@@ -23,6 +24,11 @@ namespace UI
         //     this.skill = skill;
         //     skill.onSkillUsed += delegate(object sender, EventArgs args) { SetCooldownOf(); };
         // }
+
+        public void SetImageSkill(Sprite sprite)
+        {
+            skillImage.sprite = cooldownImage.sprite = sprite;
+        }
 
         protected override void UpdateCooldownOf()
         {
@@ -35,6 +41,24 @@ namespace UI
             {
                 base.UpdateCooldownOf();
             }
+        }
+
+        public void LoadData(GameData data)
+        {
+            if (data.skillCooldownImg.TryGetValue(skill.GetType().ToString(), out var sprite))
+            {
+                SetImageSkill(sprite);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
+        public void SaveData(ref GameData data)
+        {
+            if(skillImage.sprite)
+                data.skillCooldownImg.TryAdd(skill.GetType().ToString(), skillImage.sprite);
         }
     }
 }

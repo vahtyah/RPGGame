@@ -10,6 +10,12 @@ namespace UI
         
         [SerializeField] protected TextMeshProUGUI cooldownText;
         [SerializeField] protected Image cooldownImage;
+        protected Image skillImage;
+
+        private void Awake()
+        {
+            skillImage = GetComponent<Image>();
+        }
 
         protected virtual void Start()
         {
@@ -20,6 +26,8 @@ namespace UI
         {
             UpdateCooldownOf();
         }
+
+
 
         public virtual void SetCooldownOf()
         {

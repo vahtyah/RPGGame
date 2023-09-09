@@ -33,7 +33,6 @@ namespace Save_and_Load
 
         private void Start()
         {
-            Debug.Log("Start save");
             saveManagers = FindAllSaveManagers();
             LoadGame();
         }

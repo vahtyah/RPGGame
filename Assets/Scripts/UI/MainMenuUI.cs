@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using DefaultNamespace;
 using Save_and_Load;
 using UnityEditor;
@@ -9,6 +10,8 @@ namespace UI
     public class MainMenuUI : MonoBehaviour
     {
         [SerializeField] private GameObject continueBtn;
+        [SerializeField] private LoadScreen loadScreen;
+        
 
         private void Start()
         {
@@ -17,13 +20,13 @@ namespace UI
 
         public void OnContinueButtonClick()
         {
-            GameSceneManager.Load(GameSceneManager.Scene.GameScene);
+            StartCoroutine(LoadSceneWithFadeEffect(1f));
         }
 
         public void OnNewGameButtonClick()
         {
             SaveManager.Instance.DeleteSavedData();
-            GameSceneManager.Load(GameSceneManager.Scene.GameScene);
+            StartCoroutine(LoadSceneWithFadeEffect(1f));
         }
 
         public void OnExitGameButtonClick()
@@ -32,6 +35,15 @@ namespace UI
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
             Application.Quit();
+        }
+
+        private IEnumerator LoadSceneWithFadeEffect(float delay)
+        {
+            loadScreen.FadeOut();
+            
+            yield return new WaitForSeconds(delay);
+            
+            GameSceneManager.Load(GameSceneManager.Scene.GameScene);
         }
     }
 }
