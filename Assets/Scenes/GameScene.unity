@@ -2819,7 +2819,7 @@ MonoBehaviour:
     _baseValue: 0
     _modifiers: 
   maxHealth:
-    _baseValue: 1000
+    _baseValue: 100
     _modifiers: 
   armor:
     _baseValue: 5

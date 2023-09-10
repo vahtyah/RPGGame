@@ -8,7 +8,7 @@ public enum ItemType
     Equipment,
     Pouch
 }
-
+[Serializable]
 [CreateAssetMenu(fileName = "New Item Data", menuName = "Data/Item")]
 public class ItemData : ScriptableObject
 {

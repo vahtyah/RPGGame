@@ -13,10 +13,7 @@ namespace UI
         [SerializeField] private LoadScreen loadScreen;
         
 
-        private void Start()
-        {
-            if(!SaveManager.Instance.HasSavedData()) continueBtn.SetActive(false);
-        }
+        private void Start() { continueBtn.SetActive(SaveManager.Instance.HasSavedData()); }
 
         public void OnContinueButtonClick()
         {
