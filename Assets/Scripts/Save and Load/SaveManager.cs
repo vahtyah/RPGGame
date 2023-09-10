@@ -28,13 +28,13 @@ namespace Save_and_Load
             if (Instance) Destroy(gameObject);
             else Instance = this;
             dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
-            
+            saveManagers = FindAllSaveManagers();
+            LoadGame();
         }
 
         private void Start()
         {
-            saveManagers = FindAllSaveManagers();
-            LoadGame();
+  
         }
 
         public void NewGame() { gameData = new GameData(); }

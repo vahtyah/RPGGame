@@ -8,6 +8,13 @@ namespace Item_and_Inventory.Test
         [Header("Backpack UI")]
         [SerializeField] private GameObject button;
         [SerializeField] private GameObject equipButton;
+
+        protected override void Start()
+        {
+            base.Start();
+            Tyah.Scripts.Tyah.Log("Start backpack");
+        }
+
         public override void MoveItemButtonOnClick()
         {
             if (itemSelected == null) return;
@@ -37,6 +44,7 @@ namespace Item_and_Inventory.Test
             base.LoadData(data);
             foreach (var item in data.generalInventory)
                 loadedItems.Add(item);
+            Tyah.Scripts.Tyah.Log("LoadData");
         }
 
         public override void SaveData(ref GameData data)
