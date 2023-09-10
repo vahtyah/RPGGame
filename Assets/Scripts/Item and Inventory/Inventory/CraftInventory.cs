@@ -33,7 +33,7 @@ namespace Item_and_Inventory.Test
         {
             CraftInfoItem.SetActive(true);
             this.itemData = itemData;
-            var item = new Item(itemData, null, null);
+            var item = new Item(itemData);
             itemToCraft.Setup(item, null);
             var requiredMaterialsTmp = new List<Item>(requiredMaterials);
             var matslots = requiredMaterialsParent.GetComponentsInChildren<ItemSlotUI>();
@@ -98,11 +98,11 @@ namespace Item_and_Inventory.Test
         private List<Item> GetItemDatabase()
         {
             var itemDatabase = new List<Item>();
-            var itemDataArray = Resources.LoadAll<ItemData>("Items");
+            var itemDataArray = Resources.LoadAll<ItemData>("Items/Equipment");
 
             foreach (var itemData in itemDataArray)
             {
-                var item = new Item(itemData, null, null);
+                var item = new Item(itemData);
                 itemDatabase.Add(item);
             }
 

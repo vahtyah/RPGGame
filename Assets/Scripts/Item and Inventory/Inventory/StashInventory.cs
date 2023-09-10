@@ -24,7 +24,7 @@ namespace Item_and_Inventory.Test
         {
             base.LoadData(data);
             foreach (var item in data.stashInventory)
-                loadedItems.Add(item.Key);
+                loadedItems.Add(item);
         }
 
         public override void SaveData(ref GameData data)
@@ -32,7 +32,7 @@ namespace Item_and_Inventory.Test
             base.SaveData(ref data);
             data.stashInventory.Clear();
             foreach (var value in itemDictionary)
-                data.stashInventory.Add(value.Value, 1);
+                data.stashInventory.Add(value.Value);
         }
     }
 }

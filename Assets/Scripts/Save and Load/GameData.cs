@@ -10,20 +10,20 @@ namespace Save_and_Load
     public class GameData
     {
         public int currency;
-        public SerializableDictionary<Item, int> generalInventory;
-        public SerializableDictionary<Item, int> stashInventory;
-        public SerializableDictionary<Item, int> equipmentInventory;
-        public SerializableDictionary<Item, int> pouchInventory;
+        public List<Item> generalInventory;
+        public List<Item> stashInventory;
+        public List<Item> equipmentInventory;
+        public List<Item> pouchInventory;
         public List<string> skillTree;
         public SerializableDictionary<string, Sprite> skillCooldownImg;
 
         public GameData()
         {
             currency = 0;
-            generalInventory = new SerializableDictionary<Item, int>();
-            stashInventory = new SerializableDictionary<Item, int>();
-            equipmentInventory = new SerializableDictionary<Item, int>();
-            pouchInventory = new SerializableDictionary<Item, int>();
+            generalInventory = new List<Item>();
+            stashInventory = new List<Item>();
+            equipmentInventory = new List<Item>();
+            pouchInventory = new List<Item>();
             skillTree = new List<string>();
             skillCooldownImg = new SerializableDictionary<string, Sprite>();
         }

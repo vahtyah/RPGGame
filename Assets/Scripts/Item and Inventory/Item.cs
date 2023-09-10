@@ -12,7 +12,7 @@ namespace Item_and_Inventory
         private TextMeshProUGUI _amountText;
         public ItemSlotUI itemSlotUI;
 
-        public Item(ItemData itemData, TextMeshProUGUI amountText, ItemSlotUI itemSlotUI)
+        public Item(ItemData itemData, TextMeshProUGUI amountText = null, ItemSlotUI itemSlotUI = null)
         {
             this.itemData = itemData;
             this.itemSlotUI = itemSlotUI;
