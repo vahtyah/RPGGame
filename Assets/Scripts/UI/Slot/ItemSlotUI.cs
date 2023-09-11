@@ -49,7 +49,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        if (item == null) return;
+        // if (item == null) return;
         ToolTipUI.Instance.HideToolTip();
     }
 

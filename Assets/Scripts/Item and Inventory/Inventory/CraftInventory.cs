@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UI;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -68,6 +69,7 @@ namespace Item_and_Inventory.Test
                 {
                     if (material.stackSize <= item.stackSize) continue;
                     Debug.Log("not enough material!");
+                    NotificationUI.Instance.AddNotification("Not enough material to craft ", NotificationType.Craft, $", {itemData.itemName}");
                     return false;
                 }
 
@@ -77,7 +79,7 @@ namespace Item_and_Inventory.Test
             foreach (var material in requiredMaterials)
                 inventory.backpackInventory.RemoveItem(material.itemData);
             inventory.backpackInventory.AddItem(itemData);
-            Debug.Log($"Crafted {itemData.itemName}");
+            NotificationUI.Instance.AddNotification($"Crafted {itemData.itemName}", NotificationType.Craft, $", {itemData.itemName}");
             return true;
         }
 

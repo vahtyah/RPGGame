@@ -27,6 +27,9 @@ namespace UI
 
         public void SetImageSkill(Sprite sprite)
         {
+            // Debug.Log(skillImage.sprite);
+            // Debug.Log(cooldownImage.sprite);
+            // Debug.Log(sprite);
             skillImage.sprite = cooldownImage.sprite = sprite;
         }
 
@@ -57,7 +60,7 @@ namespace UI
 
         public void SaveData(ref GameData data)
         {
-            if(skillImage.sprite)
+            if(skillImage.sprite != null)
                 data.skillCooldownImg.TryAdd(skill.GetType().ToString(), skillImage.sprite);
         }
     }

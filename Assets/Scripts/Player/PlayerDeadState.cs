@@ -16,9 +16,5 @@ namespace Player
             
             GameObject.Find("Canvas").GetComponent<UI.UI>().SwitchOnEndScreen();
         }
-
-        public override void Update() { base.Update(); }
-
-        public override void Exit() { base.Exit(); }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Item_and_Inventory.Test;
+using UI;
 using UnityEngine;
 
 public class ItemObject : MonoBehaviour
@@ -31,6 +32,9 @@ public class ItemObject : MonoBehaviour
     public void PickUpItem()
     {
         if (InventoryManager.Instance.AddItem(itemData))
+        {
             Destroy(gameObject);
+            NotificationUI.Instance.AddNotification($"Picked up {itemData.itemName}",NotificationType.PickUp,$", {itemData.itemName}");
+        }
     }
 }

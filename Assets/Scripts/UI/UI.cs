@@ -26,7 +26,6 @@ namespace UI
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 menuUI.gameObject.SetActive(!menuUI.gameObject.activeSelf);
-                Time.timeScale = menuUI.gameObject.activeSelf ? 0 : 1;
                 inventory.inventory.SelectItem(null);
             }
         }
