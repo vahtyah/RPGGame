@@ -27,10 +27,8 @@ namespace UI
 
         public void SetImageSkill(Sprite sprite)
         {
-            // Debug.Log(skillImage.sprite);
-            // Debug.Log(cooldownImage.sprite);
-            // Debug.Log(sprite);
-            skillImage.sprite = cooldownImage.sprite = sprite;
+            skillImage.sprite = sprite;
+            cooldownImage.sprite = sprite;
         }
 
         protected override void UpdateCooldownOf()

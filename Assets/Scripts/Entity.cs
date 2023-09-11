@@ -5,8 +5,7 @@ using UnityEngine.Events;
 
 public abstract class Entity : MonoBehaviour
 {
-    [Header("Collision Info")] 
-    public Transform attackCheck;
+    [Header("Collision Info")] public Transform attackCheck;
     public float attackCheckRadius;
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float groundCheckDistance;
@@ -15,7 +14,9 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] protected LayerMask whatIsGround;
 
     [Header("Knockback Info")]
-    [SerializeField] protected Vector2 knockbackDirection;
+    [SerializeField]
+    protected Vector2 knockbackDirection;
+
     [SerializeField] protected float knockbackDuration;
     protected bool isKnocked;
     public int facingDir { get; private set; } = 1;
@@ -34,9 +35,7 @@ public abstract class Entity : MonoBehaviour
 
     public event EventHandler onFlipped;
 
-    protected virtual void Awake()
-    {
-    }
+    protected virtual void Awake() { }
 
     protected virtual void Start()
     {
@@ -45,25 +44,17 @@ public abstract class Entity : MonoBehaviour
         fx = GetComponent<EntityFX>();
         sr = GetComponentInChildren<SpriteRenderer>();
         cd = GetComponent<CapsuleCollider2D>();
-        stars = GetComponent<CharacterStats>(); 
+        stars = GetComponent<CharacterStats>();
     }
 
-    protected virtual void Update()
-    {
-    }
+    protected virtual void Update() { }
 
-    public virtual void SlowEntityBy(float slowPercentage, float slowDuration)
-    {
-        
-    }
+    public virtual void SlowEntityBy(float slowPercentage, float slowDuration) { }
 
     public virtual void ReturnDefaultSpeed() => anim.speed = 1;
 
-    public virtual void DamageImpact()
-    {
-        StartCoroutine(HitKnockback());
-    }
-    
+    public virtual void DamageImpact() { StartCoroutine(HitKnockback()); }
+
     protected virtual IEnumerator HitKnockback()
     {
         isKnocked = true;
@@ -131,7 +122,7 @@ public abstract class Entity : MonoBehaviour
 
     #endregion
 
-    public virtual void Die(){}
+    public virtual void Die() { }
     protected virtual void OnFlipped() { onFlipped?.Invoke(this, EventArgs.Empty); }
 
     public Transform GroundCheck => groundCheck;

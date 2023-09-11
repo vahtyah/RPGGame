@@ -27,7 +27,8 @@ namespace UI
 
         private void UpdateHeathBar()
         {
-            rectFillHp.transform.localScale = new Vector3(playerStats.GetHealthAmountNormalized, 1, 1);
+            var healthNor = Mathf.Clamp(playerStats.GetHealthAmountNormalized, 0, 1);
+            rectFillHp.transform.localScale = new Vector3(healthNor, 1, 1);
         }
     }
 }
