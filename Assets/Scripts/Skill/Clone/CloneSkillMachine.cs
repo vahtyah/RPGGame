@@ -1,4 +1,6 @@
-﻿namespace Skill.Test
+﻿using Skill.Clone.Type;
+
+namespace Skill.Test
 {
     public class CloneSkillMachine
     {

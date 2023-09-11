@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Player;
+using Skill.Clone;
 using Skill.Test;
 using UI;
 using UnityEngine;
@@ -70,7 +71,7 @@ namespace Skill.LastBreath
             var num = numberOfSlashed;
             player.stateMachine.State = player.lastBreathSkillState;
             enemyScript.stateMachine.State = enemyScript.airState; //TODO: fix
-            Clone.Create(player.transform, CloneType.Dash, Vector3.zero, target);
+            Clone.Clone.Create(player.transform, CloneType.Dash, Vector3.zero, target);
             player.transform.position = target.position;
             yield return new WaitForSeconds(.5f);
 
@@ -88,15 +89,15 @@ namespace Skill.LastBreath
 
                 var randomVector = randomVector3[randomIndex];
 
-                Clone.Create(target, CloneType.DashAttack, randomVector);
+                Clone.Clone.Create(target, CloneType.DashAttack, randomVector);
                 yield return new WaitForSeconds(.2f);
             }
 
             player.transform.position = target.position + new Vector3(1.5f, .6f);
             player.stateMachine.State = new PlayerPrimaryAttackState(player.stateMachine, player, "Attack", 2);
             player.FlipController(-1);
-            Slash.Create(SkillManager.Instance.cloneSkill1.LastSlashPrefab, target.position, default);
-            Hit.Create(SkillManager.Instance.cloneSkill1.HitPrefab, target.position, Vector3.down);
+            Slash.Create(SkillManager.Instance.cloneSkill.LastSlashPrefab, target.position, default);
+            Hit.Create(SkillManager.Instance.cloneSkill.HitPrefab, target.position, Vector3.down);
 
             yield return new WaitForSeconds(.5f);
             player.stateMachine.State = player.idleState;

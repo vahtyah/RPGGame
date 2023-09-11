@@ -9,7 +9,7 @@ namespace Skill.Sword
         private float spinTimer;
         private float spinDir;
         private float hitTimer;
-        public SpinSwordSkillType(SwordSkill swordSkill, SwordController swordController) : base(swordSkill, swordController)
+        public SpinSwordSkillType(SwordSkill swordSkill, Sword sword) : base(swordSkill, sword)
         {
             isSpinning = true;
         }
@@ -31,7 +31,7 @@ namespace Skill.Sword
         {
             if (isSpinning)
             {
-                if (Vector2.Distance(player.transform.position, swordController.transform.position) > swordSkill.MaxTravelDistance && !wasStopped)
+                if (Vector2.Distance(player.transform.position, sword.transform.position) > swordSkill.MaxTravelDistance && !wasStopped)
                 {
                     StopWhenSpinning();
                 }
@@ -39,11 +39,11 @@ namespace Skill.Sword
                 if (wasStopped)
                 {
                     spinTimer -= Time.deltaTime;
-                    var position = swordController.transform.position;
+                    var position = sword.transform.position;
                     position = Vector2.MoveTowards(position,
                         new Vector2(position.x + spinDir, position.y * spinDir),
                         1.5f * Time.deltaTime);
-                    swordController.transform.position = position;
+                    sword.transform.position = position;
 
                     if (spinTimer < 0)
                     {
@@ -55,7 +55,7 @@ namespace Skill.Sword
                     if (hitTimer < 0)
                     {
                         hitTimer = swordSkill.HitCooldown;
-                        var colliders = Physics2D.OverlapCircleAll(swordController.transform.position, 1);
+                        var colliders = Physics2D.OverlapCircleAll(sword.transform.position, 1);
                         foreach (var hit in colliders)
                         {
                             if (hit.GetComponent<Enemy.Enemy>() != null)

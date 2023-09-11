@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using Skill.Clone.Type;
+using Skill.Test;
 using UnityEngine;
 
-namespace Skill.Test
+namespace Skill.Clone
 {
     public class Clone : MonoBehaviour
     {
         public static Clone Create(Transform cloneTransform, CloneType cloneType, Vector3 offset = default,
             Transform target = default)
         {
-            var newClone = Instantiate(SkillManager.Instance.cloneSkill1.ClonePrefab);
+            var newClone = Instantiate(SkillManager.Instance.cloneSkill.ClonePrefab);
             var newCloneCtr = newClone.GetComponent<Clone>();
             newCloneCtr.Setup(cloneTransform, cloneType, target, offset);
             return newCloneCtr;
@@ -18,14 +19,14 @@ namespace Skill.Test
         public static IEnumerator Create(Transform cloneTransform, Vector3 offset, float delay)
         {
             yield return new WaitForSeconds(delay);
-            var newClone = Instantiate(SkillManager.Instance.cloneSkill1.ClonePrefab);
+            var newClone = Instantiate(SkillManager.Instance.cloneSkill.ClonePrefab);
             var newCloneCtr = newClone.GetComponent<Clone>();
             newCloneCtr.Setup(cloneTransform, CloneType.Attack, default, offset);
         }
 
         private CloneSkillType GetCloneSkillTypeBy(CloneType cloneType)
         {
-            var cloneSkill = SkillManager.Instance.cloneSkill1;
+            var cloneSkill = SkillManager.Instance.cloneSkill;
             return cloneType switch
             {
                 CloneType.Attack => new AttackCloneSkillType(cloneSkill, this, "Attack"),

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Skill.Sword
 {
-    public class SwordController : MonoBehaviour
+    public class Sword : MonoBehaviour
     {
         
         #region Component

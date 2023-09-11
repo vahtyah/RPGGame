@@ -1,51 +1,48 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Skill
+namespace Skill.Clone
 {
+    public enum CloneType
+    {
+        Attack,
+        Dash,
+        DashAttack
+    }
+
     public class CloneSkill : Skill
     {
         [Header("Clone Info")]
         [SerializeField] private GameObject clonePrefab;
 
-        [SerializeField] private float cloneDuration;
-        [Space] 
-        [SerializeField] private bool canAttack;
-        
-        [SerializeField] private bool createCloneOnDashStart;
-        [SerializeField] private bool createCloneOnDashOver;
-        [SerializeField] private bool canCreateCloneOnCounterAttack;
-        
-        [Header("Duplicate Clone")]
-        [SerializeField] private bool canDuplicateClone;
-        [SerializeField] private float chanceToDuplicate;
+        [SerializeField] private float cloneDuration = 1.5f;
 
-        [Header("CrystalInsteadOfClone")]
-        [SerializeField] private bool crystalInsteadOfClone;
-        public void CreateClone(Transform cloneTransform, Vector3 offset)
-        {
-            if (crystalInsteadOfClone) //TODO chuyển sang chiêu Crystal
-            {
-                SkillManager.Instance.crystalSkill.CreateCrystal();
-                return;
-            }
-            var newClone = Instantiate(clonePrefab);
-            newClone.GetComponent<CloneSkillController>().SetUp(player,cloneTransform, cloneDuration, canAttack, offset,
-                FindClosestEnemy(newClone.transform), canDuplicateClone,chanceToDuplicate);
-        }
+        [Header("Clone Attack")]
+        [SerializeField] private float colorLosingSpeedAttack = 1;
 
-        public void CreateCloneOnCounterAttack(Transform enemyTransform)
-        {
-            if (canCreateCloneOnCounterAttack)
-                StartCoroutine(CreateCloneWithDelay(enemyTransform.transform, new Vector3(1.5f * player.facingDir,0)));
-        }
+        [Header("Clone Dash")]
+        [SerializeField] private float dashDuration = .2f;
 
-        private IEnumerator CreateCloneWithDelay(Transform transform, Vector3 offset)
-        {
-            yield return new WaitForSeconds(.4f);
-            CreateClone(transform, offset);
-        }
+        [SerializeField] private float dashSpeed = 25;
+        [SerializeField] private float colorLosingSpeedDash = 1;
 
-        public bool CrystalInsteadOfClone => crystalInsteadOfClone; 
+        [Header("Clone Dash Attack")]
+        public Transform target;
+
+        [SerializeField] private GameObject slashPrefab;
+        [SerializeField] private GameObject lastSlashPrefab;
+        [SerializeField] private GameObject hitPrefab;
+
+        public float CloneDuration => cloneDuration;
+        public float DashDuration => dashDuration;
+        public float DashSpeed => dashSpeed;
+
+        public float ColorLosingSpeedAttack => colorLosingSpeedAttack;
+
+        public float ColorLosingSpeedDash => colorLosingSpeedDash;
+        public Transform Target => target;
+        public GameObject SlashPrefab => slashPrefab;
+        public GameObject LastSlashPrefab => lastSlashPrefab;
+        public GameObject HitPrefab => hitPrefab;
+        public GameObject ClonePrefab => clonePrefab;
     }
 }

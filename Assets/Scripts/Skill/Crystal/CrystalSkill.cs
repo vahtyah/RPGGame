@@ -53,7 +53,7 @@ namespace Skill.Crystal
 
                 if (cloneInsteadOfCrystal)
                 {
-                    SkillManager.Instance.cloneSkill.CreateClone(currentCrystal.transform, Vector3.zero);
+                    // SkillManager.Instance.cloneSkill.CreateClone(currentCrystal.transform, Vector3.zero);
                     Destroy(currentCrystal);
                 }
                 else currentCrystal.GetComponent<CrystalSkillController>().LogicCrystal(); //TODO check or not

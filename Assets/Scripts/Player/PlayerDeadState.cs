@@ -14,7 +14,7 @@ namespace Player
             base.Enter();
             player.SetZeroVelocity();
             
-            GameObject.Find("Canvas").GetComponent<UI.UI>().SwitchOnEndScreen();
+            // GameObject.Find("Canvas").GetComponent<UI.UI>().SwitchOnEndScreen();
         }
     }
 }

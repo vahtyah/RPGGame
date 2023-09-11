@@ -11,6 +11,8 @@ namespace UI
         [SerializeField] private RectTransform rectFillHp;
         [SerializeField] private TextMeshProUGUI currencyText;
         private PlayerStats playerStats;
+        private bool isUpdateHealth;
+        private float healthNormalized;
 
         private void Start()
         {
@@ -25,10 +27,25 @@ namespace UI
                 delegate(object sender, EventArgs args) { UpdateHeathBar(); };
         }
 
+        private void Update()
+        {
+            if (isUpdateHealth)
+            {
+                var preScale = rectFillHp.transform.localScale;
+                rectFillHp.transform.localScale = Vector3.Lerp(rectFillHp.transform.localScale,
+                    new Vector3(healthNormalized, rectFillHp.transform.localScale.y),
+                    2 * Time.deltaTime);
+                if (preScale == rectFillHp.transform.localScale)
+                {
+                    isUpdateHealth = false;
+                }
+            }
+        }
+
         private void UpdateHeathBar()
         {
-            var healthNor = Mathf.Clamp(playerStats.GetHealthAmountNormalized, 0, 1);
-            rectFillHp.transform.localScale = new Vector3(healthNor, 1, 1);
+            healthNormalized = Mathf.Clamp(playerStats.GetHealthAmountNormalized, 0, 1);
+            isUpdateHealth = true;
         }
     }
 }

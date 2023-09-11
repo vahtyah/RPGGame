@@ -1,10 +1,9 @@
-﻿using System;
-using Skill.Blackhole;
+﻿using Skill.Blackhole;
+using Skill.Clone;
 using Skill.Crystal;
 using Skill.LastBreath;
 using Skill.Parry;
 using Skill.Sword;
-using Skill.Test;
 using UnityEngine;
 
 namespace Skill
@@ -14,8 +13,7 @@ namespace Skill
         public static SkillManager Instance { get; private set; }
         public DashSkill dashSkill { get; private set; }
         public CloneSkill cloneSkill { get; private set; }
-        public CloneSkill1 cloneSkill1 { get; private set; }
-        public Sword.SwordSkill swordSkill { get; private set; }
+        public SwordSkill swordSkill { get; private set; }
         public BlackholeSkill blackholeSkill { get; private set; }
         public CrystalSkill crystalSkill { get; private set; }
         public ParrySkill parrySkill { get; private set; }
@@ -31,8 +29,7 @@ namespace Skill
         {
             dashSkill = GetComponent<DashSkill>();
             cloneSkill = GetComponent<CloneSkill>();
-            cloneSkill1 = GetComponent<CloneSkill1>();
-            swordSkill = GetComponent<Sword.SwordSkill>();
+            swordSkill = GetComponent<SwordSkill>();
             blackholeSkill = GetComponent<BlackholeSkill>();
             crystalSkill = GetComponent<CrystalSkill>();
             parrySkill = GetComponent<ParrySkill>();
@@ -41,6 +38,7 @@ namespace Skill
 
         private void Update()
         {
+            
         }
     }
 }

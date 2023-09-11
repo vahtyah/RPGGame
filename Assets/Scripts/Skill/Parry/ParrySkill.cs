@@ -53,7 +53,7 @@ namespace Skill.Parry
                         if (cloneOnParryUnlocker)
                         {
                             // canCreateClone = false;
-                            StartCoroutine(Clone.Create(hit.transform, new Vector3(1.5f * player.facingDir, 0), .4f));
+                            StartCoroutine(Clone.Clone.Create(hit.transform, new Vector3(1.5f * player.facingDir, 0), .4f));
                         }
                     }
             }

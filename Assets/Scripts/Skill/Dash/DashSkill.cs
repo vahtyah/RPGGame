@@ -1,4 +1,5 @@
 ﻿using System;
+using Skill.Clone;
 using Skill.Test;
 using UI;
 using Unity.VisualScripting;
@@ -45,13 +46,14 @@ namespace Skill
         public void DashStartEffect()
         {
             if (cloneOnDashUnlocker)
-                Clone.Create(player.transform, CloneType.Attack);
+                Clone.Clone.Create(player.transform, CloneType.Attack);
+            
         }
 
         public void DashFinishEffect()
         {
             if (cloneOnDashArrivalUnlocker)
-                Clone.Create(player.transform, CloneType.Attack);
+                Clone.Clone.Create(player.transform, CloneType.Attack);
         }
     }
 }

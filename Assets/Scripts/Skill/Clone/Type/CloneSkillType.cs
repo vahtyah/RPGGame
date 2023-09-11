@@ -1,11 +1,12 @@
 ﻿using Player;
+using Skill.Test;
 using UnityEngine;
 
-namespace Skill.Test
+namespace Skill.Clone.Type
 {
     public abstract class CloneSkillType
     {
-        protected CloneSkill1 cloneSkill;
+        protected CloneSkill cloneSkill;
         protected Clone clone;
         protected Player.Player player;
 
@@ -13,7 +14,7 @@ namespace Skill.Test
         protected float timerClone; 
         protected float colorLosingSpeed;
 
-        protected CloneSkillType(CloneSkill1 cloneSkill, Clone clone, string animBoolName)
+        protected CloneSkillType(CloneSkill cloneSkill, Clone clone, string animBoolName)
         {
             this.cloneSkill = cloneSkill;
             this.clone = clone;

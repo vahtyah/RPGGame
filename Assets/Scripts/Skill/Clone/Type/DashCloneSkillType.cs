@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using Skill.Test;
+using UnityEngine;
 
-namespace Skill.Test
+namespace Skill.Clone.Type
 {
     public class DashCloneSkillType : CloneSkillType
     {
         private Vector3 facingDir;
 
-        public DashCloneSkillType(CloneSkill1 cloneSkill, Clone clone, string animBoolName) : base(cloneSkill,
+        public DashCloneSkillType(CloneSkill cloneSkill, Clone clone, string animBoolName) : base(cloneSkill,
             clone, animBoolName)
         {
         }

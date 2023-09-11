@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class ShockStrikeController : MonoBehaviour
+public class ShockStrike : MonoBehaviour
 {
     private CharacterStats targetStats;
     [SerializeField] private float speed = 5f;

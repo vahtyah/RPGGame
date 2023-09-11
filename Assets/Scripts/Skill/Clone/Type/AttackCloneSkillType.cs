@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Skill.Test;
+using UnityEngine;
 
-namespace Skill.Test
+namespace Skill.Clone.Type
 {
     public class AttackCloneSkillType : CloneSkillType
     {
-        public AttackCloneSkillType(CloneSkill1 cloneSkill, Clone clone, string animBoolName) : base(
+        public AttackCloneSkillType(CloneSkill cloneSkill, Clone clone, string animBoolName) : base(
             cloneSkill, clone, animBoolName)
         {
         }

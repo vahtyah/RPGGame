@@ -10,7 +10,7 @@ namespace Skill.Sword
             anim.SetBool("Rotation", true);
         }
 
-        public RegularSwordSkillType(SwordSkill swordSkill, SwordController swordController) : base(swordSkill, swordController)
+        public RegularSwordSkillType(SwordSkill swordSkill, Sword sword) : base(swordSkill, sword)
         {
         }
     }

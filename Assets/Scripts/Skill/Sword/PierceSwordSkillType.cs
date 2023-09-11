@@ -5,7 +5,7 @@ namespace Skill.Sword
     public class PierceSwordSkillType : SwordSkillType
     {
         private int pierceAmount;
-        public PierceSwordSkillType(SwordSkill swordSkill, SwordController swordController) : base(swordSkill, swordController)
+        public PierceSwordSkillType(SwordSkill swordSkill, Sword sword) : base(swordSkill, sword)
         {
             pierceAmount = swordSkill.PierceAmount;
         }

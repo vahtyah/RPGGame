@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Player;
-using Skill.Test;
+using Skill.Clone;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Vector2 = System.Numerics.Vector2;
 
 namespace Skill.Blackhole
 {
@@ -22,7 +20,7 @@ namespace Skill.Blackhole
         private bool canCreateHotkey = true;
         private bool cloneAttackReleased;
         private bool playerCanDisapear = true;
-        
+
         public int amountOfAttack = 4;
         private float cloneAttackCooldown = .3f;
         private float cloneAttackTimer;
@@ -43,9 +41,6 @@ namespace Skill.Blackhole
             this.amountOfAttack = amountOfAttack;
             this.cloneAttackCooldown = cloneAttackCooldown;
             this.blackholeTimer = blackholeDuration;
-
-            if (SkillManager.Instance.cloneSkill.CrystalInsteadOfClone)
-                playerCanDisapear = false;
         }
 
         private void Update()
@@ -85,7 +80,7 @@ namespace Skill.Blackhole
 
         private void ReleaseCloneAttack()
         {
-            if(targets.Count <= 0) return;
+            if (targets.Count <= 0) return;
 
             DestroyHotkey();
             cloneAttackReleased = true;
@@ -102,20 +97,11 @@ namespace Skill.Blackhole
         {
             if (cloneAttackTimer < 0 && cloneAttackReleased && targets.Count > 0 && amountOfAttack > 0)
             {
-                
                 int randomIndex = Random.Range(0, targets.Count);
                 var xOffset = Random.Range(0, 2) == 0 ? -1.5f : 1.5f;
                 cloneAttackTimer = cloneAttackCooldown;
 
-                if (SkillManager.Instance.cloneSkill.CrystalInsteadOfClone)
-                {
-                    SkillManager.Instance.crystalSkill.CreateCrystal();
-                    SkillManager.Instance.crystalSkill.CurrentCrystalChooseRandomEnemy();
-                }
-                else
-                {
-                    Clone.Create(targets[randomIndex], CloneType.Attack, new Vector3(xOffset, 0));
-                }
+                Clone.Clone.Create(targets[randomIndex], CloneType.Attack, new Vector3(xOffset, 0));
 
                 amountOfAttack--;
                 if (amountOfAttack <= 0)

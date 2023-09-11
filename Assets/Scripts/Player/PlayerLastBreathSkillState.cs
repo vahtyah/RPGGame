@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Enemy.Skeleton;
 using Skill;
+using Skill.Clone;
 using Skill.Test;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Player
 {
     public class PlayerLastBreathSkillState : PlayerState
     {
-        private CloneSkill1 cloneSkill;
+        private CloneSkill cloneSkill;
         private int defaultLayer;
 
         public PlayerLastBreathSkillState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(

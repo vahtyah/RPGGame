@@ -10,7 +10,7 @@ namespace Skill.Sword
         private int targetIndex;
         private int bounceAmount;
 
-        public BounceSwordSkillType(SwordSkill swordSkill, SwordController swordController) : base(swordSkill, swordController)
+        public BounceSwordSkillType(SwordSkill swordSkill, Sword sword) : base(swordSkill, sword)
         {
             bounceAmount = swordSkill.BounceAmount;
             enemiesTarget = new List<Transform>();
@@ -34,9 +34,9 @@ namespace Skill.Sword
         {
             if (isBouncing && enemiesTarget.Count > 0)
             {
-                swordController.transform.position = Vector2.MoveTowards(swordController.transform.position,
+                sword.transform.position = Vector2.MoveTowards(sword.transform.position,
                     enemiesTarget[targetIndex].position, swordSkill.BounceSpeed * Time.deltaTime);
-                if (Vector2.Distance(swordController.transform.position, enemiesTarget[targetIndex].position) < .1f)
+                if (Vector2.Distance(sword.transform.position, enemiesTarget[targetIndex].position) < .1f)
                 {
                     var curEnemy = enemiesTarget[targetIndex].GetComponent<Enemy.Enemy>();
                     Damage(curEnemy);
@@ -66,7 +66,7 @@ namespace Skill.Sword
             if (isBouncing && enemiesTarget.Count > 0)
             {
                 anim.SetBool("Rotation", true);
-                swordController.transform.parent = null;
+                sword.transform.parent = null;
             }
         }
 
@@ -74,7 +74,7 @@ namespace Skill.Sword
         {
             if (isBouncing && enemiesTarget.Count <= 0)
             {
-                var colliders = Physics2D.OverlapCircleAll(swordController.transform.position, swordSkill.BounceRadius);
+                var colliders = Physics2D.OverlapCircleAll(sword.transform.position, swordSkill.BounceRadius);
                 foreach (var hit in colliders)
                 {
                     if (hit.GetComponent<Enemy.Enemy>() != null)
