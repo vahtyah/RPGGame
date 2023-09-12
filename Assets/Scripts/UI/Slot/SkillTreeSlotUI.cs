@@ -17,6 +17,9 @@ namespace UI
         [SerializeField] private Color skillColor;
         [SerializeField] private SkillCooldownUI cooldownUI;
         
+        [Header("Skill UI")]
+        [SerializeField] private ArrowLineUI[] arrowLine;
+        
 
         public bool unlocker;
         [Header("Unlock conditions")]
@@ -35,8 +38,8 @@ namespace UI
         private void Awake()
         {
             img = GetComponent<Image>();
-            img.color = unlocker ? Color.white:skillColor;
-            GetComponent<Button>().onClick.AddListener( (UnlockSkillSlot));
+            img.color = unlocker ? Color.white : skillColor;
+            GetComponent<Button>().onClick.AddListener((UnlockSkillSlot));
         }
 
         private void UnlockSkillSlot()
@@ -47,16 +50,27 @@ namespace UI
 
             if (shouldBeLocker.Any(skill => skill.unlocker)) return;
 
-            if (!PlayerManager.Instance.HasEnoughMoney(skillPrice)) return;
+            if (!PlayerManager.Instance.HasEnoughMoney(skillPrice))
+            {
+                NotificationUI.Instance.AddNotification("Not enought soul!",NotificationType.Skill);
+                return;
+            }
+
             cooldownUI?.SetImageSkill(img.sprite);
             cooldownUI?.gameObject.SetActive(true);
-            img.color = Color.white;
+            
+            foreach (var arrowLineUI in arrowLine)
+            {
+                arrowLineUI.StartFilling();
+            }
+            
             OnUnlocked();
         }
 
         private void OnUnlocked()
         {
             unlocker = true;
+            img.color = Color.white;
             onUnlocked?.Invoke(this, EventArgs.Empty);
         }
 
@@ -65,6 +79,10 @@ namespace UI
             if (data.skillTree.Contains(skillName))
             {
                 OnUnlocked();
+                foreach (var arrowLineUI in arrowLine)
+                {
+                    arrowLineUI.SetFill();
+                }
             }
         }
 

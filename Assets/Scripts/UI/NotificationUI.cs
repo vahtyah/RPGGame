@@ -10,7 +10,8 @@ namespace UI
     {
         Default,
         Craft,
-        PickUp
+        PickUp,
+        Skill
     }
 
     public class NotificationUI : MonoBehaviour
@@ -97,7 +98,7 @@ namespace UI
             else gameObject.SetActive(false);
         }
 
-        public void AddNotification(string text, NotificationType type, string name)
+        public void AddNotification(string text, NotificationType type, string name = "")
         {
             if (gameObject.activeSelf && currentType == type)
             {

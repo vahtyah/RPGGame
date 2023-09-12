@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace Skill
 {
+    //TODO: Clean Input use Skill
     public class SkillManager : MonoBehaviour
     {
         public static SkillManager Instance { get; private set; }
