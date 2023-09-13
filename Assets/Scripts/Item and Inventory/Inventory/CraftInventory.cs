@@ -16,7 +16,7 @@ namespace Item_and_Inventory.Test
         [SerializeField] private Transform requiredMaterialsParent;
         [SerializeField] private ItemSlotUI itemToCraft;
         [SerializeField] private Button craftButton;
-
+        
         private EquipmentItemData itemData;
 
         protected override void Start()
@@ -85,7 +85,6 @@ namespace Item_and_Inventory.Test
 
         public override void SelectItem(Item itemToSelect)
         {
-            //TODO: just inventory run, not craft
             base.SelectItem(itemToSelect);
             if (itemToSelect == null)
             {

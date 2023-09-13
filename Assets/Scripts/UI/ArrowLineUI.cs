@@ -1,4 +1,5 @@
 ﻿using System;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,10 @@ namespace UI
     {
         [SerializeField] private Transform fillImage;
         private bool isFilling;
+
+        private void Start()
+        {
+        }
 
         private void Update()
         {

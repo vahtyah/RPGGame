@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Player;
+using Save_and_Load;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -63,9 +64,10 @@ namespace Item_and_Inventory
         }
         public void AddModifiers()
         {
+            
+            
             //TODO: Create List of Stats need to modify;
             var playerStats = PlayerManager.Instance.player.GetComponent<PlayerStats>();
-            
             playerStats.strength.AddModifier(strength);
             playerStats.agility.AddModifier(agility);
             playerStats.intelligence.AddModifier(intelligence);

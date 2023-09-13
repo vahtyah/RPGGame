@@ -18,7 +18,7 @@ public class ItemObject : MonoBehaviour
      private void UpdateVisualItem()
     {
         if (!itemData) return;
-        GetComponent<SpriteRenderer>().sprite = itemData.itemIcon;
+        GetComponent<SpriteRenderer>().sprite = itemData.itemIconInGame;
         gameObject.name = "Item object - " + itemData.itemName;
     }
 
