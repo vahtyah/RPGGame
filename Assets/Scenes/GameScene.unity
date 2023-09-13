@@ -1651,7 +1651,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 325, y: 0}
   m_SizeDelta: {x: 0, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &108440946
@@ -3128,8 +3128,8 @@ MonoBehaviour:
   possibleDrop: []
   dropList: []
   dropPrefab: {fileID: 8616273930555591629, guid: 7564fdfcba007cd4dbabf7f5f1aba4c2, type: 3}
-  chanceToLoseEquipmentItems: 0
-  chanceToLoseMaterialItems: 100
+  chanceToLoseEquipmentItems: 25
+  chanceToLoseMaterialItems: 75
 --- !u!1 &194232417
 GameObject:
   m_ObjectHideFlags: 0
@@ -6813,7 +6813,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 745, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &586190870

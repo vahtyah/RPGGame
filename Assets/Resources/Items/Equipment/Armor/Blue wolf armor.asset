@@ -35,7 +35,10 @@ MonoBehaviour:
   fireDamage: 0
   iceDamage: 0
   lightingDamage: 0
-  statsModifier: []
+  statsModifier:
+  - statType: 0
+    value: 10
   craftingMaterials:
   - itemData: {fileID: 11400000, guid: 093fb5739739cbd4386696999339c153, type: 2}
     stackSize: 0
+    itemSlotUI: {fileID: 0}

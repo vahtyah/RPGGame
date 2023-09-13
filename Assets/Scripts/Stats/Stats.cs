@@ -9,7 +9,7 @@ public class Stats
 {
     [SerializeField] private int _baseValue;
     public List<int> _modifiers;
-    public static event EventHandler onChanged;
+    public static event EventHandler onChanged;//TODO: fix event;
 
     public int Value
     {

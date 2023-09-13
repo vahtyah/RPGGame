@@ -34,7 +34,6 @@ namespace Item_and_Inventory.Test
 
         public void EquipItem(ItemData itemData)
         {
-            Debug.Log("Equip item");
             var equipmentData = itemData as EquipmentItemData;
 
             Item oldItem = null;

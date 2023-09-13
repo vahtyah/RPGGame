@@ -81,7 +81,7 @@ namespace Item_and_Inventory
             {
                 inventoryItems.Remove(inventoryItem);
                 itemDictionary.Remove(itemData);
-                Destroy(inventoryItem.itemSlotUI.gameObject);//TODO: fix
+                Destroy(inventoryItem.itemSlotUI.gameObject);
             }
             else
             {

@@ -26,7 +26,8 @@ namespace UI
             UpdateValueStat();
             Stats.onChanged += (sender, stats) =>
             {
-                UpdateValueStat(); //TODO: run 14 times
+                UpdateValueStat(); //TODO: run 14 times link:Stats.cs
+                Debug.Log("VAR");
             };
         }
 

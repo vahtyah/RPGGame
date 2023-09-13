@@ -47,7 +47,7 @@ namespace UI
                 var newConsumableSlotUI = Instantiate(consumableSlotPrefab, consumableSlotParent)
                     .GetComponent<ConsumableSlotUI>();
                 newConsumableSlotUI.Setup(new Item(pouchItemData),null);
-            } //TODO: clean
+            }
         }
 
         public override void OnPointerDown(PointerEventData eventData) { }

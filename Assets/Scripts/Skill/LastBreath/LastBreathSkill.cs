@@ -70,7 +70,7 @@ namespace Skill.LastBreath
             var lastIndex = 0;
             var num = numberOfSlashed;
             player.stateMachine.State = player.lastBreathSkillState;
-            enemyScript.stateMachine.State = enemyScript.airState; //TODO: fix
+            enemyScript.stateMachine.State = enemyScript.airState;
             Clone.Clone.Create(player.transform, CloneType.Dash, Vector3.zero, target);
             player.transform.position = target.position;
             yield return new WaitForSeconds(.5f);
