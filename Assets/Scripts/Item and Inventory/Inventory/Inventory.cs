@@ -63,7 +63,7 @@ namespace Item_and_Inventory
                 var newItemSlotUI = Instantiate(itemSlotUIPrefab, slotParent);
                 
                 var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
-                var newItem = new Item(itemData, newItemSlotUIScript.AmountText, newItemSlotUIScript);
+                var newItem = new Item(itemData, newItemSlotUIScript);
                 newItemSlotUIScript.Setup(newItem, this);
 
                 slotUIs.Add(newItemSlotUIScript);
@@ -110,7 +110,7 @@ namespace Item_and_Inventory
                 var newItemSlotUI = Instantiate(itemSlotUIPrefab, slotParent);
                 
                 var newItemSlotUIScript = newItemSlotUI.GetComponent<ItemSlotUI>();
-                var newItem = new Item(item.itemData, newItemSlotUIScript.AmountText, newItemSlotUIScript);
+                var newItem = new Item(item.itemData, newItemSlotUIScript);
                 newItemSlotUIScript.Setup(newItem, this);
                 Debug.Log(item.stackSize);
                 newItem.AddStack(item.stackSize - 1);

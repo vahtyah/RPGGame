@@ -12,12 +12,12 @@ namespace Item_and_Inventory
         private TextMeshProUGUI _amountText;
         public ItemSlotUI itemSlotUI;
 
-        public Item(ItemData itemData, TextMeshProUGUI amountText = null, ItemSlotUI itemSlotUI = null)
+        public Item(ItemData itemData, ItemSlotUI itemSlotUI = null)
         {
             this.itemData = itemData;
             this.itemSlotUI = itemSlotUI;
-            this._amountText = amountText;
-            this.stackSize = 1;
+            _amountText = itemSlotUI?.AmountText;
+            stackSize = 1;
         }
 
         public void AddStack(int size = 1)
@@ -36,7 +36,5 @@ namespace Item_and_Inventory
         {
             _amountText.text = stackSize <= 1 ? "" : stackSize.ToString();
         }
-
-        public TextMeshProUGUI AmountText => AmountText;
     }
 }

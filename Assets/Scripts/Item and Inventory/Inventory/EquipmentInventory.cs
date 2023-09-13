@@ -22,7 +22,7 @@ namespace Item_and_Inventory.Test
             foreach (var equipmentSlotUI in equipmentSlots)
                 if (equipmentSlotUI.equipmentType == equipmentItem!.equipmentType)
                 {
-                    var inventoryItem = new Item(equipmentItem, null, equipmentSlotUI);
+                    var inventoryItem = new Item(equipmentItem, equipmentSlotUI);
                     equipmentSlotUI.Setup(inventoryItem, this);
                     inventoryItems.Add(inventoryItem);
                     itemDictionary.Add(itemData, inventoryItem);
