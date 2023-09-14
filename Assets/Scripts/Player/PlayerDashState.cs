@@ -1,10 +1,12 @@
 ﻿using Skill;
+using Skill.Sword;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerDashState : PlayerState
     {
+        private DashSkill dashSkill;
         public PlayerDashState(PlayerStateMachine playerStateMachine, Player player, string animBoolName) : base(
             playerStateMachine, player, animBoolName)
         {
@@ -13,15 +15,15 @@ namespace Player
         public override void Enter()
         {
             base.Enter();
-
-            player.skill.dashSkill.DashStartEffect();
+            dashSkill = player.skill.dashSkill;
+            dashSkill.DashStartEffect();
             timerState = player.dashDuration;
         }
 
         public override void Update()
         {
             base.Update();
-            player.SetVelocity(player.dashSpeed * player.dashDir, 0);
+            player.SetVelocity(player.dashSpeed * dashSkill.GetFacingDirection, 0);
             if (timerState < 0f)
             {
                 stateMachine.State = player.idleState;
@@ -31,8 +33,10 @@ namespace Player
         public override void Exit()
         {
             base.Exit();
-            player.skill.dashSkill.DashFinishEffect();
+            dashSkill.DashFinishEffect();
             player.SetVelocity(0, rb.velocity.y);
         }
+        
+
     }
 }

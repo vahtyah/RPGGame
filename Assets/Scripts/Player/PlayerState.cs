@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Skill;
+using UnityEngine;
 
 namespace Player
 {
@@ -6,6 +7,7 @@ namespace Player
     {
         protected readonly PlayerStateMachine stateMachine;
         protected readonly Player player;
+        protected SkillManager skill;
         private readonly string animBoolName;
 
         protected Rigidbody2D rb;
@@ -28,6 +30,7 @@ namespace Player
             player.anim.SetBool(animBoolName,true);
             rb = player.rb;
             triggerCalled = false;
+            skill = player.skill;
         }
         public virtual void Update()
         {
@@ -35,6 +38,12 @@ namespace Player
             yInput = Input.GetAxisRaw("Vertical");  
             player.anim.SetFloat("yVelocity", rb.velocity.y);
             timerState -= Time.deltaTime;
+            UseSkill();
+        }
+
+        protected virtual void UseSkill()
+        {
+            
         }
 
         public virtual void Exit()

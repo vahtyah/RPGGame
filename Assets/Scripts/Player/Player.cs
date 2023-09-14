@@ -82,17 +82,10 @@ namespace Player
         {
             base.Update();
             stateMachine.State.Update();
-            CheckForDashInput();
-
-            if (Input.GetKeyDown(KeyCode.F))
-                skill.crystalSkill.UseSkill();
-
-            if (Input.GetKeyDown(KeyCode.L) && skill.lastBreathSkill.UseSkill())
-            {
-            }
-
-            if (Input.GetKeyDown(KeyCode.K))
-                Clone.Create(transform, CloneType.Dash);
+            
+            skill.UseDashSkill();
+            skill.UseCrystalSkill();
+            skill.UseLastBreathSkill();
         }
 
         public override void SlowEntityBy(float slowPercentage, float slowDuration)
@@ -139,17 +132,6 @@ namespace Player
 
         public void AnimationTrigger() => stateMachine.State.AnimationFinishTrigger();
 
-        private void CheckForDashInput()
-        {
-            if (IsWallDetected()) return;
-            if (Input.GetKeyDown(KeyCode.LeftShift) && skill.dashSkill.UseSkill())
-            {
-                dashDir = Input.GetAxisRaw("Horizontal");
-                if (dashDir == 0) dashDir = facingDir;
-                stateMachine.State = dashState;
-            }
-        }
-
         public override void Die()
         {
             base.Die();
@@ -157,5 +139,6 @@ namespace Player
         }
 
         public GameObject TornadoPrefab => tornadoPrefab;
+        public float GetFacingDirection => facingDir;
     }
 }

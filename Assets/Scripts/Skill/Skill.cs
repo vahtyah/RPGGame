@@ -27,7 +27,7 @@ namespace Skill
         {
             if (!(cooldownTimer < 0))
                 return false;
-
+            
             StartSkill(); 
             cooldownTimer = cooldown;
             return true;

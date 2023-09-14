@@ -33,12 +33,13 @@ namespace Skill.Blackhole
 
         public override bool UseSkill()
         {
-            return blackHoleUnlocker;
+            return blackHoleUnlocker && base.UseSkill();
         }
 
         public override void StartSkill()
         {
             base.StartSkill();
+            player.stateMachine.State = player.blackholeState;
             var newBlackhole = Instantiate(blackholePrefab, player.transform.position,Quaternion.identity);
             currentBlackhole = newBlackhole.GetComponent<BlackholeSkillController>();
             currentBlackhole.SetupBlackhole(maxSize,growSpeed,shrinkSpeed,amountOfAttack,cloneCooldown, blackholeDuration);

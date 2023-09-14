@@ -18,18 +18,6 @@ namespace Player
         public override void Update()
         {
             base.Update();
-
-            if (Input.GetKeyDown(KeyCode.R) && player.skill.blackholeSkill.UseSkill())
-                stateMachine.State = player.blackholeState;
-            
-            if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
-                stateMachine.State = player.holdSwordState;
-
-            if (Input.GetKeyDown(KeyCode.Q) && player.skill.parrySkill.UseSkill())
-            {
-                
-            }
-                // stateMachine.State = player.counterAttackState;
             
             if (Input.GetKeyDown(KeyCode.Mouse0))
                 stateMachine.State = player.primaryAttackState;
@@ -41,17 +29,14 @@ namespace Player
                 stateMachine.State = player.jumpState;
         }
 
-        public override void Exit()
+        protected override void UseSkill()
         {
-            base.Exit();
+            base.UseSkill();
+            skill.UseSwordSkill();
+            skill.UseBlackholeSkill();
+            skill.UseParrySkill();
         }
 
-        private bool HasNoSword()
-        {
-            if (!player.sword) return true;
-            // player.sword.GetComponent<SwordSkillController>().ReturnSword();
-            player.sword.GetComponent<Sword>().typeMachine.CurrentType.ReturnSword();
-            return false;
-        }
+        
     }
 }

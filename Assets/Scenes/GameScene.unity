@@ -2575,6 +2575,7 @@ MonoBehaviour:
   cooldownUI: {fileID: 1972359227}
   arrowLine:
   - {fileID: 1488062209}
+  image: {fileID: 160346812}
   unlocker: 0
   shouldBeUnlocker:
   - {fileID: 231912268}
@@ -2885,6 +2886,7 @@ MonoBehaviour:
   arrowLine:
   - {fileID: 1354258743}
   - {fileID: 494470576}
+  image: {fileID: 186262375}
   unlocker: 0
   shouldBeUnlocker:
   - {fileID: 1214975353}
@@ -3661,6 +3663,7 @@ MonoBehaviour:
   arrowLine:
   - {fileID: 454395575}
   - {fileID: 1766704542}
+  image: {fileID: 231912265}
   unlocker: 0
   shouldBeUnlocker:
   - {fileID: 2013184024}
@@ -13732,6 +13735,7 @@ MonoBehaviour:
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 1021083179}
   arrowLine: []
+  image: {fileID: 1147598031}
   unlocker: 0
   shouldBeUnlocker: []
   shouldBeLocker: []
@@ -14693,6 +14697,7 @@ MonoBehaviour:
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 379873671}
   arrowLine: []
+  image: {fileID: 1214975350}
   unlocker: 0
   shouldBeUnlocker: []
   shouldBeLocker: []
@@ -17333,6 +17338,7 @@ MonoBehaviour:
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 1676050244}
   arrowLine: []
+  image: {fileID: 1441492173}
   unlocker: 0
   shouldBeUnlocker: []
   shouldBeLocker: []
@@ -19321,6 +19327,7 @@ MonoBehaviour:
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 0}
   arrowLine: []
+  image: {fileID: 1632044741}
   unlocker: 0
   shouldBeUnlocker: []
   shouldBeLocker: []
@@ -26665,6 +26672,7 @@ MonoBehaviour:
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 1972359227}
   arrowLine: []
+  image: {fileID: 2013184027}
   unlocker: 0
   shouldBeUnlocker: []
   shouldBeLocker: []

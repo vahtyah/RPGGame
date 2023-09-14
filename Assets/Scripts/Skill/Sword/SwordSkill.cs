@@ -56,8 +56,17 @@ namespace Skill.Sword
             GenerateDots();
         }
 
+        public override bool UseSkill() { return HasNoSword() && base.UseSkill(); }
+
+        public override void StartSkill()
+        {
+            base.StartSkill();
+            player.stateMachine.State = player.holdSwordState;
+        }
+
         protected override void Update()
         {
+            base.Update();
             if (Input.GetKeyUp(KeyCode.Mouse1))
             {
                 var aimDirNor = AimDirection().normalized;
@@ -123,6 +132,13 @@ namespace Skill.Sword
                                AimDirection().normalized.y * launchDir.y) * t +
                            .5f * (Physics2D.gravity * swordGravity) * (t * t);
             return position;
+        }
+        
+        private bool HasNoSword()
+        {
+            if (!player.sword) return true;
+            player.sword.GetComponent<Sword>().typeMachine.CurrentType.ReturnSword();
+            return false;
         }
 
         public float BounceSpeed => bounceSpeed;

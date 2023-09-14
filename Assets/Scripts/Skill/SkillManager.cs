@@ -36,10 +36,50 @@ namespace Skill
             parrySkill = GetComponent<ParrySkill>();
             lastBreathSkill = GetComponent<LastBreathSkill>();
         }
-
-        private void Update()
+        
+        public void UseDashSkill()
         {
-            
+            if (Input.GetKeyDown(KeyCode.LeftShift) && dashSkill.UseSkill())
+            {
+            }
+        }
+        
+        public void UseSwordSkill()
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1) && swordSkill.UseSkill())
+            {
+            }
+        }
+        
+        public void UseBlackholeSkill()
+        {
+            if (Input.GetKeyDown(KeyCode.R) && blackholeSkill.UseSkill())
+            {
+            }
+        }
+
+        public void UseParrySkill()
+        {
+            if (Input.GetKeyDown(KeyCode.Q) && parrySkill.UseSkill())
+            {
+                
+            }
+        }
+        
+        public void UseCrystalSkill()
+        {
+            if (Input.GetKeyDown(KeyCode.F) && crystalSkill.UseSkill())
+            {
+                
+            }
+        }
+        
+        public void UseLastBreathSkill()
+        {
+            if (Input.GetKeyDown(KeyCode.L) && lastBreathSkill.UseSkill())
+            {
+                
+            }
         }
     }
 }

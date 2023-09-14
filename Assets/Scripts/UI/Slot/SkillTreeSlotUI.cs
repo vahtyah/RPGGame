@@ -19,6 +19,7 @@ namespace UI
         
         [Header("Skill UI")]
         [SerializeField] private ArrowLineUI[] arrowLine;
+        [SerializeField] private Image image;
         
 
         public bool unlocker;
@@ -28,7 +29,6 @@ namespace UI
 
         public event EventHandler onUnlocked;
 
-        private Image img;
 
         private void OnValidate()
         {
@@ -37,8 +37,7 @@ namespace UI
 
         private void Awake()
         {
-            img = GetComponent<Image>();
-            img.color = unlocker ? Color.white : skillColor;
+            image.color = unlocker ? Color.white : skillColor;
             GetComponent<Button>().onClick.AddListener((UnlockSkillSlot));
         }
 
@@ -56,7 +55,7 @@ namespace UI
                 return;
             }
 
-            cooldownUI?.SetImageSkill(img.sprite);
+            cooldownUI?.SetImageSkill(image.sprite);
             cooldownUI?.gameObject.SetActive(true);
             
             foreach (var arrowLineUI in arrowLine)
@@ -70,7 +69,7 @@ namespace UI
         private void OnUnlocked()
         {
             unlocker = true;
-            img.color = Color.white;
+            image.color = Color.white;
             onUnlocked?.Invoke(this, EventArgs.Empty);
         }
 
