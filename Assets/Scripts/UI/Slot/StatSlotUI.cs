@@ -27,7 +27,6 @@ namespace UI
             Stats.onChanged += (sender, stats) =>
             {
                 UpdateValueStat(); //TODO: run 14 times link:Stats.cs
-                Debug.Log("VAR");
             };
         }
 
@@ -35,33 +34,6 @@ namespace UI
         {
             var playerStats = PlayerManager.Instance.player.GetComponent<PlayerStats>();
             if (!playerStats) return;
-
-            // statValueText.text = playerStats.StatOfType(statType).Value.ToString();
-            //
-            // switch (statType)
-            // {
-            //     case StatType.maxHealth:
-            //         statValueText.text = playerStats.MaxHealthValue.ToString();
-            //         break;
-            //     case StatType.damage:
-            //         statValueText.text = (playerStats.damage.Value + playerStats.strength.Value).ToString();
-            //         break;
-            //     case StatType.critPower:
-            //         statValueText.text = (playerStats.critPower.Value + playerStats.strength.Value).ToString();
-            //         break;
-            //     case StatType.critChance:
-            //         statValueText.text = (playerStats.critChance.Value + playerStats.agility.Value).ToString();
-            //         break;
-            //     case StatType.evasion:
-            //         statValueText.text = (playerStats.evasion.Value + playerStats.agility.Value).ToString();
-            //         break;
-            //     case StatType.magicResistance:
-            //         statValueText.text =
-            //             (playerStats.magicResistance.Value + playerStats.intelligence.Value).ToString();
-            //         break;
-            // }
-            
-            
             statValueText.text = statType switch
             {
                 StatType.maxHealth => playerStats.MaxHealthValue.ToString(),

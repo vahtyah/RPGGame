@@ -18,4 +18,9 @@ public class PlayerStats : CharacterStats
         //
         // if(currentArmor) currentArmor.ExecuteItemEffect(player.transform);
     }
+
+    protected override void Update()
+    {
+        base.Update();
+    }
 }

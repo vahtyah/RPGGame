@@ -20,23 +20,15 @@ MonoBehaviour:
   equipmentType: 0
   itemEffects: []
   itemCooldown: 0
-  strength: 0
-  agility: 5
-  intelligence: 0
-  vitality: 0
-  damage: 12
-  critChance: 7
-  critPower: 0
-  maxHealth: 0
-  armor: 0
-  evasion: 0
-  magicResistance: 0
-  fireDamage: 0
-  iceDamage: 0
-  lightingDamage: 0
-  statsModifier: []
+  statsModifier:
+  - statType: 4
+    value: 10
+  - statType: 11
+    value: 7
   craftingMaterials:
   - itemData: {fileID: 11400000, guid: f5fa154c9249b114dbca0ab16300aa93, type: 2}
     stackSize: 1
+    itemSlotUI: {fileID: 0}
   - itemData: {fileID: 11400000, guid: abcb0f557d5ff854687f237eb73a5857, type: 2}
     stackSize: 1
+    itemSlotUI: {fileID: 0}

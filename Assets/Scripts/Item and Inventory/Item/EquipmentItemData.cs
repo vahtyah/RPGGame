@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Player;
 using Save_and_Load;
@@ -20,14 +21,25 @@ namespace Item_and_Inventory
         public StatType statType;
         public int value;
         private Stats stats;
+        private bool isInitialized;
+
         public void AddModifiers()
         {
-            stats ??= DetermineStats();
+            if(!isInitialized)
+            {
+                stats = DetermineStats();
+                isInitialized = true;
+            }
+
             stats.AddModifier(value);
         }
         public void RemoveModifiers()
         {
-            stats ??= DetermineStats();
+            if(!isInitialized)
+            {
+                stats = DetermineStats();
+                isInitialized = true;
+            }
             stats.RemoveModifier(value);
         }
 
