@@ -12,7 +12,6 @@ namespace Item_and_Inventory.Test
         protected override void Start()
         {
             base.Start();
-            Tyah.Scripts.Tyah.Log("Start backpack");
         }
 
         public override void MoveItemButtonOnClick()
@@ -44,7 +43,6 @@ namespace Item_and_Inventory.Test
             base.LoadData(data);
             foreach (var item in data.generalInventory)
                 loadedItems.Add(item);
-            Tyah.Scripts.Tyah.Log("LoadData");
         }
 
         public override void SaveData(ref GameData data)

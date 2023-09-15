@@ -14,7 +14,7 @@ namespace Enemy.State
             base.Update();
             enemyBase.SetZeroVelocity();
 
-            if (triggerCalled)
+            if (triggerCalled && !enemyBase.IsPlayerDetected(enemyBase.attackDistance))
                 stateMachine.State = enemyBase.battleState;
         }
 

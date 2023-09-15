@@ -58,7 +58,7 @@ namespace UI
 
         public void SaveData(ref GameData data)
         {
-            data.skillCooldownImg.Clear();
+            // data.skillCooldownImg.Clear();
             if(skillImage.sprite != null)
                 data.skillCooldownImg.TryAdd(skill.GetType().ToString(), skillImage.sprite);
         }

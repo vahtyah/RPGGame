@@ -130,8 +130,8 @@ namespace Enemy
 
         public virtual void AnimationFinishTrigger() => stateMachine.State.AnimationFinishTrigger();
 
-        public virtual RaycastHit2D IsPlayerDetected() =>
-            Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 50, whatIsPlayer);
+        public virtual RaycastHit2D IsPlayerDetected(float distance = 50) =>
+            Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, distance, whatIsPlayer);
 
         protected override void OnDrawGizmos()
         {
