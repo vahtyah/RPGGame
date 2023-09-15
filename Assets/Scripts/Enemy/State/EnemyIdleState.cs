@@ -1,6 +1,8 @@
-﻿namespace Enemy.Skeleton
+﻿using Enemy.State;
+
+namespace Enemy.Skeleton
 {
-    public class EnemyIdleState : EnemyState
+    public class EnemyIdleState : EnemyGroundedState
     {
         public EnemyIdleState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName) : base(stateMachine, enemyBase, animBoolName)
         {

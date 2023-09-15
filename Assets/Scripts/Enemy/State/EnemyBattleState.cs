@@ -44,6 +44,11 @@ namespace Enemy.State
                 moveDir = -1;
 
             enemyBase.SetVelocity(moveDir * enemyBase.moveSpeed, rb.velocity.y);
+            if (!enemyBase.IsGroundDetected() || enemyBase.IsWallDetected())
+            {
+                enemyBase.Flip();
+                stateMachine.State = enemyBase.idleState;
+            }
         }
 
 
