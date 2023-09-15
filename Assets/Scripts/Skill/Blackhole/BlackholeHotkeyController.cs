@@ -11,8 +11,8 @@ namespace Skill.Blackhole
         private KeyCode myHotkey;
         private TextMeshPro myText;
         private Enemy.Enemy enemy;
-        private BlackholeSkillController blackholeSkill;
-        public void SetupHotkey(KeyCode keyCode, Enemy.Enemy enemy, BlackholeSkillController blackholeSkill)
+        private Blackhole blackholeSkill;
+        public void SetupHotkey(KeyCode keyCode, Enemy.Enemy enemy, Blackhole blackholeSkill)
         {
             sr = GetComponent<SpriteRenderer>();
             myText = GetComponentInChildren<TextMeshPro>();

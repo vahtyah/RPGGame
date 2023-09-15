@@ -38,15 +38,16 @@ namespace UI
                 itemTimer = pouchItemData.itemCooldown;
                 pouchCooldownUI.SetCooldownOf();
                 inventory.RemoveItem(pouchItemData);
-                if (!inventory.itemDictionary.ContainsKey(pouchItemData))
-                {
-                    Dismantle();
-                    pouchCooldownUI.Dismantle();
-                }
 
                 var newConsumableSlotUI = Instantiate(consumableSlotPrefab, consumableSlotParent)
                     .GetComponent<ConsumableSlotUI>();
                 newConsumableSlotUI.Setup(new Item(pouchItemData),null);
+                if (!inventory.itemDictionary.ContainsKey(pouchItemData))
+                {
+                    Dismantle();
+                    pouchCooldownUI.Dismantle();
+                    pouchItemData = null;
+                }
             }
         }
 

@@ -22,7 +22,7 @@ namespace Skill.Blackhole
 
         
 
-        private BlackholeSkillController currentBlackhole;
+        private Blackhole currentBlackhole;
 
         private void Awake()
         {
@@ -40,9 +40,6 @@ namespace Skill.Blackhole
         {
             base.StartSkill();
             player.stateMachine.State = player.blackholeState;
-            var newBlackhole = Instantiate(blackholePrefab, player.transform.position,Quaternion.identity);
-            currentBlackhole = newBlackhole.GetComponent<BlackholeSkillController>();
-            currentBlackhole.SetupBlackhole(maxSize,growSpeed,shrinkSpeed,amountOfAttack,cloneCooldown, blackholeDuration);
         }
 
         public bool SkillComplete()
@@ -57,6 +54,14 @@ namespace Skill.Blackhole
             return false;
         }
 
-        public float GetBlackholeRadius() => maxSize / 2;   
+        public float GetBlackholeRadius() => maxSize / 2;
+        public float GetMaxSize => maxSize;
+        public float GetGrowSpeed => growSpeed;
+        public float GetShrinkSpeed => shrinkSpeed;
+        public int GetAmountOfAttack => amountOfAttack;
+        public float GetCloneCooldown => cloneCooldown;
+        public float GetBlackholeDuration => blackholeDuration;
+        public GameObject GetBlackholePrefab => blackholePrefab;
+        
     }
 }

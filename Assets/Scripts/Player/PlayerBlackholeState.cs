@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Skill;
+using Skill.Blackhole;
+using UnityEngine;
 
 namespace Player
 {
@@ -33,7 +35,7 @@ namespace Player
                 rb.velocity = new Vector2(0, -.1f);
                 if (!skillUsed)
                 {
-                    player.skill.blackholeSkill.StartSkill();
+                    Blackhole.Create(skill.blackholeSkill.GetBlackholePrefab, player.transform.position);
                     skillUsed = true;
                 }
             }

@@ -6,8 +6,17 @@ using Random = UnityEngine.Random;
 
 namespace Skill.Blackhole
 {
-    public class BlackholeSkillController : MonoBehaviour
+    public class Blackhole : MonoBehaviour
     {
+        public static Blackhole Create(GameObject prefab, Vector3 position)
+        {
+            var blackHole = Instantiate(prefab, position, Quaternion.identity);
+            var blackHoleScr = blackHole.GetComponent<Blackhole>();
+            var blackHoleSkill = SkillManager.Instance.blackholeSkill;
+            blackHoleScr.Setup(blackHoleSkill.GetMaxSize, blackHoleSkill.GetGrowSpeed, blackHoleSkill.GetShrinkSpeed,
+                blackHoleSkill.GetAmountOfAttack, blackHoleSkill.GetCloneCooldown, blackHoleSkill.GetBlackholeDuration);
+            return blackHoleScr;
+        }
         [SerializeField] private GameObject hotkeyPrefab;
         [SerializeField] private List<KeyCode> keyCodes;
 
@@ -32,7 +41,7 @@ namespace Skill.Blackhole
 
         public bool playerCanExitState { get; private set; }
 
-        public void SetupBlackhole(float maxSize, float growSpeed, float shrinkSpeed, int amountOfAttack,
+        public void Setup(float maxSize, float growSpeed, float shrinkSpeed, int amountOfAttack,
             float cloneAttackCooldown, float blackholeDuration)
         {
             this.maxSize = maxSize;
