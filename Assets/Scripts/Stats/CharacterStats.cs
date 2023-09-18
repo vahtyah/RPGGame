@@ -146,7 +146,7 @@ public class CharacterStats : MonoBehaviour
 
         totalDamage = CheckTargetArmor(target, totalDamage);
         target.TakeDamage(totalDamage);
-        // DoMagicDamage(target);
+        DoMagicDamage(target);
 
         //if invnteroy current weapon has fire effect
         // then DoMagicalDamage(_targetStats);
@@ -159,7 +159,6 @@ public class CharacterStats : MonoBehaviour
         var lightingDamage = this.lightingDamage.Value;
         var totalMagicDamage = fireDamage + iceDamage + lightingDamage + intelligence.Value;
         totalMagicDamage = CheckTargetResistance(target, totalMagicDamage);
-        Debug.Log("do magic damage" + totalMagicDamage);
         target.TakeDamage(totalMagicDamage);
 
         if (Mathf.Max(fireDamage, iceDamage, lightingDamage) <= 0) return;
@@ -173,29 +172,30 @@ public class CharacterStats : MonoBehaviour
         var canApplyChill = iceDamage > fireDamage && iceDamage > lightingDamage;
         var canApplyShock = lightingDamage > fireDamage && lightingDamage > iceDamage;
 
-        while (!canApplyChill && !canApplyIgnite && !canApplyShock)
-        {
-            if (Random.value < .5f && fireDamage > 0)
-            {
-                canApplyIgnite = true;
-                target.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
-                return;
-            }
-
-            if (Random.value < .5f && iceDamage > 0)
-            {
-                canApplyChill = true;
-                target.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
-                return;
-            }
-
-            if (Random.value < .5f && lightingDamage > 0)
-            {
-                canApplyShock = true;
-                target.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
-                return;
-            }
-        }
+        // while (!canApplyChill && !canApplyIgnite && !canApplyShock)
+        // {
+        //     Debug.Log("while");
+        //     if (Random.value < .5f && fireDamage > 0)
+        //     {
+        //         canApplyIgnite = true;
+        //         target.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+        //         return;
+        //     }
+        //
+        //     if (Random.value < .5f && iceDamage > 0)
+        //     {
+        //         canApplyChill = true;
+        //         target.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+        //         return;
+        //     }
+        //
+        //     if (Random.value < .5f && lightingDamage > 0)
+        //     {
+        //         canApplyShock = true;
+        //         target.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+        //         return;
+        //     }
+        // }
 
         if (canApplyIgnite) target.IgniteDamage = Mathf.RoundToInt(fireDamage * .2f);
         if (canApplyShock) target.ShockDamage = Mathf.RoundToInt(lightingDamage * .1f);
