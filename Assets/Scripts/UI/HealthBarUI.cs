@@ -4,15 +4,14 @@ using UnityEngine.UI;
 
 public class HealthBarUI : MonoBehaviour
 {
+    [SerializeField] private Transform fillHP;
     private Entity entity;
     private RectTransform rectTransform;
     private CharacterStats characterStats;
-    private Slider slider;
 
     private void Start()
     {
         characterStats = GetComponentInParent<CharacterStats>();
-        slider = GetComponentInChildren<Slider>();
         rectTransform = GetComponent<RectTransform>();
         entity = GetComponentInParent<Entity>();
         
@@ -30,7 +29,8 @@ public class HealthBarUI : MonoBehaviour
 
     private void UpdateHealthUI()
     {
-        slider.value = characterStats.GetHealthAmountNormalized;
+        var healthNormalized = Mathf.Clamp(characterStats.GetHealthAmountNormalized, 0, 1);
+        fillHP.localScale = new Vector3(healthNormalized, 1, 1);
     }
 
     private void FlipUI()
