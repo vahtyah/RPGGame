@@ -71,7 +71,7 @@ namespace UI
                 notificationText.rectTransform.anchoredPosition = Vector3.Lerp(
                     notificationText.rectTransform.anchoredPosition, destinationPosition,
                     2 * Time.deltaTime);
-            else
+            else if(isFinish)
             {
                 notificationText.rectTransform.anchoredPosition =
                     Vector2.MoveTowards(notificationText.rectTransform.anchoredPosition, destinationPosition, 3);
@@ -89,7 +89,7 @@ namespace UI
         private void Setup(NotificationType type = default)
         {
             currentType = type;
-            destinationPosition = new Vector3(-rectTransform.rect.width, 0);
+            destinationPosition = new Vector3(-rectTransform.rect.width + 20, 0);
             notificationText.rectTransform.anchoredPosition = Vector2.zero;
             isFinish = false;
             isAppear = false;
