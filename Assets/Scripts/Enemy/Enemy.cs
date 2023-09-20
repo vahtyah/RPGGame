@@ -80,7 +80,6 @@ namespace Enemy
 
         public override void ReturnDefaultSpeed()
         {
-            base.ReturnDefaultSpeed();
             moveSpeed = defaultMoveSpeed;
         }
 

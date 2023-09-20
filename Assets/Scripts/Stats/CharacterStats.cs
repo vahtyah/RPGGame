@@ -175,19 +175,6 @@ public class CharacterStats : MonoBehaviour
         target.TakeDamage(totalMagicDamage);
 
         if (Mathf.Max(fireDamage, iceDamage, lightingDamage) <= 0) return;
-
-        AttemptToApplyAilment(target, fireDamage, iceDamage, lightingDamage);
-    }
-
-    private void AttemptToApplyAilment(CharacterStats target, int fireDamage, int iceDamage, int lightingDamage)
-    {
-        // var canApplyIgnite = fireDamage > iceDamage && fireDamage > lightingDamage;
-        // var canApplyChill = iceDamage > fireDamage && iceDamage > lightingDamage;
-        // var canApplyShock = lightingDamage > fireDamage && lightingDamage > iceDamage;
-        //
-        // if (canApplyIgnite) target.IgniteDamage = Mathf.RoundToInt(fireDamage * .2f);
-        // if (canApplyShock) target.ShockDamage = Mathf.RoundToInt(lightingDamage * .1f);
-
         target.ApplyAilments(nextAilment);
     }
 
@@ -208,6 +195,7 @@ public class CharacterStats : MonoBehaviour
         }
         else if (nextAilment == NextAilment.chill)
         {
+            if(isChilled) return; //TODO: Tạm thời/
             isChilled = true;
             chilledTimer = ailmentDuration;
             var slowPercentage = .2f;
@@ -224,12 +212,8 @@ public class CharacterStats : MonoBehaviour
             }
         }
     }
-    
-    public void SetNextAilmentToApply()
-    {
-        nextAilment = NextAilmentToApply();
-        Debug.Log("nextAilment = " + nextAilment);
-    }
+
+    public void SetNextAilmentToApply() { nextAilment = NextAilmentToApply(); }
 
     private NextAilment NextAilmentToApply()
     {
@@ -252,9 +236,10 @@ public class CharacterStats : MonoBehaviour
 
             double randomValue = Random.value;
             if (randomValue < firstDamageRatio) return listAilments[0].Item1;
-            if(randomValue < firstDamageRatio + secondDamageRatio) return listAilments[1].Item1;
+            if (randomValue < firstDamageRatio + secondDamageRatio) return listAilments[1].Item1;
             return listAilments[2].Item1;
         }
+
         return NextAilment.none;
     }
 
