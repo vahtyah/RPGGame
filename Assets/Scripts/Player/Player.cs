@@ -76,6 +76,10 @@ namespace Player
             base.Start();
             skill = SkillManager.Instance;
             stateMachine.State = idleState;
+            
+            defaultJumpForce = jumpForce;
+            defaultMoveSpeed = moveSpeed;
+            defaultDashSpeed = dashSpeed;
         }
 
         protected override void Update()
@@ -90,11 +94,7 @@ namespace Player
 
         public override void SlowEntityBy(float slowPercentage, float slowDuration)
         {
-            defaultJumpForce = jumpForce;
-            defaultMoveSpeed = moveSpeed;
-            defaultDashSpeed = dashSpeed;
             base.SlowEntityBy(slowPercentage, slowDuration);
-
             moveSpeed *= (1 - slowPercentage);
             jumpForce *= (1 - slowPercentage);
             dashSpeed *= (1 - slowPercentage);

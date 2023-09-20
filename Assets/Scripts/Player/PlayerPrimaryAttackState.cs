@@ -19,6 +19,7 @@ namespace Player
         public override void Enter()
         {
             base.Enter();
+            player.fx.GetMaterial.SetColor("_Color", player.fx.GetNextColorSplash());
             xInput = 0; //Fix direction attack
             if ((comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow) && !noComboNeeded)
                 comboCounter = 0;
@@ -48,11 +49,10 @@ namespace Player
         public override void Exit()
         {
             base.Exit();
-
             player.StartCoroutine("BusyFor", .15f);
-
             comboCounter++;
             lastTimeAttacked = Time.time;
+            player.stars.SetNextAilmentToApply();
         }
     }
 }

@@ -1,8 +1,18 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Item_and_Inventory;
 using UnityEngine;
 using Random = UnityEngine.Random;
+
+public enum NextAilment
+{
+    none,
+    ignite,
+    chill,
+    shock
+}
 
 public class CharacterStats : MonoBehaviour
 {
@@ -49,6 +59,8 @@ public class CharacterStats : MonoBehaviour
     [SerializeField] private int currentHealth;
     public event EventHandler onHealthChanged;
 
+    public NextAilment nextAilment;
+
     public bool isDead { get; private set; }
 
     public int IgniteDamage
@@ -68,6 +80,7 @@ public class CharacterStats : MonoBehaviour
         entity = GetComponent<Entity>();
         fx = GetComponent<EntityFX>();
         itemDrop = GetComponent<ItemDrop>();
+        SetNextAilmentToApply();
     }
 
     protected virtual void Update()
@@ -98,7 +111,7 @@ public class CharacterStats : MonoBehaviour
         statToModifier.AddModifier(modifier);
 
         yield return new WaitForSeconds(duration);
-        
+
         statToModifier.RemoveModifier(modifier);
     }
 
@@ -106,7 +119,7 @@ public class CharacterStats : MonoBehaviour
     {
         StartCoroutine(HealthIncreaseCoroutine(amountHealth, timeToIncrease));
     }
-    
+
     private IEnumerator HealthIncreaseCoroutine(int amountHealth, int timeToIncrease)
     {
         var increaseFor1s = amountHealth / timeToIncrease;
@@ -168,39 +181,14 @@ public class CharacterStats : MonoBehaviour
 
     private void AttemptToApplyAilment(CharacterStats target, int fireDamage, int iceDamage, int lightingDamage)
     {
-        var canApplyIgnite = fireDamage > iceDamage && fireDamage > lightingDamage;
-        var canApplyChill = iceDamage > fireDamage && iceDamage > lightingDamage;
-        var canApplyShock = lightingDamage > fireDamage && lightingDamage > iceDamage;
-
-        // while (!canApplyChill && !canApplyIgnite && !canApplyShock)
-        // {
-        //     Debug.Log("while");
-        //     if (Random.value < .5f && fireDamage > 0)
-        //     {
-        //         canApplyIgnite = true;
-        //         target.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
-        //         return;
-        //     }
+        // var canApplyIgnite = fireDamage > iceDamage && fireDamage > lightingDamage;
+        // var canApplyChill = iceDamage > fireDamage && iceDamage > lightingDamage;
+        // var canApplyShock = lightingDamage > fireDamage && lightingDamage > iceDamage;
         //
-        //     if (Random.value < .5f && iceDamage > 0)
-        //     {
-        //         canApplyChill = true;
-        //         target.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
-        //         return;
-        //     }
-        //
-        //     if (Random.value < .5f && lightingDamage > 0)
-        //     {
-        //         canApplyShock = true;
-        //         target.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
-        //         return;
-        //     }
-        // }
+        // if (canApplyIgnite) target.IgniteDamage = Mathf.RoundToInt(fireDamage * .2f);
+        // if (canApplyShock) target.ShockDamage = Mathf.RoundToInt(lightingDamage * .1f);
 
-        if (canApplyIgnite) target.IgniteDamage = Mathf.RoundToInt(fireDamage * .2f);
-        if (canApplyShock) target.ShockDamage = Mathf.RoundToInt(lightingDamage * .1f);
-
-        target.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+        target.ApplyAilments(nextAilment);
     }
 
     private int CheckTargetResistance(CharacterStats target, int totalMagicDamage)
@@ -210,36 +198,64 @@ public class CharacterStats : MonoBehaviour
         return totalMagicDamage;
     }
 
-    public virtual void ApplyAilments(bool ignite, bool chill, bool shock)
+    public virtual void ApplyAilments(NextAilment nextAilment)
     {
-        var canApplyIgnite = !isIgnited && !isShocked && !isChilled;
-        var canApplyChill = !isIgnited && !isShocked && !isChilled;
-        var canApplyShock = !isIgnited && !isChilled;
-        if (ignite && canApplyIgnite)
+        if (nextAilment == NextAilment.ignite)
         {
-            isIgnited = ignite;
+            isIgnited = true;
             ignitedTimer = ailmentDuration;
             fx.IgniteFxFor(ailmentDuration);
         }
-
-        if (chill && canApplyChill)
+        else if (nextAilment == NextAilment.chill)
         {
-            isChilled = chill;
+            isChilled = true;
             chilledTimer = ailmentDuration;
             var slowPercentage = .2f;
             entity.SlowEntityBy(slowPercentage, ailmentDuration);
             fx.ChillFxFor(ailmentDuration);
         }
-
-        if (shock && canApplyShock)
+        else if (nextAilment == NextAilment.shock)
         {
-            if (!isShocked) ApplyShock(shock);
+            if (!isShocked) ApplyShock(true);
             else
             {
                 if (GetComponent<Player.Player>() != null) return;
                 HitNearestTargetWithShockStrike();
             }
         }
+    }
+    
+    public void SetNextAilmentToApply()
+    {
+        nextAilment = NextAilmentToApply();
+        Debug.Log("nextAilment = " + nextAilment);
+    }
+
+    private NextAilment NextAilmentToApply()
+    {
+        var fireDamage = this.fireDamage.Value;
+        var iceDamage = this.iceDamage.Value;
+        var lightingDamage = this.lightingDamage.Value;
+
+        if (fireDamage == 0 && iceDamage == 0 && lightingDamage == 0) return NextAilment.none;
+        var canApplyAilment = !isIgnited && !isShocked && !isChilled;
+        if (canApplyAilment)
+        {
+            var listAilments = new List<(NextAilment, int)>()
+            {
+                (NextAilment.ignite, fireDamage), (NextAilment.chill, iceDamage), (NextAilment.shock, lightingDamage)
+            };
+            listAilments = listAilments.OrderBy(item => item.Item2).ToList();
+            var totalDamage = fireDamage + iceDamage + lightingDamage;
+            var firstDamageRatio = (double)listAilments[0].Item2 / totalDamage;
+            var secondDamageRatio = (double)listAilments[1].Item2 / totalDamage;
+
+            double randomValue = Random.value;
+            if (randomValue < firstDamageRatio) return listAilments[0].Item1;
+            if(randomValue < firstDamageRatio + secondDamageRatio) return listAilments[1].Item1;
+            return listAilments[2].Item1;
+        }
+        return NextAilment.none;
     }
 
     public void ApplyShock(bool shock)
@@ -341,7 +357,7 @@ public class CharacterStats : MonoBehaviour
         entity.Die();
         itemDrop.GenerateDrop();
     }
-    
+
     public virtual Stats StatOfType(StatType stats)
     {
         return stats switch
@@ -370,4 +386,5 @@ public class CharacterStats : MonoBehaviour
     protected virtual void OnHealthChanged() { onHealthChanged?.Invoke(this, EventArgs.Empty); }
 
     public int CurrentHealth => currentHealth;
+    public NextAilment GetNextAilment => nextAilment;
 }

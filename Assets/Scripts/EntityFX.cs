@@ -13,11 +13,19 @@ public class EntityFX : MonoBehaviour
     [SerializeField] private Color[] chillColor;
     [SerializeField] private Color[] igniteColor;
     [SerializeField] private Color[] shockColor;
+    
+    [Header("Slashing FX")]
+    [SerializeField] private Color chillSlashColor;
+    [SerializeField] private Color igniteSlashColor;
+    [SerializeField] private Color shockSlashColor;
 
     private void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         oriMat = sr.material;
+        chillSlashColor = 50 * chillSlashColor;
+        igniteSlashColor = 50 * igniteSlashColor;
+        shockSlashColor = 50 * shockSlashColor;
     }
     
     public void MakeTransparent(bool transparent)
@@ -77,5 +85,24 @@ public class EntityFX : MonoBehaviour
     {
         sr.color = sr.color != chillColor[0] ? chillColor[0] : chillColor[1];
     }
+    
+    public Color GetNextColorSplash()
+    {
+        var stats = GetComponent<CharacterStats>();
+        var nextAilment = stats.GetNextAilment;
+        switch (nextAilment)
+        {
+            case NextAilment.ignite:
+                return igniteSlashColor;
+            case NextAilment.chill:
+                return chillSlashColor;
+            case NextAilment.shock:
+                return shockSlashColor;
+            default:
+                return Color.white;
+        }
+    }
+
+    public Material GetMaterial => sr.material;
 
 }

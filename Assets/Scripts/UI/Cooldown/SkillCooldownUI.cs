@@ -48,7 +48,6 @@ namespace UI
         {
             if (data.skillCooldownImg.TryGetValue(skill.GetType().ToString(), out var sprite))
             {
-                Debug.Log(sprite);
                 SetImageSkill(sprite);
             }
             else
