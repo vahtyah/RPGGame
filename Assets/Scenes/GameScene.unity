@@ -2707,7 +2707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Clone On Arrivel
-  skillPrice: 0
+  skillPrice: 200
   skillDescription: 
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 1972359227}
@@ -3799,7 +3799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Clone On Dash
-  skillPrice: 0
+  skillPrice: 200
   skillDescription: 
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 1972359227}
@@ -14045,7 +14045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Blackhole
-  skillPrice: 0
+  skillPrice: 500
   skillDescription: 
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 1021083179}
@@ -15007,7 +15007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Parry
-  skillPrice: 0
+  skillPrice: 100
   skillDescription: 
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 379873671}
@@ -17583,7 +17583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Last Breath
-  skillPrice: 0
+  skillPrice: 500
   skillDescription: 
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 1676050244}
@@ -19172,6 +19172,50 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &1600006055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1600006057}
+  - component: {fileID: 1600006056}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1600006056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600006055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4411b5296c4e1cbb0d4eb52845212a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1600006057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600006055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 462.67123, y: 90.93095, z: -1.3079447}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1609045595
 GameObject:
   m_ObjectHideFlags: 0
@@ -19654,7 +19698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Clone
-  skillPrice: 0
+  skillPrice: 100
   skillDescription: 
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 0}
@@ -24185,6 +24229,7 @@ GameObject:
   - component: {fileID: 1816694515}
   - component: {fileID: 1816694517}
   - component: {fileID: 1816694516}
+  - component: {fileID: 1816694518}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -24262,6 +24307,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1816694518
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816694514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 5
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1826294085
 GameObject:
   m_ObjectHideFlags: 0
@@ -26306,6 +26368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1987799109}
   - component: {fileID: 1987799108}
+  - component: {fileID: 1987799110}
   m_Layer: 0
   m_Name: Idle Camera
   m_TagString: Untagged
@@ -26368,6 +26431,18 @@ Transform:
   - {fileID: 1816694515}
   m_Father: {fileID: 1272804020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1987799110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987799107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a9663b2e7f4cb58bb4ba2e5949bd38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1997230515
 GameObject:
   m_ObjectHideFlags: 0
@@ -26886,7 +26961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dash
-  skillPrice: 0
+  skillPrice: 100
   skillDescription: 
   skillColor: {r: 0.4056604, g: 0.39636627, b: 0.39636627, a: 1}
   cooldownUI: {fileID: 1972359227}
@@ -29277,3 +29352,4 @@ SceneRoots:
   - {fileID: 1152915361}
   - {fileID: 1852726868}
   - {fileID: 727820973}
+  - {fileID: 1600006057}

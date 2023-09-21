@@ -1,4 +1,5 @@
-﻿using Item_and_Inventory;
+﻿using DefaultNamespace;
+using Item_and_Inventory;
 using UnityEngine;
 
 public class PlayerStats : CharacterStats
@@ -17,6 +18,7 @@ public class PlayerStats : CharacterStats
         // var currentArmor = Inventory.Instance.GetEquipmentByType(EquipmentType.Armor);
         //
         // if(currentArmor) currentArmor.ExecuteItemEffect(player.transform);
+        CinemachineShake.Instance.SnakeCamera(.6f, .5f);
     }
 
     protected override void Update()

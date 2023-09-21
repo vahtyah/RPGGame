@@ -19,7 +19,7 @@ namespace Save_and_Load
 
         public GameData()
         {
-            currency = 0;
+            currency = 100000;
             generalInventory = new List<Item>();
             stashInventory = new List<Item>();
             equipmentInventory = new List<Item>();

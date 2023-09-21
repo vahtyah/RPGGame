@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace;
 using Item_and_Inventory;
 using UnityEngine;
 using Random = UnityEngine.Random;
